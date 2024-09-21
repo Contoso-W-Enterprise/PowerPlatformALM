@@ -1,0 +1,73 @@
+# Copyright Microsoft Corporation
+# This Sample Code is provided for the purpose of illustration only and is not intended to be used in a production environment.
+# THIS SAMPLE CODE AND ANY RELATED INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
+# INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
+# We grant You a nonexclusive, royalty-free right to use and modify the Sample Code and to reproduce and distribute the object code form of the Sample Code, provided that You agree:
+# (i) to not use Our name, logo, or trademarks to market Your software product in which the Sample Code is embedded;
+# (ii) to include a valid copyright notice on Your software product in which the Sample Code is embedded; and
+# (iii) to indemnify, hold harmless, and defend Us and Our suppliers from and against any claims or lawsuits, including attorneys’ fees, that arise or result from the use or distribution of the Sample Code.
+# Please note: None of the conditions outlined in the disclaimer above will supersede the terms and conditions contained within the Premier Customer Services Description.
+
+# This workflow is triggered manually (workflow_dispatch) and deploys an unmanaged solution to a target environment
+# inputs parameters:
+# solution-name: name of the solution to worked on from Power Platform
+# branch-type: type of branch
+# branch-name: name of the git branch
+# target-environment: Target environment
+# Author: William Tsoi (Microsoft)
+# Date: 2024-07-16
+# Required reuseable workflows: workflow-import-solution.yml
+name: Deploy Unmanaged Solution with Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      solution-name:
+        description: 'name of the solution to worked on from Power Platform'
+        required: true
+        default:  'contoso_university_core'
+      branch-type:
+        required: false
+        type: choice
+        options:
+        - feature
+        - hotfix
+        - development
+        - main
+        default:
+          main
+      branch-name:
+        description: 'name of the git branch'
+        required: false
+        default:  ''
+      target-environment:
+        description: 'Target environment'
+        type: environment
+        required: true
+        default: 'Contoso Development'
+
+jobs:
+  deploy-staging-setup:
+    environment: 'Contoso Staging'
+    runs-on: ubuntu-latest
+    steps: 
+    - env:
+        EVENT_CONTEXT: ${{ toJSON(github.event) }}
+      run: |
+        echo $EVENT_CONTEXT
+    - name: Variables      
+      run: |        
+        write-Host "ref ${{ github.ref }}"        
+        write-Host "GITHUB_REF ${{ github.GITHUB_REF }}"
+      shell: pwsh
+  deploy-staging:
+    needs: [deploy-staging-setup]
+    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+    with: 
+      environment:  ${{ inputs.target-environment }}
+      solution-name: ${{ inputs.solution-name }}
+      branch-name: '${{ inputs.branch-name }}'
+      branch-type: '${{ inputs.branch-type }}'
+      folder-path: '.'
+      managed: false
+    secrets: inherit
