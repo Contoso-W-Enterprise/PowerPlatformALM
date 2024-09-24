@@ -46,7 +46,7 @@ on:
         required: true
 
 jobs:
-  deploy-staging-setup:
+  deploy-setup:
     environment: ${{ inputs.target-environment }}
     runs-on: ubuntu-latest
     steps: 
@@ -59,8 +59,8 @@ jobs:
         write-Host "ref ${{ github.ref }}"        
         write-Host "GITHUB_REF ${{ github.GITHUB_REF }}"
       shell: pwsh
-  deploy-staging:
-    needs: [deploy-staging-setup]
+  deploy:
+    needs: [deploy-setup]
     uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with: 
       environment:  ${{ inputs.target-environment }}
