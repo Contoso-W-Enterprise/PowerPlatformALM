@@ -47,7 +47,7 @@ on:
 
 jobs:
   deploy-staging-setup:
-    environment: 'Contoso Staging'
+    environment: ${{ inputs.target-environment }}
     runs-on: ubuntu-latest
     steps: 
     - env:
