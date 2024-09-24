@@ -1,0 +1,23 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+name: 'action-powerplatformALM'
+description: 'Power Platform Getting started with Who Am I'
+branding:
+  icon: 'cloud'
+  color: 'white'
+inputs:
+  environment-url:
+    description: 'URL of Power Platform environment to connect with; e.g. "https://test-env.crm.dynamics.com"'
+    required: false
+  app-id:
+    type: string
+    description: 'The application id to authenticate with. Setting this input makes app-id, tenant-id and client-secret required; specifying alternate "username" credential set of inputs will result in an error.'
+    required: true    
+  client-secret:
+    type: string
+    description: 'The client secret to authenticate with. Required if authenticating with app-id.'
+    required: true
+  tenant-id:
+    type: string
+    description: 'Tenant id if using app-id & client secret to authenticate.'
+    required: true

@@ -211,22 +211,21 @@ jobs:
           }
           write-host $version
         shell: pwsh
-      - name: branch Solution
-        uses: microsoft/powerplatform-actions/branch-solution@v1
-        with:
-          solution-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}'
-          solution-target-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}'
-          branch-name: ${{ env.branch-name }}
-          repo-url: 'https://github.com/Contoso-Enterprise/PowerPlatformALM'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Commit to branch
-      #   if: ${{ inputs.isCommit == true }}
-      #   uses: EndBug/add-and-commit@v9
-      #   with: 
-      #     author_name: 'System Administrator'
-      #     author_email: admin@MngEnvMCAP157851.onmicrosoft.com
-      #     message: ${{ inputs.commitMessage }}
-      #     new_branch: ${{ inputs.branch-type }}/${{ inputs.branch-name }}
-      #     add: '${{ inputs.folder-path }}/src/. --force'
-      #     default_author: github_actor
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #- name: branch Solution
+      #  uses: microsoft/powerplatform-actions/branch-solution@v1
+      #  with:
+      #    solution-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}'
+      #    solution-target-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}'
+      #    branch-name: ${{ env.branch-name }}
+      #    repo-url: 'https://github.com/Contoso-Enterprise/PowerPlatformALM'
+      #    repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit to branch
+        uses: EndBug/add-and-commit@v9
+        with: 
+          author_name: 'System Administrator'
+          author_email: admin@MngEnvMCAP157851.onmicrosoft.com
+          message: ${{ inputs.commitMessage }}
+          #new_branch: ${{ inputs.branch-type }}/${{ inputs.branch-name }}
+          add: '${{ inputs.folder-path }}/src/. --force'
+          default_author: github_actor
+          github_token: ${{ secrets.GITHUB_TOKEN }}
