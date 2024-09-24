@@ -44,7 +44,6 @@ on:
         description: 'Target environment'
         type: environment
         required: true
-        default: 'Contoso Development'
 
 jobs:
   deploy-staging-setup:
