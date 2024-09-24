@@ -46,7 +46,6 @@ on:
         description: 'Source Development Environment'
         type: environment
         required: true
-        default: 'Contoso Development'
       delete-existing-source:
         description: 'delete existing source file before export'
         type: boolean
