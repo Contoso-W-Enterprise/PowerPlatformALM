@@ -131,15 +131,6 @@
       <RootComponent type="29" id="{6d1f7783-f675-ef11-a670-7c1e521885cf}" behavior="0" />
       <RootComponent type="29" id="{b15badd0-3075-ef11-a671-6045bdd8919f}" behavior="0" />
     </RootComponents>
-    <MissingDependencies>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="ce_sharedcommondataserviceforapps_a470c" solution="Active" id.connectionreferencelogicalname="ce_sharedcommondataserviceforapps_a470c" />
-        <Dependent type="29" displayName="FC API Query - Historic" id="{6d1f7783-f675-ef11-a670-7c1e521885cf}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="ce_sharedcommondataserviceforapps_a470c" solution="Active" id.connectionreferencelogicalname="ce_sharedcommondataserviceforapps_a470c" />
-        <Dependent type="29" displayName="FC API Query - Latest" id="{b15badd0-3075-ef11-a671-6045bdd8919f}" />
-      </MissingDependency>
-    </MissingDependencies>
+    <MissingDependencies />
   </SolutionManifest>
 </ImportExportXml>

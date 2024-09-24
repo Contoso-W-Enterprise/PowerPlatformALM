@@ -1,10 +1,10 @@
 {
   "properties": {
     "connectionReferences": {
-      "shared_commondataserviceforapps": {
+      "shared_commondataserviceforapps_1": {
         "runtimeSource": "embedded",
         "connection": {
-          "connectionReferenceLogicalName": "ce_sharedcommondataserviceforapps_a470c"
+          "connectionReferenceLogicalName": "cont_FCAPIDataverseConnectionReference"
         },
         "api": {
           "name": "shared_commondataserviceforapps"
@@ -15,13 +15,13 @@
       "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
       "contentVersion": "1.0.0.0",
       "parameters": {
-        "$authentication": {
-          "defaultValue": {},
-          "type": "SecureObject"
-        },
         "$connections": {
           "defaultValue": {},
           "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
         },
         "FC API Key (cont_FCAPIKey)": {
           "defaultValue": "fca_live_Arz3dC57Pw666fwniSMaT5SB9xLrES9KuDFRsthf",
@@ -107,6 +107,9 @@
       "actions": {
         "Initialize_Backdays": {
           "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "9412b15a-f50a-48fb-a393-4131c5475a9a"
+          },
           "type": "InitializeVariable",
           "inputs": {
             "variables": [
@@ -124,6 +127,9 @@
               "Succeeded"
             ]
           },
+          "metadata": {
+            "operationMetadataId": "2db2dbd5-78b0-43fb-aa78-adf3c814e183"
+          },
           "type": "Terminate",
           "inputs": {
             "runStatus": "Succeeded"
@@ -132,6 +138,7 @@
         "Initialize": {
           "actions": {
             "Parse_JSON": {
+              "runAfter": {},
               "metadata": {
                 "operationMetadataId": "5d3aaa92-1c46-4b64-bb42-66eeaa349ce5"
               },
@@ -212,6 +219,10 @@
           "foreach": "@range(variables('BackDays'), mul(variables('BackDays'),-1)  )",
           "actions": {
             "Compose": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "066ffb6e-e934-4001-aa57-a3522af23189"
+              },
               "type": "Compose",
               "inputs": "@formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd')"
             },
@@ -219,13 +230,14 @@
               "foreach": "@body('Parse_JSON')?['currencies']",
               "actions": {
                 "Get_FC_Historic": {
+                  "runAfter": {},
                   "metadata": {
                     "operationMetadataId": "94c8add0-1a13-4d8e-b45a-313b54bc841c"
                   },
                   "type": "Http",
                   "inputs": {
-                    "uri": "@{parameters('FC API URL (cont_FCAPIURL)')}historical?apikey=@{parameters('FC API Key (cont_FCAPIKey)')}&currencies=@{body('Join')}&base_currency=@{items('Apply_to_each')?['code']}&date=@{formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd')}",
-                    "method": "GET"
+                    "method": "GET",
+                    "uri": "@{parameters('FC API URL (cont_FCAPIURL)')}historical?apikey=@{parameters('FC API Key (cont_FCAPIKey)')}&currencies=@{body('Join')}&base_currency=@{items('Apply_to_each')?['code']}&date=@{formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd')}"
                   }
                 },
                 "Apply_to_each_2": {
@@ -234,6 +246,7 @@
                     "Condition": {
                       "actions": {
                         "Compose_2": {
+                          "runAfter": {},
                           "metadata": {
                             "operationMetadataId": "5c1f7c1c-a1e2-4a41-b814-c981ce7eb693"
                           },
@@ -251,6 +264,11 @@
                           },
                           "type": "OpenApiConnection",
                           "inputs": {
+                            "host": {
+                              "connectionName": "shared_commondataserviceforapps_1",
+                              "operationId": "CreateRecord",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                            },
                             "parameters": {
                               "entityName": "cont_fcs",
                               "item/cont_destination": "@items('Apply_to_each_2')?['code']",
@@ -259,17 +277,14 @@
                               "item/cont_valuedatetime": "@variables('CurrentDate')",
                               "item/cont_value": "@body('Get_FC_Historic')?['data']?[outputs('Compose')]?[items('Apply_to_each_2')?['code']]\n"
                             },
-                            "host": {
-                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
-                              "operationId": "CreateRecord",
-                              "connectionName": "shared_commondataserviceforapps"
+                            "authentication": {
+                              "type": "Raw",
+                              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
                             }
                           }
                         }
                       },
-                      "else": {
-                        "actions": {}
-                      },
+                      "runAfter": {},
                       "expression": {
                         "not": {
                           "equals": [
@@ -316,6 +331,9 @@
               "Succeeded"
             ]
           },
+          "metadata": {
+            "operationMetadataId": "25a181ed-cbd3-4bb8-ae7f-ea6d5e9fd5d2"
+          },
           "type": "Foreach"
         },
         "Initialize_variable": {
@@ -323,6 +341,9 @@
             "Initialize_Backdays": [
               "Succeeded"
             ]
+          },
+          "metadata": {
+            "operationMetadataId": "76f700bd-139f-468b-aa98-08ff363b03db"
           },
           "type": "InitializeVariable",
           "inputs": {
@@ -337,7 +358,7 @@
         }
       }
     },
-    "templateName": null
+    "templateName": ""
   },
   "schemaVersion": "1.0.0.0"
 }
