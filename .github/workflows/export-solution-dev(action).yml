@@ -70,14 +70,14 @@ jobs:
         Get-ChildItem -Recurse | foreach { write-host $_.FullName }
   #createBranch:
   #  needs: [setup]
-  #  uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-createBranch.yml@main
+  #  uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-createBranch.yml@main
   #  with: 
   #    branch-name: ${{ inputs.branch-name }}
   #    branch-type: ${{ inputs.branch-type }}
   #  secrets: inherit
   export:
     needs: [setup]      
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-export-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-export-solution.yml@main
     with: 
       environment: ${{ inputs.source-Environment }}
       solution-names: ${{ inputs.solution-names }}

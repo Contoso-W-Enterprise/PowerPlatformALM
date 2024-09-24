@@ -146,7 +146,7 @@ jobs:
 
 
   get-solution-version:
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-get-solution-version.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-get-solution-version.yml@main
     with: 
       solution-name: ${{ inputs.solution-name }}
       branch-name: 'main'

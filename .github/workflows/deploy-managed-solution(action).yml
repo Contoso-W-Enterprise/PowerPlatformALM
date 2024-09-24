@@ -80,7 +80,7 @@ jobs:
         echo "setting-file=${{ env.setting-file }}" >> "$GITHUB_OUTPUT"
   deploy-staging:
     needs: [deploy-staging-setup]
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with: 
       environment: 'Contoso Staging'
       solution-name: ${{ inputs.solution-name }}
@@ -120,7 +120,7 @@ jobs:
         echo "setting-file=${{ env.setting-file }}" >> "$GITHUB_OUTPUT"
   deploy-production:
     needs: [deploy-production-setup]
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with: 
       environment: 'Contoso Production'
       solution-name: ${{ inputs.solution-name }}

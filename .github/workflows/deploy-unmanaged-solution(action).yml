@@ -62,7 +62,7 @@ jobs:
       shell: pwsh
   deploy-staging:
     needs: [deploy-staging-setup]
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with: 
       environment:  ${{ inputs.target-environment }}
       solution-name: ${{ inputs.solution-name }}

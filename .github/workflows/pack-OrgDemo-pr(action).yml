@@ -80,7 +80,7 @@ jobs:
 
   pack:
     needs: pack-set-variables
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-pack-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-pack-solution.yml@main
     with: 
       solution-name: ${{ needs.pack-set-variables.outputs.solution-name }}
       branch-name: '${{ needs.pack-set-variables.outputs.branch-name }}'

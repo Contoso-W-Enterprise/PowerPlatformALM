@@ -133,15 +133,15 @@ jobs:
         uses: microsoft/powerplatform-actions/who-am-i@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
       - name: Check solution exists
         id: check-solution-exists
         run: |
           . "PowerShell/PowerPlatform-Utility.ps1"
           $solutionName = '${{ Inputs.solution-name }}';
-          $token = Connect-Dataverse -dataverseHost '${{ vars.POWERPLATFORMORGURI }}' -tenantId ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }} -clientId ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }} -clientSecret ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }} 
+          $token = Connect-Dataverse -dataverseHost '${{ vars.POWERPLATFORMORGURI }}' -tenantId ${{ secrets.POWERPLATFORMCONTOSOTENANTID }} -clientId ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }} -clientSecret ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }} 
           $results = Get-DataverseSolution -token $token -dataverseHost '${{ vars.POWERPLATFORMORGURI }}' -solutionUniqueName $solutionName
           if($solutionName -in $results.uniquename)
           {
@@ -161,9 +161,9 @@ jobs:
         uses: microsoft/powerplatform-actions/check-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           path: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
       #managed solution & setting file & solution exists
       - name: import upgrade managed Solution with settings file
@@ -171,9 +171,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           stage-and-upgrade: true
           force-overwrite: true
@@ -187,9 +187,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           force-overwrite: true
           publish-changes: true
@@ -202,9 +202,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           stage-and-upgrade: true
           force-overwrite: true
@@ -217,9 +217,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           force-overwrite: true
           publish-changes: true
@@ -232,9 +232,9 @@ jobs:
         uses: microsoft/powerplatform-actions/check-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           path: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
       # unmanaged solution & solution file & solution exist
       - name: Import upgrade Unmanaged Solution with settings file
@@ -242,9 +242,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
           stage-and-upgrade: true
           force-overwrite: true
@@ -258,9 +258,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
           force-overwrite: true
           publish-changes: true
@@ -273,9 +273,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
           stage-and-upgrade: true
           force-overwrite: true
@@ -288,9 +288,9 @@ jobs:
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
           force-overwrite: true
           publish-changes: true

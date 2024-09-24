@@ -115,7 +115,7 @@ jobs:
       - name: Variables 
         run: |
           echo ${{ vars.POWERPLATFORMORGURI }}
-          echo ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           echo ${{ env.release-date }}
       - name: Install Power Platform Tools
         uses: microsoft/powerplatform-actions/actions-install@v1
@@ -123,23 +123,23 @@ jobs:
         uses: microsoft/powerplatform-actions/who-am-i@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
       - name: Publish Solution Customizations
         uses: microsoft/powerplatform-actions/publish-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
       - name: Export Unmanaged Solution
         uses: microsoft/powerplatform-actions/export-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-name: ${{ inputs.solution-names }}
           solution-output-file: '${{ inputs.folder-path }}/solutions/${{ inputs.solution-names }}.zip'
           overwrite: true
@@ -148,9 +148,9 @@ jobs:
         uses: microsoft/powerplatform-actions/export-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMMANAGEMENTCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOPRODUCTIONTENANTID }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           solution-name: ${{ inputs.solution-names }}
           solution-output-file: '${{ inputs.folder-path }}/solutions/${{ inputs.solution-names }}_managed.zip'
           managed: true

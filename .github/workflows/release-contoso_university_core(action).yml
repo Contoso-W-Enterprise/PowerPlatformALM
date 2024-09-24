@@ -80,7 +80,7 @@ jobs:
         echo "${{ needs.release-staging-setup.outputs.setting-file }}"
   release-staging:
     needs: [release-staging-setup]
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with:
       environment: 'Contoso Staging'
       solution-name: ${{ needs.release-staging-setup.outputs.solution-name }}
@@ -123,7 +123,7 @@ jobs:
       shell: pwsh
   release-production:
     needs: [release-production-setup]
-    uses: Contoso-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with: 
       environment: 'Contoso Production'
       solution-name: ${{ needs.release-production-setup.outputs.solution-name }}
