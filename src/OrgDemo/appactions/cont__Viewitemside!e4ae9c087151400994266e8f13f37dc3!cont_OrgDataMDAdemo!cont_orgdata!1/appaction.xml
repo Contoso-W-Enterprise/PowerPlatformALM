@@ -1,0 +1,37 @@
+<appaction uniquename="cont__Viewitemside!e4ae9c087151400994266e8f13f37dc3!cont_OrgDataMDAdemo!cont_orgdata!1">
+  <appmoduleid>
+    <uniquename>cont_OrgDataMDAdemo</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="View item (side)">
+    <label description="View item (side)" languagecode="1033" />
+  </buttonlabeltext>
+  <buttonsequencepriority>10.0000000000</buttonsequencepriority>
+  <context>1</context>
+  <contextentity>
+    <logicalname>cont_orgdata</logicalname>
+  </contextentity>
+  <contextvalue>cont_orgdata</contextvalue>
+  <fonticon>DockRight</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>1</location>
+  <name>Viewitemside!e4ae9c087151400994266e8f13f37dc3</name>
+  <onclickeventjavascriptfunctionname>OpenOrgDataRecSideDialog</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":10}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>5f6fb431-b626-ee11-9966-6045bdd96914</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>cont_orgdatamdademodefaultcommandlibrary_c2905</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>6a478d0b22ca4568be7f89ce048250a1</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

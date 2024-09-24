@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{64d1cc1e-9cef-4a55-8216-6b0ccfdec3f7}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cu_name" select="1" icon="1" preview="1">
+        <row name="result" id="cu_applicationid">
+          <cell name="cu_name" width="300" />
+          <cell name="cu_department_id" width="107" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cu_application">
+          <attribute name="cu_applicationid" />
+          <attribute name="cu_name" />
+          <attribute name="createdon" />
+          <order attribute="cu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="cu_department_id" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Applications" languagecode="1033" />
+      <LocalizedName description="Applications actives" languagecode="1036" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

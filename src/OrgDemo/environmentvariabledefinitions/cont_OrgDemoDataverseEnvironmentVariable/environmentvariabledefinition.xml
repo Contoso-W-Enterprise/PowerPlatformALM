@@ -1,0 +1,12 @@
+<environmentvariabledefinition schemaname="cont_OrgDemoDataverseEnvironmentVariable">
+  <apiid>/providers/microsoft.powerapps/apis/shared_commondataservice</apiid>
+  <defaultvalue>https://org439c3f54.crm.dynamics.com/</defaultvalue>
+  <displayname default="Org Demo Dataverse Environment Variable">
+    <label description="Org Demo Dataverse Environment Variable" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

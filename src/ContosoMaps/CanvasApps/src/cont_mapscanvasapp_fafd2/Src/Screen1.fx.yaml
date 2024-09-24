@@ -1,0 +1,109 @@
+"Screen1 As screen.'layout_Offline_ver1.0'":
+    Fill: =Color.White
+    LoadingSpinnerColor: =App.Theme.Colors.Primary
+
+    ScreenContainer2 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer2 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.Light
+            Fill: =App.Theme.Colors.Primary
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingLeft: =10
+            PaddingRight: =10
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =2
+
+            AppName1 As Text:
+                Align: ='TextCanvas.Align'.Start
+                AlignInContainer: =AlignInContainer.Stretch
+                DisplayMode: =DisplayMode.Edit
+                FillPortions: =1
+                FontColor: =App.Theme.Colors.Lighter70
+                Height: =75
+                LayoutMinHeight: =40
+                LayoutMinWidth: =280
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =25
+                Text: ="App name"
+                Tooltip: ="App name"
+                VerticalAlign: ='TextCanvas.VerticalAlign'.Middle
+                Weight: ='TextCanvas.Weight'.Regular
+                Width: =280
+                X: =0
+                Y: =0
+                ZIndex: =3
+
+            "'Offline sync Icon1' As Button":
+                AccessibleLabel: ="Offline sync status icon"
+                Align: =Align.Left
+                AlignInContainer: =AlignInContainer.Stretch
+                Appearance: ='ButtonCanvas.Appearance'.Transparent
+                DisplayMode: =DisplayMode.Edit
+                FontColor: =App.Theme.Colors.Lighter70
+                FontSize: =50
+                Height: =32
+                Icon: |-
+                    =Switch(Connection.Sync,
+                       ConnectionSync.Connected, "Globe", 
+                       ConnectionSync.ConnectedWithWarning, "GlobeWarning",
+                       ConnectionSync.ConnectedPendingUpsync, "GlobeArrowUp",   ConnectionSync.ConnectedError, "GlobeError",
+                       ConnectionSync.ConnectedRefresh, "GlobeSync",
+                       ConnectionSync.NotConnected, "GlobeProhibited", 
+                       ConnectionSync.NotConnectedWithWarning, "GlobeWarning",
+                       ConnectionSync.NotConnectedPendingUpsync, "GlobeArrowUp",
+                       ConnectionSync.NotConnectedSyncError, "GlobeError")
+                IconStyle: ='ButtonCanvas.IconStyle'.Outline
+                Layout: ='ButtonCanvas.Layout'.IconOnly
+                LayoutMinHeight: =50
+                LayoutMinWidth: =96
+                OnSelect: =ShowHostInfo(HostInfo.OfflineSync)
+                Tooltip: =If(Connection.Connected,"Connected","Offline")
+                VerticalAlign: =VerticalAlign.Middle
+                Visible: =Host.OfflineEnabled
+                Width: =70
+                X: =0
+                Y: =0
+                ZIndex: =4
+
+        MainSectionContainer1 As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =5
+

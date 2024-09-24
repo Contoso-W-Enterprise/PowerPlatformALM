@@ -1,0 +1,97 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cont_userdatas",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cont_userdata",
+    "MaxGetRowsCount": 500,
+    "Name": "User Data",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cont_name": "Name",
+      "cont_userdata_AsyncOperations": "System Jobs",
+      "cont_userdata_BulkDeleteFailures": "Bulk Delete Failures",
+      "cont_userdata_DuplicateBaseRecord": "Duplicate Records (cont_userdata_DuplicateBaseRecord)",
+      "cont_userdata_DuplicateMatchingRecord": "Duplicate Records (cont_userdata_DuplicateMatchingRecord)",
+      "cont_userdata_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cont_userdata_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cont_userdata_ProcessSession": "Process Sessions",
+      "cont_userdata_SyncErrors": "Sync Errors",
+      "cont_userdataid": "User Data",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "User Data",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "User Data (Views)",
+    "Name": "_cont_userdata_views",
+    "RelatedEntityName": "User Data",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "16520267-6122-4433-a37d-4b2b5b6e5277": "Inactive User Data",
+      "1f1334c2-3f09-4b6f-a382-ae1cd2394027": "User Data Advanced Find View",
+      "29bd57e8-11b6-4045-a80b-5642ea49f93a": "User Data Lookup View",
+      "590a3d2e-1c5f-4e05-b0da-9a83a9629748": "Active User Data",
+      "5e700da4-a51b-4668-b66f-6d2fcc54ae01": "User Data Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (User Data)",
+    "Name": "cont_userdata_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "User Data"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "User Data",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (User Data)",
+    "Name": "cont_userdata_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "User Data"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "User Data",
+    "Type": "OptionSetInfo"
+  }
+]

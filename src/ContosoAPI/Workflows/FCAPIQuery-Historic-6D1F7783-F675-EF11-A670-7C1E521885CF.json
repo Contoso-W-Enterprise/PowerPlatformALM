@@ -1,0 +1,343 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_sharedcommondataserviceforapps_a470c"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "FC API Key (cont_FCAPIKey)": {
+          "defaultValue": "fca_live_Arz3dC57Pw666fwniSMaT5SB9xLrES9KuDFRsthf",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cont_FCAPIKey"
+          }
+        },
+        "FC API URL (cont_FCAPIURL)": {
+          "defaultValue": "https://api.freecurrencyapi.com/v1/",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cont_FCAPIURL"
+          }
+        },
+        "FC Listings (cont_FCListings)": {
+          "defaultValue": {
+            "currencies": [
+              {
+                "country": "United States",
+                "currency": "Dollar",
+                "code": "USD"
+              },
+              {
+                "country": "Eurozone",
+                "currency": "Euro",
+                "code": "EUR"
+              },
+              {
+                "country": "Japan",
+                "currency": "Yen",
+                "code": "JPY"
+              },
+              {
+                "country": "United Kingdom",
+                "currency": "Pound Sterling",
+                "code": "GBP"
+              },
+              {
+                "country": "Australia",
+                "currency": "Australian Dollar",
+                "code": "AUD"
+              },
+              {
+                "country": "Canada",
+                "currency": "Canadian Dollar",
+                "code": "CAD"
+              },
+              {
+                "country": "Switzerland",
+                "currency": "Swiss Franc",
+                "code": "CHF"
+              },
+              {
+                "country": "Sweden",
+                "currency": "Swedish Krona",
+                "code": "SEK"
+              }
+            ]
+          },
+          "type": "Object",
+          "metadata": {
+            "schemaName": "cont_FCListings"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "b62051b1-02d2-4c35-b1fc-dfe170e35f5a"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_Backdays": {
+          "runAfter": {},
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "BackDays",
+                "type": "integer",
+                "value": -360
+              }
+            ]
+          }
+        },
+        "Terminate": {
+          "runAfter": {
+            "Apply_to_each_Backdays": [
+              "Succeeded"
+            ]
+          },
+          "type": "Terminate",
+          "inputs": {
+            "runStatus": "Succeeded"
+          }
+        },
+        "Initialize": {
+          "actions": {
+            "Parse_JSON": {
+              "metadata": {
+                "operationMetadataId": "5d3aaa92-1c46-4b64-bb42-66eeaa349ce5"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@parameters('FC Listings (cont_FCListings)')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "currencies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "country": {
+                            "type": "string"
+                          },
+                          "currency": {
+                            "type": "string"
+                          },
+                          "code": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "country",
+                          "currency",
+                          "code"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Select": {
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f5d1734e-c11a-40a7-b344-ca356780a50c"
+              },
+              "type": "Select",
+              "inputs": {
+                "from": "@body('Parse_JSON')?['currencies']",
+                "select": "@item()?['code']"
+              }
+            },
+            "Join": {
+              "runAfter": {
+                "Select": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "55830ad6-5a5f-49f5-9cd8-14c50520ce44"
+              },
+              "type": "Join",
+              "inputs": {
+                "from": "@body('Select')",
+                "joinWith": ","
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c1ee8488-74a8-432c-9bd5-e6bbc54eb00d"
+          },
+          "type": "Scope"
+        },
+        "Apply_to_each_Backdays": {
+          "foreach": "@range(variables('BackDays'), mul(variables('BackDays'),-1)  )",
+          "actions": {
+            "Compose": {
+              "type": "Compose",
+              "inputs": "@formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd')"
+            },
+            "Apply_to_each": {
+              "foreach": "@body('Parse_JSON')?['currencies']",
+              "actions": {
+                "Get_FC_Historic": {
+                  "metadata": {
+                    "operationMetadataId": "94c8add0-1a13-4d8e-b45a-313b54bc841c"
+                  },
+                  "type": "Http",
+                  "inputs": {
+                    "uri": "@{parameters('FC API URL (cont_FCAPIURL)')}historical?apikey=@{parameters('FC API Key (cont_FCAPIKey)')}&currencies=@{body('Join')}&base_currency=@{items('Apply_to_each')?['code']}&date=@{formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd')}",
+                    "method": "GET"
+                  }
+                },
+                "Apply_to_each_2": {
+                  "foreach": "@body('Parse_JSON')?['currencies']",
+                  "actions": {
+                    "Condition": {
+                      "actions": {
+                        "Compose_2": {
+                          "metadata": {
+                            "operationMetadataId": "5c1f7c1c-a1e2-4a41-b814-c981ce7eb693"
+                          },
+                          "type": "Compose",
+                          "inputs": "@body('Get_FC_Historic')?['data']?[outputs('Compose')]?[items('Apply_to_each_2')?['code']]\r\n"
+                        },
+                        "Add_a_new_row": {
+                          "runAfter": {
+                            "Compose_2": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "89cb9fc4-1acd-4b92-a7eb-2f58df5cba80"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "parameters": {
+                              "entityName": "cont_fcs",
+                              "item/cont_destination": "@items('Apply_to_each_2')?['code']",
+                              "item/cont_name": "@{items('Apply_to_each')?['code']}-@{items('Apply_to_each_2')?['code']}-@{formatDateTime(variables('CurrentDate'),'yyyy-MM-dd hh:mm:ss tt')}",
+                              "item/cont_source": "@items('Apply_to_each')?['code']",
+                              "item/cont_valuedatetime": "@variables('CurrentDate')",
+                              "item/cont_value": "@body('Get_FC_Historic')?['data']?[outputs('Compose')]?[items('Apply_to_each_2')?['code']]\n"
+                            },
+                            "host": {
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                              "operationId": "CreateRecord",
+                              "connectionName": "shared_commondataserviceforapps"
+                            }
+                          }
+                        }
+                      },
+                      "else": {
+                        "actions": {}
+                      },
+                      "expression": {
+                        "not": {
+                          "equals": [
+                            "@items('Apply_to_each')?['code']",
+                            "@items('Apply_to_each_2')?['code']"
+                          ]
+                        }
+                      },
+                      "metadata": {
+                        "operationMetadataId": "9df567e5-7c3a-44bb-b54a-7b56bef61d44"
+                      },
+                      "type": "If"
+                    }
+                  },
+                  "runAfter": {
+                    "Get_FC_Historic": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "82ee54bd-fd59-43fa-856f-e4673f283bb8"
+                  },
+                  "type": "Foreach",
+                  "runtimeConfiguration": {
+                    "concurrency": {
+                      "repetitions": 5
+                    }
+                  }
+                }
+              },
+              "runAfter": {
+                "Compose": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "003e907d-860a-4c74-80fa-8812adba4978"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Initialize": [
+              "Succeeded"
+            ]
+          },
+          "type": "Foreach"
+        },
+        "Initialize_variable": {
+          "runAfter": {
+            "Initialize_Backdays": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "CurrentDate",
+                "type": "string",
+                "value": "@convertFromUtc(utcNow(),'Mountain Standard Time')"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

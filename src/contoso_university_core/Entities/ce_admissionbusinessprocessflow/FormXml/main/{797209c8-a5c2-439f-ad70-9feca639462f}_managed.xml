@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{797209c8-a5c2-439f-ad70-9feca639462f}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{02b599bc-66c4-4a24-b272-35121bb823a1}" name="StageStep3" locklevel="0" expanded="true" visible="false" labelid="{c0458f16-eea0-452f-a63a-2aec4acfe584}">
+          <labels>
+            <label description="New" languagecode="1033" />
+            <label description="Nouvelle étape" languagecode="1036" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{380a4f7b-57b1-ad9c-56d5-57eb54f57ca7}" name="StageStep3_section1" labelid="{a16193d9-a6a8-4096-aeb9-d1e8a1cb837f}">
+                  <labels>
+                    <label description="New" languagecode="1033" />
+                    <label description="Nouvelle étape" languagecode="1036" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{351f4305-d2eb-482d-bdfe-3466784ef41d}" showlabel="true" visible="true" labelid="{77c3d991-acc4-414b-9c20-739b2c72d9c7}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nom" languagecode="1036" />
+                        </labels>
+                        <control id="bpf_cu_major_ce_admissionbusinessprocessflow:cu_department_id" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="cu_department_id" disabled="false" relationship="bpf_cu_major_ce_admissionbusinessprocessflow" isrequired="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{b317a256-1d7f-4322-ad8c-bf5d750724d8}" name="StageStep7" locklevel="0" expanded="true" visible="false" labelid="{2a0c2098-33f6-462d-9f64-15f86cde47eb}">
+          <labels>
+            <label description="Confirmed" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{c64df182-3f44-d5c2-34a3-4162dcdef6cb}" name="StageStep7_section1" labelid="{cb5b5b64-109f-4eac-9378-9504b7b8441c}">
+                  <labels>
+                    <label description="Confirmed" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{f7416b0c-9bf8-40cc-8fde-38adf2686514}" showlabel="true" visible="true" labelid="{10f41fe9-8310-4995-8d58-f4d3bfbe92ce}">
+                        <labels>
+                          <label description="Testing column for Microsoft" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_cu_major_ce_admissionbusinessprocessflow:ce_testingcolumn" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="ce_testingcolumn" relationship="bpf_cu_major_ce_admissionbusinessprocessflow" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="L'information" languagecode="1036" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulaire pour cette entité." languagecode="1036" />
+    </Descriptions>
+  </systemform>
+</forms>

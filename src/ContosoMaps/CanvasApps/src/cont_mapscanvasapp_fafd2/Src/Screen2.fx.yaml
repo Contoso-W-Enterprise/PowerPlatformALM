@@ -1,0 +1,1035 @@
+"Screen2 As screen.'autoLayout_Sidebar_ver1.0'":
+    Fill: =Color.White
+    LoadingSpinnerColor: =App.Theme.Colors.Primary
+
+    ScreenContainer1 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =75
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =2
+
+            txtTitle As Text:
+                Align: ='TextCanvas.Align'.Center
+                AutoHeight: =true
+                DisplayMode: =DisplayMode.Edit
+                FillPortions: =1
+                Font: =Font.'Lato Black'
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                Size: =20
+                Text: ="Location App"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+            "'Offline sync Icon1_1' As Button":
+                AccessibleLabel: ="Offline sync status icon"
+                Align: =Align.Left
+                AlignInContainer: =AlignInContainer.Stretch
+                Appearance: ='ButtonCanvas.Appearance'.Transparent
+                BasePaletteColor: =
+                BorderColor: =
+                DisplayMode: =DisplayMode.Edit
+                FontColor: =App.Theme.Colors.Lighter70
+                FontSize: =50
+                Height: =32
+                Icon: |-
+                    =Switch(Connection.Sync,
+                       ConnectionSync.Connected, "Globe", 
+                       ConnectionSync.ConnectedWithWarning, "GlobeWarning",
+                       ConnectionSync.ConnectedPendingUpsync, "GlobeArrowUp",   ConnectionSync.ConnectedError, "GlobeError",
+                       ConnectionSync.ConnectedRefresh, "GlobeSync",
+                       ConnectionSync.NotConnected, "GlobeProhibited", 
+                       ConnectionSync.NotConnectedWithWarning, "GlobeWarning",
+                       ConnectionSync.NotConnectedPendingUpsync, "GlobeArrowUp",
+                       ConnectionSync.NotConnectedSyncError, "GlobeError")
+                IconStyle: ='ButtonCanvas.IconStyle'.Outline
+                Layout: ='ButtonCanvas.Layout'.IconOnly
+                LayoutMinHeight: =50
+                LayoutMinWidth: =96
+                OnSelect: =ShowHostInfo(HostInfo.OfflineSync)
+                Tooltip: =If(Connection.Connected,"Connected","Offline")
+                VerticalAlign: =VerticalAlign.Middle
+                Visible: =Host.OfflineEnabled
+                Width: =70
+                X: =0
+                Y: =0
+                ZIndex: =3
+
+        BottomContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(245, 245, 245, 1)
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutGap: =16
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            PaddingBottom: =2
+            PaddingLeft: =2
+            PaddingRight: =2
+            PaddingTop: =2
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =3
+
+            SidebarContainer1 As groupContainer.verticalAutoLayoutContainer:
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =3
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =4
+
+                Container1 As groupContainer.horizontalAutoLayoutContainer:
+                    DropShadow: =DropShadow.Light
+                    Height: =50
+                    LayoutAlignItems: =LayoutAlignItems.Center
+                    LayoutGap: =30
+                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =50
+                    PaddingRight: =50
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Width: =Parent.Width
+                    ZIndex: =1
+
+                    Icon1 As icon.Add:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        Color: =App.Theme.Colors.Darker30
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(244, 244, 244, 1)
+                        Height: =32
+                        Icon: =Icon.Add
+                        OnSelect: =NewForm(frmLocations)
+                        Width: =32
+                        ZIndex: =1
+
+                    Icon2 As icon.Reset:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        Color: =App.Theme.Colors.Darker30
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(244, 244, 244, 1)
+                        Height: =32
+                        Icon: =Icon.Reset
+                        Width: =32
+                        ZIndex: =2
+
+                    Icon3 As icon.GlobeRefresh:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        Color: =App.Theme.Colors.Darker30
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(244, 244, 244, 1)
+                        Height: =32
+                        Icon: =Icon.GlobeRefresh
+                        Width: =32
+                        ZIndex: =3
+
+                "glyLocations As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver5.0'":
+                    BorderColor: =App.Theme.Colors.Darker40
+                    DelayItemLoading: =true
+                    FillPortions: =0
+                    Height: =190
+                    Items: =Locations
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =200
+                    LayoutMinWidth: =Parent.Width
+                    LoadingSpinner: =LoadingSpinner.Data
+                    OnSelect: =EditForm(frmLocations)
+                    TemplatePadding: =0
+                    TemplateSize: =50
+                    Width: =Parent.Width
+                    ZIndex: =2
+
+                    Title2 As label:
+                        Color: =RGBA(50, 49, 48, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        Font: =App.Theme.Font
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.Name
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.TemplateWidth - 86
+                        X: =16
+                        Y: =(Parent.TemplateHeight - (Self.Size * 1.8 + Subtitle2.Size * 1.8)) / 2
+                        ZIndex: =1
+
+                    Subtitle2 As label:
+                        Color: =RGBA(0, 0, 0, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        Font: =App.Theme.Font
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.Type
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Title2.Width
+                        X: =Title2.X
+                        Y: =Title2.Y + Title2.Height
+                        ZIndex: =2
+
+                    NextArrow2 As icon.ChevronRight:
+                        AccessibleLabel: =Self.Tooltip
+                        BorderColor: =App.Theme.Colors.Darker40
+                        Color: =RGBA(166, 166, 166, 1)
+                        DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                        DisabledColor: =RGBA(244, 244, 244, 1)
+                        Height: =50
+                        Icon: =Icon.ChevronRight
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =16
+                        PaddingLeft: =16
+                        PaddingRight: =16
+                        PaddingTop: =16
+                        Tooltip: ="View item details"
+                        Width: =50
+                        X: =Parent.TemplateWidth - Self.Width - 12
+                        Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                        ZIndex: =3
+
+                    Separator2 As rectangle:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =8
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Self.Height
+                        ZIndex: =4
+
+                    Rectangle2 As rectangle:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        Fill: =App.Theme.Colors.Darker30
+                        Height: =Parent.TemplateHeight - Separator2.Height
+                        OnSelect: =Select(Parent)
+                        Visible: =ThisItem.IsSelected
+                        Width: =4
+                        ZIndex: =5
+
+                frmLocations As form:
+                    BorderColor: =App.Theme.Colors.Darker40
+                    DataSource: =Locations
+                    DefaultMode: =FormMode.New
+                    Height: =300
+                    Item: =glyLocations.Selected
+                    LayoutMinHeight: =250
+                    LayoutMinWidth: =Parent.Width
+                    NumberOfColumns: =2
+                    ZIndex: =3
+
+                    Type_DataCard1 As typedDataCard.comboBoxOptionSetSingleEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_type"
+                        Default: =ThisItem.Type
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,cont_type)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        Required: =false
+                        Update: =DataCardValue6.Selected.Value
+                        Width: =197
+                        X: =1
+                        Y: =0
+                        ZIndex: =1
+
+                        DataCardKey6 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue6 As combobox:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            ChevronBackground: =App.Theme.Colors.Primary
+                            ChevronDisabledBackground: =RGBA(166, 166, 166, 1)
+                            ChevronDisabledFill: =RGBA(244, 244, 244, 1)
+                            ChevronHoverBackground: =App.Theme.Colors.Darker10
+                            ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                            DefaultSelectedItems: =[Parent.Default]
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            Font: =App.Theme.Font
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            IsSearchable: =false
+                            Items: =Choices('Location Type')
+                            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                            PressedColor: =RGBA(255, 255, 255, 1)
+                            PressedFill: =App.Theme.Colors.Darker30
+                            SelectionFill: =App.Theme.Colors.Primary
+                            SelectMultiple: =false
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey6.Y + DataCardKey6.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage6 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue6.Y + DataCardValue6.Height
+                            ZIndex: =3
+
+                        StarVisible6 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey6.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey6.Y
+                            ZIndex: =4
+
+                    Address_DataCard1 As typedDataCard.textualEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_address"
+                        Default: =ThisItem.Address
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,cont_address)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =DataSourceInfo([@Locations], DataSourceInfo.MaxLength, cont_address)
+                        Required: =false
+                        Update: =DataCardValue7.Text
+                        Width: =197
+                        X: =1
+                        Y: =1
+                        ZIndex: =1
+
+                        DataCardKey7 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue7 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderThickness: =2
+                            Color: =RGBA(0, 0, 0, 1)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            FocusedBorderThickness: =4
+                            Font: =App.Theme.Font
+                            HoverBorderColor: =App.Theme.Colors.Darker40
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey7.Y + DataCardKey7.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage7 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue7.Y + DataCardValue7.Height
+                            ZIndex: =3
+
+                        StarVisible7 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey7.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey7.Y
+                            ZIndex: =4
+
+                    GeoJSON_DataCard1 As typedDataCard.textualMultiLineEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_geojson"
+                        Default: =ThisItem.GeoJSON
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,cont_geojson)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =221
+                        Required: =false
+                        Update: =DataCardValue5.Text
+                        Visible: =If(ThisItem.Type <> [@'Location Type'].Pin, true, false)
+                        Width: =394
+                        X: =0
+                        Y: =3
+                        ZIndex: =1
+
+                        DataCardKey5 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue5 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderThickness: =2
+                            Color: =RGBA(0, 0, 0, 1)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            FocusedBorderThickness: =4
+                            Font: =App.Theme.Font
+                            Height: =147
+                            HoverBorderColor: =App.Theme.Colors.Darker40
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            Mode: =TextMode.MultiLine
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey5.Y + DataCardKey5.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage5 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue5.Y + DataCardValue5.Height
+                            ZIndex: =3
+
+                        StarVisible5 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey5.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey5.Y
+                            ZIndex: =4
+
+                    Submit_DataCard As typedDataCard.blankCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DisplayMode: =DisplayMode.Edit
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =61
+                        Width: =394
+                        X: =0
+                        Y: =4
+                        ZIndex: =1
+
+                        Button1 As button:
+                            BorderColor: =App.Theme.Colors.Primary
+                            DisabledBorderColor: =RGBA(244, 244, 244, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            Fill: =App.Theme.Colors.Primary
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            HoverBorderColor: =App.Theme.Colors.Darker10
+                            HoverColor: =RGBA(255, 255, 255, 1)
+                            HoverFill: =App.Theme.Colors.Darker10
+                            OnSelect: |-
+                                =SubmitForm(frmLocations);
+                                NewForm(frmLocations);
+                            PressedBorderColor: =App.Theme.Colors.Darker40
+                            PressedColor: =Self.Color
+                            PressedFill: =App.Theme.Colors.Darker40
+                            Size: =15
+                            Text: ="Add"
+                            X: =208
+                            Y: =12
+                            ZIndex: =1
+
+                    Name_DataCard1 As typedDataCard.textualEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_name"
+                        Default: =ThisItem.Name
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,Name)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =DataSourceInfo([@Locations], DataSourceInfo.MaxLength, Name)
+                        Required: =true
+                        Update: =DataCardValue4.Text
+                        Width: =197
+                        X: =0
+                        Y: =0
+                        ZIndex: =3
+
+                        DataCardKey4 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue4 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderThickness: =2
+                            Color: =RGBA(0, 0, 0, 1)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            FocusedBorderThickness: =4
+                            Font: =App.Theme.Font
+                            HoverBorderColor: =App.Theme.Colors.Darker40
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage4 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue4.Y + DataCardValue4.Height
+                            ZIndex: =3
+
+                        StarVisible4 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey4.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey4.Y
+                            ZIndex: =4
+
+                    Latitude_DataCard1 As typedDataCard.numberEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_latitude"
+                        Default: =ThisItem.Latitude
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,Latitude)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        Required: =false
+                        Update: =Value(DataCardValue2.Text)
+                        Visible: =If(ThisItem.Type = [@'Location Type'].Pin, true, false)
+                        Width: =197
+                        X: =0
+                        Y: =2
+                        ZIndex: =3
+
+                        DataCardKey2 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue2 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderThickness: =2
+                            Color: =RGBA(0, 0, 0, 1)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            FocusedBorderThickness: =4
+                            Font: =App.Theme.Font
+                            Format: =TextFormat.Number
+                            HoverBorderColor: =App.Theme.Colors.Darker40
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage2 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue2.Y + DataCardValue2.Height
+                            ZIndex: =3
+
+                        StarVisible2 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey2.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey2.Y
+                            ZIndex: =4
+
+                    Longitude_DataCard1 As typedDataCard.numberEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_longitude"
+                        Default: =ThisItem.Longitude
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,Longitude)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        Required: =false
+                        Update: =Value(DataCardValue3.Text)
+                        Visible: =If(ThisItem.Type = [@'Location Type'].Pin, true, false)
+                        Width: =197
+                        X: =1
+                        Y: =2
+                        ZIndex: =3
+
+                        DataCardKey3 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue3 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderThickness: =2
+                            Color: =RGBA(0, 0, 0, 1)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            FocusedBorderThickness: =4
+                            Font: =App.Theme.Font
+                            Format: =TextFormat.Number
+                            HoverBorderColor: =App.Theme.Colors.Darker40
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage3 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue3.Y + DataCardValue3.Height
+                            ZIndex: =3
+
+                        StarVisible3 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey3.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey3.Y
+                            ZIndex: =4
+
+                    Description_DataCard1 As typedDataCard.textualMultiLineEditCard:
+                        BorderColor: =App.Theme.Colors.Darker40
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="cont_description"
+                        Default: =ThisItem.Description
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@Locations],DataSourceInfo.DisplayName,Description)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        Required: =false
+                        Update: =DataCardValue1.Text
+                        Width: =197
+                        X: =0
+                        Y: =1
+                        ZIndex: =3
+
+                        DataCardKey1 As label:
+                            AutoHeight: =true
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =34
+                            Size: =13
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue1 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderThickness: =2
+                            Color: =RGBA(0, 0, 0, 1)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            FocusedBorderThickness: =4
+                            Font: =App.Theme.Font
+                            Height: =80
+                            HoverBorderColor: =App.Theme.Colors.Darker40
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =App.Theme.Colors.Lighter70
+                            Mode: =TextMode.MultiLine
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =13
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage1 As label:
+                            AutoHeight: =true
+                            Color: =RGBA(168, 0, 0, 1)
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            FontWeight: =FontWeight.Semibold
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue1.Y + DataCardValue1.Height
+                            ZIndex: =3
+
+                        StarVisible1 As label:
+                            Align: =Align.Center
+                            Color: =App.Theme.Colors.Darker30
+                            DisabledColor: =RGBA(166, 166, 166, 1)
+                            Font: =App.Theme.Font
+                            Height: =DataCardKey1.Height
+                            Size: =13
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey1.Y
+                            ZIndex: =4
+
+            MainContainer1 As groupContainer.verticalAutoLayoutContainer:
+                DropShadow: =DropShadow.Light
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                ZIndex: =5
+
+                "Map1 As 'Map (preview)'.pcfdataset":
+                    AddressDataSource: ="Default"
+                    BorderColor: =RGBA(0, 18, 107, 1)
+                    CurrentLocation: =false
+                    CurrentLocationLatitude: =
+                    CurrentLocationLongitude: =
+                    DefaultLatitude: =glyLocations.Selected.Latitude
+                    DefaultLocation: =true
+                    DefaultLongitude: =glyLocations.Selected.Longitude
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =Parent.Height
+                    InfoCards: ='Map.InfoCards'.OnHover
+                    Items: =Filter(Locations, ThisRecord.Type = [@'Location Type'].Pin)
+                    ItemsAddresses: ="cont_description"
+                    ItemsLabels: ="cont_name"
+                    ItemsLatitudes: ="cont_latitude"
+                    ItemsLongitudes: ="cont_longitude"
+                    LayoutMinHeight: =400
+                    LayoutMinWidth: =400
+                    OnItemsChange: =false
+                    OnLoad: =false
+                    OnMapClick: =false
+                    OnRouteDirectionChange: =false
+                    OnSelect: =false
+                    OnShapeCreated: =false
+                    OnShapeDeleted: =false
+                    OnShapeEdited: =false
+                    OnShapeSelected: =false
+                    PinColor: =RGBA(29, 114, 169, 1)
+                    SatelliteView: =false
+                    ShapeDrawing: =false
+                    ShapeGeoJSONObjects: ="cont_geojson"
+                    ShapeLabels: ="cont_name"
+                    Shapes_Items: =Filter(Locations, ThisRecord.Type = [@'Location Type'].Shape)
+                    ShowRoutePins: =false
+                    Width: =Parent.Width
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                    Name1 As MapTemplate_dataField.textualColumn:
+                        FieldDisplayName: ="Name"
+                        FieldName: ="cont_name"
+                        FieldType: ="s"
+                        FieldVariantName: ="textualColumn"
+                        Order: =1
+                        ZIndex: =6
+
+                    Description1 As MapTemplate_dataField.textualColumn:
+                        FieldDisplayName: ="Description"
+                        FieldName: ="cont_description"
+                        FieldType: ="s"
+                        FieldVariantName: ="textualColumn"
+                        Order: =2
+                        ZIndex: =7
+
+                    Longitude1 As MapTemplate_dataField.textualColumn:
+                        FieldDisplayName: ="Longitude"
+                        FieldName: ="cont_longitude"
+                        FieldType: ="n"
+                        FieldVariantName: ="textualColumn"
+                        Order: =3
+                        ZIndex: =8
+
+                    Latitude1 As MapTemplate_dataField.textualColumn:
+                        FieldDisplayName: ="Latitude"
+                        FieldName: ="cont_latitude"
+                        FieldType: ="n"
+                        FieldVariantName: ="textualColumn"
+                        Order: =4
+                        ZIndex: =9
+

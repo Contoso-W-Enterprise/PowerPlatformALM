@@ -1,0 +1,745 @@
+"Screen1 As screen.'tabletAutoLayout_Sidebar_ver1.0'":
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+    OnVisible: |-
+        =UpdateContext({isNameNew:false});
+
+    ScreenContainer2 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        SidebarContainer2 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =3
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =4
+
+            HeaderContainer2_1 As groupContainer.horizontalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =75
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                ZIndex: =1
+
+                Header_2 As Header:
+                    FillPortions: =1
+                    Height: =Parent.Height
+                    LayoutMinHeight: =640
+                    LayoutMinWidth: =320
+                    LeftButtonVisible: =false
+                    RightButtonVisible: =false
+                    Text: ="Org Data"
+
+            "TabList1 As 'Tab list'.pcfdataset":
+                Alignment: ='TabList.Alignment'.Vertical
+                DefaultSelectedItems: =
+                DisplayMode: =DisplayMode.Edit
+                FillPortions: =1
+                Height: =55
+                Items: =Filter('Org Data', 'Org Data (Views)'.'Active Org Data')
+                LayoutMinHeight: =55
+                LayoutMinWidth: =280
+                Width: =280
+                X: =0
+                Y: =0
+                ZIndex: =2
+
+                Name2 As pcfDataField.textualColumn:
+                    FieldDisplayName: ="Name"
+                    FieldName: ="cont_name"
+                    FieldType: ="s"
+                    FieldVariantName: ="textualColumn"
+                    Order: =1
+                    ZIndex: =42
+
+                "'Created On2' As pcfDataField.textualColumn":
+                    FieldDisplayName: ="Created On"
+                    FieldName: ="createdon"
+                    FieldType: ="d"
+                    FieldVariantName: ="textualColumn"
+                    Order: =2
+                    ZIndex: =43
+
+                "'Owning Business Unit1' As pcfDataField":
+                    FieldDisplayName: ="Owning Business Unit"
+                    FieldName: ="owningbusinessunit"
+                    FieldType: ="E"
+                    FieldVariantName: ="complexTypeColumn"
+                    Order: =4
+                    ZIndex: =44
+
+                Images1 As pcfDataField.textualColumn:
+                    FieldDisplayName: ="Images"
+                    FieldName: ="cont_images"
+                    FieldType: ="I"
+                    FieldVariantName: ="textualColumn"
+                    Order: =6
+                    ZIndex: =45
+
+        MainSectionContainer2 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =7
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =5
+
+            HeaderContainer2 As groupContainer.horizontalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =75
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                ZIndex: =1
+
+                Header_1 As Header:
+                    FillPortions: =1
+                    Height: =Parent.Height
+                    LayoutMinHeight: =640
+                    LayoutMinWidth: =640
+                    Text: ="Org Items"
+
+            MainSectionContainer2_1 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =7
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                ZIndex: =2
+
+                VCtn001 As groupContainer.verticalAutoLayoutContainer:
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingTop: =10
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    ZIndex: =3
+
+                    HCtn002_1 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        ZIndex: =1
+
+                        Label1_3 As Label:
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =320
+                            Text: ="Name"
+                            Width: =150
+                            X: =0
+                            Y: =0
+                            ZIndex: =1
+
+                        "TextInputCanvas1 As 'Text input'":
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =320
+                            Width: =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =2
+
+                    HCtn001 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        ZIndex: =2
+
+                        Label1 As Label:
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =320
+                            Text: ="Org Items"
+                            Width: |
+                                =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =1
+
+                        "ComboBox1 As 'Combo box'.pcfdataset":
+                            AllowSearching: =true
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            Items: ='Org Lookups'
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =320
+                            Width: =250
+                            X: =0
+                            Y: =0
+                            ZIndex: =2
+
+                            Name8 As pcfDataField.textualColumn:
+                                FieldDisplayName: ="Name"
+                                FieldName: ="cont_name"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =1
+                                ZIndex: =26
+
+                            "'Created On7' As pcfDataField.textualColumn":
+                                FieldDisplayName: ="Created On"
+                                FieldName: ="createdon"
+                                FieldType: ="d"
+                                FieldVariantName: ="textualColumn"
+                                Order: =2
+                                ZIndex: =27
+
+                        ButtonCanvas1 As Button:
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =96
+                            OnSelect: |-
+                                =UpdateContext({isNameNew:!isNameNew});
+                            Text: ="New"
+                            Width: =96
+                            X: =0
+                            Y: =0
+                            ZIndex: =3
+
+                        "TagList1 As 'Fluent Tag List (1.0.22)'.pcfdataset":
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =200
+                            ItemDisplayName: ="cont_name"
+                            ItemKey: ="cont_orglookupid"
+                            Items: =Filter('Org Lookups', 'Org Lookups (Views)'.'Active Org Lookups')
+                            LayoutMinHeight: =200
+                            LayoutMinWidth: =200
+                            Width: =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =4
+
+                            Name9 As pcfDataField.textualColumn:
+                                FieldDisplayName: ="Name"
+                                FieldName: ="cont_name"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =1
+                                ZIndex: =28
+
+                            "'Created On8' As pcfDataField.textualColumn":
+                                FieldDisplayName: ="Created On"
+                                FieldName: ="createdon"
+                                FieldType: ="d"
+                                FieldVariantName: ="textualColumn"
+                                Order: =2
+                                ZIndex: =29
+
+                        "Picker1 As 'Fluent Picker (1.0.22)'.pcfdataset":
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =200
+                            Items: =Filter('Org Lookups', 'Org Lookups (Views)'.'Active Org Lookups')
+                            LayoutMinHeight: =200
+                            LayoutMinWidth: =200
+                            Suggestions_Items: ='Org Lookups'
+                            SuggestionsDisplayName: ="cont_name"
+                            SuggestionsKey: ="cont_orglookupid"
+                            TagsDisplayName: ="cont_name"
+                            TagsKey: ="cont_orglookupid"
+                            Width: =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =5
+
+                            Name10 As pcfDataField.textualColumn:
+                                FieldDisplayName: ="Name"
+                                FieldName: ="cont_name"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =1
+                                ZIndex: =30
+
+                            "'Created On9' As pcfDataField.textualColumn":
+                                FieldDisplayName: ="Created On"
+                                FieldName: ="createdon"
+                                FieldType: ="d"
+                                FieldVariantName: ="textualColumn"
+                                Order: =2
+                                ZIndex: =31
+
+                    HCtn002 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        ZIndex: =3
+
+                        Label1_1 As Label:
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =320
+                            OnSelect: =false
+                            Text: ="Owner"
+                            Width: |
+                                =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =1
+
+                        "PeoplePicker1 As 'Fluent PeoplePicker (1.0.22) Preview'.pcfdataset":
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =200
+                            Items: =Filter(Users, 'Users (Views)'.'Enabled Users')
+                            LayoutMinHeight: =200
+                            LayoutMinWidth: =200
+                            PersonaImageAlt: ="fullname"
+                            PersonaImgUrl: ="photourl"
+                            PersonaKey: ="userpuid"
+                            PersonaName: ="fullname"
+                            PersonaPresence: =""
+                            PersonaRole: ="jobtitle"
+                            SuggestionImageAlt: ="fullname"
+                            SuggestionImgUrl: ="photourl"
+                            SuggestionKey: ="userpuid"
+                            SuggestionName: ="fullname"
+                            SuggestionRole: ="jobtitle"
+                            Suggestions_Items: =Users
+                            Width: =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =2
+
+                            "'Full Name1' As pcfDataField.textualColumn":
+                                FieldDisplayName: ="Full Name"
+                                FieldName: ="fullname"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =1
+                                ZIndex: =32
+
+                            "'Business Unit1' As pcfDataField":
+                                FieldDisplayName: ="Business Unit"
+                                FieldName: ="businessunitid"
+                                FieldType: ="E"
+                                FieldVariantName: ="complexTypeColumn"
+                                Order: =2
+                                ZIndex: =33
+
+                            Title1 As pcfDataField.textualColumn:
+                                FieldDisplayName: ="Title"
+                                FieldName: ="title"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =3
+                                ZIndex: =34
+
+                            Position1 As pcfDataField:
+                                FieldDisplayName: ="Position"
+                                FieldName: ="positionid"
+                                FieldType: ="E"
+                                FieldVariantName: ="complexTypeColumn"
+                                Order: =4
+                                ZIndex: =35
+
+                            "'Main Phone1' As pcfDataField.textualColumn":
+                                FieldDisplayName: ="Main Phone"
+                                FieldName: ="address1_telephone1"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =5
+                                ZIndex: =36
+
+                    HCtn003 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        ZIndex: =4
+
+                        Label1_2 As Label:
+                            DisplayMode: =DisplayMode.Edit
+                            Height: =32
+                            LayoutMinHeight: =32
+                            LayoutMinWidth: =320
+                            OnSelect: =false
+                            Text: ="Business Unit"
+                            Width: |
+                                =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =1
+
+                        "FluentDetailsList1 As 'Fluent Details List (1.0.22)'.pcfdataset":
+                            AlternateRowColor: =true
+                            ColCellType: =""
+                            ColDisplayName: ="colDisplayName"
+                            ColIsBold: ="colIsBold"
+                            ColName: ="colName"
+                            ColResizable: ="colResizable"
+                            ColSortable: ="colSortable"
+                            columns_Items: |
+                                =Table(
+                                    {
+                                        colName:"Business Unit",
+                                        colDisplayName: "Name",
+                                        colId:"Business Unit",
+                                        colSortable: true,
+                                        colIsBold:true,
+                                        colResizable:true,
+                                        colWidth:200
+                                    },
+                                    {
+                                        colName:"Division",
+                                        colDisplayName: "Division"
+                                    }
+                                )
+                            ColWidth: ="colWidth"
+                            DisplayMode: =DisplayMode.Edit
+                            FillPortions: =1
+                            Height: =150
+                            Items: =Filter('Business Units', 'Business Units (Views)'.'Active Business Units')
+                            LayoutMinHeight: =200
+                            LayoutMinWidth: =200
+                            RecordCanSelect: =""
+                            RecordKey: =""
+                            RecordSelected: =""
+                            Width: =200
+                            X: =0
+                            Y: =0
+                            ZIndex: =2
+
+                            Name12 As pcfDataField.textualColumn:
+                                FieldDisplayName: ="Name"
+                                FieldName: ="name"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =1
+                                ZIndex: =37
+
+                            "'Parent Business2' As pcfDataField":
+                                FieldDisplayName: ="Parent Business"
+                                FieldName: ="parentbusinessunitid"
+                                FieldType: ="E"
+                                FieldVariantName: ="complexTypeColumn"
+                                Order: =4
+                                ZIndex: =40
+
+                            Division1 As pcfDataField.textualColumn:
+                                FieldDisplayName: ="Division"
+                                FieldName: ="divisionname"
+                                FieldType: ="s"
+                                FieldVariantName: ="textualColumn"
+                                Order: =5
+                                ZIndex: =41
+
+    Pane As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Regular
+        Fill: =RGBA(245, 245, 245, 0.91)
+        Height: =768
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Visible: =isNameNew
+        X: =App.Width - Self.Width
+        ZIndex: =3
+
+        Header_3 As Header:
+            Height: =50
+            LayoutMinHeight: =200
+            LayoutMinWidth: =320
+            LeftButtonVisible: =false
+            OnRightButtonSelect: |-
+                =UpdateContext({isNameNew:!isNameNew});
+            Text: ="New Org Lookup"
+            Width: =Parent.Width
+
+        Form1 As form:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            DataSource: ='Org Lookups'
+            DefaultMode: =FormMode.New
+            LayoutMinHeight: =250
+            LayoutMinWidth: =400
+            NumberOfColumns: =1
+            ZIndex: =2
+
+            "'Owning Business Unit_DataCard1' As typedDataCard.pcfCoreComboBoxEditCard":
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="owningbusinessunit"
+                Default: =ThisItem.'Owning Business Unit'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@'Org Lookups'],DataSourceInfo.DisplayName,"owningbusinessunit")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =70
+                Required: =false
+                Update: =DataCardValue3.Selected
+                Width: =500
+                WidthFit: =true
+                X: =0
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey3 As Label:
+                    AutoHeight: =true
+                    DisplayMode: =DisplayMode.Edit
+                    FontSize: =9
+                    Height: =22
+                    Text: =Parent.DisplayName
+                    Tooltip: =Parent.DisplayName
+                    VerticalAlignment: =VerticalAlign.Bottom
+                    Width: =Parent.Width - 48
+                    Wrap: =true
+                    X: =24
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue3 As combobox:
+                    AccessibleLabel: =If(Parent.Required, Substitute("{0}. Required.", "{0}", Parent.DisplayName), Parent.DisplayName)
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    ChevronBackground: =RGBA(255, 255, 255, 1)
+                    ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                    ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                    ChevronFill: =RGBA(33, 33, 33, 1)
+                    ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                    ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                    Color: =RGBA(51, 51, 51, 1)
+                    DefaultSelectedItems: =Parent.Default
+                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                    DisabledColor: =RGBA(166, 166, 166, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayFields: =["name"]
+                    DisplayMode: =Parent.DisplayMode
+                    FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                    FocusedBorderThickness: =2
+                    Font: =Font.'Segoe UI'
+                    Height: =32
+                    HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    HoverColor: =RGBA(51, 51, 51, 1)
+                    HoverFill: =RGBA(212, 212, 212, 1)
+                    Items: =Choices([@'Org Lookups'].owningbusinessunit)
+                    PaddingLeft: =12
+                    PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                    PressedColor: =RGBA(255, 255, 255, 1)
+                    PressedFill: =RGBA(212, 212, 212, 1)
+                    SearchFields: =["name"]
+                    SearchItems: =Search(Choices([@'Org Lookups'].owningbusinessunit),DataCardValue3.SearchText,"name")
+                    SelectionColor: =RGBA(51, 51, 51, 1)
+                    SelectionFill: =RGBA(0, 120, 212, 1)
+                    SelectMultiple: =false
+                    Size: =10.5
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 48
+                    X: =24
+                    Y: =DataCardKey3.Y + DataCardKey3.Height + 4
+                    ZIndex: =2
+
+                ErrorMessage2 As Label:
+                    AutoHeight: =true
+                    Color: =Color.Red
+                    DisplayMode: =DisplayMode.Edit
+                    FontSize: =9
+                    Height: =30
+                    Text: =Parent.Error
+                    Tooltip: =Parent.Error
+                    Visible: =And(!IsBlank(Parent.Error), Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =Parent.Width - 48
+                    Wrap: =true
+                    X: =24
+                    Y: =DataCardValue3.Y + DataCardValue3.Height
+                    ZIndex: =3
+
+                StarVisible2 As Label:
+                    Alignment: =Align.Center
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =20
+                    Text: ="*"
+                    VerticalAlignment: =VerticalAlign.Bottom
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    X: =0
+                    Y: =DataCardKey3.Y
+                    ZIndex: =4
+
+            Name_DataCard1 As typedDataCard.pcfCoreTextualEditCard:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="cont_name"
+                Default: =ThisItem.Name
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@'Org Lookups'],DataSourceInfo.DisplayName,"cont_name")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =70
+                MaxLength: =DataSourceInfo([@'Org Lookups'], DataSourceInfo.MaxLength, "cont_name")
+                Required: =true
+                Update: =DataCardValue1.Value
+                Width: =500
+                WidthFit: =true
+                X: =0
+                Y: =0
+                ZIndex: =3
+
+                DataCardKey1 As Label:
+                    AutoHeight: =true
+                    DisplayMode: =DisplayMode.Edit
+                    FontSize: =9
+                    Height: =22
+                    Text: =Parent.DisplayName
+                    Tooltip: =Parent.DisplayName
+                    VerticalAlignment: =VerticalAlign.Bottom
+                    Width: =Parent.Width - 48
+                    Wrap: =true
+                    X: =24
+                    Y: =10
+                    ZIndex: =1
+
+                "DataCardValue1 As 'Text box'":
+                    AccessibleLabel: =Parent.DisplayName
+                    DisplayMode: =Parent.DisplayMode
+                    FontSize: =10.5
+                    Height: =32
+                    Mode: ="SingleLine"
+                    Required: =Parent.Required
+                    Tooltip: =Parent.DisplayName
+                    Value: =Parent.Default
+                    Width: =Parent.Width - 48
+                    X: =24
+                    Y: =DataCardKey1.Y + DataCardKey1.Height + 4
+                    ZIndex: =2
+
+                ErrorMessage1 As Label:
+                    AutoHeight: =true
+                    Color: =Color.Red
+                    DisplayMode: =DisplayMode.Edit
+                    FontSize: =9
+                    Height: =30
+                    Text: =Parent.Error
+                    Tooltip: =Parent.Error
+                    Visible: =And(!IsBlank(Parent.Error), Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =Parent.Width - 48
+                    Wrap: =true
+                    X: =24
+                    Y: =DataCardValue1.Y + DataCardValue1.Height
+                    ZIndex: =3
+
+                StarVisible1 As Label:
+                    Alignment: =Align.Center
+                    DisplayMode: =DisplayMode.Edit
+                    Height: =30
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    X: =0
+                    Y: =DataCardKey1.Y
+                    ZIndex: =4
+
+        Container2 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            FillPortions: =0
+            Height: =80
+            LayoutGap: =10
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =20
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =20
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =3
+
+            ButtonCanvas2 As Button:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                Text: ="Reset"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+            ButtonCanvas2_1 As Button:
+                Appearance: ='ButtonCanvas.Appearance'.Primary
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                OnSelect: |
+                    =SubmitForm(Form1);
+                    Notify("Org Lookup created");
+                    UpdateContext({isNameNew:!isNameNew});
+                    Refresh('Org Lookups');
+                Text: ="Create"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =2
+

@@ -1,0 +1,46 @@
+<appaction uniquename="ce__Assign!53a9adfab11345dca873854f84f0efb1!ce_Admission!cu_application!1">
+  <appmoduleid>
+    <uniquename>ce_Admission</uniquename>
+  </appmoduleid>
+  <buttonaccessibilitytext default="Assign">
+    <label description="Assign" languagecode="1033" />
+  </buttonaccessibilitytext>
+  <buttonlabeltext default="Assign+">
+    <label description="Assign+" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Make someone else the owner of these {EntityPluralDisplayName}. &lt;br&gt;&lt;br&gt;If you want to keep ownership of the {EntityPluralDisplayName}, yet let someone else work with them, select Share instead.">
+    <label description="Make someone else the owner of these {EntityPluralDisplayName}. &lt;br&gt;&lt;br&gt;If you want to keep ownership of the {EntityPluralDisplayName}, yet let someone else work with them, select Share instead." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Assign">
+    <label description="Assign" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>cu_application</logicalname>
+  </contextentity>
+  <contextvalue>cu_application</contextvalue>
+  <fonticon>$clientsvg:FollowUser</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>1</location>
+  <name>Assign!53a9adfab11345dca873854f84f0efb1</name>
+  <onclickeventjavascriptfunctionname>XrmCore.Commands.Assign.assignSelectedRecords</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":12},{"type":24},{"type":8}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>adea1aea-b2aa-e611-80d6-00155d88c343</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>1000300025.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>ce_admissiondefaultcommandlibrary_a1e1f</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>6417774684fe4e4998c05b9fe90886d1</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

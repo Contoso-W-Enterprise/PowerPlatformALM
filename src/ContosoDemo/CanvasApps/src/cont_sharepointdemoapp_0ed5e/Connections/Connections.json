@@ -1,0 +1,35 @@
+{
+  "38276662-a834-4669-ad8f-26fc2fddba1a": {
+    "appActions": [],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/jayawan/releases/v1.0.1697/1.0.1697.3786/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://mngenvmcap157851.sharepoint.com/sites/IT_cont_SharePointDemoSite": {
+        "datasetOverride": {
+          "environmentVariableName": "cont_SharePointDemoSite",
+          "name": "https://mngenvmcap157851.sharepoint.com/sites/IT"
+        },
+        "dataSources": {
+          "SharePoint Demo List": {
+            "tableName": "9b764650-370e-44ab-b8d8-b1239b9d76bf",
+            "tableNameOverride": {
+              "environmentVariableName": "cont_SharePointDemoList"
+            }
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "SharePoint Demo List"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "38276662-a834-4669-ad8f-26fc2fddba1a"
+  }
+}

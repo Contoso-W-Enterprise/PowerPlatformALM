@@ -1,0 +1,378 @@
+"Screen2 As screen.'autoLayout_HeaderFooter_ver1.0'":
+    Fill: =Color.White
+    LoadingSpinnerColor: =App.Theme.Colors.Primary
+
+    ScreenContainer1 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =75
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =1
+
+            Label1 As label:
+                Align: =Align.Center
+                BorderColor: =App.Theme.Colors.Darker40
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledColor: =RGBA(166, 166, 166, 1)
+                Font: =App.Theme.Font
+                FontWeight: =FontWeight.Bold
+                Size: =18
+                Text: ="App Title"
+                ZIndex: =1
+
+        FilterContainer As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =2
+
+            DropdownCanvas1 As Dropdown.pcfdataset:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                Items: =Table( ["Select All"], Choices([@'SharePoint Demo List'].Choice) )
+                LayoutMinHeight: =32
+                LayoutMinWidth: =320
+                Width: =320
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                Value1 As PowerApps_CoreControls_DropdownCanvasTemplate_dataField.textualColumn:
+                    FieldDisplayName: ="Value"
+                    FieldName: ="Value"
+                    FieldType: ="s"
+                    FieldVariantName: ="textualColumn"
+                    Order: =1
+                    ZIndex: =14
+
+            "DatePickerCanvas1 As 'Date picker'":
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =320
+                Width: =320
+                X: =0
+                Y: =0
+                ZIndex: =2
+
+            ButtonCanvas1 As Button:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                OnSelect: |-
+                    =Concurrent(
+                        Reset(DatePickerCanvas1),
+                        Reset(DropdownCanvas1)
+                    );
+                Text: ="reset"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =3
+
+            ButtonCanvas1_1 As Button:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                OnSelect: =Refresh('SharePoint Demo List')
+                Text: ="refresh"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =4
+
+        MainContainer1 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Width: =Parent.Width - 30
+            ZIndex: =3
+
+            Table1 As Table.pcfdataset:
+                DisplayMode: =DisplayMode.Edit
+                Height: =If(Self.Y + 500 > Parent.Height, Parent.Height - Self.Y, 500)
+                Items: |
+                    =Filter(
+                        'SharePoint Demo List',
+                        (
+                            (!IsBlank(DropdownCanvas1.Selected) && DropdownCanvas1.Selected.Value = ThisRecord.Choice.Value) ||
+                            ((IsBlank(DropdownCanvas1.Selected) || DropdownCanvas1.Selected.Value = "Select All") && !IsBlank(ThisRecord.Choice.Value))
+                        )
+                        && 
+                        (
+                            (!IsBlank(DatePickerCanvas1.SelectedDate) && (DateDiff(DatePickerCanvas1.SelectedDate, ThisRecord.Modified) > 0 )) ||
+                            (IsBlank(DatePickerCanvas1.SelectedDate) &&  !IsBlank(ThisRecord.Modified))
+                        )
+                    )    
+                onCellValueChange: =false
+                onFilter: =false
+                onNavigate: =false
+                onRowSelect: =false
+                onSave: =false
+                OnSelect: =false
+                Width: =Parent.Width / 2
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                Title1 As PowerAppsOneGridTemplate_dataField.textualColumn:
+                    FieldDisplayName: ="Title"
+                    FieldName: ="Title"
+                    FieldType: ="s"
+                    FieldVariantName: ="textualColumn"
+                    Order: =1
+                    Width: =0
+                    ZIndex: =5
+
+                "'Item Name1' As PowerAppsOneGridTemplate_dataField.textualColumn":
+                    FieldDisplayName: ="Item Name"
+                    FieldName: ="ItemName"
+                    FieldType: ="s"
+                    FieldVariantName: ="textualColumn"
+                    Order: =2
+                    Width: =0
+                    ZIndex: =6
+
+                Choice1 As PowerAppsOneGridTemplate_dataField.textualColumn:
+                    FieldDisplayName: ="Choice"
+                    FieldName: ="Choice"
+                    FieldType: ="E"
+                    FieldVariantName: ="textualColumn"
+                    Order: =3
+                    Width: =0
+                    ZIndex: =7
+
+                "'Item Date1' As PowerAppsOneGridTemplate_dataField.textualColumn":
+                    FieldDisplayName: ="Item Date"
+                    FieldName: ="ItemDate"
+                    FieldType: ="D"
+                    FieldVariantName: ="textualColumn"
+                    Order: =4
+                    Width: =0
+                    ZIndex: =8
+
+                "'File name with extension1' As PowerAppsOneGridTemplate_dataField.textualColumn":
+                    FieldDisplayName: ="File name with extension"
+                    FieldName: ="{FilenameWithExtension}"
+                    FieldType: ="s"
+                    FieldVariantName: ="textualColumn"
+                    Order: =5
+                    Width: =0
+                    ZIndex: =9
+
+                Created1 As PowerAppsOneGridTemplate_dataField.textualColumn:
+                    FieldDisplayName: ="Created"
+                    FieldName: ="Created"
+                    FieldType: ="d"
+                    FieldVariantName: ="textualColumn"
+                    Order: =7
+                    Width: =0
+                    ZIndex: =10
+
+                "'Modified By1' As PowerAppsOneGridTemplate_dataField.textualColumn":
+                    FieldDisplayName: ="Modified By"
+                    FieldName: ="Editor"
+                    FieldType: ="E"
+                    FieldVariantName: ="textualColumn"
+                    Order: =8
+                    Width: =0
+                    ZIndex: =11
+
+                Modified1 As PowerAppsOneGridTemplate_dataField.textualColumn:
+                    FieldDisplayName: ="Modified"
+                    FieldName: ="Modified"
+                    FieldType: ="d"
+                    FieldVariantName: ="textualColumn"
+                    Order: =9
+                    Width: =0
+                    ZIndex: =12
+
+                "'Color Tag1' As PowerAppsOneGridTemplate_dataField.textualColumn":
+                    FieldDisplayName: ="Color Tag"
+                    FieldName: ="OData__ColorTag"
+                    FieldType: ="s"
+                    FieldVariantName: ="textualColumn"
+                    Order: =10
+                    Width: =0
+                    ZIndex: =13
+
+        FooterContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =4
+
+            TextCanvas1 As Text:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                Text: =If(!IsBlank(DatePickerCanvas1.SelectedDate), DateDiff(DatePickerCanvas1.SelectedDate,Today()))
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+            TextCanvas1_1 As Text:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                Text: =!IsBlank(DropdownCanvas1.Selected)
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =2
+
+    DataTable2 As dataGrid:
+        BorderColor: =App.Theme.Colors.Darker40
+        DisabledColor: =RGBA(166, 166, 166, 1)
+        Font: =App.Theme.Font
+        HeadingColor: =RGBA(255, 255, 255, 1)
+        HeadingFill: =App.Theme.Colors.Primary
+        HeadingFont: =App.Theme.Font
+        HeadingFontWeight: =FontWeight.Normal
+        HeadingSize: =13
+        Height: =419
+        HoverColor: =RGBA(0, 0, 0, 1)
+        HoverFill: =App.Theme.Colors.Lighter80
+        InputFill: =RGBA(255, 255, 255, 1)
+        InvertedColor: =RGBA(255, 255, 255, 1)
+        Items: |-
+            =Filter(
+                'SharePoint Demo List',
+                (
+                    (!IsBlank(DropdownCanvas1.Selected) && DropdownCanvas1.Selected.Value = ThisRecord.Choice.Value) ||
+                    ((IsBlank(DropdownCanvas1.Selected) || DropdownCanvas1.Selected.Value = "Select All") && !IsBlank(ThisRecord.Choice.Value))
+                )
+                && 
+                (
+                    (!IsBlank(DatePickerCanvas1.SelectedDate) && (DateDiff(DatePickerCanvas1.SelectedDate, ThisRecord.Modified) > 0 )) ||
+                    (IsBlank(DatePickerCanvas1.SelectedDate) &&  !IsBlank(ThisRecord.Modified))
+                )
+            )    
+        LinkColor: =App.Theme.Colors.Lighter10
+        PrimaryColor1: =App.Theme.Colors.Primary
+        PrimaryColor2: =App.Theme.Colors.Darker30
+        PrimaryColor3: =App.Theme.Colors.Lighter70
+        SelectedColor: =RGBA(0, 0, 0, 1)
+        SelectedFill: =App.Theme.Colors.Lighter70
+        Size: =13
+        Width: =681
+        X: =663
+        Y: =234
+        ZIndex: =2
+
+        Title As customControl.dataColumn:
+            AutoWidth: =true
+            DisplayName: ="Title"
+            FieldName: ="Title"
+            Height: =0
+            IsHyperlink: =false
+            Order: =0
+            Required: =true
+            TitleProperty: =""
+            Type: ="s"
+            VariantName: ="textualViewCard"
+            Width: =160
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+        ItemName As customControl.dataColumn:
+            AutoWidth: =true
+            DisplayName: ="Item Name"
+            FieldName: ="ItemName"
+            Height: =0
+            IsHyperlink: =false
+            Order: =1
+            Required: =false
+            TitleProperty: =""
+            Type: ="s"
+            VariantName: ="textualViewCard"
+            Width: =160
+            X: =0
+            Y: =0
+            ZIndex: =2
+
+        Choice As customControl.dataColumn:
+            AutoWidth: =true
+            DisplayName: ="Choice"
+            FieldName: ="Choice"
+            Height: =0
+            IsHyperlink: =false
+            Order: =2
+            Required: =false
+            TitleProperty: ="Value"
+            Type: ="E"
+            VariantName: ="comboBoxViewCard"
+            Width: =240
+            X: =0
+            Y: =0
+            ZIndex: =3
+
+        ItemDate As customControl.dataColumn:
+            AutoWidth: =true
+            DisplayName: ="Item Date"
+            FieldName: ="ItemDate"
+            Height: =0
+            IsHyperlink: =false
+            Order: =3
+            Required: =false
+            TitleProperty: =""
+            Type: ="D"
+            VariantName: ="textualViewCard"
+            Width: =160
+            X: =0
+            Y: =0
+            ZIndex: =4
+

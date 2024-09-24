@@ -1,0 +1,70 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_shifts": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_sharedshifts_2374d"
+        },
+        "api": {
+          "name": "shared_shifts"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "7a792c08-f7ad-4ea6-8c45-b5d68045335f"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "List_all_Shifts": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "4c64a03d-3fde-4e4c-9651-903dc4ea4a0c"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_shifts",
+              "operationId": "ListShifts",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_shifts"
+            },
+            "parameters": {
+              "teamId": "3512ef67-ba49-4a85-a085-367bf830b405"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

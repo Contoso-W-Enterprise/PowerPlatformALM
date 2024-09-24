@@ -1,0 +1,28 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "ce_ContosoTestingVariable001",
+      "Value": "Production"
+    },
+    {
+      "SchemaName": "cu_ContosoUniversitySPOITList",
+      "Value": "https://mngenvmcap157851.sharepoint.com/sites/ITBusinessApplications"
+    },
+    {
+      "SchemaName": "cu_ContosoUniversitySPOITSite",
+      "Value": "6438c7f3-205c-42fa-a803-c90d6ac42b8a"
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "ce_ContosoUniversityDataverseConnectionReference",
+      "ConnectionId": "f8c48ac92b4240f2aa8ebf0e9f2ab7ac",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+    },
+    {
+      "LogicalName": "cu_ContosoUniversitySPOITConRef",
+      "ConnectionId": "f8c48ac92b4240f2aa8ebf0e9f2ab7ac",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+    }
+  ]
+}

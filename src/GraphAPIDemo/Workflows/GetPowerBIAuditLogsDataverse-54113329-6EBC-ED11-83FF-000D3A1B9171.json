@@ -1,0 +1,974 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps-1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_DataverseConnectionRef"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GraphTenantId (ce_GraphTenantId)": {
+          "defaultValue": "9ead217e-7624-4b1a-b877-3cb3d835f38d",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphTenantId"
+          }
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "timeZone": "Mountain Standard Time",
+            "schedule": {
+              "hours": [
+                "0"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "c7b01937-ce02-4dd2-a22a-3f7774b112a7"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Initialize_results": {
+          "runAfter": {
+            "Initialize_subscription": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "cc046054-f178-4d06-b66b-3c7221ce208d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "results",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Initialize_StartDate": {
+          "runAfter": {
+            "Initialize_backdays": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a7741d66-18de-4b63-a27e-b72bb70ae61b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "StartDate",
+                "type": "string",
+                "value": "@{AddDays(startOfDay(convertFromUtc(utcNow(),'Mountain Standard Time')),variables('backdays'))}"
+              }
+            ]
+          }
+        },
+        "Initialize_EndDate": {
+          "runAfter": {
+            "Initialize_StartDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "50489362-2684-4a6c-b5cf-0876c83a96f3"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EndDate",
+                "type": "string",
+                "value": "@{AddHours(AddDays(startOfDay(convertFromUtc(utcNow(),'Mountain Standard Time')),variables('backdays')),1)}"
+              }
+            ]
+          }
+        },
+        "Initialize_backdate": {
+          "runAfter": {
+            "Initialize_EndDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "430c0019-7b58-48b8-a63c-ef28ae5b6435"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Backdate",
+                "type": "string",
+                "value": "@{convertFromUtc(utcNow(),'Mountain Standard Time')}"
+              }
+            ]
+          },
+          "description": "startOfDay(convertFromUtc(utcNow(),'Mountain Standard Time'))"
+        },
+        "Initialize_Operations": {
+          "runAfter": {
+            "Initialize_Workload": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "da1d1ac1-4e08-4f30-bf39-0385e351940d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Operations",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Compose": {
+          "runAfter": {
+            "Compose_3": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "59c7f3b3-ce2e-4026-a32c-5e6d69fa8369"
+          },
+          "type": "Compose",
+          "inputs": "@variables('results')"
+        },
+        "Initialize_Workload": {
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5a557cf1-e400-4774-93db-e7bba80aed17"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Workload",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Compose_2": {
+          "runAfter": {
+            "Apply_to_each_Date": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a6bd1b37-bad5-4024-9693-895bfa0eecd6"
+          },
+          "type": "Compose",
+          "inputs": "@variables('Operations')"
+        },
+        "Compose_3": {
+          "runAfter": {
+            "Compose_2": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "71333f59-fec1-410e-82d8-d989cc7f0420"
+          },
+          "type": "Compose",
+          "inputs": "@variables('Workload')"
+        },
+        "Initialize_backdays": {
+          "runAfter": {
+            "Initialize_results": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e3bd9614-4d49-42fa-9eae-379973aa0864"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "backdays",
+                "type": "integer",
+                "value": -1
+              }
+            ]
+          }
+        },
+        "Initialize_subscription": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "1b4aded5-f221-43e6-9e2b-f9a24ef8492e"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "subscriptions",
+                "type": "array",
+                "value": [
+                  "Audit.General",
+                  "Audit.SharePoint",
+                  "Audit.Exchange",
+                  "Audit.AzureActiveDirectory"
+                ]
+              }
+            ]
+          }
+        },
+        "Do_until_Start_to_End_Date": {
+          "actions": {
+            "Set_EndDate": {
+              "runAfter": {
+                "Compose_5": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f974b59c-45c1-4591-8758-00ddf3f0f6fa"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "EndDate",
+                "value": "@{outputs('Compose_5')}"
+              }
+            },
+            "Compose_4": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "9636ffd0-94c9-466b-9c0e-6d1c4fa782de"
+              },
+              "type": "Compose",
+              "inputs": "@{variables('StartDate')} \n@{dateDifference(variables('EndDate'),variables('BackDate'))}\n@{variables('EndDate')}\n@{variables('Backdate')}\n@{variables('Workload')}\n@{variables('Operations')}"
+            },
+            "Set_StartDate": {
+              "runAfter": {
+                "Append_to_Dates": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "effc21d0-9c82-49cd-9d74-c03d4fb8648a"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "StartDate",
+                "value": "@variables('EndDate')"
+              }
+            },
+            "Compose_5": {
+              "runAfter": {
+                "Set_StartDate": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "01397327-8f6d-4b79-b2ae-9a8b534de18a"
+              },
+              "type": "Compose",
+              "inputs": "@addHours(variables('EndDate'),1)"
+            },
+            "Append_to_Dates": {
+              "runAfter": {
+                "Compose_4": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "e35a0ce4-2300-40b7-b203-6350708343c1"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "DateArray",
+                "value": {
+                  "StartDate": "@{variables('StartDate')}",
+                  "EndDate": "@{variables('EndDate')}"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_Operations": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@less(dateDifference(variables('EndDate'), variables('BackDate')), '01:00:00')",
+          "limit": {
+            "count": 150,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "c97aae8b-81dc-46bb-8bc5-8da32812eb79"
+          },
+          "type": "Until"
+        },
+        "Initialize_variable": {
+          "runAfter": {
+            "Initialize_backdate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "42c5a881-2d7f-467d-8cd2-551a13500caa"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DateArray",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Apply_to_each_Date": {
+          "foreach": "@variables('DateArray')",
+          "actions": {
+            "Apply_to_each_subscription": {
+              "foreach": "@variables('subscriptions')",
+              "actions": {
+                "Get_Content_Scope": {
+                  "actions": {
+                    "Get_Content": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "7aaaee3b-26cc-49f4-90e3-c19e89428cd7"
+                      },
+                      "type": "Http",
+                      "inputs": {
+                        "method": "GET",
+                        "uri": "https://manage.office.com/api/v1.0/@{parameters('GraphTenantId (ce_GraphTenantId)')}/activity/feed/subscriptions/content?contentType=@{items('Apply_to_each_subscription')}&startTime=@{formatDateTime(items('Apply_to_each_Date')?['StartDate'],'yyyy-MM-ddTHH:mm:ss')}&endTime=@{formatDateTime(items('Apply_to_each_Date')?['EndDate'],'yyyy-MM-ddTHH:mm:ss')}",
+                        "authentication": {
+                          "type": "ActiveDirectoryOAuth",
+                          "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+                          "audience": "https://manage.office.com",
+                          "clientId": "bfd896d7-bca3-4820-b636-2bb60be83593",
+                          "secret": "D5r8Q~T_twzddqvmiZFzn3o-H6JC2hSgii335az9"
+                        }
+                      }
+                    },
+                    "Parse_Content": {
+                      "runAfter": {
+                        "Get_Content": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "b9e41a15-f257-453f-b4d0-530a5f045922"
+                      },
+                      "type": "ParseJson",
+                      "inputs": {
+                        "content": "@body('Get_Content')",
+                        "schema": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "contentUri": {
+                                "type": "string"
+                              },
+                              "contentId": {
+                                "type": "string"
+                              },
+                              "contentType": {
+                                "type": "string"
+                              },
+                              "contentCreated": {
+                                "type": "string"
+                              },
+                              "contentExpiration": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "contentUri",
+                              "contentId",
+                              "contentType",
+                              "contentCreated",
+                              "contentExpiration"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "0068fbcc-3c4d-4cfb-85cc-5419d37d9b8a"
+                  },
+                  "type": "Scope"
+                },
+                "Apply_to_each_Content": {
+                  "foreach": "@body('Parse_Content')",
+                  "actions": {
+                    "Apply_to_each": {
+                      "foreach": "@body('Parse_Content_Details')",
+                      "actions": {
+                        "Condition": {
+                          "actions": {
+                            "Append_to_array_variable_2": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "510475cb-b54f-44fe-ba8a-caa8bad844f4"
+                              },
+                              "type": "AppendToArrayVariable",
+                              "inputs": {
+                                "name": "Workload",
+                                "value": "@items('Apply_to_each')['Workload']"
+                              }
+                            }
+                          },
+                          "runAfter": {
+                            "If_exists": [
+                              "Succeeded"
+                            ]
+                          },
+                          "expression": {
+                            "not": {
+                              "contains": [
+                                "@variables('Workload')",
+                                "@items('Apply_to_each')['Workload']"
+                              ]
+                            }
+                          },
+                          "metadata": {
+                            "operationMetadataId": "3f28e8f3-529e-4d8d-b2e3-a334ebdf175b"
+                          },
+                          "type": "If"
+                        },
+                        "Condition_2": {
+                          "actions": {
+                            "Append_to_array_variable_3": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "38d8cf8e-f7b8-4826-820d-f8709422cad7"
+                              },
+                              "type": "AppendToArrayVariable",
+                              "inputs": {
+                                "name": "Operations",
+                                "value": "@concat(items('Apply_to_each')['Workload'],'.',items('Apply_to_each')['Operation'])"
+                              }
+                            }
+                          },
+                          "runAfter": {
+                            "Condition": [
+                              "Succeeded"
+                            ]
+                          },
+                          "expression": {
+                            "not": {
+                              "contains": [
+                                "@variables('Operations')",
+                                "@concat(items('Apply_to_each')['Workload'],'.',items('Apply_to_each')['Operation'])"
+                              ]
+                            }
+                          },
+                          "metadata": {
+                            "operationMetadataId": "51f30471-394c-49cb-b25d-b1f5ac0e8fa2"
+                          },
+                          "type": "If"
+                        },
+                        "Condition_on_workload": {
+                          "actions": {},
+                          "runAfter": {},
+                          "expression": {
+                            "or": [
+                              {
+                                "contains": [
+                                  "@items('Apply_to_each')['Workload']",
+                                  "PowerBI"
+                                ]
+                              },
+                              {
+                                "contains": [
+                                  "@items('Apply_to_each')['Workload']",
+                                  "SharePoint"
+                                ]
+                              }
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "679356bf-d8c2-4c47-8108-0eb615e65527"
+                          },
+                          "type": "If"
+                        },
+                        "If_exists": {
+                          "actions": {
+                            "Add_a_new_row": {
+                              "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "3b24774e-7eb0-45e5-b9af-0bae8b359dde"
+                              },
+                              "type": "OpenApiConnection",
+                              "inputs": {
+                                "host": {
+                                  "connectionName": "shared_commondataserviceforapps-1",
+                                  "operationId": "CreateRecord",
+                                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                },
+                                "parameters": {
+                                  "entityName": "cr4bc_auditsamples",
+                                  "item/cr4bc_name": "@items('Apply_to_each')['Id']",
+                                  "item/cr4bc_activity": "@items('Apply_to_each')?['Activity']",
+                                  "item/cr4bc_activityid": "@items('Apply_to_each')?['ActivityId']",
+                                  "item/cr4bc_clientip": "@items('Apply_to_each')?['ClientIP']",
+                                  "item/cr4bc_creationtime": "@items('Apply_to_each')['CreationTime']",
+                                  "item/cr4bc_issuccess": "@items('Apply_to_each')?['IsSuccess']",
+                                  "item/cr4bc_jsonbody": "@items('Apply_to_each')",
+                                  "item/cr4bc_operation": "@items('Apply_to_each')['Operation']",
+                                  "item/cr4bc_organizationid": "@items('Apply_to_each')['OrganizationId']",
+                                  "item/cr4bc_recordtype": "@items('Apply_to_each')['RecordType']",
+                                  "item/cr4bc_requestid": "@items('Apply_to_each')?['RequestId']",
+                                  "item/cr4bc_useragent": "@items('Apply_to_each')?['UserAgent']",
+                                  "item/cr4bc_userid": "@items('Apply_to_each')['UserId']",
+                                  "item/cr4bc_userkey": "@items('Apply_to_each')['UserKey']",
+                                  "item/cr4bc_usertype": "@items('Apply_to_each')['UserType']",
+                                  "item/cr4bc_workload": "@items('Apply_to_each')['Workload']"
+                                },
+                                "authentication": "@parameters('$authentication')"
+                              }
+                            },
+                            "Upload_a_file_or_an_image": {
+                              "runAfter": {
+                                "Add_a_new_row": [
+                                  "Succeeded",
+                                  "Skipped",
+                                  "Failed"
+                                ]
+                              },
+                              "metadata": {
+                                "operationMetadataId": "e2c178e4-755a-4b54-8316-3f33dacb019b"
+                              },
+                              "type": "OpenApiConnection",
+                              "inputs": {
+                                "host": {
+                                  "connectionName": "shared_commondataserviceforapps-1",
+                                  "operationId": "UpdateEntityFileImageFieldContent",
+                                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                },
+                                "parameters": {
+                                  "entityName": "cr4bc_auditsamples",
+                                  "recordId": "@outputs('Add_a_new_row')?['body/cr4bc_auditsampleid']",
+                                  "fileImageFieldName": "cr4bc_json",
+                                  "item": "@items('Apply_to_each')",
+                                  "x-ms-file-name": "@{outputs('Add_a_new_row')?['body/cr4bc_name']}.json"
+                                },
+                                "authentication": "@parameters('$authentication')"
+                              }
+                            }
+                          },
+                          "runAfter": {
+                            "List_rows": [
+                              "Succeeded"
+                            ]
+                          },
+                          "else": {
+                            "actions": {
+                              "Condition_3": {
+                                "actions": {
+                                  "Apply_to_each_2": {
+                                    "foreach": "@outputs('List_rows')?['body/value']",
+                                    "actions": {
+                                      "Update_a_row": {
+                                        "runAfter": {},
+                                        "metadata": {
+                                          "operationMetadataId": "9aab98c3-658e-4e36-9648-894838fa593b"
+                                        },
+                                        "type": "OpenApiConnection",
+                                        "inputs": {
+                                          "host": {
+                                            "connectionName": "shared_commondataserviceforapps-1",
+                                            "operationId": "UpdateRecord",
+                                            "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                                          },
+                                          "parameters": {
+                                            "entityName": "cr4bc_auditsamples",
+                                            "recordId": "@items('Apply_to_each_2')?['cr4bc_auditsampleid']",
+                                            "item/cr4bc_jsonbody": "@items('Apply_to_each')"
+                                          },
+                                          "authentication": "@parameters('$authentication')"
+                                        }
+                                      }
+                                    },
+                                    "runAfter": {},
+                                    "metadata": {
+                                      "operationMetadataId": "b380529d-d521-465b-99fb-7df49f563770"
+                                    },
+                                    "type": "Foreach"
+                                  }
+                                },
+                                "runAfter": {},
+                                "expression": {
+                                  "equals": [
+                                    "@empty(first(outputs('List_rows')?['body/value'])?['cr4bc_auditsample_FileAttachments@odata.navigationLink'])",
+                                    "@true"
+                                  ]
+                                },
+                                "metadata": {
+                                  "operationMetadataId": "9c391447-2b76-4260-8d53-7a155df3a00f"
+                                },
+                                "type": "If"
+                              }
+                            }
+                          },
+                          "expression": {
+                            "equals": [
+                              "@empty(body('List_rows'))",
+                              "@true"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "d6a75e90-d781-49dc-8492-edcea37f38a5"
+                          },
+                          "type": "If"
+                        },
+                        "List_rows": {
+                          "runAfter": {
+                            "Append_to_array_variable": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "436a7919-5f71-4eb9-b525-3a080001466e"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_commondataserviceforapps-1",
+                              "operationId": "ListRecords",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                            },
+                            "parameters": {
+                              "entityName": "cr4bc_auditsamples",
+                              "$filter": "cr4bc_name eq '@{items('Apply_to_each')['Id']}'"
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        },
+                        "Append_to_array_variable": {
+                          "runAfter": {
+                            "Condition_on_workload": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "a36e28f5-4eae-4a4f-8d60-3d3f210d223d"
+                          },
+                          "type": "AppendToArrayVariable",
+                          "inputs": {
+                            "name": "results",
+                            "value": "@items('Apply_to_each')"
+                          }
+                        }
+                      },
+                      "runAfter": {
+                        "Get_Content_Detail_Scope": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "4cfa97b9-8c07-479d-b3d3-c3c055f1a41f"
+                      },
+                      "type": "Foreach",
+                      "runtimeConfiguration": {
+                        "concurrency": {
+                          "repetitions": 10
+                        }
+                      }
+                    },
+                    "Get_Content_Detail_Scope": {
+                      "actions": {
+                        "Get_Content_Details": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "7aaaee3b-26cc-49f4-90e3-c19e89428cd7"
+                          },
+                          "type": "Http",
+                          "inputs": {
+                            "method": "GET",
+                            "uri": "https://manage.office.com/api/v1.0/@{parameters('GraphTenantId (ce_GraphTenantId)')}/activity/feed/audit/@{items('Apply_to_each_Content')['contentId']}",
+                            "authentication": {
+                              "type": "ActiveDirectoryOAuth",
+                              "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+                              "audience": "https://manage.office.com",
+                              "clientId": "bfd896d7-bca3-4820-b636-2bb60be83593",
+                              "secret": "D5r8Q~T_twzddqvmiZFzn3o-H6JC2hSgii335az9"
+                            }
+                          }
+                        },
+                        "Parse_Content_Details": {
+                          "runAfter": {
+                            "Get_Content_Details": [
+                              "Succeeded"
+                            ]
+                          },
+                          "metadata": {
+                            "operationMetadataId": "4b0002ab-4ef4-4c13-8258-0d5721d909ae"
+                          },
+                          "type": "ParseJson",
+                          "inputs": {
+                            "content": "@body('Get_Content_Details')",
+                            "schema": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "Id": {
+                                    "type": "string"
+                                  },
+                                  "RecordType": {
+                                    "type": "integer"
+                                  },
+                                  "CreationTime": {
+                                    "type": "string"
+                                  },
+                                  "Operation": {
+                                    "type": "string"
+                                  },
+                                  "OrganizationId": {
+                                    "type": "string"
+                                  },
+                                  "UserType": {
+                                    "type": "integer"
+                                  },
+                                  "UserKey": {
+                                    "type": "string"
+                                  },
+                                  "Workload": {
+                                    "type": "string"
+                                  },
+                                  "UserId": {
+                                    "type": "string"
+                                  },
+                                  "ClientIP": {
+                                    "type": "string"
+                                  },
+                                  "UserAgent": {
+                                    "type": "string"
+                                  },
+                                  "Activity": {
+                                    "type": "string"
+                                  },
+                                  "IsSuccess": {
+                                    "type": "boolean"
+                                  },
+                                  "RequestId": {
+                                    "type": "string"
+                                  },
+                                  "ActivityId": {
+                                    "type": "string"
+                                  },
+                                  "ModelsSnapshots": {
+                                    "type": "array"
+                                  },
+                                  "ItemName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "WorkSpaceName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "DatasetName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ReportName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "CapacityId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "CapacityName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "WorkspaceId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ObjectId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "DatasetId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ReportId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ArtifactId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ArtifactName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ReportType": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "DistributionMethod": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ConsumptionMethod": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "ArtifactKind": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "AppName": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "AppReportId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  },
+                                  "AppId": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ]
+                                  }
+                                },
+                                "required": [
+                                  "Id",
+                                  "RecordType",
+                                  "CreationTime",
+                                  "Operation",
+                                  "OrganizationId",
+                                  "UserType",
+                                  "UserKey",
+                                  "Workload",
+                                  "UserId"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "f4b5db89-5769-475d-870f-976a0eb66ef1"
+                      },
+                      "type": "Scope"
+                    }
+                  },
+                  "runAfter": {
+                    "Get_Content_Scope": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "1b41aaca-42bb-4484-bab7-3a6ed5cb4611"
+                  },
+                  "type": "Foreach",
+                  "runtimeConfiguration": {
+                    "concurrency": {
+                      "repetitions": 20
+                    }
+                  }
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "d1a62e03-95f2-4e18-a3cd-e437133f2451"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Do_until_Start_to_End_Date": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "00f17f75-a29d-40b6-823c-4229fa57692b"
+          },
+          "type": "Foreach",
+          "runtimeConfiguration": {
+            "concurrency": {
+              "repetitions": 20
+            }
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

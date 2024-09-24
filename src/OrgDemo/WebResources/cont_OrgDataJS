@@ -1,0 +1,131 @@
+function OpenOrgDataFullPage()
+{
+    // Inline Page
+    var pageInput = {
+        pageType: "custom",
+        name: "cont_orgdatacustomdialog_ef86d",
+    };
+    var navigationOptions = {
+        target: 1
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions)
+        .then(
+            function () {
+                // Called when page opens
+            }
+        ).catch(
+            function (error) {
+                // Handle error
+            }
+        );
+}
+function OpenOrgDataRecordFullPage( selectedItem )
+{
+    // Inline Page
+    if (selectedItem)
+    {
+        var pageInput = {
+            pageType: "custom",
+            name: "cont_orgdatacustomdialog_ef86d",
+            entityName: "cont_orgdata",
+            recordId: selectedItem,
+        };
+        var navigationOptions = {
+            target: 1
+        };
+        Xrm.Navigation.navigateTo(pageInput, navigationOptions)
+            .then(
+                function () {
+                    // Called when page opens
+                }
+            ).catch(
+                function (error) {
+                    // Handle error
+                }
+            );
+    
+    }
+}
+function OpenOrgDataDialog()
+{
+    // Centered Dialog
+    var pageInput = {
+        pageType: "custom",
+        name: "cont_orgdatacustomdialog_ef86d",
+    };
+    var navigationOptions = {
+        target: 2, 
+        position: 1,
+        width: {value: 50, unit:"%"},
+        title: "Org Data Dialog"
+    };
+    Xrm.Navigation.navigateTo(pageInput, navigationOptions)
+        .then(
+            function () {
+                // Called when the dialog closes
+            }
+        ).catch(
+            function (error) {
+                // Handle error
+            }
+        );
+}
+function OpenOrgDataRecDialog( selectedItem )
+{
+    // Centered Dialog
+    if (selectedItem)
+    {
+        console.log(selectedItem);
+        var pageInput = {
+            pageType: "custom",
+            name: "cont_orgdatacustomdialog_ef86d",
+            entityName: "cont_orgdata",
+            recordId: selectedItem,
+        };
+        var navigationOptions = {
+            target: 2, 
+            position: 1,
+            width: {value: 50, unit:"%"},
+            title: "Org Data Dialog"
+        };
+        Xrm.Navigation.navigateTo(pageInput, navigationOptions)
+            .then(
+                function () {
+                    // Called when the dialog closes
+                }
+            ).catch(
+                function (error) {
+                    // Handle error
+                }
+            );
+    }
+}
+function OpenOrgDataRecSideDialog( selectedItem )
+{
+    // Side Dialog
+    if (selectedItem)
+    {
+        var pageInput = {
+            pageType: "custom",
+            name: "cont_orgdatacustomdialog_ef86d",
+            entityName: "cont_orgdata",
+            recordId: selectedItem,
+        };
+        var navigationOptions = {
+            target: 2, 
+            position: 2,
+            width: {value: 500, unit: "px"},
+            title: "Org Data Record Side Dialog"
+        };
+        Xrm.Navigation.navigateTo(pageInput, navigationOptions)
+            .then(
+                function () {
+                    // Called when the dialog closes
+                }
+            ).catch(
+                function (error) {
+                    // Handle error
+                }
+            );
+    }
+}

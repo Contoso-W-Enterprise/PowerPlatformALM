@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="cont_SharePointDemoSite">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <defaultvalue>https://mngenvmcap157851.sharepoint.com/sites/IT</defaultvalue>
+  <displayname default="SharePoint Demo Site">
+    <label description="SharePoint Demo Site" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>dataset</parameterkey>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

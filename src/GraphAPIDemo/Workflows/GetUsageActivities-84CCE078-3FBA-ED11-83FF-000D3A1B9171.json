@@ -1,0 +1,123 @@
+{
+  "properties": {
+    "connectionReferences": {},
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "264e5e9e-3dfe-4166-b9f0-ce1bc9b30f0d"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_Queries": {
+          "runAfter": {
+            "Initialize_period": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e994f3e7-bcf2-4a57-8c5c-bf92ed334239"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Queries",
+                "type": "array",
+                "value": [
+                  "getMailboxUsageDetail(period='@{variables('period')}')",
+                  "getM365AppUserDetail(period='@{variables('period')}')",
+                  "getOffice365ActivationsUserDetail()",
+                  "getOffice365GroupsActivityDetail(period='@{variables('period')}')",
+                  "getOneDriveUsageAccountDetail(period='@{variables('period')}')",
+                  "getSharePointSiteUsageDetail(period='@{variables('period')}')",
+                  "getSkypeForBusinessActivityUserDetail(period='@{variables('period')}')",
+                  "getTeamsUserActivityUserDetail(period='@{variables('period')}')",
+                  "getMailboxUsageQuotaStatusMailboxCounts(period='@{variables('period')}')",
+                  "deviceConfigurationUserActivity()"
+                ]
+              }
+            ]
+          }
+        },
+        "Initialize_period": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "3fe38641-de45-4a26-81eb-ff0bc9195b7f"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "period",
+                "type": "string",
+                "value": "D7"
+              }
+            ]
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@variables('Queries')",
+          "actions": {
+            "Run_a_Child_Flow": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "0863d5e0-b690-4c24-b8c6-de866a5d37ae"
+              },
+              "type": "Workflow",
+              "inputs": {
+                "host": {
+                  "workflowReferenceName": "c3dc5013-16ba-ed11-83ff-000d3a1b9171"
+                },
+                "body": {
+                  "text": "@items('Apply_to_each')"
+                }
+              }
+            },
+            "Compose": {
+              "runAfter": {
+                "Run_a_Child_Flow": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "1117b3c9-7b74-48a6-afc2-d80e7a5eaece"
+              },
+              "type": "Compose",
+              "inputs": "@json(outputs('Run_a_Child_Flow')?['Body']?['value'])"
+            }
+          },
+          "runAfter": {
+            "Initialize_Queries": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "bc98f820-09c4-44d3-bd1c-a4a91533ccbf"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

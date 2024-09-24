@@ -1,0 +1,97 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cont_orglookups",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cont_orglookup",
+    "Name": "Org Lookups",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cont_cont_orgdata_OrgLookupContent_cont_orgloo": "Org Data",
+      "cont_name": "Name",
+      "cont_orglookup_AsyncOperations": "System Jobs",
+      "cont_orglookup_BulkDeleteFailures": "Bulk Delete Failures",
+      "cont_orglookup_DuplicateBaseRecord": "Duplicate Records (cont_orglookup_DuplicateBaseRecord)",
+      "cont_orglookup_DuplicateMatchingRecord": "Duplicate Records (cont_orglookup_DuplicateMatchingRecord)",
+      "cont_orglookup_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cont_orglookup_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cont_orglookup_ProcessSession": "Process Sessions",
+      "cont_orglookup_SyncErrors": "Sync Errors",
+      "cont_orglookupid": "Org Lookup",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Org Lookups",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Org Lookups (Views)",
+    "Name": "_cont_orglookup_views",
+    "RelatedEntityName": "Org Lookups",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "3f8bf25f-d33b-4ae2-a04a-adbcd89db57c": "Org Lookup Associated View",
+      "403862aa-5792-48da-aff5-8be95e69b9e8": "Inactive Org Lookups",
+      "581baf16-30e4-40b7-801a-c1bc969e96ae": "Org Lookup Lookup View",
+      "63c898ad-d64b-4318-b9e0-9d5b882edab3": "Active Org Lookups",
+      "9a85c19c-d79d-4c79-8e7b-be19bff5526d": "Org Lookup Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (Org Lookups)",
+    "Name": "cont_orglookup_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Org Lookups"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Org Lookups",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Org Lookups)",
+    "Name": "cont_orglookup_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Org Lookups"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Org Lookups",
+    "Type": "OptionSetInfo"
+  }
+]

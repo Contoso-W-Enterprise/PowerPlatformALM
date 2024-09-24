@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{9315e660-56d0-489f-99ae-46490029d4e9}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cu_name" select="1" icon="1" preview="1">
+        <row name="result" id="cu_applicationid">
+          <cell name="cu_name" width="300" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cu_application">
+          <attribute name="cu_applicationid" />
+          <attribute name="cu_name" />
+          <attribute name="createdon" />
+          <order attribute="cu_name" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Application Advanced Find View" languagecode="1033" />
+      <LocalizedName description="Vue de recherche avancée de l'application" languagecode="1036" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

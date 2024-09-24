@@ -1,0 +1,28 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "ce_ContosoTestingVariable001",
+      "Value": ""
+    },
+    {
+      "SchemaName": "cu_ContosoUniversitySPOITList",
+      "Value": ""
+    },
+    {
+      "SchemaName": "cu_ContosoUniversitySPOITSite",
+      "Value": ""
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "ce_ContosoUniversityDataverseConnectionReference",
+      "ConnectionId": "",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+    },
+    {
+      "LogicalName": "cu_ContosoUniversitySPOITConRef",
+      "ConnectionId": "",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+    }
+  ]
+}

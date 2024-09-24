@@ -1,0 +1,85 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline_1": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "cj_JokesSharePointConnectionReference"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Jokes SharePoint Site (cj_JokesSharePointSite)": {
+          "defaultValue": "https://mngenvmcap157851.sharepoint.com/sites/IT",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cj_JokesSharePointSite"
+          }
+        },
+        "Jokes SharePoint List (cj_JokesSharePointList)": {
+          "defaultValue": "f0080285-54e3-4c6b-aec4-af8bdde4dd92",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cj_JokesSharePointList"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "99ca43b6-9871-48ab-8a88-2d7dac64cee0"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Get_items": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "7cf0601c-cee5-4747-b617-0499c0fe00e4"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_sharepointonline_1",
+              "operationId": "GetItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+            },
+            "parameters": {
+              "dataset": "@parameters('Jokes SharePoint Site (cj_JokesSharePointSite)')",
+              "table": "@parameters('Jokes SharePoint List (cj_JokesSharePointList)')"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

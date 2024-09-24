@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<InteractionCentricDashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Application Dashboard" languagecode="1033" />
+    <LocalizedName description="Tableau de bord de l'application" languagecode="1036" />
+  </LocalizedNames>
+  <FormId>{ad71b4ca-99dd-ee11-904d-000d3a1b9171}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>1</IsDefault>
+  <FormXml>
+    <forms type="interactioncentricdashboard">
+      <form>
+        <tabs filterby="createdon" timeframe="2" primaryentitylogicalname="cu_application" entityview="{64D1CC1E-9CEF-4A55-8216-6B0CCFDEC3F7}" dashboardCategory="1_1" tilespresent="false">
+          <tab showlabel="true" verticallayout="true" collapsible="true" id="{280d3464-4b1f-4aa8-a29b-6a4c0506cf7b}">
+            <labels>
+              <label description="Visual Filters" languagecode="1033" />
+              <label description="Filtres visuels" languagecode="1036" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section name="VisualFilters" showlabel="false" showbar="false" columns="11" id="{5d7375d8-ff54-4ec9-842c-00ba7fee287d}">
+                    <labels>
+                      <label description="Section" languagecode="1033" />
+                      <label description="Section de l'information" languagecode="1036" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="1" rowspan="12" showlabel="false" ischartcell="true" id="{b19dd2b7-66dd-4377-b5e8-ca781d78c27e}" auto="false">
+                          <labels>
+                            <label description="Application" languagecode="1033" />
+                            <label description="Demande d'admission" languagecode="1036" />
+                          </labels>
+                          <control id="Componentd15862d" uniqueid="{53457cd3-ae56-346e-0598-9d3bd8ca7d3a}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>cu_application</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <HeaderColorCode />
+                              <ViewId>{64D1CC1E-9CEF-4A55-8216-6B0CCFDEC3F7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{A67A6D49-99DD-EE11-904D-000D3A1B9171}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" ischartcell="true" id="{ba9d68ec-334b-40b1-a5e5-2e3021c1df10}" auto="false">
+                          <labels>
+                            <label description="Application" languagecode="1033" />
+                            <label description="Demande d'admission" languagecode="1036" />
+                          </labels>
+                          <control id="Component963f131" uniqueid="{0b085e58-5766-b959-b807-765b1c7d14b2}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>cu_application</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <HeaderColorCode />
+                              <ViewId>{64D1CC1E-9CEF-4A55-8216-6B0CCFDEC3F7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{C0ED4964-99DD-EE11-904D-000D3A1B9171}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+          <tab name="StreamsContainer" showlabel="true" verticallayout="true" collapsible="false" id="{7ec8ce48-3671-4fe0-a07a-6093966a4c9e}">
+            <labels>
+              <label description="Streams" languagecode="1033" />
+              <label description="Cours d'eau" languagecode="1036" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section name="Streams" showlabel="false" showbar="false" columns="11" id="{ccab7323-918a-4ad3-bd20-d51dd6830e3f}">
+                    <labels>
+                      <label description="Section" languagecode="1033" />
+                      <label description="Section de l'information" languagecode="1036" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="2" rowspan="12" showlabel="false" isstreamcell="true" id="{8911c2a6-f83b-4cd2-b630-3a0cf518b720}">
+                          <labels>
+                            <label description="" languagecode="1033" />
+                          </labels>
+                          <control id="Component{eac6516d-8511-a283-d34c-e87e09ec2683}" classid="{EE9078C8-6946-4E2C-B8F8-35E65F4BE6A8}">
+                            <parameters>
+                              <StreamObjects>
+                                <ShowAsTiles>false</ShowAsTiles>
+                                <StreamObject id="{0b67e0bc-da3e-0ba6-ad8e-d2ec6d0cd916}" type="1">
+                                  <LogicalEntityName>cu_application</LogicalEntityName>
+                                  <EntityViewId>{64D1CC1E-9CEF-4A55-8216-6B0CCFDEC3F7}</EntityViewId>
+                                </StreamObject>
+                              </StreamObjects>
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.5.0.22</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</InteractionCentricDashboard>

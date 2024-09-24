@@ -1,0 +1,148 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline_1": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "cont_SharePointDemoConnectionReference"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "SharePoint Demo Site (cont_SharePointDemoSite)": {
+          "defaultValue": "https://mngenvmcap157851.sharepoint.com/sites/IT",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cont_SharePointDemoSite"
+          }
+        },
+        "SharePoint Demo List (cont_SharePointDemoList)": {
+          "defaultValue": "9b764650-370e-44ab-b8d8-b1239b9d76bf",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cont_SharePointDemoList"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "a24e6479-c061-48ca-8a34-d09fe1c62a67"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize_variable": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "92ba323f-fb4a-4273-bc7d-cef739c234a6"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "debug",
+                "type": "boolean",
+                "value": "@false"
+              }
+            ]
+          }
+        },
+        "Compose_use_this_instead": {
+          "runAfter": {
+            "Catch": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "41b0da90-77f9-4e45-a0b2-de5352c1cf77"
+          },
+          "type": "Compose",
+          "inputs": 1234
+        },
+        "Try": {
+          "actions": {
+            "Get_items": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "a49abc9f-e6a0-4424-8b04-fc65d8cc392c"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline_1",
+                  "operationId": "GetItems",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('SharePoint Demo Site (cont_SharePointDemoSite)')",
+                  "table": "@parameters('SharePoint Demo List (cont_SharePointDemoList)')"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Initialize_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4d2e8307-b370-4e4b-8ca6-d5e787346aa1"
+          },
+          "type": "Scope"
+        },
+        "Catch": {
+          "actions": {
+            "Compose_to_be_disabled": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "aa3aead2-27bc-4113-872c-a964749e482a"
+              },
+              "type": "Compose",
+              "inputs": "abcd"
+            }
+          },
+          "runAfter": {
+            "Try": [
+              "Failed",
+              "Skipped"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "8dd1446b-9f19-4087-8406-afb385db52e3"
+          },
+          "type": "Scope"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,23 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "ce_ContosoTestingVariable001",
+      "Value": "Updateing value from Actions"
+    },
+    {
+      "SchemaName": "cu_ContosoUniversitySPOITList",
+      "Value": "19af515d-18a3-465b-8b02-925580b36c04"
+    },
+    {
+      "SchemaName": "cu_ContosoUniversitySPOITSite",
+      "Value": "https://mngenvmcap157851.sharepoint.com/sites/NewEmployeeOnboarding/"
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "cu_ContosoUniversitySPOITConRef",
+      "ConnectionId": "",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+    }
+  ]
+}

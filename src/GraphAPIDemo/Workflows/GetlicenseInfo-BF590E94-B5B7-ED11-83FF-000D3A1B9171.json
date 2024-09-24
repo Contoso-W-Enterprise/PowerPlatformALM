@@ -1,0 +1,249 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_sharedcommondataserviceforapps_a470c"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GraphAppId (ce_GraphAppId)": {
+          "defaultValue": "0a7f60f2-ada5-40b1-93d8-e71b1de2ac6c",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphAppId"
+          }
+        },
+        "GraphTenantId (ce_GraphTenantId)": {
+          "defaultValue": "9ead217e-7624-4b1a-b877-3cb3d835f38d",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphTenantId"
+          }
+        },
+        "GraphBaseURI (ce_GraphBaseURI)": {
+          "defaultValue": "https://graph.microsoft.com",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphBaseURI"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "e60b4574-2ffd-4a58-972d-507825215524"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Get_SubscribedSkus": {
+          "runAfter": {
+            "GetGraphPfxPw": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7aaaee3b-26cc-49f4-90e3-c19e89428cd7"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "@variables('nextURL')",
+            "authentication": {
+              "type": "ActiveDirectoryOAuth",
+              "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+              "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+              "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+              "pfx": "@outputs('GetGraphPfx')?['body/EnvironmentVariableSecretValue']",
+              "password": "@outputs('GetGraphPfxPw')?['body/EnvironmentVariableSecretValue']"
+            }
+          }
+        },
+        "GetGraphPfx": {
+          "runAfter": {
+            "Initialize_nextURL": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0813de43-8b2a-40a8-b745-61b3d5099399"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfx"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "GetGraphPfxPw": {
+          "runAfter": {
+            "GetGraphPfx": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "03de3191-89fa-4c95-9977-3f37a683b0db"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfxPw"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "Initialize_results": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "cc046054-f178-4d06-b66b-3c7221ce208d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "results",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Initialize_StartDate": {
+          "runAfter": {
+            "Initialize_results": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a7741d66-18de-4b63-a27e-b72bb70ae61b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "StartDate",
+                "type": "string",
+                "value": "@{formatDateTime(addDays(convertFromUtc(utcNow(),'Mountain Standard Time'),-1),'yyyy-MM-dd')}"
+              }
+            ]
+          }
+        },
+        "Initialize_EndDate": {
+          "runAfter": {
+            "Initialize_StartDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "50489362-2684-4a6c-b5cf-0876c83a96f3"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EndDate",
+                "type": "string",
+                "value": "@{formatDateTime(convertFromUtc(utcNow(),'Mountain Standard Time'),'yyyy-MM-dd')}"
+              }
+            ]
+          }
+        },
+        "Initialize_nextURL": {
+          "runAfter": {
+            "Initialize_EndDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "430c0019-7b58-48b8-a63c-ef28ae5b6435"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "nextURL",
+                "type": "string",
+                "value": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/subscribedSkus"
+              }
+            ]
+          }
+        },
+        "Set_variable": {
+          "runAfter": {
+            "Get_SubscribedSkus": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b8efe331-b118-4074-9e3c-cb2bf8f13d80"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "nextURL",
+            "value": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/users"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

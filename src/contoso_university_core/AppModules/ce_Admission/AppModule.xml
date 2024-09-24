@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>ce_Admission</UniqueName>
+  <IntroducedVersion>1.5.0.0</IntroducedVersion>
+  <WebResourceId>953b9fac-1e5e-e611-80d6-00155ded156f</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="cu_application" />
+    <AppModuleComponent type="1" schemaName="cu_department" />
+    <AppModuleComponent type="1" schemaName="cu_major" />
+    <AppModuleComponent type="1" schemaName="cu_semester" />
+    <AppModuleComponent type="60" id="{d477a387-9add-ee11-904d-000d3a1b9171}" />
+    <AppModuleComponent type="62" schemaName="ce_Admission" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Admission" languagecode="1033" />
+    <LocalizedName description="L'admission" languagecode="1036" />
+  </LocalizedNames>
+  <appelements>
+    <appelement uniquename="ce_ce_Admission_canvasappid_ce_admissiondefaultcommandlibrary_a1e1f">
+      <canvasappid>
+        <name>ce_admissiondefaultcommandlibrary_a1e1f</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>ce_ce_Admission_canvasappid_ce_admissiondefaultcommandlibrary_a1e1f</name>
+    </appelement>
+    <appelement uniquename="ce_ce_Admission_canvasappid_ce_universitycustompage_42561">
+      <canvasappid>
+        <name>ce_universitycustompage_42561</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>ce_ce_Admission_canvasappid_ce_universitycustompage_42561</name>
+    </appelement>
+  </appelements>
+</AppModule>

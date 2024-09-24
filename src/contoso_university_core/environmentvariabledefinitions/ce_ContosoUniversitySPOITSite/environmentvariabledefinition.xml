@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="ce_ContosoUniversitySPOITSite">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <displayname default="ContosoUniversitySPOITSite">
+    <label description="ContosoUniversitySPOITSite" languagecode="1033" />
+    <label description="ContosoUniversitySPOITSite" languagecode="1036" />
+  </displayname>
+  <introducedversion>1.5.0.22</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>dataset</parameterkey>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

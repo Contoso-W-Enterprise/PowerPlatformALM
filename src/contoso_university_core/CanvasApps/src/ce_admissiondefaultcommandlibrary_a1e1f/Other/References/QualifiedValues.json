@@ -1,0 +1,12 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_cu_application_forms",
+      "Namespace": "Applications (Forms)",
+      "Values": {
+        "Application Dashboard": "ad71b4ca-99dd-ee11-904d-000d3a1b9171",
+        "Information": "05e4c702-07bd-4fb9-809c-983889c46186"
+      }
+    }
+  ]
+}

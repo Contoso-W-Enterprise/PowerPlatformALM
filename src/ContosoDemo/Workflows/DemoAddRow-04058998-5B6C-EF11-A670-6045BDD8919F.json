@@ -1,0 +1,98 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_BrandNewSPOConnectionReference"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "SharePoint Demo Site (cont_SharePointDemoSite)": {
+          "defaultValue": "https://mngenvmcap157851.sharepoint.com/sites/IT",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cont_SharePointDemoSite"
+          }
+        },
+        "SharePoint Demo List (cont_SharePointDemoList)": {
+          "defaultValue": "9b764650-370e-44ab-b8d8-b1239b9d76bf",
+          "type": "String",
+          "metadata": {
+            "schemaName": "cont_SharePointDemoList"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "c8a6d20f-b381-4d74-bdb0-ffedfac65cb2"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Apply_to_each": {
+          "foreach": "@range(1,4000)",
+          "actions": {
+            "Create_item": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "9ff967cd-e21f-458b-9dc5-8d424bff4121"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "PostItem",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+                },
+                "parameters": {
+                  "dataset": "@parameters('SharePoint Demo Site (cont_SharePointDemoSite)')",
+                  "table": "@parameters('SharePoint Demo List (cont_SharePointDemoList)')",
+                  "item/Title": "@concat('ISO-',rand(0,10000))",
+                  "item/ItemName": "@{rand(0,10000)}-@{items('Apply_to_each')}",
+                  "item/Choice/Value": "@concat('Choice ',rand(1,3))"
+                },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
+              }
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "ef12901b-3144-4ef1-ac32-f049af77f9d4"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

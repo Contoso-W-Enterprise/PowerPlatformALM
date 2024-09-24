@@ -1,0 +1,581 @@
+"Screen1 As screen.'tabletAutoLayout_HeaderMainFooter_ver1.0'":
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+
+    ScreenContainer1 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            Fill: =RGBA(0, 60, 106, 1)
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =2
+
+            Label2 As Label:
+                AlignInContainer: =AlignInContainer.Center
+                Alignment: =Align.Center
+                Color: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.View
+                FillPortions: =1
+                FontSize: =18
+                FontWeight: =FontWeight.Semibold
+                Height: =40
+                LayoutMinHeight: =32
+                LayoutMinWidth: =320
+                Text: ="Org Data"
+                TextRole: ='Label.TextRole'.Heading1
+                Width: =320
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+        MainSectionContainer1 As groupContainer.verticalAutoLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =3
+
+            Form1 As form:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                DataSource: ='Org Data'
+                Item: =RecordItem
+                LayoutMinHeight: =250
+                LayoutMinWidth: =400
+                NumberOfColumns: =1
+                ZIndex: =1
+
+                "'Owning Business Unit_DataCard1' As typedDataCard.pcfCoreComboBoxEditCard":
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="owningbusinessunit"
+                    Default: =ThisItem.'Owning Business Unit'
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"owningbusinessunit")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    Required: =false
+                    Update: =DataCardValue3.Selected
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =1
+                    ZIndex: =1
+
+                    DataCardKey4 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue3 As combobox:
+                        AccessibleLabel: =If(Parent.Required, Substitute("{0}. Required.", "{0}", Parent.DisplayName), Parent.DisplayName)
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                        ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                        ChevronFill: =RGBA(33, 33, 33, 1)
+                        ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                        ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                        Color: =RGBA(51, 51, 51, 1)
+                        DefaultSelectedItems: =Parent.Default
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        DisplayFields: =["name"]
+                        DisplayMode: =Parent.DisplayMode
+                        FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                        FocusedBorderThickness: =2
+                        Font: =Font.'Segoe UI'
+                        Height: =32
+                        HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(212, 212, 212, 1)
+                        Items: =Choices([@'Org Data'].owningbusinessunit)
+                        PaddingLeft: =12
+                        PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        PressedColor: =RGBA(255, 255, 255, 1)
+                        PressedFill: =RGBA(212, 212, 212, 1)
+                        SearchFields: =["name"]
+                        SearchItems: =Search(Choices([@'Org Data'].owningbusinessunit),DataCardValue3.SearchText,"name")
+                        SelectionColor: =RGBA(51, 51, 51, 1)
+                        SelectionFill: =RGBA(0, 120, 212, 1)
+                        SelectMultiple: =false
+                        Size: =10.5
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey4.Y + DataCardKey4.Height + 4
+                        ZIndex: =2
+
+                    ErrorMessage3 As Label:
+                        AutoHeight: =true
+                        Color: =Color.Red
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =30
+                        Text: =Parent.Error
+                        Tooltip: =Parent.Error
+                        Visible: =And(!IsBlank(Parent.Error), Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =DataCardValue3.Y + DataCardValue3.Height
+                        ZIndex: =3
+
+                    StarVisible3 As Label:
+                        Alignment: =Align.Center
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =20
+                        Text: ="*"
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        X: =0
+                        Y: =DataCardKey4.Y
+                        ZIndex: =4
+
+                "'Org Lookup Content_DataCard1' As typedDataCard.pcfCoreComboBoxEditCard":
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="cont_OrgLookupContent"
+                    Default: =ThisItem.'Org Lookup Content'
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"cont_OrgLookupContent")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    Required: =false
+                    Update: =DataCardValue5.Selected
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =2
+                    ZIndex: =1
+
+                    DataCardKey6 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue5 As combobox:
+                        AccessibleLabel: =If(Parent.Required, Substitute("{0}. Required.", "{0}", Parent.DisplayName), Parent.DisplayName)
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                        ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                        ChevronFill: =RGBA(33, 33, 33, 1)
+                        ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                        ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                        Color: =RGBA(51, 51, 51, 1)
+                        DefaultSelectedItems: =Parent.Default
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        DisplayFields: =["cont_name"]
+                        DisplayMode: =Parent.DisplayMode
+                        FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                        FocusedBorderThickness: =2
+                        Font: =Font.'Segoe UI'
+                        Height: =32
+                        HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(212, 212, 212, 1)
+                        Items: =Choices([@'Org Data'].cont_OrgLookupContent)
+                        PaddingLeft: =12
+                        PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        PressedColor: =RGBA(255, 255, 255, 1)
+                        PressedFill: =RGBA(212, 212, 212, 1)
+                        SearchFields: =["cont_name"]
+                        SearchItems: =Search(Choices([@'Org Data'].cont_OrgLookupContent),DataCardValue5.SearchText,"cont_name")
+                        SelectionColor: =RGBA(51, 51, 51, 1)
+                        SelectionFill: =RGBA(0, 120, 212, 1)
+                        SelectMultiple: =false
+                        Size: =10.5
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey6.Y + DataCardKey6.Height + 4
+                        ZIndex: =2
+
+                    ErrorMessage4 As Label:
+                        AutoHeight: =true
+                        Color: =Color.Red
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =30
+                        Text: =Parent.Error
+                        Tooltip: =Parent.Error
+                        Visible: =And(!IsBlank(Parent.Error), Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =DataCardValue5.Y + DataCardValue5.Height
+                        ZIndex: =3
+
+                    StarVisible4 As Label:
+                        Alignment: =Align.Center
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =20
+                        Text: ="*"
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        X: =0
+                        Y: =DataCardKey6.Y
+                        ZIndex: =4
+
+                "'Owning User_DataCard1' As typedDataCard.pcfCoreComboBoxViewCard":
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="owninguser"
+                    Default: =ThisItem.'Owning User'
+                    DisplayMode: =DisplayMode.View
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"owninguser")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    Required: =false
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =3
+                    ZIndex: =1
+
+                    DataCardKey5 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue4 As combobox:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                        ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                        ChevronFill: =RGBA(33, 33, 33, 1)
+                        ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                        ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                        Color: =RGBA(51, 51, 51, 1)
+                        DefaultSelectedItems: =Parent.Default
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        DisabledFill: =RGBA(244, 244, 244, 1)
+                        DisplayFields: =["fullname"]
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderColor: =RGBA(0, 120, 212, 1)
+                        FocusedBorderThickness: =2
+                        Font: =Font.'Segoe UI'
+                        Height: =32
+                        HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        HoverColor: =RGBA(51, 51, 51, 1)
+                        HoverFill: =RGBA(212, 212, 212, 1)
+                        Items: =Choices([@'Org Data'].owninguser)
+                        PaddingLeft: =12
+                        PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                        PressedColor: =RGBA(255, 255, 255, 1)
+                        PressedFill: =RGBA(212, 212, 212, 1)
+                        SearchFields: =["fullname"]
+                        SearchItems: =Search(Choices([@'Org Data'].owninguser),DataCardValue4.SearchText,"fullname")
+                        SelectionColor: =RGBA(51, 51, 51, 1)
+                        SelectionFill: =RGBA(0, 120, 212, 1)
+                        SelectMultiple: =false
+                        Size: =10.5
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey5.Y + DataCardKey5.Height + 4
+                        ZIndex: =2
+
+                "'Org Data_DataCard1' As typedDataCard.pcfCoreTextualViewCard":
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="cont_orgdataid"
+                    Default: =ThisItem.'Org Data'
+                    DisplayMode: =DisplayMode.View
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"cont_orgdataid")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    Required: =false
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =5
+                    ZIndex: =1
+
+                    DataCardKey7 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    "DataCardValue6 As 'Text box'":
+                        DisplayMode: =DisplayMode.View
+                        FontSize: =10.5
+                        Height: =32
+                        Mode: ="SingleLine"
+                        Tooltip: =Parent.DisplayName
+                        Value: =Parent.Default
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey7.Y + DataCardKey7.Height + 4
+                        ZIndex: =2
+
+                "'Modified On_DataCard1' As typedDataCard.pcfCoreTextualViewCard":
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="modifiedon"
+                    Default: =ThisItem.'Modified On'
+                    DisplayMode: =DisplayMode.View
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"modifiedon")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    Required: =false
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =6
+                    ZIndex: =1
+
+                    DataCardKey8 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    "DataCardValue7 As 'Text box'":
+                        DisplayMode: =DisplayMode.View
+                        FontSize: =10.5
+                        Height: =32
+                        Mode: ="SingleLine"
+                        Tooltip: =Parent.DisplayName
+                        Value: =Parent.Default
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey8.Y + DataCardKey8.Height + 4
+                        ZIndex: =2
+
+                Name_DataCard1 As typedDataCard.pcfCoreTextualEditCard:
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="cont_name"
+                    Default: =ThisItem.Name
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"cont_name")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    MaxLength: =DataSourceInfo([@'Org Data'], DataSourceInfo.MaxLength, "cont_name")
+                    Required: =true
+                    Update: =DataCardValue1.Value
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+
+                    DataCardKey1 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    "DataCardValue1 As 'Text box'":
+                        AccessibleLabel: =Parent.DisplayName
+                        DisplayMode: =Parent.DisplayMode
+                        FontSize: =10.5
+                        Height: =32
+                        Mode: ="SingleLine"
+                        Required: =Parent.Required
+                        Tooltip: =Parent.DisplayName
+                        Value: =Parent.Default
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey1.Y + DataCardKey1.Height + 4
+                        ZIndex: =2
+
+                    ErrorMessage1 As Label:
+                        AutoHeight: =true
+                        Color: =Color.Red
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =30
+                        Text: =Parent.Error
+                        Tooltip: =Parent.Error
+                        Visible: =And(!IsBlank(Parent.Error), Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =DataCardValue1.Y + DataCardValue1.Height
+                        ZIndex: =3
+
+                    StarVisible1 As Label:
+                        Alignment: =Align.Center
+                        DisplayMode: =DisplayMode.Edit
+                        Height: =30
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        X: =0
+                        Y: =DataCardKey1.Y
+                        ZIndex: =4
+
+                "'Created On_DataCard1' As typedDataCard.pcfCoreTextualViewCard":
+                    BorderColor: =RGBA(166, 166, 166, 1)
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="createdon"
+                    Default: =ThisItem.'Created On'
+                    DisplayMode: =DisplayMode.View
+                    DisplayName: =DataSourceInfo([@'Org Data'],DataSourceInfo.DisplayName,"createdon")
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =70
+                    Required: =false
+                    Width: =736
+                    WidthFit: =true
+                    X: =0
+                    Y: =4
+                    ZIndex: =2
+
+                    DataCardKey2 As Label:
+                        AutoHeight: =true
+                        DisplayMode: =DisplayMode.Edit
+                        FontSize: =9
+                        Height: =22
+                        Text: =Parent.DisplayName
+                        Tooltip: =Parent.DisplayName
+                        VerticalAlignment: =VerticalAlign.Bottom
+                        Width: =Parent.Width - 48
+                        Wrap: =true
+                        X: =24
+                        Y: =10
+                        ZIndex: =1
+
+                    "DataCardValue2 As 'Text box'":
+                        DisplayMode: =DisplayMode.View
+                        FontSize: =10.5
+                        Height: =32
+                        Mode: ="SingleLine"
+                        Tooltip: =Parent.DisplayName
+                        Value: =Parent.Default
+                        Width: =Parent.Width - 48
+                        X: =24
+                        Y: =DataCardKey2.Y + DataCardKey2.Height + 4
+                        ZIndex: =2
+
+        FooterContainer1 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.End
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =50
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Width: =Parent.Width- Parent.PaddingLeft - Parent.PaddingRight
+            ZIndex: =4
+
+            ButtonCanvas1 As Button:
+                Appearance: ='ButtonCanvas.Appearance'.Secondary
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                Text: ="Cancel"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+            ButtonCanvas1_1 As Button:
+                Appearance: ='ButtonCanvas.Appearance'.Primary
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =96
+                Text: ="Save"
+                Width: =96
+                X: =0
+                Y: =0
+                ZIndex: =2
+

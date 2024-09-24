@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cu_contosouniversity_8f4f5</Name>
+  <AppVersion>2023-12-05T18:26:39Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23094.31.0</CreatedByClientVersion>
+  <MinClientVersion>3.23094.31.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23094.31","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","sienaVersion":"20230227T034057Z-3.23021.21.0","showStatusBar":"false"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>Contoso University</DisplayName>
+  <Description></Description>
+  <CommitMessage></CommitMessage>
+  <Publisher></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Majors":{"entitySetName":"cu_majors","logicalName":"cu_major"},"Applications":{"entitySetName":"cu_applications","logicalName":"cu_application"},"Semesters":{"entitySetName":"cu_semesters","logicalName":"cu_semester"},"Departments":{"entitySetName":"cu_departments","logicalName":"cu_department"},"Contacts":{"entitySetName":"contacts","logicalName":"contact"}}}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"componenttype":1,"logicalname":"cu_major"},{"componenttype":1,"logicalname":"cu_application"},{"componenttype":1,"logicalname":"cu_semester"},{"componenttype":1,"logicalname":"cu_department"},{"componenttype":1,"logicalname":"contact"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cu_contosouniversity_8f4f5_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cu_contosouniversity_8f4f5_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

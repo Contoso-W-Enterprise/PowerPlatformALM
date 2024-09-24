@@ -1,0 +1,28 @@
+{
+  "EnvironmentVariables": [
+    {
+      "SchemaName": "ce_ContosoTestingVariable001",
+      "Value": "Staging"
+    },
+    {
+      "SchemaName": "ce_ContosoUniversitySPOITList",
+      "Value": "b8a3fe08-79a2-4dcd-9440-4a9f8d770fb1"
+    },
+    {
+      "SchemaName": "ce_ContosoUniversitySPOITSite",
+      "Value": "https://mngenvmcap157851.sharepoint.com/sites/ITSupport"
+    }
+  ],
+  "ConnectionReferences": [
+    {
+      "LogicalName": "ce_ContosoUniversityDataverseConnectionReference",
+      "ConnectionId": "bff37c8c189c40809cf6a76247438e41",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+    },
+    {
+      "LogicalName": "cu_ContosoUniversitySPOITConRef",
+      "ConnectionId": "shared-sharepointonl-c2fcf346-5ff2-4163-8275-da17c6a32ddf",
+      "ConnectorId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+    }
+  ]
+}

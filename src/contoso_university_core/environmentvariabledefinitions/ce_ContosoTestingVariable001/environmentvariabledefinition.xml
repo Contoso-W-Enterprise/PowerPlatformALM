@@ -1,0 +1,12 @@
+<environmentvariabledefinition schemaname="ce_ContosoTestingVariable001">
+  <defaultvalue>Original</defaultvalue>
+  <displayname default="ContosoTestingVariable001">
+    <label description="ContosoTestingVariable001" languagecode="1033" />
+    <label description="ContosoTestingVariable001" languagecode="1036" />
+  </displayname>
+  <introducedversion>1.0.1.2</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="cont_FCListings">
+  <defaultvalue>{   "currencies": [     {       "country": "United States",       "currency": "Dollar",       "code": "USD"     },     {       "country": "Eurozone",       "currency": "Euro",       "code": "EUR"     },     {       "country": "Japan",       "currency": "Yen",       "code": "JPY"     },     {       "country": "United Kingdom",       "currency": "Pound Sterling",       "code": "GBP"     },     {       "country": "Australia",       "currency": "Australian Dollar",       "code": "AUD"     },     {       "country": "Canada",       "currency": "Canadian Dollar",       "code": "CAD"     },     {       "country": "Switzerland",       "currency": "Swiss Franc",       "code": "CHF"     },     {       "country": "Sweden",       "currency": "Swedish Krona",       "code": "SEK"     }   ] }</defaultvalue>
+  <displayname default="FC Listings">
+    <label description="FC Listings" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>

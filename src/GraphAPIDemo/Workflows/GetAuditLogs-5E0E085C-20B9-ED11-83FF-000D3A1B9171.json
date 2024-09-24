@@ -1,0 +1,970 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_sharedcommondataserviceforapps_a470c"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_sql_1": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_AzureSQLConnectionRef"
+        },
+        "api": {
+          "name": "shared_sql"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GraphAppId (ce_GraphAppId)": {
+          "defaultValue": "0a7f60f2-ada5-40b1-93d8-e71b1de2ac6c",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphAppId"
+          }
+        },
+        "GraphTenantId (ce_GraphTenantId)": {
+          "defaultValue": "9ead217e-7624-4b1a-b877-3cb3d835f38d",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphTenantId"
+          }
+        },
+        "GraphBaseURI (ce_GraphBaseURI)": {
+          "defaultValue": "https://graph.microsoft.com",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphBaseURI"
+          }
+        },
+        "AzureSQLServer (ce_AzureSQLServer)": {
+          "defaultValue": "contososqlsrv001.database.windows.net",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_AzureSQLServer"
+          }
+        },
+        "AzureSQLDB (ce_AzureSQLDB)": {
+          "defaultValue": "CONTOSOSQLDB001",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_AzureSQLDB"
+          }
+        },
+        "AzureSQLAuditTable (ce_AzureSQLAuditTable)": {
+          "defaultValue": "[dbo].[AuditLogs]",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_AzureSQLAuditTable"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "e60b4574-2ffd-4a58-972d-507825215524"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "GetGraphPfx": {
+          "runAfter": {
+            "Initialize_nextURL": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0813de43-8b2a-40a8-b745-61b3d5099399"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfx"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "GetGraphPfxPw": {
+          "runAfter": {
+            "GetGraphPfx": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "03de3191-89fa-4c95-9977-3f37a683b0db"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfxPw"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "Do_until_for_activities": {
+          "actions": {
+            "Get_Audit_Logs": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "7aaaee3b-26cc-49f4-90e3-c19e89428cd7"
+              },
+              "type": "Http",
+              "inputs": {
+                "method": "GET",
+                "uri": "@variables('nextURL')",
+                "authentication": {
+                  "type": "ActiveDirectoryOAuth",
+                  "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+                  "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+                  "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+                  "pfx": "@outputs('GetGraphPfx')?['body/EnvironmentVariableSecretValue']",
+                  "password": "@outputs('GetGraphPfxPw')?['body/EnvironmentVariableSecretValue']"
+                }
+              }
+            },
+            "Set_nextLink": {
+              "runAfter": {
+                "Parse_Audit_Logs_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f2130830-e491-4f5b-9ca1-482f145739c4"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "nextURL",
+                "value": "@{outputs('Get_Audit_Logs')['nextLink']}"
+              }
+            },
+            "Set_nextLink_to_end": {
+              "runAfter": {
+                "Set_nextLink": [
+                  "Failed"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "608a6027-bd0a-4a40-ac08-ce279e8d6dce"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "nextURL",
+                "value": "*"
+              }
+            },
+            "Parse_Audit_Logs_JSON": {
+              "runAfter": {
+                "Get_Audit_Logs": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ec3e427a-8121-4f2a-b45e-a573a05a2778"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@body('Get_Audit_Logs')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "@@odata.context": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "correlationId": {
+                            "type": "string"
+                          },
+                          "result": {
+                            "type": "string"
+                          },
+                          "resultReason": {
+                            "type": "string"
+                          },
+                          "activityDisplayName": {
+                            "type": "string"
+                          },
+                          "activityDateTime": {
+                            "type": "string"
+                          },
+                          "loggedByService": {
+                            "type": "string"
+                          },
+                          "operationType": {
+                            "type": "string"
+                          },
+                          "initiatedBy": {
+                            "type": "object",
+                            "properties": {
+                              "app": {},
+                              "user": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  },
+                                  "displayName": {},
+                                  "userPrincipalName": {
+                                    "type": "string"
+                                  },
+                                  "ipAddress": {
+                                    "type": "string"
+                                  },
+                                  "userType": {},
+                                  "homeTenantId": {},
+                                  "homeTenantName": {}
+                                }
+                              }
+                            }
+                          },
+                          "targetResources": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "displayName": {},
+                                "type": {
+                                  "type": "string"
+                                },
+                                "userPrincipalName": {},
+                                "groupType": {},
+                                "modifiedProperties": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "displayName": {
+                                        "type": "string"
+                                      },
+                                      "oldValue": {},
+                                      "newValue": {}
+                                    },
+                                    "required": [
+                                      "displayName",
+                                      "oldValue",
+                                      "newValue"
+                                    ]
+                                  }
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "displayName",
+                                "type",
+                                "userPrincipalName",
+                                "groupType",
+                                "modifiedProperties"
+                              ]
+                            }
+                          },
+                          "additionalDetails": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "key",
+                                "value"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "category",
+                          "correlationId",
+                          "result",
+                          "resultReason",
+                          "activityDisplayName",
+                          "activityDateTime",
+                          "loggedByService",
+                          "operationType",
+                          "initiatedBy",
+                          "targetResources",
+                          "additionalDetails"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Apply_to_each_Audit_Logs": {
+              "foreach": "@body('Parse_Audit_Logs_JSON')?['value']",
+              "actions": {
+                "Get_rows_(V2)": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "f20afa5c-fec5-4ae8-ab01-72ebf40e1a61"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sql_1",
+                      "operationId": "GetItems_V2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sql"
+                    },
+                    "parameters": {
+                      "server": "@parameters('AzureSQLServer (ce_AzureSQLServer)')",
+                      "database": "@parameters('AzureSQLDB (ce_AzureSQLDB)')",
+                      "table": "@parameters('AzureSQLAuditTable (ce_AzureSQLAuditTable)')",
+                      "$filter": "id eq '@{items('Apply_to_each_Audit_Logs')?['id']}'"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "Condition": {
+                  "actions": {
+                    "Insert_row_(V2)": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "c9cd5f9a-83bf-4e1d-be75-262e164c1e6c"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_sql_1",
+                          "operationId": "PostItem_V2",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_sql"
+                        },
+                        "parameters": {
+                          "server": "@parameters('AzureSQLServer (ce_AzureSQLServer)')",
+                          "database": "@parameters('AzureSQLDB (ce_AzureSQLDB)')",
+                          "table": "@parameters('AzureSQLAuditTable (ce_AzureSQLAuditTable)')",
+                          "item/Id": "@items('Apply_to_each_Audit_Logs')?['id']",
+                          "item/activityDateTime": "@items('Apply_to_each_Audit_Logs')?['activityDateTime']",
+                          "item/ActivityName": "@items('Apply_to_each_Audit_Logs')?['activityDisplayName']",
+                          "item/Category": "@items('Apply_to_each_Audit_Logs')?['category']",
+                          "item/Operation": "@items('Apply_to_each_Audit_Logs')?['operationType']",
+                          "item/initiatorUPN": "@items('Apply_to_each_Audit_Logs')?['initiatedBy']?['user']?['userPrincipalName']",
+                          "item/ipaddress": "@items('Apply_to_each_Audit_Logs')?['initiatedBy']?['user']?['ipAddress']",
+                          "item/additionalDetails": "@body('Parse_Audit_Logs_JSON')?['value']",
+                          "item/initiatorId": "@items('Apply_to_each_Audit_Logs')?['initiatedBy']?['user']?['id']",
+                          "item/targetName": "@first(items('Apply_to_each_Audit_Logs')?['targetResources'])?['displayName']",
+                          "item/targetId": "@first(items('Apply_to_each_Audit_Logs')?['targetResources'])?['id']"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Get_rows_(V2)": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "equals": [
+                      "@empty(outputs('Get_rows_(V2)')?['body/value'])",
+                      "@true"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "84fa6b3e-c312-401d-a3dc-68cac8182b28"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {
+                "Set_nextLink_to_end": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "2a443537-088c-4631-9068-d300c9860ac3"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Set_nextURL_for_Activities": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@equals(variables('nextURL'), '*')",
+          "limit": {
+            "count": 60,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "d26a25c0-f961-4b64-ace9-6de33b00363f"
+          },
+          "type": "Until"
+        },
+        "Initialize_results": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "cc046054-f178-4d06-b66b-3c7221ce208d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "results",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Initialize_StartDate": {
+          "runAfter": {
+            "Initialize_results": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a7741d66-18de-4b63-a27e-b72bb70ae61b"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "StartDate",
+                "type": "string",
+                "value": "@{formatDateTime(addDays(convertFromUtc(utcNow(),'Mountain Standard Time'),-1),'yyyy-MM-dd')}"
+              }
+            ]
+          }
+        },
+        "Initialize_EndDate": {
+          "runAfter": {
+            "Initialize_StartDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "50489362-2684-4a6c-b5cf-0876c83a96f3"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EndDate",
+                "type": "string",
+                "value": "@{formatDateTime(convertFromUtc(utcNow(),'Mountain Standard Time'),'yyyy-MM-dd')}"
+              }
+            ]
+          }
+        },
+        "Initialize_nextURL": {
+          "runAfter": {
+            "Initialize_EndDate": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "430c0019-7b58-48b8-a63c-ef28ae5b6435"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "nextURL",
+                "type": "string",
+                "value": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/subscribedSkus"
+              }
+            ]
+          }
+        },
+        "Set_nextURL_for_Signins": {
+          "runAfter": {
+            "Set_variable": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4b20ab3c-a899-4919-9b4d-1ab63732fbed"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "nextURL",
+            "value": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/auditLogs/signIns?$filter=createdDateTime gt @{variables('StartDate')} and createdDateTime le @{variables('EndDate')}"
+          }
+        },
+        "Set_nextURL_for_Activities": {
+          "runAfter": {
+            "GetGraphPfxPw": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "294a356b-23a5-4008-b60b-52d5523ed57c"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "nextURL",
+            "value": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/auditLogs/directoryaudits?$filter=activityDateTime gt @{variables('StartDate')} and activityDateTime le @{variables('EndDate')}"
+          }
+        },
+        "Do_until_for_signins": {
+          "actions": {
+            "Get_Audit_Logs_for_Signins": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "7aaaee3b-26cc-49f4-90e3-c19e89428cd7"
+              },
+              "type": "Http",
+              "inputs": {
+                "method": "GET",
+                "uri": "@variables('nextURL')",
+                "authentication": {
+                  "type": "ActiveDirectoryOAuth",
+                  "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+                  "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+                  "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+                  "pfx": "@outputs('GetGraphPfx')?['body/EnvironmentVariableSecretValue']",
+                  "password": "@outputs('GetGraphPfxPw')?['body/EnvironmentVariableSecretValue']"
+                }
+              }
+            },
+            "Set_nextLink_2": {
+              "runAfter": {
+                "Parse_JSON": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f2130830-e491-4f5b-9ca1-482f145739c4"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "nextURL",
+                "value": "@{outputs('Get_Audit_Logs_for_Signins')['nextLink']}"
+              }
+            },
+            "Set_nextLink_to_end_2": {
+              "runAfter": {
+                "Set_nextLink_2": [
+                  "Failed"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "608a6027-bd0a-4a40-ac08-ce279e8d6dce"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "nextURL",
+                "value": "*"
+              }
+            },
+            "Parse_JSON": {
+              "runAfter": {
+                "Get_Audit_Logs_for_Signins": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f95a9fa1-1c74-46f5-8fd0-fe5531fd5b0b"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@body('Get_Audit_Logs_for_Signins')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "@@odata.context": {
+                      "type": "string"
+                    },
+                    "@@odata.nextLink": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "createdDateTime": {
+                            "type": "string"
+                          },
+                          "userDisplayName": {
+                            "type": "string"
+                          },
+                          "userPrincipalName": {
+                            "type": "string"
+                          },
+                          "userId": {
+                            "type": "string"
+                          },
+                          "appId": {
+                            "type": "string"
+                          },
+                          "appDisplayName": {
+                            "type": "string"
+                          },
+                          "ipAddress": {
+                            "type": "string"
+                          },
+                          "clientAppUsed": {
+                            "type": "string"
+                          },
+                          "correlationId": {
+                            "type": "string"
+                          },
+                          "conditionalAccessStatus": {
+                            "type": "string"
+                          },
+                          "isInteractive": {
+                            "type": "boolean"
+                          },
+                          "riskDetail": {
+                            "type": "string"
+                          },
+                          "riskLevelAggregated": {
+                            "type": "string"
+                          },
+                          "riskLevelDuringSignIn": {
+                            "type": "string"
+                          },
+                          "riskState": {
+                            "type": "string"
+                          },
+                          "riskEventTypes": {
+                            "type": "array"
+                          },
+                          "riskEventTypes_v2": {
+                            "type": "array"
+                          },
+                          "resourceDisplayName": {
+                            "type": "string"
+                          },
+                          "resourceId": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "object",
+                            "properties": {
+                              "errorCode": {
+                                "type": "integer"
+                              },
+                              "failureReason": {
+                                "type": "string"
+                              },
+                              "additionalDetails": {}
+                            }
+                          },
+                          "deviceDetail": {
+                            "type": "object",
+                            "properties": {
+                              "deviceId": {
+                                "type": "string"
+                              },
+                              "displayName": {
+                                "type": "string"
+                              },
+                              "operatingSystem": {
+                                "type": "string"
+                              },
+                              "browser": {
+                                "type": "string"
+                              },
+                              "isCompliant": {
+                                "type": "boolean"
+                              },
+                              "isManaged": {
+                                "type": "boolean"
+                              },
+                              "trustType": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "location": {
+                            "type": "object",
+                            "properties": {
+                              "city": {
+                                "type": "string"
+                              },
+                              "state": {
+                                "type": "string"
+                              },
+                              "countryOrRegion": {
+                                "type": "string"
+                              },
+                              "geoCoordinates": {
+                                "type": "object",
+                                "properties": {
+                                  "altitude": {},
+                                  "latitude": {
+                                    "type": "number"
+                                  },
+                                  "longitude": {
+                                    "type": "number"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "appliedConditionalAccessPolicies": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                },
+                                "displayName": {
+                                  "type": "string"
+                                },
+                                "enforcedGrantControls": {
+                                  "type": "array"
+                                },
+                                "enforcedSessionControls": {
+                                  "type": "array"
+                                },
+                                "result": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id",
+                                "displayName",
+                                "enforcedGrantControls",
+                                "enforcedSessionControls",
+                                "result"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "createdDateTime",
+                          "userDisplayName",
+                          "userPrincipalName",
+                          "userId",
+                          "appId",
+                          "appDisplayName",
+                          "ipAddress",
+                          "clientAppUsed",
+                          "correlationId",
+                          "conditionalAccessStatus",
+                          "isInteractive",
+                          "riskDetail",
+                          "riskLevelAggregated",
+                          "riskLevelDuringSignIn",
+                          "riskState",
+                          "riskEventTypes",
+                          "riskEventTypes_v2",
+                          "resourceDisplayName",
+                          "resourceId",
+                          "status",
+                          "deviceDetail",
+                          "location",
+                          "appliedConditionalAccessPolicies"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Apply_to_each_Signin": {
+              "foreach": "@body('Parse_JSON')?['value']",
+              "actions": {
+                "Get_rows_(V2)_2": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "c035ad50-e211-4ac9-ab94-0b3abf32d592"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_sql_1",
+                      "operationId": "GetItems_V2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_sql"
+                    },
+                    "parameters": {
+                      "server": "@parameters('AzureSQLServer (ce_AzureSQLServer)')",
+                      "database": "@parameters('AzureSQLDB (ce_AzureSQLDB)')",
+                      "table": "@parameters('AzureSQLAuditTable (ce_AzureSQLAuditTable)')",
+                      "$filter": "id eq '@{items('Apply_to_each_Signin')?['id']}'"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                },
+                "Condition_2": {
+                  "actions": {
+                    "Insert_row_(V2)_2": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "a8f3724b-6151-48fb-8a1d-e9ca606934e2"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_sql_1",
+                          "operationId": "PostItem_V2",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_sql"
+                        },
+                        "parameters": {
+                          "server": "@parameters('AzureSQLServer (ce_AzureSQLServer)')",
+                          "database": "@parameters('AzureSQLDB (ce_AzureSQLDB)')",
+                          "table": "@parameters('AzureSQLAuditTable (ce_AzureSQLAuditTable)')",
+                          "item/Id": "@items('Apply_to_each_Signin')?['id']",
+                          "item/activityDateTime": "@items('Apply_to_each_Signin')?['createdDateTime']",
+                          "item/Category": "Authentication",
+                          "item/Operation": "Sign-in",
+                          "item/initiatorUPN": "@items('Apply_to_each_Signin')?['userPrincipalName']",
+                          "item/ipaddress": "@items('Apply_to_each_Signin')?['ipAddress']",
+                          "item/additionalDetails": "@body('Parse_JSON')?['value']",
+                          "item/initiatorId": "@items('Apply_to_each_Signin')?['userId']",
+                          "item/targetName": "@items('Apply_to_each_Signin')?['resourceDisplayName']",
+                          "item/targetId": "@items('Apply_to_each_Signin')?['resourceId']"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    }
+                  },
+                  "runAfter": {
+                    "Get_rows_(V2)_2": [
+                      "Succeeded"
+                    ]
+                  },
+                  "expression": {
+                    "equals": [
+                      "@empty(outputs('Get_rows_(V2)_2')?['body/value'])",
+                      "@true"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "a2c6e8e8-9eda-4ee2-aaa0-59b1a7d8b557"
+                  },
+                  "type": "If"
+                }
+              },
+              "runAfter": {
+                "Set_nextLink_to_end_2": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "89fada5a-f676-460b-bac1-c25a05bb4fd1"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Set_nextURL_for_Signins": [
+              "Succeeded"
+            ]
+          },
+          "expression": "@equals(variables('nextURL'), '*')",
+          "limit": {
+            "count": 60,
+            "timeout": "PT1H"
+          },
+          "metadata": {
+            "operationMetadataId": "d26a25c0-f961-4b64-ace9-6de33b00363f"
+          },
+          "type": "Until"
+        },
+        "Set_variable": {
+          "runAfter": {
+            "Do_until_for_activities": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "da54b03a-05e9-4f12-9f44-caae1eb6a513"
+          },
+          "type": "SetVariable",
+          "inputs": {
+            "name": "results",
+            "value": []
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

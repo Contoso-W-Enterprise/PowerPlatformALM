@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{84a96a08-5731-ee11-bdf3-000d3a1b9171}" Name="Admission Business Process Flow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <XamlFileName>/Workflows/AdmissionBusinessProcessFlow-84A96A08-5731-EE11-BDF3-000D3A1B9171.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>4</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>1</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <processorder>100</processorder>
+  <RunAs>1</RunAs>
+  <UniqueName>ce_admissionbusinessprocessflow</UniqueName>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.5.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ProcessTriggerScope>1</ProcessTriggerScope>
+  <PrimaryEntity>cu_major</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Admission Business Process Flow" />
+    <LocalizedName languagecode="1036" description="Flux des processus opérationnels d'admission" />
+  </LocalizedNames>
+  <labels>
+    <steplabels id="{02b599bc-66c4-4a24-b272-35121bb823a1}">
+      <label languagecode="1033" description="New" />
+      <label languagecode="1036" description="Nouvelle étape" />
+    </steplabels>
+    <steplabels id="{351f4305-d2eb-482d-bdfe-3466784ef41d}">
+      <label languagecode="1033" description="Name" />
+      <label languagecode="1036" description="Nom" />
+    </steplabels>
+    <steplabels id="{b317a256-1d7f-4322-ad8c-bf5d750724d8}">
+      <label languagecode="1033" description="Confirmed" />
+    </steplabels>
+    <steplabels id="{f7416b0c-9bf8-40cc-8fde-38adf2686514}">
+      <label languagecode="1033" description="Testing column for Microsoft" />
+    </steplabels>
+  </labels>
+</Workflow>

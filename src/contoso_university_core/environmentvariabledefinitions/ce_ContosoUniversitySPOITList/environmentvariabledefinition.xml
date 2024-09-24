@@ -1,0 +1,16 @@
+<environmentvariabledefinition schemaname="ce_ContosoUniversitySPOITList">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <displayname default="ContosoUniversitySPOITList">
+    <label description="ContosoUniversitySPOITList" languagecode="1033" />
+    <label description="ContosoUniversitySPOITList" languagecode="1036" />
+  </displayname>
+  <introducedversion>1.5.0.22</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>table</parameterkey>
+  <parentdefinitionid>
+    <schemaname>ce_ContosoUniversitySPOITSite</schemaname>
+  </parentdefinitionid>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

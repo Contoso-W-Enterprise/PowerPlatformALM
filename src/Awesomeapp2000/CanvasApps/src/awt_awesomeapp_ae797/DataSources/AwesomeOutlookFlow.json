@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "9dcc2a12-5655-4fc3-a7ea-ecf1ed9a5cf3",
+    "Name": "AwesomeOutlookFlow",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "6d387a90-70ff-ed11-8f6e-000d3a1b9171"
+  }
+]

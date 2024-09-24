@@ -1,0 +1,10 @@
+<environmentvariabledefinition schemaname="contoso_LicenseSPOTestEnvVariable">
+  <displayname default="License SPO Test Env Variable">
+    <label description="License SPO Test Env Variable" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.2.3.1</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

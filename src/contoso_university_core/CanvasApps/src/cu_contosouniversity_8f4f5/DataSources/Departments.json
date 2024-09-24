@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cu_departments",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cu_department",
+    "Name": "Departments",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "ce_test": "test",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "cu_application_department_id_cu_departmen": "Applications",
+      "cu_department_AsyncOperations": "System Jobs",
+      "cu_department_BulkDeleteFailures": "Bulk Delete Failures",
+      "cu_department_DuplicateBaseRecord": "Duplicate Records (cu_department_DuplicateBaseRecord)",
+      "cu_department_DuplicateMatchingRecord": "Duplicate Records (cu_department_DuplicateMatchingRecord)",
+      "cu_department_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cu_department_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cu_department_ProcessSession": "Process Sessions",
+      "cu_department_SyncErrors": "Sync Errors",
+      "cu_departmentid": "Department",
+      "cu_head_id": "Head",
+      "cu_major_department_id_cu_department": "Majors",
+      "cu_name": "Name",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Departments",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Departments (Views)",
+    "Name": "_cu_department_views",
+    "RelatedEntityName": "Departments",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "02d99d4c-126d-42a0-a3d2-90c39015cf2a": "Department Associated View",
+      "56ae7542-19f1-403c-ba3c-fd36eaf09188": "Active Departments",
+      "6338525d-fa9b-4b9f-9584-7f9113884ae7": "Department Advanced Find View",
+      "652a4008-b56f-4aa7-af6d-b09e7eb051cf": "Inactive Departments",
+      "e6d5a39b-e246-4df7-99ee-d96259fefe6f": "Department Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Departments)",
+    "Name": "cu_department_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Departments"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Departments",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Departments)",
+    "Name": "cu_department_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Departments"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Departments",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cont_orgdatacustompage_92077</Name>
+  <AppVersion>2023-07-20T04:07:10Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23071.11.0</CreatedByClientVersion>
+  <MinClientVersion>3.23071.11.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1919","primaryDeviceHeight":"826","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23071.11","minimumRequiredApiVersion":"2.2.0","hasComponent":"true","hasUnlockedComponent":"false","isUnifiedRootApp":"false","sienaVersion":"20230719T040848Z-3.23071.11.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>Org Data Custom Page</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified"}},"dataSources":{"Org Data":{"entitySetName":"cont_orgdatas","logicalName":"cont_orgdata"},"User Data":{"entitySetName":"cont_userdatas","logicalName":"cont_userdata"},"Org Items":{"entitySetName":"cont_orgitems","logicalName":"cont_orgitem"},"Org Lookups":{"entitySetName":"cont_orglookups","logicalName":"cont_orglookup"},"Users":{"entitySetName":"systemusers","logicalName":"systemuser"},"Business Units":{"entitySetName":"businessunits","logicalName":"businessunit"}},"components":[{"componentName":"CustomControl","identifier":"cat_PowerCAT.TagList","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.Picker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.PeoplePicker","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}},{"componentName":"CustomControl","identifier":"cat_PowerCAT.FluentDetailsList","identifierType":"LogicalName","capabilities":{"pcfExternalServiceUsageAllowed":false}}]}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[{"appComponentName":"2e88179d732a402184a767c94eab038b","appName":"efd0b616-4ee2-4801-beeb-b1516c5f6b14","appComponentLibraryName":"5c208808-5cf9-46c4-88e4-f630c7e16583","appComponentLibraryVersion":"2023-07-18T17:36:35Z","appComponentLibraryLogicalName":"cat_powercatcomponentlibrary_0be3a","environmentName":"9678b3ca-9445-e9b9-8d80-3ccdbf2dea03"},{"appComponentName":"44e7951b1fad4ad98126f8c108dd1e9f","appName":"efd0b616-4ee2-4801-beeb-b1516c5f6b14","appComponentLibraryName":"5c208808-5cf9-46c4-88e4-f630c7e16583","appComponentLibraryVersion":"2023-07-18T17:36:35Z","appComponentLibraryLogicalName":"cat_powercatcomponentlibrary_0be3a","environmentName":"9678b3ca-9445-e9b9-8d80-3ccdbf2dea03"},{"appComponentName":"6da4b2f929d240969e49e05e10e720ce","appName":"efd0b616-4ee2-4801-beeb-b1516c5f6b14","appComponentLibraryName":"5c208808-5cf9-46c4-88e4-f630c7e16583","appComponentLibraryVersion":"2023-07-18T17:36:35Z","appComponentLibraryLogicalName":"cat_powercatcomponentlibrary_0be3a","environmentName":"9678b3ca-9445-e9b9-8d80-3ccdbf2dea03"},{"appComponentName":"952d39d80fc84420b772a5058b19d909","appName":"efd0b616-4ee2-4801-beeb-b1516c5f6b14","appComponentLibraryName":"5c208808-5cf9-46c4-88e4-f630c7e16583","appComponentLibraryVersion":"2023-07-18T17:36:35Z","appComponentLibraryLogicalName":"cat_powercatcomponentlibrary_0be3a","environmentName":"9678b3ca-9445-e9b9-8d80-3ccdbf2dea03"}]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>2</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"cont_orgdata","componenttype":1},{"logicalname":"cont_userdata","componenttype":1},{"logicalname":"cont_orgitem","componenttype":1},{"logicalname":"cont_orglookup","componenttype":1},{"logicalname":"systemuser","componenttype":1},{"logicalname":"businessunit","componenttype":1},{"dependencyid":"","logicalname":"cat_PowerCAT.TagList","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.Picker","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.PeoplePicker","componenttype":66,"componenttypeplatformname":"CustomControl"},{"dependencyid":"","logicalname":"cat_PowerCAT.FluentDetailsList","componenttype":66,"componenttypeplatformname":"CustomControl"},{"logicalname":"cat_powercatcomponentlibrary_0be3a","componenttype":300,"componenttypeplatformname":"CanvasApp"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cont_orgdatacustompage_92077_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cont_orgdatacustompage_92077_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

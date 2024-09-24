@@ -1,0 +1,124 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cont_locationses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cont_locations",
+    "MaxGetRowsCount": 500,
+    "Name": "Locations",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cont_address": "Address",
+      "cont_description": "Description",
+      "cont_geojson": "GeoJSON",
+      "cont_latitude": "Latitude",
+      "cont_locations_AsyncOperations": "System Jobs",
+      "cont_locations_BulkDeleteFailures": "Bulk Delete Failures",
+      "cont_locations_DuplicateBaseRecord": "Duplicate Records (cont_locations_DuplicateBaseRecord)",
+      "cont_locations_DuplicateMatchingRecord": "Duplicate Records (cont_locations_DuplicateMatchingRecord)",
+      "cont_locations_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cont_locations_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cont_locations_ProcessSession": "Process Sessions",
+      "cont_locations_SyncErrors": "Sync Errors",
+      "cont_locationsid": "Locations",
+      "cont_longitude": "Longitude",
+      "cont_name": "Name",
+      "cont_type": "Type",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Locations",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Locations (Views)",
+    "Name": "_cont_locations_views",
+    "RelatedEntityName": "Locations",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "236ac4b9-8985-4722-9cc7-cf3b2120ee96": "Inactive Locations",
+      "2c6732ae-47e1-475a-b4e6-cb39f675a758": "Locations Associated View",
+      "5feb4509-c6ef-47f7-b652-6f05f376b550": "Locations Lookup View",
+      "7c77f162-2bda-4592-a415-c00d1d353e69": "Active Locations",
+      "a1525bb1-ad56-4b1b-a17c-68636a52ea40": "Locations Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (Locations)",
+    "Name": "cont_locations_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Locations)",
+    "Name": "cont_locations_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Location Type",
+    "Name": "cont_locationtype",
+    "OptionSetInfoNameMapping": {
+      "144180000": "Pin",
+      "144180001": "Route",
+      "144180002": "Shape"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "cont_type",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "cont_type",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  }
+]

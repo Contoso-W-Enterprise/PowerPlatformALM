@@ -1,0 +1,9 @@
+{
+  "environmentvariablevalues": {
+    "environmentvariablevalue": {
+      "@environmentvariablevalueid": "010bd0ae-1e04-ee11-8f6e-000d3a1b9171",
+      "iscustomizable": "1",
+      "value": "/subscriptions/4c822ab6-3f1b-488b-aed0-6dd65d0c273f/resourceGroups/CONTOSO-Infrastructure001/providers/Microsoft.KeyVault/vaults/CONTOSOAzKeyVault/secrets/Contoso-CoEAuditLogSecret"
+    }
+  }
+}

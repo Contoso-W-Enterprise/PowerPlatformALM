@@ -1,0 +1,736 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_microsoftbookings": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "contoso_sharedmicrosoftbookings_cd4df"
+        },
+        "api": {
+          "name": "shared_microsoftbookings"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_sharedcommondataserviceforapps_a470c"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GraphAppId (ce_GraphAppId)": {
+          "defaultValue": "0a7f60f2-ada5-40b1-93d8-e71b1de2ac6c",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphAppId"
+          }
+        },
+        "GraphTenantId (ce_GraphTenantId)": {
+          "defaultValue": "9ead217e-7624-4b1a-b877-3cb3d835f38d",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphTenantId"
+          }
+        },
+        "GraphBaseURI (ce_GraphBaseURI)": {
+          "defaultValue": "https://graph.microsoft.com",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphBaseURI"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "2917264d-5a09-4c2e-a38e-75617c700515"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "List_Booking_Businesses_where_user_is_an_admin": {
+          "runAfter": {
+            "Get_Graph_Pfx_PW": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4f78ed3c-7d9c-4446-be3e-5a430bb026d1"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_microsoftbookings",
+              "operationId": "ListBookingsBusinessUserAsAdmin",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftbookings"
+            },
+            "parameters": {},
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('List_Booking_Businesses_where_user_is_an_admin')?['body/mailboxes']",
+          "actions": {
+            "Parse_Events": {
+              "runAfter": {
+                "Get_Events": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "5f8b4337-d577-4a40-8a3e-77d14d7b035d"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@body('Get_Events')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "@@odata.context": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "@@odata.etag": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "createdDateTime": {
+                            "type": "string"
+                          },
+                          "lastModifiedDateTime": {
+                            "type": "string"
+                          },
+                          "changeKey": {
+                            "type": "string"
+                          },
+                          "categories": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "transactionId": {},
+                          "originalStartTimeZone": {
+                            "type": "string"
+                          },
+                          "originalEndTimeZone": {
+                            "type": "string"
+                          },
+                          "iCalUId": {
+                            "type": "string"
+                          },
+                          "reminderMinutesBeforeStart": {
+                            "type": "integer"
+                          },
+                          "isReminderOn": {
+                            "type": "boolean"
+                          },
+                          "hasAttachments": {
+                            "type": "boolean"
+                          },
+                          "subject": {
+                            "type": "string"
+                          },
+                          "bodyPreview": {
+                            "type": "string"
+                          },
+                          "importance": {
+                            "type": "string"
+                          },
+                          "sensitivity": {
+                            "type": "string"
+                          },
+                          "isAllDay": {
+                            "type": "boolean"
+                          },
+                          "isCancelled": {
+                            "type": "boolean"
+                          },
+                          "isOrganizer": {
+                            "type": "boolean"
+                          },
+                          "responseRequested": {
+                            "type": "boolean"
+                          },
+                          "seriesMasterId": {},
+                          "showAs": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "webLink": {
+                            "type": "string"
+                          },
+                          "onlineMeetingUrl": {},
+                          "isOnlineMeeting": {
+                            "type": "boolean"
+                          },
+                          "onlineMeetingProvider": {
+                            "type": "string"
+                          },
+                          "allowNewTimeProposals": {
+                            "type": "boolean"
+                          },
+                          "occurrenceId": {},
+                          "isDraft": {
+                            "type": "boolean"
+                          },
+                          "hideAttendees": {
+                            "type": "boolean"
+                          },
+                          "responseStatus": {
+                            "type": "object",
+                            "properties": {
+                              "response": {
+                                "type": "string"
+                              },
+                              "time": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "body": {
+                            "type": "object",
+                            "properties": {
+                              "contentType": {
+                                "type": "string"
+                              },
+                              "content": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "start": {
+                            "type": "object",
+                            "properties": {
+                              "dateTime": {
+                                "type": "string"
+                              },
+                              "timeZone": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "end": {
+                            "type": "object",
+                            "properties": {
+                              "dateTime": {
+                                "type": "string"
+                              },
+                              "timeZone": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "location": {
+                            "type": "object",
+                            "properties": {
+                              "displayName": {
+                                "type": "string"
+                              },
+                              "locationUri": {
+                                "type": "string"
+                              },
+                              "locationType": {
+                                "type": "string"
+                              },
+                              "uniqueId": {
+                                "type": "string"
+                              },
+                              "uniqueIdType": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "object",
+                                "properties": {
+                                  "street": {
+                                    "type": "string"
+                                  },
+                                  "city": {
+                                    "type": "string"
+                                  },
+                                  "state": {
+                                    "type": "string"
+                                  },
+                                  "countryOrRegion": {
+                                    "type": "string"
+                                  },
+                                  "postalCode": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "coordinates": {
+                                "type": "object",
+                                "properties": {}
+                              }
+                            }
+                          },
+                          "locations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "displayName": {
+                                  "type": "string"
+                                },
+                                "locationUri": {
+                                  "type": "string"
+                                },
+                                "locationType": {
+                                  "type": "string"
+                                },
+                                "uniqueId": {
+                                  "type": "string"
+                                },
+                                "uniqueIdType": {
+                                  "type": "string"
+                                },
+                                "address": {
+                                  "type": "object",
+                                  "properties": {
+                                    "street": {
+                                      "type": "string"
+                                    },
+                                    "city": {
+                                      "type": "string"
+                                    },
+                                    "state": {
+                                      "type": "string"
+                                    },
+                                    "countryOrRegion": {
+                                      "type": "string"
+                                    },
+                                    "postalCode": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "coordinates": {
+                                  "type": "object",
+                                  "properties": {}
+                                }
+                              },
+                              "required": [
+                                "displayName",
+                                "locationUri",
+                                "locationType",
+                                "uniqueId",
+                                "uniqueIdType",
+                                "address",
+                                "coordinates"
+                              ]
+                            }
+                          },
+                          "recurrence": {},
+                          "attendees": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "object",
+                                  "properties": {
+                                    "response": {
+                                      "type": "string"
+                                    },
+                                    "time": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "emailAddress": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "address": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "required": [
+                                "type",
+                                "status",
+                                "emailAddress"
+                              ]
+                            }
+                          },
+                          "organizer": {
+                            "type": "object",
+                            "properties": {
+                              "emailAddress": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "address": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "onlineMeeting": {
+                            "type": [
+                              "object",
+                              "null"
+                            ],
+                            "properties": {
+                              "joinUrl": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "calendar@odata.associationLink": {
+                            "type": "string"
+                          },
+                          "calendar@odata.navigationLink": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "@@odata.etag",
+                          "id",
+                          "createdDateTime",
+                          "lastModifiedDateTime",
+                          "changeKey",
+                          "categories",
+                          "transactionId",
+                          "originalStartTimeZone",
+                          "originalEndTimeZone",
+                          "iCalUId",
+                          "reminderMinutesBeforeStart",
+                          "isReminderOn",
+                          "hasAttachments",
+                          "subject",
+                          "bodyPreview",
+                          "importance",
+                          "sensitivity",
+                          "isAllDay",
+                          "isCancelled",
+                          "isOrganizer",
+                          "responseRequested",
+                          "seriesMasterId",
+                          "showAs",
+                          "type",
+                          "webLink",
+                          "onlineMeetingUrl",
+                          "isOnlineMeeting",
+                          "onlineMeetingProvider",
+                          "allowNewTimeProposals",
+                          "occurrenceId",
+                          "isDraft",
+                          "hideAttendees",
+                          "responseStatus",
+                          "body",
+                          "start",
+                          "end",
+                          "location",
+                          "locations",
+                          "recurrence",
+                          "attendees",
+                          "organizer",
+                          "onlineMeeting",
+                          "calendar@odata.associationLink",
+                          "calendar@odata.navigationLink"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Filter_Events": {
+              "runAfter": {
+                "Parse_Events": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "e0d5044d-8826-4a30-91d5-d5106881d006"
+              },
+              "type": "Query",
+              "inputs": {
+                "from": "@body('Parse_Events')?['value']",
+                "where": "@equals(item()?['organizer']?['emailAddress']?['address'], items('Apply_to_each')?['email'])"
+              }
+            },
+            "Apply_to_each_calendar_entry": {
+              "foreach": "@body('Filter_Events')",
+              "actions": {
+                "Compose": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "82282721-525b-462d-866e-dcacf034f45c"
+                  },
+                  "type": "Compose",
+                  "inputs": "subject:@{items('Apply_to_each_calendar_entry')?['subject']}\nbody:@{items('Apply_to_each_calendar_entry')?['body']}\nstart/end:@{items('Apply_to_each_calendar_entry')?['start']} - @{items('Apply_to_each_calendar_entry')?['end']}\nAttendees:@{items('Apply_to_each_calendar_entry')?['attendees']}\nlocation:@{items('Apply_to_each_calendar_entry')?['location']?['displayName']}(@{items('Apply_to_each_calendar_entry')?['location']?['uniqueId']})"
+                }
+              },
+              "runAfter": {
+                "Filter_Events": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "aa2c5faf-4170-4505-bfcf-ad658401f6cd"
+              },
+              "type": "Foreach"
+            },
+            "Get_Calendars": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "2054f95d-a431-47b9-8580-11b30c9f6b45"
+              },
+              "type": "Http",
+              "inputs": {
+                "method": "GET",
+                "uri": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/users/@{items('Apply_to_each')?['email']}/calendars?$filter=name eq 'Calendar'",
+                "authentication": {
+                  "type": "ActiveDirectoryOAuth",
+                  "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+                  "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+                  "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+                  "pfx": "@outputs('Get_Graph_Pfx')?['body/EnvironmentVariableSecretValue']",
+                  "password": "@outputs('Get_Graph_Pfx_PW')?['body/EnvironmentVariableSecretValue']"
+                }
+              }
+            },
+            "Get_Events": {
+              "runAfter": {
+                "Parse_Calendars": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b6c07a97-fb1b-4a23-93ae-a38325d790ae"
+              },
+              "type": "Http",
+              "inputs": {
+                "method": "GET",
+                "uri": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/users/@{items('Apply_to_each')?['email']}/events",
+                "authentication": {
+                  "type": "ActiveDirectoryOAuth",
+                  "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+                  "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+                  "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+                  "pfx": "@outputs('Get_Graph_Pfx')?['body/EnvironmentVariableSecretValue']",
+                  "password": "@outputs('Get_Graph_Pfx_PW')?['body/EnvironmentVariableSecretValue']"
+                }
+              }
+            },
+            "Parse_Calendars": {
+              "runAfter": {
+                "Get_Calendars": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "3a1a12b1-c9fa-4ad2-badf-e0234537c648"
+              },
+              "type": "ParseJson",
+              "inputs": {
+                "content": "@body('Get_Calendars')",
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "@@odata.context": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "color": {
+                            "type": "string"
+                          },
+                          "hexColor": {
+                            "type": "string"
+                          },
+                          "isDefaultCalendar": {
+                            "type": "boolean"
+                          },
+                          "changeKey": {
+                            "type": "string"
+                          },
+                          "canShare": {
+                            "type": "boolean"
+                          },
+                          "canViewPrivateItems": {
+                            "type": "boolean"
+                          },
+                          "canEdit": {
+                            "type": "boolean"
+                          },
+                          "allowedOnlineMeetingProviders": {
+                            "type": "array"
+                          },
+                          "defaultOnlineMeetingProvider": {
+                            "type": "string"
+                          },
+                          "isTallyingResponses": {
+                            "type": "boolean"
+                          },
+                          "isRemovable": {
+                            "type": "boolean"
+                          },
+                          "owner": {
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "name",
+                          "color",
+                          "hexColor",
+                          "isDefaultCalendar",
+                          "changeKey",
+                          "canShare",
+                          "canViewPrivateItems",
+                          "canEdit",
+                          "allowedOnlineMeetingProviders",
+                          "defaultOnlineMeetingProvider",
+                          "isTallyingResponses",
+                          "isRemovable",
+                          "owner"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "List_Booking_Businesses_where_user_is_an_admin": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d1def97f-133a-416f-841a-c624c65ce5b8"
+          },
+          "type": "Foreach"
+        },
+        "Get_Graph_Pfx": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "e88c4eed-6bfe-4d63-bae1-0ab6245c3d99"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfx"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "Get_Graph_Pfx_PW": {
+          "runAfter": {
+            "Get_Graph_Pfx": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "330a8a55-2f67-4dfa-9ecb-3f0793667707"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfxPw"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

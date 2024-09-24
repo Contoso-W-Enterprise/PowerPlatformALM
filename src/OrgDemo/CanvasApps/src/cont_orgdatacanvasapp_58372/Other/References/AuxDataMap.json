@@ -1,0 +1,3 @@
+{
+  "AppFromDataMetaDataIdsToEntityNameMappings": "{\"%DataSourceName.AFD%\":\"Org Data\",\"%DataSourceValue.AFD%\":\"[@'Org Data']\",\"%SortFieldName.AFD%\":\"\\\"cont_name\\\"\",\"%FilterFieldName.AFD%\":\"cont_name\",\"%PrimaryNameField.AFD%\":\"\\\"cont_name\\\"\",\"%PrimaryNameFieldDisplayName.AFD%\":\"'Name'\",\"%SearchFieldName.AFD%\":\"\\\"cont_name\\\"\",\"%StartsWithFieldName.AFD%\":\"cont_name\",\"%DeleteConfirmFieldName.AFD%\":\"cont_name\",\"%SortDescending.AFD%\":\"SortDescending1\",\"%CopilotSinglePageScreen.ID%\":\"OrgData\",\"%BrowseContainer.ID%\":\"BrowseGallery1\",\"%DetailEditContainer.ID%\":\"EditForm1\"}"
+}

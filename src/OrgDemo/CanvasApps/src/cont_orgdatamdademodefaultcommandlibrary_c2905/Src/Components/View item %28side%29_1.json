@@ -1,0 +1,26 @@
+{
+  "ComponentAllowCustomization": true,
+  "ComponentChangedSinceFileImport": true,
+  "ComponentManifest": {
+    "AllowAccessToGlobals": false,
+    "AllowCustomization": true,
+    "Description": "",
+    "Name": "View item (side)_1",
+    "TemplateGuid": "6a478d0b22ca4568be7f89ce048250a1"
+  },
+  "ComponentType": "CommandComponent",
+  "CustomGroupControlTemplateName": "",
+  "CustomProperties": [],
+  "FirstParty": true,
+  "Id": "http://microsoft.com/appmagic/CommandComponent",
+  "IsComponentLocked": false,
+  "IsComponentTemplate": true,
+  "IsCustomGroupControlTemplate": false,
+  "IsPcfControl": false,
+  "IsPremiumPcfControl": false,
+  "IsWidgetTemplate": false,
+  "LastModifiedTimestamp": "638254256624771873",
+  "Name": "6a478d0b22ca4568be7f89ce048250a1",
+  "OverridableProperties": {},
+  "Version": "638254253092152819"
+}

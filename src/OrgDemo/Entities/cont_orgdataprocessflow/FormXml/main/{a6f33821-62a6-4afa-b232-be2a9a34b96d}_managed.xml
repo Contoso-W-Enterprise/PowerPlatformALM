@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{a6f33821-62a6-4afa-b232-be2a9a34b96d}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab verticallayout="true" id="{e1f05cde-2d41-4514-8d26-11cad826a994}" name="StageStep3" locklevel="0" expanded="true" visible="false" labelid="{4b504a86-5646-4ac6-b95b-7ddb7ef3d074}">
+          <labels>
+            <label description="Stage1" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{e473cdf6-5680-a920-accf-3dcfe5e389ab}" name="StageStep3_section1" labelid="{c708f326-a4e5-4663-954b-1d546415922d}">
+                  <labels>
+                    <label description="Stage1" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{0bbad6c8-f3b7-44f6-b634-ec8eb448b5b1}" showlabel="true" visible="true" labelid="{3d87e94f-ce6d-4172-9e25-4cbc01171c1c}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_cont_orgdata_cont_orgdataprocessflow:cont_name" classid="{4273edbd-ac1d-40d3-9fb2-095c621b552d}" datafieldname="cont_name" relationship="bpf_cont_orgdata_cont_orgdataprocessflow" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{5090e441-ff75-4ac8-ad3c-9d79adbefa68}" name="StageStep7" locklevel="0" expanded="true" visible="false" labelid="{3d6dbb60-0664-4b4d-ad02-3c0b0dc79ee9}">
+          <labels>
+            <label description="Stage2" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{debaa596-14cd-0733-1f5c-453069a59ad5}" name="StageStep7_section1" labelid="{f805b06c-fe9a-48f9-98e2-d1462f1394c4}">
+                  <labels>
+                    <label description="Stage2" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{69e939c5-6d9e-4be2-af98-8a75be98af4c}" showlabel="true" visible="true" labelid="{1326d77e-a76d-458c-bdf0-e431cc6179f6}">
+                        <labels>
+                          <label description="Org Lookup Content" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_cont_orgdata_cont_orgdataprocessflow:cont_orglookupcontent" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="cont_orglookupcontent" relationship="bpf_cont_orgdata_cont_orgdataprocessflow" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6426a5c4-423d-4143-97fc-f3054217e9d5}" showlabel="true" visible="true" labelid="{e58beb5e-d09b-450d-84f6-36b7588be733}">
+                        <labels>
+                          <label description="Call Flow" languagecode="1033" />
+                        </labels>
+                        <control id="Step_12:a0013e46-e71c-ee11-8f6e-000d3a5a7956_flowstep" classid="{00ad73da-bd4d-49c6-88a8-2f4f4cad4a20}" datafieldname="Step_12" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab verticallayout="true" id="{3ef82ee9-0c00-4cf0-83e8-151e1e158991}" name="StageStep14" locklevel="0" expanded="true" visible="false" labelid="{190d4585-cc81-44ce-a9bf-d5f0e329466e}">
+          <labels>
+            <label description="Stage3" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showbar="false" columns="1" id="{9a2d2d96-677c-661b-3797-8d778d959f6c}" name="StageStep14_section1" labelid="{3937c344-b89d-4774-a71a-6e1fc8b9ae4e}">
+                  <labels>
+                    <label description="Stage3" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{612cf87e-1695-48f4-897f-cab96a59bff0}" showlabel="true" visible="true" labelid="{06750571-442d-4198-a89b-6107d2eacc50}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="bpf_cont_orgdata_cont_orgdataprocessflow:ownerid" classid="{270bd3db-d9af-4782-9025-509e298dec0a}" datafieldname="ownerid" relationship="bpf_cont_orgdata_cont_orgdataprocessflow" isrequired="false" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

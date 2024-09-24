@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "47ec76fd-3656-4f3a-a0de-797206158acf",
+    "Name": "JokesQuery(AppTrigger)",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "2556ceb9-231d-ef11-9f89-6045bdda1517"
+  }
+]

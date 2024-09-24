@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="awt_AwesomeSecret">
+  <description default="TestSecret">
+    <label description="TestSecret" languagecode="1033" />
+  </description>
+  <displayname default="AwesomeSecret">
+    <label description="AwesomeSecret" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.3.0.2</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000005</type>
+</environmentvariabledefinition>

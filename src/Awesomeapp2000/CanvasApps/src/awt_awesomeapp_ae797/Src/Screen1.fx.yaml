@@ -1,0 +1,465 @@
+Screen1 As screen:
+    BackgroundImage: =Picture1
+    Fill: |
+        =RGBA(255, 255, 255, 1)
+        /*
+        */
+    ImagePosition: =ImagePosition.Fill
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+
+    Container1 As groupContainer.horizontalAutoLayoutContainer:
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =1
+
+        Container2 As groupContainer.horizontalAutoLayoutContainer:
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(9, 33, 98, 1)
+            FillPortions: =0
+            Height: =60
+            LayoutMinHeight: =50
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            PaddingBottom: =10
+            PaddingLeft: =30
+            PaddingRight: =30
+            PaddingTop: =10
+            ZIndex: =1
+
+            "Icon4 As icon.'3DPrinting'":
+                BorderColor: =RGBA(0, 0, 0, 0)
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                DisabledColor: =RGBA(225, 223, 221, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                Height: =40
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(16, 110, 190, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Printing3D
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =RGBA(16, 110, 190, 1)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                Width: =32
+                ZIndex: =1
+
+            Label1 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(161, 159, 157, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Size: =18
+                Text: ="App Title"
+                Width: =If(Parent.Width > 500, Parent.Width * 80%, 500)
+                ZIndex: =2
+
+            Label2 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(236, 236, 235, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(161, 159, 157, 1)
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Size: =13
+                Text: |-
+                    ="User:"
+                ZIndex: =3
+
+        Container1_1 As groupContainer.horizontalAutoLayoutContainer:
+            Height: =100
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width
+            Y: =80
+            ZIndex: =2
+
+            "glySPO As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                AlignInContainer: =AlignInContainer.SetByContainer
+                BorderColor: =RGBA(245, 245, 245, 1)
+                DelayItemLoading: =true
+                Height: =Parent.Height
+                Items: =colResults
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                ShowNavigation: =true
+                TemplatePadding: =0
+                TemplateSize: =Min(108, Self.Height - 60)
+                Width: =Parent.Width
+                ZIndex: =1
+
+                Title3 As label:
+                    Color: =RGBA(0, 120, 212, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.results
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =16
+                    ZIndex: =1
+
+                Subtitle3 As label:
+                    Color: =RGBA(50, 49, 48, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.results
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =Title3.Y + Title3.Height + 2
+                    ZIndex: =2
+
+                Body2 As label:
+                    Color: =RGBA(96, 94, 92, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    Height: =Self.Size * 4
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =10
+                    Size: =12
+                    Text: =ThisItem.results
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =Subtitle3.Y + Subtitle3.Height + 4
+                    ZIndex: =3
+
+                NextArrow3 As icon.ChevronRight:
+                    AccessibleLabel: =Self.Tooltip
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =RGBA(0, 120, 212, 1)
+                    DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                    DisabledColor: =RGBA(225, 223, 221, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =4
+                    Height: =60
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(16, 110, 190, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.ChevronRight
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =RGBA(16, 110, 190, 1)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    TabIndex: =0
+                    Tooltip: ="View item details"
+                    Width: =60
+                    X: =Parent.TemplateWidth - Self.Width - 5
+                    Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                    ZIndex: =4
+
+                Separator3 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 120, 212, 1)
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - 1
+                    ZIndex: =5
+
+            "glyOutlook As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                AlignInContainer: =AlignInContainer.SetByContainer
+                BorderColor: =RGBA(245, 245, 245, 1)
+                DelayItemLoading: =true
+                Height: =Parent.Height
+                Items: =colOutlookResults
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =287
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                TemplatePadding: =0
+                TemplateSize: =Min(168, Self.Height - 60)
+                ZIndex: =1
+
+                Title4 As label:
+                    Color: =RGBA(0, 120, 212, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.Value
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =16
+                    ZIndex: =1
+
+                Subtitle4 As label:
+                    Color: =RGBA(50, 49, 48, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    Height: =Self.Size * 1.8
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.Value
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =Title4.Y + Title4.Height + 2
+                    ZIndex: =2
+
+                Body3 As label:
+                    Color: =RGBA(96, 94, 92, 1)
+                    DisabledColor: =RGBA(161, 159, 157, 1)
+                    Font: =Font.'Segoe UI'
+                    Height: =Self.Size * 4
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =10
+                    Size: =12
+                    Text: =ThisItem.Value
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =Parent.TemplateWidth - 104
+                    X: =32
+                    Y: =Subtitle4.Y + Subtitle4.Height + 4
+                    ZIndex: =3
+
+                NextArrow4 As icon.ChevronRight:
+                    AccessibleLabel: =Self.Tooltip
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Color: =RGBA(0, 120, 212, 1)
+                    DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                    DisabledColor: =RGBA(225, 223, 221, 1)
+                    DisabledFill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =4
+                    Height: =60
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(16, 110, 190, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.ChevronRight
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    PressedColor: =RGBA(16, 110, 190, 1)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    TabIndex: =0
+                    Tooltip: ="View item details"
+                    Width: =60
+                    X: =Parent.TemplateWidth - Self.Width - 5
+                    Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                    ZIndex: =4
+
+                Separator4 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 120, 212, 1)
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - 1
+                    ZIndex: =5
+
+        Container1_2 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            Fill: =RGBA(158, 158, 158, 0.27)
+            Height: =100
+            LayoutGap: =10
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =300
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            PaddingBottom: =20
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =20
+            Width: =Parent.Width
+            Y: =20
+            ZIndex: =3
+
+            Button1 As button:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(161, 159, 157, 1)
+                DisabledFill: =RGBA(242, 242, 241, 0)
+                Fill: =RGBA(0, 120, 212, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =120
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(16, 110, 190, 1)
+                OnSelect: =Collect(colResults,AwesomeFlow.Run())
+                PressedBorderColor: =RGBA(0, 69, 120, 1)
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(16, 110, 190, 1)
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =15
+                Text: ="Get SPO"
+                Width: =500
+                ZIndex: =1
+
+            Button2 As button:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(161, 159, 157, 1)
+                DisabledFill: =RGBA(242, 242, 241, 0)
+                Fill: =RGBA(0, 120, 212, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =120
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(16, 110, 190, 1)
+                OnSelect: =Collect(colOutlookResults,AwesomeOutlookFlow.Run().result);
+                PressedBorderColor: =RGBA(0, 69, 120, 1)
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(16, 110, 190, 1)
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =15
+                Text: ="Get Oulook"
+                Width: =500
+                ZIndex: =2
+
+            Button2_1 As button:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(161, 159, 157, 1)
+                DisabledFill: =RGBA(242, 242, 241, 0)
+                Fill: =RGBA(0, 120, 212, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =120
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(255, 255, 255, 1)
+                HoverFill: =RGBA(16, 110, 190, 1)
+                PressedBorderColor: =RGBA(0, 69, 120, 1)
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(16, 110, 190, 1)
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =15
+                Text: ="Button"
+                Width: =500
+                ZIndex: =3
+
+        Container1_3 As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =100
+            LayoutGap: =100
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =80
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            PaddingBottom: =20
+            PaddingLeft: =40
+            PaddingRight: =40
+            PaddingTop: =10
+            Width: =Parent.Width
+            Y: =20
+            ZIndex: =4
+
+            Icon1 As icon.Add:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                Color: =RGBA(0, 120, 212, 1)
+                DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                DisabledColor: =RGBA(225, 223, 221, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(16, 110, 190, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Add
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =RGBA(16, 110, 190, 1)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                ZIndex: =1
+
+            Icon2 As icon.DetailList:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                Color: =RGBA(0, 120, 212, 1)
+                DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                DisabledColor: =RGBA(225, 223, 221, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(16, 110, 190, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.DetailList
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =RGBA(16, 110, 190, 1)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                ZIndex: =2
+
+            Icon3 As icon.Heart:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                Color: =RGBA(0, 120, 212, 1)
+                DisabledBorderColor: =RGBA(245, 245, 245, 1)
+                DisabledColor: =RGBA(225, 223, 221, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =4
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                HoverColor: =RGBA(16, 110, 190, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Icon: =Icon.Heart
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                PressedColor: =RGBA(16, 110, 190, 1)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                ZIndex: =3
+

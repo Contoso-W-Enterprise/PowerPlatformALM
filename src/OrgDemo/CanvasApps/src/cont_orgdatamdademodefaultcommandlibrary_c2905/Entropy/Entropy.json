@@ -1,0 +1,66 @@
+{
+  "ComponentIndexes": {
+    "View item (side)_1": 1,
+    "View item_2": 2
+  },
+  "ControlUniqueGuids": {},
+  "ControlUniqueIds": {
+    "App": 1,
+    "HelperScreen": 4,
+    "Host": 3,
+    "View item (side)_1": 6,
+    "View item_2": 7
+  },
+  "FunctionParamsInvariantScripts": {},
+  "FunctionParamsInvariantScriptsOnInstances": {},
+  "HeaderLastSavedDateTimeUTC": "07/20/2023 04:54:25",
+  "IsLegacyComponentAllowGlobalScopeCase": false,
+  "LocalConnectionIDReferences": {},
+  "LocalDatabaseReferencesAsEmpty": true,
+  "LocalResourceFileNames": {},
+  "LocalResourceRootPaths": {},
+  "OrderComponentMetadata": {
+    "6a478d0b22ca4568be7f89ce048250a1": 0,
+    "e9953f08d4614363baf61eeb7c4526e8": 1
+  },
+  "OrderComponentTemplate": {
+    "6a478d0b22ca4568be7f89ce048250a1": 0,
+    "e9953f08d4614363baf61eeb7c4526e8": 1
+  },
+  "OrderDataSource": {
+    "Org Data": 3,
+    "Org Data\\cont_orgdata_statecode": 0,
+    "Org Data\\cont_orgdata_statuscode": 1,
+    "Org Data\\default.cds_cont_orgdata_views": 2
+  },
+  "OrderGroupControls": {},
+  "OrderPcfTemplate": {},
+  "OrderTemplate": {},
+  "OrderXMLTemplate": {},
+  "OverridablePropertiesEntry": {
+    "App": {},
+    "HelperScreen": {},
+    "Host": {},
+    "View item (side)_1": {},
+    "View item_2": {}
+  },
+  "PCFDynamicSchemaForIRRetrievalEntry": {},
+  "PCFTemplateEntry": {},
+  "PublishOrderIndices": {
+    "App": 0,
+    "HelperScreen": 0,
+    "Host": 0,
+    "View item (side)_1": 0,
+    "View item_2": 0
+  },
+  "ResourcesJsonIndices": {
+    "Image-SampleImage": 0
+  },
+  "RuleScreenIdWithoutScreen": {},
+  "TemplateVersions": {},
+  "VolatileProperties": {
+    "AnalysisLoadTime": 0.0193412,
+    "ControlCount": {}
+  },
+  "WasLocalDatabaseReferencesEmpty": true
+}

@@ -1,0 +1,66 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365groups": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "admin_CoECoreO365Groups"
+        },
+        "api": {
+          "name": "shared_office365groups"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Month",
+            "interval": 1,
+            "startTime": "2023-01-11T17:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "1000dc06-08be-4d5c-906c-67bc1747c4f0"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Send_an_HTTP_request_V2": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "30f60e55-359c-44a7-aa17-2cc9c2573426"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_office365groups",
+              "operationId": "HttpRequestV2",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365groups"
+            },
+            "parameters": {
+              "Uri": "https://graph.microsoft.com/v1.0/organization/9ead217e-7624-4b1a-b877-3cb3d835f38d/assignedPlans",
+              "Method": "GET",
+              "ContentType": "application/json"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

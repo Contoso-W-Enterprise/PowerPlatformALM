@@ -1,0 +1,35 @@
+<entities >
+  <entity name="cont_orgdata" displayname="Org Data" etc="10907" primaryidfield="cont_orgdataid" primarynamefield="cont_name" disableplugins="false">
+    <fields>
+      <field displayname="cont_imagesid" name="cont_imagesid" type="guid" customfield="true" />
+      <field displayname="Images" name="cont_images" type="imagedata" customfield="true" />
+      <field displayname="Name" name="cont_name" type="string" customfield="true" />
+      <field displayname="Org Lookup Content" name="cont_orglookupcontent" type="entityreference" lookupType="cont_orglookup" customfield="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="cont_orgdataprocessflow" displayname="Org Data Process Flow" etc="10908" primaryidfield="businessprocessflowinstanceid" primarynamefield="bpf_name" disableplugins="false">
+    <fields>
+      <field displayname="Name" name="bpf_name" type="string" customfield="true" />
+      <field displayname="Org Data Process Flow" name="businessprocessflowinstanceid" type="guid" primaryKey="true" />
+      <field displayname="Process" name="processid" type="entityreference" lookupType="workflow" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="cont_orgitem" displayname="Org Item" etc="10909" primaryidfield="cont_orgitemid" primarynamefield="cont_name" disableplugins="false">
+    <fields>
+      <field displayname="Item" name="cont_item" type="entityreference" lookupType="cref2_items" customfield="true" />
+      <field displayname="Name" name="cont_name" type="string" customfield="true" />
+      <field displayname="Org Data" name="cont_orgdata" type="entityreference" lookupType="cont_orgdata" customfield="true" />
+      <field displayname="Org Item" name="cont_orgitemid" type="guid" primaryKey="true" />
+    </fields>
+    <relationships />
+  </entity>
+  <entity name="cont_orglookup" displayname="Org Lookup" etc="10910" primaryidfield="cont_orglookupid" primarynamefield="cont_name" disableplugins="false">
+    <fields>
+      <field displayname="Name" name="cont_name" type="string" customfield="true" />
+      <field displayname="Org Lookup" name="cont_orglookupid" type="guid" primaryKey="true" />
+    </fields>
+    <relationships />
+  </entity>
+</entities>

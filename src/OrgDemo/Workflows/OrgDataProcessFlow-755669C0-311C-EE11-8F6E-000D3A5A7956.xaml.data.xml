@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{755669c0-311c-ee11-8f6e-000d3a5a7956}" Name="Org Data Process Flow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <XamlFileName>/Workflows/OrgDataProcessFlow-755669C0-311C-EE11-8F6E-000D3A5A7956.xaml</XamlFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>4</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>1</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <processorder>100</processorder>
+  <RunAs>1</RunAs>
+  <UniqueName>cont_orgdataprocessflow</UniqueName>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ProcessTriggerScope>1</ProcessTriggerScope>
+  <PrimaryEntity>cont_OrgData</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Org Data Process Flow" />
+  </LocalizedNames>
+  <labels>
+    <steplabels id="{e1f05cde-2d41-4514-8d26-11cad826a994}">
+      <label languagecode="1033" description="Stage1" />
+    </steplabels>
+    <steplabels id="{0bbad6c8-f3b7-44f6-b634-ec8eb448b5b1}">
+      <label languagecode="1033" description="Name" />
+    </steplabels>
+    <steplabels id="{5090e441-ff75-4ac8-ad3c-9d79adbefa68}">
+      <label languagecode="1033" description="Stage2" />
+    </steplabels>
+    <steplabels id="{69e939c5-6d9e-4be2-af98-8a75be98af4c}">
+      <label languagecode="1033" description="Org Lookup Content" />
+    </steplabels>
+    <steplabels id="{6426a5c4-423d-4143-97fc-f3054217e9d5}">
+      <label languagecode="1033" description="Call Flow" />
+    </steplabels>
+    <steplabels id="{3ef82ee9-0c00-4cf0-83e8-151e1e158991}">
+      <label languagecode="1033" description="Stage3" />
+    </steplabels>
+    <steplabels id="{612cf87e-1695-48f4-897f-cab96a59bff0}">
+      <label languagecode="1033" description="Owner" />
+    </steplabels>
+  </labels>
+</Workflow>

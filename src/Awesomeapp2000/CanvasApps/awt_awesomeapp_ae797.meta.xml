@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>awt_awesomeapp_ae797</Name>
+  <AppVersion>2023-08-03T16:56:24Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.23073.23.0</CreatedByClientVersion>
+  <MinClientVersion>3.23073.23.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1919","primaryDeviceHeight":"826","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","publisherVersion":"3.23073.23","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","sienaVersion":"20230601T042656Z-3.23052.29.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>rgba(99, 139, 44, 1)</BackgroundColor>
+  <DisplayName>Awesome App</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"920c83b5-e1d1-491a-ae20-7285169c804d":{"id":"/providers/microsoft.powerapps/apis/shared_sharepointonline","displayName":"SharePoint","iconUri":"https://connectoricons-prod.azureedge.net/u/shgogna/globalperconnector-train1/1.0.1639.3312/sharepointonline/icon.png","dataSources":["AwesomeSPOList"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{"https://mngenvmcap157851.sharepoint.com/sites/IT_awt_AwesomeSPOSite":{"datasetOverride":{"name":"https://mngenvmcap157851.sharepoint.com/sites/IT","environmentVariableName":"awt_AwesomeSPOSite"},"dataSources":{"AwesomeSPOList":{"tableName":"09539922-35de-4817-94c5-840de3533345","tableNameOverride":{"name":"09539922-35de-4817-94c5-840de3533345","environmentVariableName":"awt_AwesomeSPOList"}}}}},"apiTier":"Standard","actions":["providers/PowerPlatform.Governance/Operations/Read"]},"e3d66b0c-390e-4e79-9921-166a4132ed39":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1645/1.0.1645.3345/logicflows/icon.png","dataSources":["AwesomeFlow"],"dependencies":[],"dependents":[],"parameterHints":{"workflowName":{"value":"a7590762-90eb-45a7-afdd-5ff0abb42ee5"},"workflowEntityId":{"value":"a3ccd93f-01bd-ed11-83ff-000d3a1b9171"}},"parameterHintsV2":{"workflowName":{"value":"a7590762-90eb-45a7-afdd-5ff0abb42ee5"},"workflowEntityId":{"value":"a3ccd93f-01bd-ed11-83ff-000d3a1b9171"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"1d956dcd-81cf-4c19-86e4-31478c7c8938":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1645/1.0.1645.3345/logicflows/icon.png","dataSources":["AwesomeOutlookFlow"],"dependencies":["a7b9d24e-2e4c-4fb6-9054-a1f8691aac2e"],"dependents":[],"parameterHints":{"workflowName":{"value":"9c6f2454-90ba-43eb-8bb6-25177241b07b"},"workflowEntityId":{"value":"6d387a90-70ff-ed11-8f6e-000d3a1b9171"},"a7b9d24e-2e4c-4fb6-9054-a1f8691aac2e":{"value":"shared_office365"}},"parameterHintsV2":{"workflowName":{"value":"9c6f2454-90ba-43eb-8bb6-25177241b07b"},"workflowEntityId":{"value":"6d387a90-70ff-ed11-8f6e-000d3a1b9171"},"shared_office365":{"value":"a7b9d24e-2e4c-4fb6-9054-a1f8691aac2e"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"a7b9d24e-2e4c-4fb6-9054-a1f8691aac2e":{"id":"/providers/microsoft.powerapps/apis/shared_office365","displayName":"Office 365 Outlook","iconUri":"https://connectoricons-prod.azureedge.net/u/laborbol/partial-builds/390724148/1.0.1641.3327/office365/icon.png","dataSources":[],"dependencies":[],"dependents":["1d956dcd-81cf-4c19-86e4-31478c7c8938"],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard"}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"dependencyid":"a3ccd93f-01bd-ed11-83ff-000d3a1b9171","componenttype":29,"componenttypeplatformname":"Workflow"},{"dependencyid":"6d387a90-70ff-ed11-8f6e-000d3a1b9171","componenttype":29,"componenttypeplatformname":"Workflow"},{"logicalname":"awt_AwesomeSPOSite","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"},{"logicalname":"awt_AwesomeSPOList","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/awt_awesomeapp_ae797_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/awt_awesomeapp_ae797_DocumentUri.msapp</DocumentUri>
+</CanvasApp>

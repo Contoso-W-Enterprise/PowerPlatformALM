@@ -1,0 +1,102 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cu_majors",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cu_major",
+    "Name": "Majors",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "bpf_cu_major_ce_admissionbusinessprocessflow": "Admission Business Process Flow",
+      "ce_testingcolumn": "Testing column for Microsoft",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "cu_department_id": "Department",
+      "cu_major_AsyncOperations": "System Jobs",
+      "cu_major_BulkDeleteFailures": "Bulk Delete Failures",
+      "cu_major_DuplicateBaseRecord": "Duplicate Records (cu_major_DuplicateBaseRecord)",
+      "cu_major_DuplicateMatchingRecord": "Duplicate Records (cu_major_DuplicateMatchingRecord)",
+      "cu_major_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cu_major_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cu_major_ProcessSession": "Process Sessions",
+      "cu_major_SyncErrors": "Sync Errors",
+      "cu_majorid": "Major",
+      "cu_name": "Name",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "processid": "Process Id",
+      "stageid": "(Deprecated) Stage Id",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "traversedpath": "(Deprecated) Traversed Path",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Majors",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Majors (Views)",
+    "Name": "_cu_major_views",
+    "RelatedEntityName": "Majors",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "314ff245-a0ce-43dd-a4c1-0c134deae002": "Major Advanced Find View",
+      "7a4a0f56-3d49-47d8-ba43-965bd35f11a1": "Active Majors",
+      "89a55c62-55b7-4573-96f9-cbc9581a5909": "Inactive Majors",
+      "ed2d3d4f-c71c-4694-af7a-a201a5de6036": "Major Lookup View",
+      "f4efddf7-9574-4b90-b439-a34bb974f989": "Major Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Majors)",
+    "Name": "cu_major_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Majors"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Majors",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Majors)",
+    "Name": "cu_major_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Majors"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Majors",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Application Dashboard" languagecode="1033" />
+    <LocalizedName description="Tableau de bord de l'application" languagecode="1036" />
+  </LocalizedNames>
+  <FormId>{d477a387-9add-ee11-904d-000d3a1b9171}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>0</IsDefault>
+  <FormXml>
+    <forms type="dashboard">
+      <form>
+        <tabs>
+          <tab showlabel="false" verticallayout="true" id="{9e967c70-c9d6-476c-964a-f00d260ec390}">
+            <labels>
+              <label description="Tab" languagecode="1033" />
+              <label description="Onglet" languagecode="1036" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section showlabel="false" showbar="false" columns="1111" id="{626914ed-a392-45b7-82a4-92259d8bf07e}">
+                    <labels>
+                      <label description="Section" languagecode="1033" />
+                      <label description="Section de l'information" languagecode="1036" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="2" rowspan="12" showlabel="false" id="{1e8b91c3-ee64-498c-8c9d-c23162f0554f}" auto="false">
+                          <labels>
+                            <label description="Application" languagecode="1033" />
+                            <label description="Demande d'admission" languagecode="1036" />
+                          </labels>
+                          <control id="Component2293bf5" uniqueid="{abd81a2c-189d-3d5b-0bc6-e71e37714dd9}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>cu_application</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <HeaderColorCode />
+                              <ViewId>{64D1CC1E-9CEF-4A55-8216-6B0CCFDEC3F7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{A67A6D49-99DD-EE11-904D-000D3A1B9171}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="2" rowspan="12" showlabel="false" id="{503a65d4-f04b-43d0-ad8f-b0f7fa58695f}" auto="false">
+                          <labels>
+                            <label description="Application" languagecode="1033" />
+                            <label description="Demande d'admission" languagecode="1036" />
+                          </labels>
+                          <control id="Componentc8fe1f5" uniqueid="{0432b074-15ed-257b-2626-691347e7cd4c}" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>cu_application</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>10</RecordsPerPage>
+                              <HeaderColorCode />
+                              <ViewId>{64D1CC1E-9CEF-4A55-8216-6B0CCFDEC3F7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{C0ED4964-99DD-EE11-904D-000D3A1B9171}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row>
+                        <cell colspan="2" rowspan="12" showlabel="false" ispreviewcell="true" id="{3589ba4c-3ec6-46fd-bd43-05b64b18f4c3}">
+                          <labels>
+                            <label description="" languagecode="1033" />
+                          </labels>
+                        </cell>
+                        <cell colspan="2" rowspan="12" showlabel="false" ispreviewcell="true" id="{ba2d4766-b11e-46dc-9161-1fb42330c7db}">
+                          <labels>
+                            <label description="" languagecode="1033" />
+                          </labels>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.5.0.22</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</Dashboard>

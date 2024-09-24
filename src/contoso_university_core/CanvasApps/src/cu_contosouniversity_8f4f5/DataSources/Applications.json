@@ -1,0 +1,98 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cu_applications",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cu_application",
+    "Name": "Applications",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "cu_applicant_id": "Applicant",
+      "cu_application_AsyncOperations": "System Jobs",
+      "cu_application_BulkDeleteFailures": "Bulk Delete Failures",
+      "cu_application_DuplicateBaseRecord": "Duplicate Records (cu_application_DuplicateBaseRecord)",
+      "cu_application_DuplicateMatchingRecord": "Duplicate Records (cu_application_DuplicateMatchingRecord)",
+      "cu_application_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cu_application_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cu_application_ProcessSession": "Process Sessions",
+      "cu_application_SyncErrors": "Sync Errors",
+      "cu_applicationid": "Application",
+      "cu_department_id": "Department",
+      "cu_name": "Name",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Applications",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Applications (Views)",
+    "Name": "_cu_application_views",
+    "RelatedEntityName": "Applications",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "4706f0a6-ea59-43b1-9b7c-1f3d85815465": "Inactive Applications",
+      "64d1cc1e-9cef-4a55-8216-6b0ccfdec3f7": "Active Applications",
+      "6606b439-c584-46cc-b59c-ea83b229d56d": "Application Lookup View",
+      "7c98f06c-03f8-40a3-81dd-883638ce20ed": "Application Associated View",
+      "9315e660-56d0-489f-99ae-46490029d4e9": "Application Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (Applications)",
+    "Name": "cu_application_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Applications"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Applications",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Applications)",
+    "Name": "cu_application_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Applications"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Applications",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{167037a5-6b08-4840-a2d6-48c81898e9b5}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="cont_name" select="1" icon="1" preview="1">
+        <row name="result" id="cont_orgdataid">
+          <cell name="cont_name" width="300" />
+          <cell name="createdon" width="125" />
+          <cell name="cont_orglookupcontent" width="157" />
+          <cell name="cont_images" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>1</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="cont_orgdata">
+          <attribute name="cont_orgdataid" />
+          <attribute name="cont_name" />
+          <attribute name="createdon" />
+          <order attribute="cont_name" descending="false" />
+          <attribute name="cont_orglookupcontent" />
+          <attribute name="cont_images" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Org Data Advanced Find View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

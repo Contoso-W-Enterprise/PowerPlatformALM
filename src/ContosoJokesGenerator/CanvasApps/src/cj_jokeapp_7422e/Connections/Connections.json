@@ -1,0 +1,102 @@
+{
+  "25ed6b37-350e-496b-be19-f9ba0f36ad39": {
+    "appActions": [
+      "providers/PowerPlatform.Governance/Operations/Read"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1685/1.0.1685.3700/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://mngenvmcap157851.sharepoint.com/sites/IT_cj_JokesSharePointSite": {
+        "datasetOverride": {
+          "environmentVariableName": "cj_JokesSharePointSite",
+          "name": "https://mngenvmcap157851.sharepoint.com/sites/IT"
+        },
+        "dataSources": {
+          "Jokes SharePoint List": {
+            "tableName": "9cd8be6e-2b27-4c5a-aa45-0795fb70b601",
+            "tableNameOverride": {
+              "environmentVariableName": "cj_JokesSharePointList",
+              "name": "9cd8be6e-2b27-4c5a-aa45-0795fb70b601"
+            }
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Jokes SharePoint List"
+    ],
+    "dependencies": {},
+    "dependents": [
+      "aec23adf-076f-4cae-99d8-b0ba70572e03"
+    ],
+    "id": "25ed6b37-350e-496b-be19-f9ba0f36ad39"
+  },
+  "413c19f3-60c3-42e9-b90f-17210811b290": {
+    "connectionRef": {
+      "displayName": "Office 365 Users",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1686/1.0.1686.3706/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users"
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Users"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "413c19f3-60c3-42e9-b90f-17210811b290"
+  },
+  "aec23adf-076f-4cae-99d8-b0ba70572e03": {
+    "appActions": [
+      "Run"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/patelronak/specialtrain-logicflows-2/1.0.1692.3734/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "25ed6b37-350e-496b-be19-f9ba0f36ad39": {
+          "value": "shared_sharepointonline"
+        },
+        "workflowDisplayName": {
+          "value": "Jokes Query (App Trigger)"
+        },
+        "workflowEntityId": {
+          "value": "2556ceb9-231d-ef11-9f89-6045bdda1517"
+        },
+        "workflowName": {
+          "value": "ab489eab-5650-408d-f86a-a79c19a93f3a"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_sharepointonline": {
+          "value": "25ed6b37-350e-496b-be19-f9ba0f36ad39"
+        },
+        "workflowDisplayName": {
+          "value": "Jokes Query (App Trigger)"
+        },
+        "workflowEntityId": {
+          "value": "2556ceb9-231d-ef11-9f89-6045bdda1517"
+        },
+        "workflowName": {
+          "value": "ab489eab-5650-408d-f86a-a79c19a93f3a"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "JokesQuery(AppTrigger)"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "25ed6b37-350e-496b-be19-f9ba0f36ad39"
+    },
+    "dependents": [],
+    "id": "aec23adf-076f-4cae-99d8-b0ba70572e03"
+  }
+}

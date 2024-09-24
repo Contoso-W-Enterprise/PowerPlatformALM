@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{c277c667-273e-4aa1-946e-3dbd84b005cb}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{fae07b51-b583-439c-ae9a-2f7beec3c169}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{810af73b-59a4-402c-96cb-ac2d94f76919}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{1a8cc192-af75-4e6f-a405-87b19ca9b8d2}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="cont_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="cont_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cb403a8f-5621-4a53-800b-b03982b3f207}" locklevel="0" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="Org Lookup Content" languagecode="1033" />
+                        </labels>
+                        <control id="cont_orglookupcontent" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="cont_orglookupcontent" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{de596899-3f0a-4ee3-b514-6fb2ee4edfb8}">
+                        <labels>
+                          <label description="Owner" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{72a85966-49e9-4a2f-aa9d-991b7cd5e5ee}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Owning Business Unit" languagecode="1033" />
+                        </labels>
+                        <control id="owningbusinessunit" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="owningbusinessunit" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{80e869fb-30dc-4e38-aae2-5550c7413d9a}" locklevel="0" rowspan="1" colspan="1">
+                        <labels>
+                          <label description="Images" languagecode="1033" />
+                        </labels>
+                        <control id="cont_images" classid="{7E548B0D-209C-477B-9DCD-F0F44472381D}" datafieldname="cont_images" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="null_section_3" id="13d81190-890c-45e3-9750-0f1c51951ea4" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Items" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell showlabel="false" locklevel="0" id="{40c9897e-561f-4732-a9f5-69a4ed7b0f66}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{92ddf912-44f8-4fb6-9319-c6fd0f58c678}" rowspan="4" colspan="1" auto="false">
+                        <labels>
+                          <label description="New SG control 1688750379881" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_new_1" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <TargetEntityType>cont_orgitem</TargetEntityType>
+                            <ViewId>{3BF18360-C46D-4988-AAE3-19E65C9A4D4B}</ViewId>
+                            <ViewIds>{3BF18360-C46D-4988-AAE3-19E65C9A4D4B}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="null_section_4" id="58decb64-d510-4c8f-9bae-f4d7c2db03b1" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell showlabel="false" locklevel="0" id="{d4839f25-36c1-4ea0-a0e6-ee107ab9637d}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{54bff3f9-09e7-497a-8b69-d40834357eb9}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Owning Business Unit" languagecode="1033" />
+                        </labels>
+                        <control id="owningbusinessunit" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="owningbusinessunit" uniqueid="{49d19c4d-4b3d-4117-997e-f55d7baf64b9}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{7730ae8c-f19f-4555-9090-6db69341e8e0}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="cont_name" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cont_name" uniqueid="{9c74a4ff-69a2-4ad4-8617-4c8ab3ad2605}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{81e1a8a4-bd57-466c-8936-5973ea182a5b}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="cont_name" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="cont_name" uniqueid="{f4566296-50d6-4480-81e7-d47f6450f2f5}" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{5defb13e-0318-4a4f-af99-6f240c82c22b}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{0579240c-35ad-45b8-96a3-6423c0f363bf}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f0f19391-b20e-46f9-9dd0-0bf62394340b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d9cb794f-b68c-4f6f-aa0c-63f9c1337981}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{2486e49c-eac0-49ff-9f91-04d189ed7479}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{09f3c974-16c5-4889-9edb-12beb1e6819e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{50ffb06c-7d83-493a-9fb3-8659daf5511d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{4a50ada0-2e13-4fa9-b30c-1fe48afb9800}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{f4566296-50d6-4480-81e7-d47f6450f2f5}">
+          <customControl id="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}">
+            <parameters>
+              <datafieldname>cont_name</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.AutoComplete.AutoCompleteControl">
+            <parameters>
+              <value type="SingleLine.Text">cont_name</value>
+              <dataSourceSwitch isGroup="true" static="true">DataSetGroup</dataSourceSwitch>
+              <data-set name="dynamicSource">
+                <TargetEntityType>businessunit</TargetEntityType>
+                <ViewId>{00000000-0000-0000-00aa-000010001018}</ViewId>
+                <IsUserView>false</IsUserView>
+                <displayValue>name</displayValue>
+              </data-set>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.AutoComplete.AutoCompleteControl">
+            <parameters>
+              <value type="SingleLine.Text">cont_name</value>
+              <dataSourceSwitch isGroup="true" static="true">DataSetGroup</dataSourceSwitch>
+              <data-set name="dynamicSource">
+                <TargetEntityType>businessunit</TargetEntityType>
+                <ViewId>{00000000-0000-0000-00aa-000010001018}</ViewId>
+                <IsUserView>false</IsUserView>
+                <displayValue>name</displayValue>
+              </data-set>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.AutoComplete.AutoCompleteControl">
+            <parameters>
+              <value type="SingleLine.Text">cont_name</value>
+              <dataSourceSwitch isGroup="true" static="true">DataSetGroup</dataSourceSwitch>
+              <data-set name="dynamicSource">
+                <TargetEntityType>businessunit</TargetEntityType>
+                <ViewId>{00000000-0000-0000-00aa-000010001018}</ViewId>
+                <IsUserView>false</IsUserView>
+                <displayValue>name</displayValue>
+              </data-set>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{9c74a4ff-69a2-4ad4-8617-4c8ab3ad2605}">
+          <customControl id="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}">
+            <parameters>
+              <datafieldname>cont_name</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.AdvancedLookupWrapper">
+            <parameters>
+              <advancedLookupConfigure type="SingleLine.Text">cont_name</advancedLookupConfigure>
+              <advancedLookupConfigureInitialSearchText type="SingleLine.Text">cont_orgdataid</advancedLookupConfigureInitialSearchText>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.AdvancedLookupWrapper">
+            <parameters>
+              <advancedLookupConfigure type="SingleLine.Text">cont_name</advancedLookupConfigure>
+              <advancedLookupConfigureInitialSearchText type="SingleLine.Text">cont_orgdataid</advancedLookupConfigureInitialSearchText>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.AdvancedLookupWrapper">
+            <parameters>
+              <advancedLookupConfigure type="SingleLine.Text">cont_name</advancedLookupConfigure>
+              <advancedLookupConfigureInitialSearchText type="SingleLine.Text">cont_orgdataid</advancedLookupConfigureInitialSearchText>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{49d19c4d-4b3d-4117-997e-f55d7baf64b9}">
+          <customControl id="{270BD3DB-D9AF-4782-9025-509E298DEC0A}">
+            <parameters>
+              <datafieldname>owningbusinessunit</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="PPMA.CustomControls.LookupControl">
+            <parameters>
+              <selectedRecord type="Lookup.Simple">owningbusinessunit</selectedRecord>
+              <relatedVirtualEntity type="SingleLine.Text">cont_orgdataid</relatedVirtualEntity>
+              <virtualEntityLookupViewId type="SingleLine.Text">cont_orgdataid</virtualEntityLookupViewId>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="PPMA.CustomControls.LookupControl">
+            <parameters>
+              <selectedRecord type="Lookup.Simple">owningbusinessunit</selectedRecord>
+              <relatedVirtualEntity type="SingleLine.Text">cont_orgdataid</relatedVirtualEntity>
+              <virtualEntityLookupViewId type="SingleLine.Text">cont_orgdataid</virtualEntityLookupViewId>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="PPMA.CustomControls.LookupControl">
+            <parameters>
+              <selectedRecord type="Lookup.Simple">owningbusinessunit</selectedRecord>
+              <relatedVirtualEntity type="SingleLine.Text">cont_orgdataid</relatedVirtualEntity>
+              <virtualEntityLookupViewId type="SingleLine.Text">cont_orgdataid</virtualEntityLookupViewId>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

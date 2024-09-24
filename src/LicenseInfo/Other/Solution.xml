@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.24083.202" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24083.202" OrganizationSchemaType="Standard" OrganizationType="Developer" TenantId="9ead217e-7624-4b1a-b877-3cb3d835f38d" CRMServerServiceabilityVersion="9.2.24083.00202">
+  <SolutionManifest>
+    <UniqueName>LicenseInfo</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="License Info" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Upgrade of License Info" languagecode="1033" />
+    </Descriptions>
+    <Version>1.3.1.0</Version>
+    <Managed>2</Managed>
+    <Publisher>
+      <UniqueName>CONTOSO</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="Contoso" languagecode="1033" />
+        <LocalizedName description="Contoso" languagecode="1036" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true">
+      </EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true">
+      </SupportingWebsiteUrl>
+      <CustomizationPrefix>cont</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>14418</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true">
+          </City>
+          <County xsi:nil="true">
+          </County>
+          <Country xsi:nil="true">
+          </Country>
+          <Fax xsi:nil="true">
+          </Fax>
+          <FreightTermsCode xsi:nil="true">
+          </FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true">
+          </ImportSequenceNumber>
+          <Latitude xsi:nil="true">
+          </Latitude>
+          <Line1 xsi:nil="true">
+          </Line1>
+          <Line2 xsi:nil="true">
+          </Line2>
+          <Line3 xsi:nil="true">
+          </Line3>
+          <Longitude xsi:nil="true">
+          </Longitude>
+          <Name xsi:nil="true">
+          </Name>
+          <PostalCode xsi:nil="true">
+          </PostalCode>
+          <PostOfficeBox xsi:nil="true">
+          </PostOfficeBox>
+          <PrimaryContactName xsi:nil="true">
+          </PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true">
+          </StateOrProvince>
+          <Telephone1 xsi:nil="true">
+          </Telephone1>
+          <Telephone2 xsi:nil="true">
+          </Telephone2>
+          <Telephone3 xsi:nil="true">
+          </Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true">
+          </TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true">
+          </UPSZone>
+          <UTCOffset xsi:nil="true">
+          </UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true">
+          </UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true">
+          </City>
+          <County xsi:nil="true">
+          </County>
+          <Country xsi:nil="true">
+          </Country>
+          <Fax xsi:nil="true">
+          </Fax>
+          <FreightTermsCode xsi:nil="true">
+          </FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true">
+          </ImportSequenceNumber>
+          <Latitude xsi:nil="true">
+          </Latitude>
+          <Line1 xsi:nil="true">
+          </Line1>
+          <Line2 xsi:nil="true">
+          </Line2>
+          <Line3 xsi:nil="true">
+          </Line3>
+          <Longitude xsi:nil="true">
+          </Longitude>
+          <Name xsi:nil="true">
+          </Name>
+          <PostalCode xsi:nil="true">
+          </PostalCode>
+          <PostOfficeBox xsi:nil="true">
+          </PostOfficeBox>
+          <PrimaryContactName xsi:nil="true">
+          </PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true">
+          </StateOrProvince>
+          <Telephone1 xsi:nil="true">
+          </Telephone1>
+          <Telephone2 xsi:nil="true">
+          </Telephone2>
+          <Telephone3 xsi:nil="true">
+          </Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true">
+          </TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true">
+          </UPSZone>
+          <UTCOffset xsi:nil="true">
+          </UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true">
+          </UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="contoso_licensereference" behavior="0" />
+      <RootComponent type="29" id="{22675cc0-ef91-ed11-aad0-000d3a14b956}" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="admin_CoECoreO365Groups" solution="CenterofExcellenceCoreComponents (4.31)" id.connectionreferencelogicalname="admin_CoECoreO365Groups" />
+        <Dependent type="29" displayName="Get Tenant License Info" id="{22675cc0-ef91-ed11-aad0-000d3a14b956}" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

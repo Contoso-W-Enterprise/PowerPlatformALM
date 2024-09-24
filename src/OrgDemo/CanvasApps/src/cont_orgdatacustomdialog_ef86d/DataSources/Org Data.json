@@ -1,0 +1,104 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cont_orgdatas",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cont_orgdata",
+    "Name": "Org Data",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "bpf_cont_orgdata_cont_orgdataprocessflow": "Org Data Process Flow",
+      "cont_cont_orgitem_OrgData_cont_orgdata": "Org Items",
+      "cont_images": "Images",
+      "cont_imagesid": "cont_ImagesId",
+      "cont_name": "Name",
+      "cont_orgdata_AsyncOperations": "System Jobs",
+      "cont_orgdata_BulkDeleteFailures": "Bulk Delete Failures",
+      "cont_orgdata_DuplicateBaseRecord": "Duplicate Records (cont_orgdata_DuplicateBaseRecord)",
+      "cont_orgdata_DuplicateMatchingRecord": "Duplicate Records (cont_orgdata_DuplicateMatchingRecord)",
+      "cont_orgdata_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cont_orgdata_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cont_orgdata_ProcessSession": "Process Sessions",
+      "cont_orgdata_SyncErrors": "Sync Errors",
+      "cont_orgdataid": "Org Data",
+      "cont_OrgLookupContent": "Org Lookup Content",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "processid": "Process Id",
+      "stageid": "(Deprecated) Stage Id",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "traversedpath": "(Deprecated) Traversed Path",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Org Data",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Org Data (Views)",
+    "Name": "_cont_orgdata_views",
+    "RelatedEntityName": "Org Data",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "167037a5-6b08-4840-a2d6-48c81898e9b5": "Org Data Advanced Find View",
+      "36472fef-bff4-4533-b37e-a225509e8d4d": "Org Data Lookup View",
+      "63cbe05a-c1bb-4195-bb41-749791e636ee": "Inactive Org Data",
+      "6cfa42a5-b030-4ae2-93ea-3d69dbcd5fca": "Active Org Data",
+      "d0e2fd82-d69b-4492-a0e1-27034641f449": "Org Data Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Org Data)",
+    "Name": "cont_orgdata_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Org Data"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Org Data",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Org Data)",
+    "Name": "cont_orgdata_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Org Data"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Org Data",
+    "Type": "OptionSetInfo"
+  }
+]

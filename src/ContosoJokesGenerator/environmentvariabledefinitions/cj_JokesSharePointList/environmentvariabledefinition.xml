@@ -1,0 +1,16 @@
+<environmentvariabledefinition schemaname="cj_JokesSharePointList">
+  <apiid>/providers/microsoft.powerapps/apis/shared_sharepointonline</apiid>
+  <defaultvalue>9cd8be6e-2b27-4c5a-aa45-0795fb70b601</defaultvalue>
+  <displayname default="Jokes SharePoint List">
+    <label description="Jokes SharePoint List" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <parameterkey>table</parameterkey>
+  <parentdefinitionid>
+    <schemaname>cj_JokesSharePointSite</schemaname>
+  </parentdefinitionid>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cj_jokeapp_7422e</Name>
+  <AppVersion>2024-05-29T16:22:18Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.24051.29.0</CreatedByClientVersion>
+  <MinClientVersion>3.24051.29.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.24051.29","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false","sienaVersion":"20240528T193034Z-3.24045.24.0"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>Joke App</DisplayName>
+  <Description xsi:nil="true"></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"25ed6b37-350e-496b-be19-f9ba0f36ad39":{"id":"/providers/microsoft.powerapps/apis/shared_sharepointonline","displayName":"SharePoint","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1685/1.0.1685.3700/sharepointonline/icon.png","dataSources":["Jokes SharePoint List"],"dependencies":[],"dependents":["aec23adf-076f-4cae-99d8-b0ba70572e03"],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{"https://mngenvmcap157851.sharepoint.com/sites/IT_cj_JokesSharePointSite":{"datasetOverride":{"name":"https://mngenvmcap157851.sharepoint.com/sites/IT","environmentVariableName":"cj_JokesSharePointSite"},"dataSources":{"Jokes SharePoint List":{"tableName":"9cd8be6e-2b27-4c5a-aa45-0795fb70b601","tableNameOverride":{"name":"9cd8be6e-2b27-4c5a-aa45-0795fb70b601","environmentVariableName":"cj_JokesSharePointList"}}}}},"apiTier":"Standard","actions":["providers/PowerPlatform.Governance/Operations/Read"]},"aec23adf-076f-4cae-99d8-b0ba70572e03":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/u/patelronak/specialtrain-logicflows-2/1.0.1692.3734/logicflows/icon.png","dataSources":["JokesQuery(AppTrigger)"],"dependencies":["25ed6b37-350e-496b-be19-f9ba0f36ad39"],"dependents":[],"parameterHints":{"workflowName":{"value":"f0b2d6fe-2e80-4d6b-a0b3-27ba9a436891"},"workflowEntityId":{"value":"2556ceb9-231d-ef11-9f89-6045bdda1517"},"workflowDisplayName":{"value":"Jokes Query (App Trigger)"},"25ed6b37-350e-496b-be19-f9ba0f36ad39":{"value":"shared_sharepointonline"}},"parameterHintsV2":{"workflowName":{"value":"f0b2d6fe-2e80-4d6b-a0b3-27ba9a436891"},"workflowEntityId":{"value":"2556ceb9-231d-ef11-9f89-6045bdda1517"},"workflowDisplayName":{"value":"Jokes Query (App Trigger)"},"shared_sharepointonline":{"value":"25ed6b37-350e-496b-be19-f9ba0f36ad39"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"413c19f3-60c3-42e9-b90f-17210811b290":{"id":"/providers/microsoft.powerapps/apis/shared_office365users","displayName":"Office 365 Users","iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1686/1.0.1686.3706/office365users/icon.png","dataSources":["Office365Users"],"dependencies":[],"dependents":[],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["UserPhoto_V2"]}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>0</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"dependencyid":"2556ceb9-231d-ef11-9f89-6045bdda1517","componenttype":29,"componenttypeplatformname":"Workflow"},{"logicalname":"cj_JokesSharePointSite","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"},{"logicalname":"cj_JokesSharePointList","componenttype":380,"componenttypeplatformname":"EnvironmentVariableDefinition"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cj_jokeapp_7422e_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cj_jokeapp_7422e_DocumentUri.msapp</DocumentUri>
+  <AdditionalUris>
+    <AdditionalUri>/CanvasApps/cj_jokeapp_7422e_AdditionalUris0_identity.json</AdditionalUri>
+  </AdditionalUris>
+</CanvasApp>

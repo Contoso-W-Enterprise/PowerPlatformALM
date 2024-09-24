@@ -1,0 +1,519 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "ce_sharedcommondataserviceforapps_a470c"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GraphAppId (ce_GraphAppId)": {
+          "defaultValue": "0a7f60f2-ada5-40b1-93d8-e71b1de2ac6c",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphAppId"
+          }
+        },
+        "GraphTenantId (ce_GraphTenantId)": {
+          "defaultValue": "9ead217e-7624-4b1a-b877-3cb3d835f38d",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphTenantId"
+          }
+        },
+        "GraphBaseURI (ce_GraphBaseURI)": {
+          "defaultValue": "https://graph.microsoft.com",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphBaseURI"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "a549dde5-e0ff-4736-a726-059ff7203e42"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "title": "Query",
+                  "type": "string",
+                  "x-ms-dynamically-added": true,
+                  "description": "Please enter your input",
+                  "x-ms-content-hint": "TEXT"
+                }
+              },
+              "required": [
+                "text"
+              ]
+            }
+          }
+        }
+      },
+      "actions": {
+        "GetGraphPfx": {
+          "runAfter": {
+            "Initialize_headers": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "0813de43-8b2a-40a8-b745-61b3d5099399"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfx"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "GetGraphPfxPw": {
+          "runAfter": {
+            "GetGraphPfx": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "03de3191-89fa-4c95-9977-3f37a683b0db"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "RetrieveEnvironmentVariableSecretValue",
+              "item/EnvironmentVariableName": "ce_GraphPfxPw"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "outputs"
+              ]
+            }
+          }
+        },
+        "Get_Activites": {
+          "runAfter": {
+            "GetGraphPfxPw": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7aaaee3b-26cc-49f4-90e3-c19e89428cd7"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/reports/@{triggerBody()['text']}",
+            "authentication": {
+              "type": "ActiveDirectoryOAuth",
+              "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+              "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+              "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+              "pfx": "@outputs('GetGraphPfx')?['body/EnvironmentVariableSecretValue']",
+              "password": "@outputs('GetGraphPfxPw')?['body/EnvironmentVariableSecretValue']"
+            }
+          }
+        },
+        "Get_Content": {
+          "runAfter": {
+            "Get_Activities_CSV": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d32ad863-016d-43a3-a62b-5e5003d1cdeb"
+          },
+          "type": "Compose",
+          "inputs": "@decodeBase64(body('Get_Activities_CSV')?['$content'])"
+        },
+        "Get_Activities_CSV": {
+          "runAfter": {
+            "Get_Activites": [
+              "Succeeded",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "faaca826-6223-474a-a94a-9629ec1a6a8b"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "@{outputs('Get_Activites')['headers']?['Location']}"
+          }
+        },
+        "Split_rows": {
+          "runAfter": {
+            "Get_Content": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "759e6e64-1cfd-495d-90bd-f51e094a87f9"
+          },
+          "type": "Compose",
+          "inputs": "@split(outputs('Get_Content'),decodeUriComponent('%0D%0A'))"
+        },
+        "Split_header": {
+          "runAfter": {
+            "Split_rows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "6b0aa1e2-96d5-4637-8f02-8eb255713693"
+          },
+          "type": "Compose",
+          "inputs": "@split(first(outputs('Split_rows')),',')"
+        },
+        "Apply_to_each": {
+          "foreach": "@variables('result')",
+          "actions": {
+            "Condition_if_value_row": {
+              "actions": {
+                "Apply_to_each_column": {
+                  "foreach": "@variables('headers')",
+                  "actions": {
+                    "Update_output": {
+                      "runAfter": {
+                        "Add_property_to_selected_row": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "b4ed7b83-1771-4f4c-816f-8e1a19458a36"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "result",
+                        "value": "@body('Add_property_to_selected_row')"
+                      }
+                    },
+                    "Add_property_to_selected_row": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "62154de0-067d-4243-9fea-ab6fe4c1dbcc"
+                      },
+                      "type": "Select",
+                      "inputs": {
+                        "from": "@variables('result')",
+                        "select": "@if(equals(item()?['id'],items('Apply_to_each')?['id']),\r\n\taddProperty(item(),items('Apply_to_each_column')?['value'],trim(items('Apply_to_each')?['value'][items('Apply_to_each_column')?['id']])),\r\n\titem() )"
+                      },
+                      "description": "@if(equals(item()?['id'],items('Apply_to_each')?['id']), \taddProperty(item(),items('Apply_to_each_column')?['value'],trim(items('Apply_to_each')?['value'][items('Apply_to_each_column')?['id']])), \titem() )"
+                    }
+                  },
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "0416491a-b7f5-434f-aa85-c5893e8bebd2"
+                  },
+                  "type": "Foreach"
+                }
+              },
+              "runAfter": {},
+              "expression": {
+                "greater": [
+                  "@length(items('Apply_to_each')?['value'])",
+                  1
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "9413da58-2aba-4c12-b64f-b80d0e2fb987"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Apply_to_each_rows_(init)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "73289dd8-aa90-4d60-a2ee-726914639be2"
+          },
+          "type": "Foreach"
+        },
+        "Response": {
+          "runAfter": {
+            "Compose": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a7e4b075-4a57-4ad6-b65e-5e1e756d30ba"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "Count": "@length(variables('result'))",
+              "value": "@{string(variables('result'))}"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Count": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "Initialize_result": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "4341e2de-5ecd-44ef-9909-706035001f6a"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "result",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Response_fail": {
+          "runAfter": {
+            "Response": [
+              "Failed",
+              "Skipped"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "22733681-e15b-431b-9dea-1f2229c3cdfc"
+          },
+          "type": "Response",
+          "kind": "Http",
+          "inputs": {
+            "statusCode": 400,
+            "body": {
+              "Count": -1,
+              "value": ""
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Count": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "Initialize_output": {
+          "runAfter": {
+            "Initialize_result": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d6125fa0-f9af-45b3-8cc5-0829f791e0b8"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "output",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Initialize_headers": {
+          "runAfter": {
+            "Initialize_output": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "519f0163-3250-479f-8245-1d61540626ba"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "headers",
+                "type": "array"
+              }
+            ]
+          }
+        },
+        "Apply_to_each_headers": {
+          "foreach": "@outputs('Split_header')",
+          "actions": {
+            "headers_count": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "452309de-79a8-4fd7-b07d-d13611f8edba"
+              },
+              "type": "Compose",
+              "inputs": "@length(variables('headers'))"
+            },
+            "Append_to_headers": {
+              "runAfter": {
+                "headers_count": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "04bf858d-2843-4708-ba10-8f7de0629049"
+              },
+              "type": "AppendToArrayVariable",
+              "inputs": {
+                "name": "headers",
+                "value": {
+                  "id": "@outputs('headers_count')",
+                  "value": "@{trim(items('Apply_to_each_headers'))}"
+                }
+              }
+            }
+          },
+          "runAfter": {
+            "Split_header": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7430e392-f0a0-4406-85ae-b5d4bd126a06"
+          },
+          "type": "Foreach"
+        },
+        "Apply_to_each_rows_(init)": {
+          "foreach": "@skip(outputs('Split_rows'),1)",
+          "actions": {
+            "Condition_value_exists": {
+              "actions": {
+                "result_count": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "89818e1b-0fb5-45ed-9640-92353a84f67b"
+                  },
+                  "type": "Compose",
+                  "inputs": "@length(variables('result'))"
+                },
+                "Append_to_results_init": {
+                  "runAfter": {
+                    "result_count": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "112bf6b9-1205-42f3-9d80-10bc3bbfec25"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "result",
+                    "value": {
+                      "id": "@outputs('result_count')",
+                      "value": "@split(items('Apply_to_each_rows_(init)'),',')"
+                    }
+                  }
+                },
+                "Append_to_output_init": {
+                  "runAfter": {
+                    "Append_to_results_init": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "d19a45d0-735f-4890-9957-bbeab84bc2e2"
+                  },
+                  "type": "AppendToArrayVariable",
+                  "inputs": {
+                    "name": "output",
+                    "value": {
+                      "id": "@outputs('result_count')"
+                    }
+                  }
+                }
+              },
+              "runAfter": {},
+              "expression": {
+                "greater": [
+                  "@length(items('Apply_to_each_rows_(init)'))",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "70fe28cf-d9c9-486c-98e0-2ad990b5e28b"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Apply_to_each_headers": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "69b3222c-efaf-4f55-bc46-064fb8df2802"
+          },
+          "type": "Foreach"
+        },
+        "Compose": {
+          "runAfter": {
+            "Apply_to_each": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "19776aa1-4461-4d7e-a79f-ace583b978d6"
+          },
+          "type": "Compose",
+          "inputs": "@variables('result')"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

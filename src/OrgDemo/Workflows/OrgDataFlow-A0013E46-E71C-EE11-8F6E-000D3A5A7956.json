@@ -1,0 +1,99 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "cont_OrgDemo_Dataverse_ConnectionReference"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "splitOn": "@triggerBody()['rows']",
+          "metadata": {
+            "operationMetadataId": "4ed8adec-c8d4-4ec4-bc9b-28a4f784ff72"
+          },
+          "type": "Request",
+          "kind": "ApiConnection",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "title": "Test Input",
+                        "type": "string",
+                        "x-ms-dynamically-added": true,
+                        "description": "Please enter your input",
+                        "x-ms-content-hint": "TEXT"
+                      },
+                      "entity": {
+                        "type": "object",
+                        "properties": {
+                          "entity": {
+                            "title": "entity",
+                            "type": "object"
+                          }
+                        },
+                        "required": [
+                          "entity"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "text",
+                      "entity"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "rows"
+              ]
+            },
+            "host": {
+              "connection": {
+                "name": "@parameters('$connections')['shared_commondataserviceforapps']['connectionId']"
+              }
+            },
+            "operationId": "FlowStepRun",
+            "parameters": {}
+          }
+        }
+      },
+      "actions": {
+        "Compose": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "08f2a49f-4992-4558-91dd-6572d9290fb8"
+          },
+          "type": "Compose",
+          "inputs": "@triggerBody()?['entity']?['entity']"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cont_orgitems",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cont_orgitem",
+    "MaxGetRowsCount": 500,
+    "Name": "Org Items",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cont_Item": "Item",
+      "cont_name": "Name",
+      "cont_OrgData": "Org Data",
+      "cont_orgitem_AsyncOperations": "System Jobs",
+      "cont_orgitem_BulkDeleteFailures": "Bulk Delete Failures",
+      "cont_orgitem_DuplicateBaseRecord": "Duplicate Records (cont_orgitem_DuplicateBaseRecord)",
+      "cont_orgitem_DuplicateMatchingRecord": "Duplicate Records (cont_orgitem_DuplicateMatchingRecord)",
+      "cont_orgitem_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cont_orgitem_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cont_orgitem_ProcessSession": "Process Sessions",
+      "cont_orgitem_SyncErrors": "Sync Errors",
+      "cont_orgitemid": "Org Item",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Org Items",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Org Items (Views)",
+    "Name": "_cont_orgitem_views",
+    "RelatedEntityName": "Org Items",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2d0c2c25-e0bc-4b95-9523-efab2c101bd8": "Org Item Associated View",
+      "3bf18360-c46d-4988-aae3-19e65c9a4d4b": "Active Org Items",
+      "7960ba30-5374-4036-8133-d8033672edfd": "Org Item Advanced Find View",
+      "b3d05ebf-2e04-4b5a-8a6b-63b33cf10643": "Inactive Org Items",
+      "e2c9ad95-8a98-4b39-a90f-d5f20280e10a": "Org Item Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Org Items)",
+    "Name": "cont_orgitem_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Org Items"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Org Items",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Org Items)",
+    "Name": "cont_orgitem_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Org Items"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Org Items",
+    "Type": "OptionSetInfo"
+  }
+]

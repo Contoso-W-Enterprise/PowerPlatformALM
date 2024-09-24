@@ -1,0 +1,9 @@
+{
+  "environmentvariablevalues": {
+    "environmentvariablevalue": {
+      "@environmentvariablevalueid": "9dcb36e6-b5b7-ed11-83ff-000d3a1b9171",
+      "iscustomizable": "1",
+      "value": "https://graph.microsoft.com"
+    }
+  }
+}

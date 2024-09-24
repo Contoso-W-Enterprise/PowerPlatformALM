@@ -1,0 +1,129 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline_1": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "awt_AwesomeSPOConRef"
+        },
+        "api": {
+          "name": "shared_sharepointonline"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "AwesomeSPOSite (awt_AwesomeSPOSite)": {
+          "defaultValue": "https://mngenvmcap157851.sharepoint.com/sites/IT",
+          "type": "String",
+          "metadata": {
+            "schemaName": "awt_AwesomeSPOSite"
+          }
+        },
+        "AwesomeSPOList (awt_AwesomeSPOList)": {
+          "defaultValue": "09539922-35de-4817-94c5-840de3533345",
+          "type": "String",
+          "metadata": {
+            "schemaName": "awt_AwesomeSPOList"
+          }
+        },
+        "AwesomeName (awt_AwesomeName)": {
+          "defaultValue": "ThursdayAwesome",
+          "type": "String",
+          "metadata": {
+            "schemaName": "awt_AwesomeName"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "5c76964e-170a-4bf1-b411-52f09e3e75c4"
+          },
+          "type": "Request",
+          "kind": "PowerAppV2",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Compose": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "cb203a0d-292a-4d29-8cc7-49c019b1236c"
+          },
+          "type": "Compose",
+          "inputs": "@parameters('AwesomeName (awt_AwesomeName)')"
+        },
+        "Get_items": {
+          "runAfter": {
+            "Compose": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "aca914ef-1f5d-4ee8-b896-d504fc483f3f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_sharepointonline_1",
+              "operationId": "GetItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline"
+            },
+            "parameters": {
+              "dataset": "@parameters('AwesomeSPOSite (awt_AwesomeSPOSite)')",
+              "table": "@parameters('AwesomeSPOList (awt_AwesomeSPOList)')"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Respond_to_a_PowerApp_or_flow": {
+          "runAfter": {
+            "Get_items": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "ac30a3e9-1eb5-407c-bd76-2f677e49b19e"
+          },
+          "type": "Response",
+          "kind": "PowerApp",
+          "inputs": {
+            "statusCode": 200,
+            "body": {
+              "results": "@{first(outputs('Get_items')?['body/value'])?['Title']}"
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "title": "results",
+                  "x-ms-dynamically-added": true,
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

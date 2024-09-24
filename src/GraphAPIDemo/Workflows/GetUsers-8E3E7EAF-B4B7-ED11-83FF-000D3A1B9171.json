@@ -1,0 +1,82 @@
+{
+  "properties": {
+    "connectionReferences": {},
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "GraphAppId (ce_GraphAppId)": {
+          "defaultValue": "0a7f60f2-ada5-40b1-93d8-e71b1de2ac6c",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphAppId"
+          }
+        },
+        "GraphTenantId (ce_GraphTenantId)": {
+          "defaultValue": "9ead217e-7624-4b1a-b877-3cb3d835f38d",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphTenantId"
+          }
+        },
+        "GraphPfxPassword (ce_GraphPfxPassword)": {
+          "defaultValue": "Activate-Graph20230227",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphPfxPassword"
+          }
+        },
+        "GraphBaseURI (ce_GraphBaseURI)": {
+          "defaultValue": "https://graph.microsoft.com",
+          "type": "String",
+          "metadata": {
+            "schemaName": "ce_GraphBaseURI"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "0c14ba33-0411-482a-9c08-5b684a6b2e1e"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "HTTP": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "1cd9fe57-051b-4148-bb32-a1838dadcdb0"
+          },
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "@{parameters('GraphBaseURI (ce_GraphBaseURI)')}/v1.0/users",
+            "authentication": {
+              "type": "ActiveDirectoryOAuth",
+              "tenant": "@parameters('GraphTenantId (ce_GraphTenantId)')",
+              "audience": "@parameters('GraphBaseURI (ce_GraphBaseURI)')",
+              "clientId": "@parameters('GraphAppId (ce_GraphAppId)')",
+              "pfx": "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",
+              "password": "@parameters('GraphPfxPassword (ce_GraphPfxPassword)')"
+            }
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

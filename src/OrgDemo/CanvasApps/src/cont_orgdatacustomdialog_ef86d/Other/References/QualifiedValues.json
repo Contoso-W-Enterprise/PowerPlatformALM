@@ -1,0 +1,37 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_cont_orgdata_forms",
+      "Namespace": "Org Data (Forms)",
+      "Values": {
+        "Information": "4b56f2eb-ac66-42e0-8d66-b754cd508715"
+      }
+    },
+    {
+      "Kind": "default.cds_cont_orglookup_forms",
+      "Namespace": "Org Lookups (Forms)",
+      "Values": {
+        "Information": "c970373c-bb24-43a8-b14f-9e381146f0b5"
+      }
+    },
+    {
+      "Kind": "default.cds_businessunit_forms",
+      "Namespace": "Business Units (Forms)",
+      "Values": {
+        "Business Unit Hierarchy Form": "405b16b6-126a-4117-a4e0-33f0caf0c7a2",
+        "Information": "ca8dfced-338c-43b2-b212-83745e257c28"
+      }
+    },
+    {
+      "Kind": "default.cds_systemuser_forms",
+      "Namespace": "Users (Forms)",
+      "Values": {
+        "Application User": "d26924ef-4d80-46f7-ab1d-e6ae80a54ce8",
+        "Information": "094fb08a-77bb-49e0-b7ea-8dbddfd01294",
+        "User": "c2cd9e55-d4b4-4b55-9951-16ead79643e5",
+        "User form – Business": "c2413504-7eb2-4c59-a087-95d819866114",
+        "User Hierarchy Tile Form": "c68d6c09-d7a7-4959-8d0f-44b8cff9b452"
+      }
+    }
+  ]
+}

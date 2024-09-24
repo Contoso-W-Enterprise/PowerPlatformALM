@@ -1,0 +1,631 @@
+{
+  "appinfo": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/appinfo",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "appinfo",
+    "OverridableProperties": {},
+    "Version": "1.0"
+  },
+  "button": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/button",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "button",
+    "OverridableProperties": {},
+    "Version": "2.2.0"
+  },
+  "Button": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/powercontrol/PowerApps_CoreControls_ButtonCanvas",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": true,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "PowerApps_CoreControls_ButtonCanvas",
+    "OverridableProperties": {},
+    "TemplateDisplayName": "Button",
+    "Version": "0.0.42"
+  },
+  "combobox": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/combobox",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "combobox",
+    "OverridableProperties": {},
+    "Version": "2.4.0"
+  },
+  "form": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/form",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "form",
+    "OverridableProperties": {},
+    "Version": "2.4.2"
+  },
+  "gallery": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/gallery",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "gallery",
+    "OverridableProperties": {},
+    "Version": "2.15.0"
+  },
+  "galleryTemplate": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/galleryTemplate",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "galleryTemplate",
+    "OverridableProperties": {},
+    "Version": "1.0"
+  },
+  "groupContainer": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/groupContainer",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "groupContainer",
+    "OverridableProperties": {},
+    "Version": "1.3.0"
+  },
+  "Host": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "HostType": "Default",
+    "Id": "http://microsoft.com/appmagic/hostcontrol",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "hostControl",
+    "OverridableProperties": {},
+    "Version": "1.6.0"
+  },
+  "icon": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/icon",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "icon",
+    "OverridableProperties": {},
+    "Version": "2.5.0"
+  },
+  "label": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/label",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "label",
+    "OverridableProperties": {},
+    "Version": "2.5.1"
+  },
+  "Map (preview)": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/powercontrol/Map",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": true,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "Map",
+    "OverridableProperties": {
+      "Bounds": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Record",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "East",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "North",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "South",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "West",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      },
+      "CenterLocation": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Record",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Latitude",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Longitude",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      },
+      "ClickedLocation": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Record",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Latitude",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Longitude",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      },
+      "DeletedShape": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Record",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Area",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Color",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "GeoJSON",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Id",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Label",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Perimeter",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      },
+      "GeocodedItems": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Table",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Address",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Label",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Latitude",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Longitude",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      },
+      "RouteDirection": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Record",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "LengthInMeters",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Table",
+              "Name": "OrderedWaypoints",
+              "Type": [
+                {
+                  "EnumString": "",
+                  "Kind": "String",
+                  "Name": "Address",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "Index",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "String",
+                  "Name": "Label",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "Latitude",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "Longitude",
+                  "Type": []
+                }
+              ]
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "RouteGeoJSON",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Table",
+              "Name": "RouteLegs",
+              "Type": [
+                {
+                  "EnumString": "",
+                  "Kind": "String",
+                  "Name": "EndAddress",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "String",
+                  "Name": "EndLabel",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "EndLatitude",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "EndLongitude",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "Index",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "LengthInMeters",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "String",
+                  "Name": "StartAddress",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "String",
+                  "Name": "StartLabel",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "StartLatitude",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "StartLongitude",
+                  "Type": []
+                },
+                {
+                  "EnumString": "",
+                  "Kind": "Number",
+                  "Name": "TravelTimeInSeconds",
+                  "Type": []
+                }
+              ]
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "TravelTimeInSeconds",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      },
+      "SelectedShape": {
+        "Type": {
+          "EnumString": "",
+          "Kind": "Record",
+          "Name": "Root",
+          "Type": [
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Area",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Color",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "GeoJSON",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Id",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "String",
+              "Name": "Label",
+              "Type": []
+            },
+            {
+              "EnumString": "",
+              "Kind": "Number",
+              "Name": "Perimeter",
+              "Type": []
+            }
+          ]
+        },
+        "Version": "1.343"
+      }
+    },
+    "PCFDynamicSchemaForIRRetrieval": {
+      "Bounds": {
+        "DynamicSchema": "{\"type\":\"object\",\"properties\":{\"North\":{\"type\":\"number\"},\"South\":{\"type\":\"number\"},\"East\":{\"type\":\"number\"},\"West\":{\"type\":\"number\"}}}",
+        "PCFSkipValidation": false
+      },
+      "CenterLocation": {
+        "DynamicSchema": "{\"type\":\"object\",\"properties\":{\"Latitude\":{\"type\":\"number\"},\"Longitude\":{\"type\":\"number\"}}}",
+        "PCFSkipValidation": false
+      },
+      "ClickedLocation": {
+        "DynamicSchema": "{\"type\":\"object\",\"properties\":{\"Latitude\":{\"type\":\"number\"},\"Longitude\":{\"type\":\"number\"}}}",
+        "PCFSkipValidation": false
+      },
+      "DeletedShape": {
+        "DynamicSchema": "{\"type\":\"object\",\"properties\":{\"GeoJSON\":{\"type\":\"string\"},\"Label\":{\"type\":\"string\"},\"Color\":{\"type\":\"string\"},\"Area\":{\"type\":\"number\"},\"Perimeter\":{\"type\":\"number\"},\"Id\":{\"type\":\"string\"}}}",
+        "PCFSkipValidation": false
+      },
+      "GeocodedItems": {
+        "DynamicSchema": "{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"Label\":{\"type\":\"string\"},\"Latitude\":{\"type\":\"number\"},\"Longitude\":{\"type\":\"number\"},\"Address\":{\"type\":\"string\"}}}}",
+        "PCFSkipValidation": false
+      },
+      "RouteDirection": {
+        "DynamicSchema": "{\"type\":\"object\",\"properties\":{\"LengthInMeters\":{\"type\":\"number\"},\"TravelTimeInSeconds\":{\"type\":\"number\"},\"RouteGeoJSON\":{\"type\":\"string\"},\"RouteLegs\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"LengthInMeters\":{\"type\":\"number\"},\"TravelTimeInSeconds\":{\"type\":\"number\"},\"StartLatitude\":{\"type\":\"number\"},\"StartLongitude\":{\"type\":\"number\"},\"StartLabel\":{\"type\":\"string\"},\"StartAddress\":{\"type\":\"string\"},\"EndLatitude\":{\"type\":\"number\"},\"EndLongitude\":{\"type\":\"number\"},\"EndLabel\":{\"type\":\"string\"},\"EndAddress\":{\"type\":\"string\"},\"Index\":{\"type\":\"number\"}}}},\"OrderedWaypoints\":{\"type\":\"array\",\"items\":{\"type\":\"object\",\"properties\":{\"Latitude\":{\"type\":\"number\"},\"Longitude\":{\"type\":\"number\"},\"Label\":{\"type\":\"string\"},\"Address\":{\"type\":\"string\"},\"Index\":{\"type\":\"number\"}}}}}}",
+        "PCFSkipValidation": false
+      },
+      "SelectedShape": {
+        "DynamicSchema": "{\"type\":\"object\",\"properties\":{\"GeoJSON\":{\"type\":\"string\"},\"Label\":{\"type\":\"string\"},\"Color\":{\"type\":\"string\"},\"Area\":{\"type\":\"number\"},\"Perimeter\":{\"type\":\"number\"},\"Id\":{\"type\":\"string\"}}}",
+        "PCFSkipValidation": false
+      }
+    },
+    "TemplateDisplayName": "Map (preview)",
+    "Version": "1.8.27"
+  },
+  "MapTemplate_dataField": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/MapTemplate_dataField",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "MapTemplate_dataField",
+    "OverridableProperties": {},
+    "Version": "1.5.0"
+  },
+  "rectangle": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/shapes/rectangle",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "rectangle",
+    "OverridableProperties": {},
+    "Version": "2.3.0"
+  },
+  "screen": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/screen",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "screen",
+    "OverridableProperties": {},
+    "Version": "1.0"
+  },
+  "text": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/text",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": true,
+    "LastModifiedTimestamp": "0",
+    "Name": "text",
+    "OverridableProperties": {},
+    "Version": "2.3.2"
+  },
+  "Text": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/powercontrol/PowerApps_CoreControls_TextCanvas",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": true,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "PowerApps_CoreControls_TextCanvas",
+    "OverridableProperties": {},
+    "TemplateDisplayName": "Text",
+    "Version": "0.0.39"
+  },
+  "typedDataCard": {
+    "CustomGroupControlTemplateName": "",
+    "FirstParty": true,
+    "Id": "http://microsoft.com/appmagic/card",
+    "IsComponentTemplate": false,
+    "IsCustomGroupControlTemplate": false,
+    "IsPcfControl": false,
+    "IsPremiumPcfControl": false,
+    "IsWidgetTemplate": false,
+    "LastModifiedTimestamp": "0",
+    "Name": "typedDataCard",
+    "OverridableProperties": {},
+    "Version": "1.0.6"
+  }
+}

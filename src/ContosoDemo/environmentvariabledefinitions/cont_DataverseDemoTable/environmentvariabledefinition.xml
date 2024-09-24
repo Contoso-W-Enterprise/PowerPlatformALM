@@ -1,0 +1,12 @@
+<environmentvariabledefinition schemaname="cont_DataverseDemoTable">
+  <apiid>/providers/microsoft.powerapps/apis/shared_commondataservice</apiid>
+  <defaultvalue>https://org1b29da34.crm.dynamics.com/</defaultvalue>
+  <displayname default="Dataverse Demo Table">
+    <label description="Dataverse Demo Table" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000004</type>
+</environmentvariabledefinition>

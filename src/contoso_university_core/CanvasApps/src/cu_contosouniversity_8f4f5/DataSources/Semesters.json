@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cu_semesters",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cu_semester",
+    "Name": "Semesters",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "cu_application_deadline": "Application Deadline",
+      "cu_end_date": "End Date",
+      "cu_name": "Name",
+      "cu_semester_AsyncOperations": "System Jobs",
+      "cu_semester_BulkDeleteFailures": "Bulk Delete Failures",
+      "cu_semester_DuplicateBaseRecord": "Duplicate Records (cu_semester_DuplicateBaseRecord)",
+      "cu_semester_DuplicateMatchingRecord": "Duplicate Records (cu_semester_DuplicateMatchingRecord)",
+      "cu_semester_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cu_semester_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cu_semester_ProcessSession": "Process Sessions",
+      "cu_semester_SyncErrors": "Sync Errors",
+      "cu_semesterid": "Semester",
+      "cu_start_date": "Start Date",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Semesters",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Semesters (Views)",
+    "Name": "_cu_semester_views",
+    "RelatedEntityName": "Semesters",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0475b172-8e58-4f89-b4ca-6197ff6d4a89": "Active Semesters",
+      "0d719e20-bbf9-4839-adb7-79f05a0d4711": "Semester Lookup View",
+      "307887e8-4320-44e0-9338-8e2f2824fbcb": "Inactive Semesters",
+      "33962116-0e50-4dd7-8821-11c97cd37e25": "Semester Advanced Find View",
+      "96771e64-7374-4aaa-b463-aee7e0ab1685": "Semester Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Semesters)",
+    "Name": "cu_semester_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Semesters"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Semesters",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Semesters)",
+    "Name": "cu_semester_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Semesters"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Semesters",
+    "Type": "OptionSetInfo"
+  }
+]
