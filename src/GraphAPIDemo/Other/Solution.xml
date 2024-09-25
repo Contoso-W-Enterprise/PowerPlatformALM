@@ -91,11 +91,6 @@
       <RootComponent type="29" id="{bf590e94-b5b7-ed11-83ff-000d3a1b9171}" behavior="0" />
       <RootComponent type="29" id="{c3dc5013-16ba-ed11-83ff-000d3a1b9171}" behavior="0" />
     </RootComponents>
-    <MissingDependencies>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="contoso_DataverseConnectionRef" solution="Active" id.connectionreferencelogicalname="contoso_DataverseConnectionRef" />
-        <Dependent type="29" displayName="Get Power BI AuditLogs (Dataverse)" id="{54113329-6ebc-ed11-83ff-000d3a1b9171}" />
-      </MissingDependency>
-    </MissingDependencies>
+    <MissingDependencies />
   </SolutionManifest>
 </ImportExportXml>
