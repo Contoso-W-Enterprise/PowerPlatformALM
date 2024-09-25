@@ -81,6 +81,7 @@
       </Addresses>
     </Publisher>
     <RootComponents>
+      <RootComponent type="1" schemaName="cr4bc_auditsample" behavior="0" />
       <RootComponent type="29" id="{54113329-6ebc-ed11-83ff-000d3a1b9171}" behavior="0" />
       <RootComponent type="29" id="{5e0e085c-20b9-ed11-83ff-000d3a1b9171}" behavior="0" />
       <RootComponent type="29" id="{84cce078-3fba-ed11-83ff-000d3a1b9171}" behavior="0" />
@@ -92,16 +93,8 @@
     </RootComponents>
     <MissingDependencies>
       <MissingDependency>
-        <Required type="1" schemaName="cr4bc_auditsample" displayName="Audit Sample" solution="Active" />
-        <Dependent type="29" displayName="Get Power BI AuditLogs (Dataverse)" id="{54113329-6ebc-ed11-83ff-000d3a1b9171}" />
-      </MissingDependency>
-      <MissingDependency>
         <Required type="connectionreference" displayName="contoso_DataverseConnectionRef" solution="Active" id.connectionreferencelogicalname="contoso_DataverseConnectionRef" />
         <Dependent type="29" displayName="Get Power BI AuditLogs (Dataverse)" id="{54113329-6ebc-ed11-83ff-000d3a1b9171}" />
-      </MissingDependency>
-      <MissingDependency>
-        <Required type="connectionreference" displayName="contoso_sharedmicrosoftbookings_cd4df" solution="Active" id.connectionreferencelogicalname="contoso_sharedmicrosoftbookings_cd4df" />
-        <Dependent type="29" displayName="Get Bookings Appointments by Services" id="{a4374633-dc24-ee11-9cbd-000d3a1b9171}" />
       </MissingDependency>
     </MissingDependencies>
   </SolutionManifest>
