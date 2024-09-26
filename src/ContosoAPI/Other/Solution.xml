@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.24083.202" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24083.202" OrganizationSchemaType="Standard" OrganizationType="Developer" TenantId="9ead217e-7624-4b1a-b877-3cb3d835f38d" CRMServerServiceabilityVersion="9.2.24083.00202">
+<ImportExportXml version="9.2.24083.202" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.24083.202" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.24084.00196">
   <SolutionManifest>
     <UniqueName>ContosoAPI</UniqueName>
     <LocalizedNames>
       <LocalizedName description="Contoso API" languagecode="1033" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.1.0</Version>
+    <Version>1.0.2.0</Version>
     <Managed>2</Managed>
     <Publisher>
       <UniqueName>CONTOSO</UniqueName>
       <LocalizedNames>
         <LocalizedName description="Contoso" languagecode="1033" />
-        <LocalizedName description="Contoso" languagecode="1036" />
       </LocalizedNames>
       <Descriptions />
       <EMailAddress xsi:nil="true">
@@ -128,9 +127,27 @@
     </Publisher>
     <RootComponents>
       <RootComponent type="1" schemaName="cont_fc" behavior="0" />
+      <RootComponent type="29" id="{13c371ae-977a-ef11-a671-000d3a361221}" behavior="0" />
       <RootComponent type="29" id="{6d1f7783-f675-ef11-a670-7c1e521885cf}" behavior="0" />
+      <RootComponent type="29" id="{8b8dcf76-a17a-ef11-a671-000d3a361221}" behavior="0" />
       <RootComponent type="29" id="{b15badd0-3075-ef11-a671-6045bdd8919f}" behavior="0" />
+      <RootComponent type="300" schemaName="cont_fccanvas_b9739" behavior="0" />
+      <RootComponent type="300" schemaName="cont_fccustompage_ab446" behavior="0" />
+      <RootComponent type="60" id="{477bc43e-1b7c-ef11-ac21-000d3a361221}" behavior="0" />
+      <RootComponent type="60" id="{9147d361-9c7a-ef11-a671-000d3a361221}" behavior="0" />
+      <RootComponent type="62" schemaName="cont_FCDemoMDA" behavior="0" />
+      <RootComponent type="62" schemaName="cont_FCMDA" behavior="0" />
+      <RootComponent type="80" schemaName="cont_FCMDA" behavior="0" />
     </RootComponents>
-    <MissingDependencies />
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="61" schemaName="msdyn_/Images/AppModule_Default_Icon.png" displayName="msdyn_/Images/AppModule_Default_Icon.png" solution="AppModuleWebResources (2.5)" />
+        <Dependent type="80" schemaName="cont_FCMDA" displayName="FC MDA" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.12)" id.uniquename="AppChannel" />
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=cont_FCMDA,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="cont_FCMDA" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+    </MissingDependencies>
   </SolutionManifest>
 </ImportExportXml>

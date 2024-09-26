@@ -1,0 +1,88 @@
+Screen1 As screen:
+    LoadingSpinnerColor: =RGBA(0, 120, 212, 1)
+
+    Container1 As groupContainer.verticalAutoLayoutContainer:
+        DropShadow: =DropShadow.Light
+        Height: =Parent.Height
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        RadiusBottomLeft: =4
+        RadiusBottomRight: =4
+        RadiusTopLeft: =4
+        RadiusTopRight: =4
+        Width: =Parent.Width
+        ZIndex: =2
+
+        Container2 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(102, 182, 227, 1)
+            FillPortions: =0
+            Height: =100
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: |-
+                =
+                Parent.Width
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =1
+
+            Label1 As Label:
+                DisplayMode: =DisplayMode.Edit
+                Height: =32
+                LayoutMinHeight: =32
+                LayoutMinWidth: =320
+                OnChange: =false
+                Text: ="FC Custom Page"
+                Width: =320
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+        Container3 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: |-
+                =
+                Parent.Width
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =2
+
+            PowerBI1 As powerbi:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                DashboardId: ="d9fd4b18-a7cc-4d25-8f01-f05f09d8deeb"
+                Height: =Parent.Height
+                TileUrl: |-
+                    ="https://app.powerbi.com/embed?dashboardId=d9fd4b18-a7cc-4d25-8f01-f05f09d8deeb&tileId=2adffed3-38ae-42cd-bc57-f1905a4a0da6&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVdFU1QtVVMzLUEtUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnt9fQ%3d%3d"
+                Width: =Parent.Width
+                WorkspaceId: ="09aec556-eed8-4ea6-a400-cf8b390a7e05"
+                X: =25
+                Y: =80
+                ZIndex: =1
+
+        Container4 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.Light
+            Fill: =RGBA(204, 228, 246, 1)
+            FillPortions: =0
+            Height: =50
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: |-
+                =
+                Parent.Width
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            ZIndex: =3
+

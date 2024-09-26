@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="FC Data Power BI" languagecode="1033" />
+  </LocalizedNames>
+  <FormId>{9147d361-9c7a-ef11-a671-000d3a361221}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>0</IsDefault>
+  <FormXml>
+    <forms type="powerbi">
+      <form>
+        <tabs>
+          <tab showlabel="false" verticallayout="true" id="{510e95b0-fecf-4d78-84ce-abfc03d6dcd1}">
+            <labels>
+              <label description="" languagecode="1033" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section showlabel="false" showbar="false" columns="111" id="{8f938bec-d0af-4167-98ea-c0d96d3ed421}">
+                    <labels>
+                      <label description="" languagecode="1033" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="3" rowspan="24" showlabel="false" id="{7b7e4799-87ac-4ffb-bd0b-1b4a87cb6fd0}" availableforphone="false">
+                          <labels>
+                            <label description="" languagecode="1033" />
+                          </labels>
+                          <control id="046e8a30-f683-4b2c-a120-0ad842a0e215" classid="{8C54228C-1B25-4909-A12A-F2B968BB0D62}">
+                            <parameters>
+                              <PowerBIGroupId>{EV:cont_FCDataPowerBI.group.id}</PowerBIGroupId>
+                              <PowerBIReportId>{EV:cont_FCDataPowerBI.component.id}</PowerBIReportId>
+                              <TileUrl>https://app.powerbi.com/reportEmbed?groupId={EV:cont_FCDataPowerBI.group.id}&amp;reportId={EV:cont_FCDataPowerBI.component.id}</TileUrl>
+                              <Type>2</Type>
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.0.1.0</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</Dashboard>
