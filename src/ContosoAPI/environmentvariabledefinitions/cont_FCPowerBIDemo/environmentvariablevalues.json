@@ -1,9 +1,0 @@
-{
-  "environmentvariablevalues": {
-    "environmentvariablevalue": {
-      "@environmentvariablevalueid": "76d5d936-1b7c-ef11-ac21-000d3a361221",
-      "iscustomizable": "1",
-      "value": "{\"group\":{\"id\":\"ca68b2fc-5ddd-4ca4-a82b-ee2a044fbbfa\",\"name\":\"Power BI Demo\"},\"component\":{\"id\":\"f978d4ae-37e9-4fa3-aa8e-1c7bbf60b8b4\",\"name\":\"FC-Demo\",\"type\":\"Report\",\"embedUrl\":\"https://app.powerbi.com/reportEmbed\"}}"
-    }
-  }
-}
