@@ -272,9 +272,9 @@
                             "parameters": {
                               "entityName": "cont_fcs",
                               "item/cont_destination": "@items('Apply_to_each_2')?['code']",
-                              "item/cont_name": "@{items('Apply_to_each')?['code']}-@{items('Apply_to_each_2')?['code']}-@{formatDateTime(variables('CurrentDate'),'yyyy-MM-dd hh:mm:ss tt')}",
+                              "item/cont_name": "@{items('Apply_to_each')?['code']}-@{items('Apply_to_each_2')?['code']}-@{formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd hh:mm:ss tt')}",
                               "item/cont_source": "@items('Apply_to_each')?['code']",
-                              "item/cont_valuedatetime": "@variables('CurrentDate')",
+                              "item/cont_valuedatetime": "@formatDateTime(addDays(variables('CurrentDate'),items('Apply_to_each_Backdays')),'yyyy-MM-dd hh:mm:ss tt')",
                               "item/cont_value": "@body('Get_FC_Historic')?['data']?[outputs('Compose')]?[items('Apply_to_each_2')?['code']]\n"
                             },
                             "authentication": {

@@ -202,6 +202,7 @@
           <IsLocalizable>0</IsLocalizable>
           <MinValue>0</MinValue>
           <MaxValue>1000000000</MaxValue>
+          <Accuracy>2</Accuracy>
           <displaynames>
             <displayname description="Value" languagecode="1033" />
           </displaynames>
@@ -240,6 +241,7 @@
           <IsRetrievable>0</IsRetrievable>
           <IsLocalizable>0</IsLocalizable>
           <Format>datetime</Format>
+          <CanChangeDateTimeBehavior>1</CanChangeDateTimeBehavior>
           <Behavior>1</Behavior>
           <displaynames>
             <displayname description="Value Datetime" languagecode="1033" />
@@ -617,7 +619,7 @@
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>0</ValidForCreateApi>
           <IsCustomField>0</IsCustomField>
-          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsAuditEnabled>1</IsAuditEnabled>
           <IsSecured>0</IsSecured>
           <IntroducedVersion>1.0</IntroducedVersion>
           <IsCustomizable>1</IsCustomizable>

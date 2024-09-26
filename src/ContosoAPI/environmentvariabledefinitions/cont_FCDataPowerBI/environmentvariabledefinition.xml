@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="cont_FCDataPowerBI">
+  <defaultvalue>{"group":{"id":"09aec556-eed8-4ea6-a400-cf8b390a7e05","name":"FC Data"},"component":{"id":"6ab745b3-9485-436f-9f88-a40c24fdf578","name":"Cont_FC","type":"Report","embedUrl":"https://app.powerbi.com/reportEmbed"}}</defaultvalue>
+  <displayname default="FC Data Power BI">
+    <label description="FC Data Power BI" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.1.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000003</type>
+</environmentvariabledefinition>
