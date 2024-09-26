@@ -132,6 +132,7 @@
       <RootComponent type="29" id="{8b8dcf76-a17a-ef11-a671-000d3a361221}" behavior="0" />
       <RootComponent type="29" id="{b15badd0-3075-ef11-a671-6045bdd8919f}" behavior="0" />
       <RootComponent type="300" schemaName="cont_fccanvas_b9739" behavior="0" />
+      <RootComponent type="300" schemaName="cont_fccanvasemded_1d6d2" behavior="0" />
       <RootComponent type="300" schemaName="cont_fccustompage_ab446" behavior="0" />
       <RootComponent type="60" id="{9147d361-9c7a-ef11-a671-000d3a361221}" behavior="0" />
       <RootComponent type="62" schemaName="cont_FCMDA" behavior="0" />
