@@ -25,7 +25,9 @@ on:
         type: string
         required: false
         default: '.'
-
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false 
 jobs:
   # This workflow contains a single job called "build"
   pack-solution:
