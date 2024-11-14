@@ -145,7 +145,7 @@ jobs:
         uses: actions/checkout@v4
         with:
            ref: ${{ env.branch-name }}
-           path: PowerPlatformALM
+           path: ${{ inputs.folder-path }}
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
