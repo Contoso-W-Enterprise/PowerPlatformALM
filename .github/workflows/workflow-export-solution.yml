@@ -149,10 +149,12 @@ jobs:
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
-          repository: admin-contoso-willinc-ca/PowerPlatformALM
+          repository: Contoso-W-Enterprise/PowerPlatformALM
           ref: V1
           path: ALMTemplate
-          
+          github-server-url: 'https://github.com'
+          lfs: true
+          persist-credentials: true          
       
       # - name: Branch not found
       #   if:  ${{ env.branch-exists == 'False' }}
