@@ -60,9 +60,53 @@ concurrency:
   cancel-in-progress: false 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  setup:
+    environment: ${{ inputs.environment }}
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Set Solution Names Matrix
+        run: | 
+          $solutionNames = @()
+          echo "solution-names=$solutionNames" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
+        #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
+        shell: pwsh
+      - name: Variables 
+        run: |
+          echo ${{ vars.POWERPLATFORMORGURI }}
+          echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
+  publish_customizations:
+    needs: setup
+    environment: ${{ inputs.environment }}
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+      - name: who-am-i action
+        uses: microsoft/powerplatform-actions/who-am-i@v1
+        with:
+          environment-url: ${{ vars.POWERPLATFORMORGURI }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
+      - name: Publish Solution Customizations
+        uses: microsoft/powerplatform-actions/publish-solution@v1
+        with:
+          environment-url: ${{ vars.POWERPLATFORMORGURI }}
+          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
+          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
+          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
 
   # This workflow contains a single job called "build"
   export:
+    needs: [setup, publish_customizations]
     environment: ${{ inputs.environment }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -92,15 +136,7 @@ jobs:
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
-        shell: pwsh
-      - name: Set Solution Names Matrix
-        run: | 
-          $solutionNames = @()
-          echo "solution-names=$solutionNames" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
-        #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
-        shell: pwsh
-
- 
+        shell: pwsh 
         ##uses: GuillaumeFalourd/branch-exists@v1
         ##with:
           ##branch: ${{ inputs.branchType }}-${{ inputs.branchName }}
@@ -115,22 +151,10 @@ jobs:
       #   uses: actions/checkout@v4
         
       # Runs a single command using the runners shell
-      - name: Variables 
-        run: |
-          echo ${{ vars.POWERPLATFORMORGURI }}
-          echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          echo ${{ env.release-date }}
       - name: Install Power Platform Tools
         uses: microsoft/powerplatform-actions/actions-install@v1
       - name: who-am-i action
         uses: microsoft/powerplatform-actions/who-am-i@v1
-        with:
-          environment-url: ${{ vars.POWERPLATFORMORGURI }}
-          app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
-          client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
-          tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-      - name: Publish Solution Customizations
-        uses: microsoft/powerplatform-actions/publish-solution@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
