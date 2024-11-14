@@ -19,18 +19,11 @@ function Get-SpnToken {
         [Parameter(Mandatory)] [String]$clientId,
         [Parameter(Mandatory)] [String]$clientSecret,
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [Parameter(Mandatory)] [String]$aadHost
+        [Parameter(Mandatory)] [String]$aadHost = "https://login.microsoftonline.com/"
     )
-    if ($dataverseHost -notlike'https://*')
-    {
-        $dataverseHost = "https://$dataverseHost"
-    }
-    if ($aadHost -notlike 'https://*')
-    {
-        $aadHost = "https://$aadHost" 
-    }
-    $body = @{client_id = $clientId; client_secret = $clientSecret; grant_type = "client_credentials"; scope = "$dataverseHost/.default"; }
-    $OAuthReq = Invoke-RestMethod -Method Post -Uri "$aadHost/$tenantId/oauth2/v2.0/token" -Body $body
+    $validDataverseHost = Get-HostFromUrl -url $dataverseHost
+    $body = @{client_id = $clientId; client_secret = $clientSecret; grant_type = "client_credentials"; scope = "https://$validDataverseHost/.default"; }
+    $OAuthReq = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token" -Body $body
 
     return $OAuthReq.access_token
 }
