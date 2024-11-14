@@ -31,7 +31,7 @@ FunctionName -Parameter1 "Value1" -Parameter2 "Value2"
 # Function definitions and other code
 
 # Import the dataverse-webapi-functions module
-Import-Module './PowerShell/dataverse-webapi-functions.psm1' -force
+Import-Module 'ALMTemplate/PowerShell/dataverse-webapi-functions.psm1' -force
 ###########################
 # PAC CLI functions
 # Function to install pac cli
