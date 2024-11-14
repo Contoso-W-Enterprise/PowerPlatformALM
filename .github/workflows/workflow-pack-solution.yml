@@ -24,7 +24,7 @@ on:
       folder-path:
         type: string
         required: false
-        default: '.'
+        default: 'PowerPlatformALM'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false 
@@ -80,8 +80,8 @@ jobs:
         uses: microsoft/powerplatform-actions/actions-install@v1
       - uses: microsoft/powerplatform-actions/pack-solution@v1
         with:
-          solution-file: ${{ env.release-path }}${{ inputs.solution-name }}.zip
-          solution-folder: ${{ env.source-path }}${{ inputs.solution-name }}
+          solution-file: ${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip
+          solution-folder: ${{ env.folder-path }}${{ inputs.solution-name }}
           solution-type: Both
           #process-canvas-apps: true
       - name: Debug output
