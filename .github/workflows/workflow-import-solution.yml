@@ -33,7 +33,7 @@ on:
       folder-path:
         type: string
         required: false
-        default: '.'
+        default: 'PowerPlatformALM'
       release-name:
         type: string
         required: false
@@ -164,7 +164,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          path: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
+          path: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
       #managed solution & setting file & solution exists
       - name: import upgrade managed Solution with settings file
         if: ${{ inputs.managed  == true && inputs.setting-file != '' && env.check-solution-exists  == true }}
@@ -174,7 +174,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           stage-and-upgrade: true
           force-overwrite: true
           publish-changes: true
@@ -190,7 +190,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           force-overwrite: true
           publish-changes: true
           use-deployment-settings-file: true
@@ -205,7 +205,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           stage-and-upgrade: true
           force-overwrite: true
           publish-changes: true
@@ -220,7 +220,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}_managed.zip'
           force-overwrite: true
           publish-changes: true
           use-deployment-settings-file: false
@@ -235,7 +235,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          path: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
+          path: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip'
       # unmanaged solution & solution file & solution exist
       - name: Import upgrade Unmanaged Solution with settings file
         if: ${{ inputs.managed == false && inputs.setting-file != '' && env.check-solution-exists == true }}
@@ -245,7 +245,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip'
           stage-and-upgrade: true
           force-overwrite: true
           publish-changes: true
@@ -261,7 +261,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip'
           force-overwrite: true
           publish-changes: true
           use-deployment-settings-file: true
@@ -276,7 +276,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip'
           stage-and-upgrade: true
           force-overwrite: true
           publish-changes: true
@@ -291,7 +291,7 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-file: '${{ env.release-path }}${{ inputs.solution-name }}.zip'
+          solution-file: '${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip'
           force-overwrite: true
           publish-changes: true
           use-deployment-settings-file: false
