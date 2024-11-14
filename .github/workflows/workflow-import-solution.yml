@@ -82,6 +82,17 @@ jobs:
       - name: Checkout branch main
         if: ${{ steps.check-branch-exists.outputs.exists != 'true' }}
         uses: actions/checkout@v4
+        with: 
+          persistCredentials: true
+          ref: ${{ inputs.branch-name }}
+          path: ${{ inputs.folder-path }}
+      - name: Checkout Template Branch 
+        uses: actions/checkout@v4
+        with:
+          persistCredentials: true
+          repository: Contoso-W-Enterprise/PowerPlatformALM/
+          ref: V1
+          path: ALMTemplate
       - name: Set release variables
         run: |
           $solutionName = '${{ Inputs.solution-name }}';
