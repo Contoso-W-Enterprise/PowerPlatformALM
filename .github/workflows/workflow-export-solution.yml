@@ -149,7 +149,6 @@ jobs:
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
-          persistCredentials: true
           repository: Contoso-W-Enterprise/PowerPlatformALM/
           ref: V1
           path: ALMTemplate
