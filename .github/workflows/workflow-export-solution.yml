@@ -50,7 +50,7 @@ on:
       folder-path:
         type: string
         required: false
-        default: '.'
+        default: 'PowerPlatformALM'
       delete-existing-source:
         type: boolean
         default: false
@@ -145,6 +145,15 @@ jobs:
         uses: actions/checkout@v4
         with:
            ref: ${{ env.branch-name }}
+           path: PowerPlatformALM
+      - name: Checkout Template Branch 
+        uses: actions/checkout@v4
+        with:
+          persistCredentials: true
+          repository: Contoso-W-Enterprise/PowerPlatformALM/
+          ref: V1
+          path: ALMTemplate
+          
       
       # - name: Branch not found
       #   if:  ${{ env.branch-exists == 'False' }}
@@ -186,7 +195,7 @@ jobs:
       - name: Delete existing source file
         if: ${{ inputs.delete-existing-source == true }}
         run: |
-          . "PowerShell/PowerPlatform-Utility.ps1"
+          . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           $results = Delete-ExistingSolutionSource -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -deleteFiles $true 
           write-host $results
         shell: pwsh
@@ -206,7 +215,7 @@ jobs:
         id: clear-solution-env-var
         if:  ${{ inputs.ClearEnvironmentVariableValues == true }}
         run: |
-          . "PowerShell/PowerPlatform-Utility.ps1"
+          . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           $version = Clear-CurentEnvironmentVariables -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
         shell: pwsh
       - name: update solution version
