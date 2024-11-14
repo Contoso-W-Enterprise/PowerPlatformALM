@@ -93,4 +93,4 @@ jobs:
         with: 
           message: ${{ inputs.commitMessage }}
           #new_branch: ${{ inputs.branch-name }}
-          add: '${{ env.release-path }}. --force'
+          add: '${{ inputs.folder-path }}/${{ env.release-path }}. --force'
