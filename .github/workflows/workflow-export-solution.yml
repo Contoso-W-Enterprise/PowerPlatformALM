@@ -56,7 +56,7 @@ on:
         default: false
         required: false
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}  
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.branch-type }}-${{ inputs.branch-name}}
   cancel-in-progress: false 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -95,6 +95,7 @@ jobs:
         run: |
           echo ${{ vars.POWERPLATFORMORGURI }}
           echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
+          echo ${{ steps.solution-matrix.outputs.value }}
   publish_customizations:
     needs: setup
     environment: ${{ inputs.environment }}
@@ -131,7 +132,10 @@ jobs:
       contents: write
     strategy:
       matrix:
-        solutions-name: ${{ fromJSON( needs.setup.outputs.solution-names) }}      
+        solution-name: ${{ fromJSON( needs.setup.outputs.solution-names ) }} 
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.branch-type }}-${{ inputs.branch-name }}
+      cancel-in-progress: false 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
