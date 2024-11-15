@@ -134,7 +134,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout branch
         uses: actions/checkout@v4
-      - name: Set environment variables
+      - name: checkout exist or create new branch
         run: | 
           $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
           $branchExists = ($null -ne (git branch --all | where {$_ -like "*$branchName"}))
