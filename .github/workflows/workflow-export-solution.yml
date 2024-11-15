@@ -222,7 +222,7 @@ jobs:
       - name: update solution version
         id: update-solution-version
         run: |
-          . "PowerShell/PowerPlatform-Utility.ps1"
+          . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           switch ("${{ inputs.branch-type }}"){
             "main" {
               $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -MajorVersionIncrement 1 -updateVersion $true
