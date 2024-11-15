@@ -212,11 +212,10 @@ jobs:
       - name: Delete existing source file
         if: ${{ inputs.delete-existing-source == true }}
         run: |
-          . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
+          . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           $results = Delete-ExistingSolutionSource -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteFiles $true 
           write-host $results
         shell: pwsh
-        working-directory: .
 
       - name: Unpack Solution
         uses: microsoft/powerplatform-actions/unpack-solution@v1
@@ -228,21 +227,20 @@ jobs:
           overwrite-files: true
       - name: Debug list of files
         run: |
-          Get-ChildItem -path '${{ inputs.folder-path }}' -Recurse | foreach { write-host $_.FullName }
+          Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
         shell: pwsh
       - name: Clear environment variables current values
         id: clear-solution-env-var
         if:  ${{ inputs.ClearEnvironmentVariableValues == true }}
         run: |
-          . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
+          . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           $version = Clear-CurentEnvironmentVariables -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
         shell: pwsh
-        working-directory: .
 
       - name: update solution version
         id: update-solution-version
         run: |
-          . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
+          . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           switch ("${{ inputs.branch-type }}"){
             "main" {
               $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -MajorVersionIncrement 1 -updateVersion $true
@@ -267,7 +265,6 @@ jobs:
             }
           }
           write-host $version
-          working-directory: .
 
         shell: pwsh
       #- name: branch Solution
