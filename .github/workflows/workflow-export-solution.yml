@@ -165,7 +165,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Contoso-W-Enterprise/PowerPlatformALM
-          ref: main
+          ref: V1
           path: ALMTemplate
           github-server-url: 'https://github.com'
           lfs: true
