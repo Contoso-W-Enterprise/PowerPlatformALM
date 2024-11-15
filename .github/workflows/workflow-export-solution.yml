@@ -89,6 +89,7 @@ jobs:
           echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
           echo ${{ steps.solution-matrix.outputs.value }}
   publish_customizations:
+    if: ${{ inputs.publish-customization == true }}
     needs: setup
     environment: ${{ inputs.environment }}
     # The type of runner that the job will run on
