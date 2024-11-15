@@ -35,18 +35,6 @@ on:
         type: string
       branch-type:
         type: string
-      VersionMajorIncrement:
-        type: number
-        default: 0
-      VersionMinorIncrement:
-        type: number
-        default: 0
-      VersionReleaseIncrement:
-        type: number
-        default: 0
-      VersionPatchIncrement:
-        type: number
-        default: 0
       folder-path:
         type: string
         required: false
@@ -54,6 +42,10 @@ on:
       delete-existing-source:
         type: boolean
         default: false
+        required: false
+      publish-customization:
+        type: boolean
+        default: true
         required: false
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.environment }}
