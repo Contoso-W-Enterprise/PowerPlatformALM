@@ -56,8 +56,8 @@ on:
         default: false
         required: false
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.branch-type }}-${{ inputs.branch-name}}
-  cancel-in-progress: false 
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.environment }}
+  cancel-in-progress: false
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   setup:
@@ -135,7 +135,7 @@ jobs:
         solution-name: ${{ fromJSON( needs.setup.outputs.solution-names ) }} 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.branch-type }}-${{ inputs.branch-name }}
-      cancel-in-progress: false 
+      cancel-in-progress: false
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -176,8 +176,7 @@ jobs:
           path: ALMTemplate
           github-server-url: 'https://github.com'
           lfs: true
-          persist-credentials: true          
-      
+          persist-credentials: true      
       # - name: Branch not found
       #   if:  ${{ env.branch-exists == 'False' }}
       #   uses: actions/checkout@v4
