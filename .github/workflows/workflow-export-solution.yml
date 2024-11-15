@@ -98,8 +98,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Install Power Platform Tools
+        if: ${{ inputs.publish-customization == true }}
         uses: microsoft/powerplatform-actions/actions-install@v1
       - name: who-am-i action
+        if: ${{ inputs.publish-customization == true }}
         uses: microsoft/powerplatform-actions/who-am-i@v1
         with:
           environment-url: ${{ vars.POWERPLATFORMORGURI }}
