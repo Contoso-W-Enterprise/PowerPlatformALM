@@ -28,7 +28,7 @@ on:
       solution-names:
         description: 'name of the solutions to worked on from Power Platform'
         required: true
-        default:  'contoso_university_core'
+        default:  'contoso_university_core,ContosoUniversityExtended'
       branch-name:
         description: 'name of the git branch'
         required: false
