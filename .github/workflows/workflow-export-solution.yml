@@ -214,6 +214,8 @@ jobs:
           $results = Delete-ExistingSolutionSource -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteFiles $true 
           write-host $results
         shell: pwsh
+        working-directory: .
+
       - name: Unpack Solution
         uses: microsoft/powerplatform-actions/unpack-solution@v1
         with:
@@ -233,6 +235,8 @@ jobs:
           . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           $version = Clear-CurentEnvironmentVariables -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
         shell: pwsh
+        working-directory: .
+
       - name: update solution version
         id: update-solution-version
         run: |
@@ -261,6 +265,8 @@ jobs:
             }
           }
           write-host $version
+          working-directory: .
+
         shell: pwsh
       #- name: branch Solution
       #  uses: microsoft/powerplatform-actions/branch-solution@v1
