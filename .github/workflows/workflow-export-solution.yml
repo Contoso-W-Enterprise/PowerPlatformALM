@@ -66,14 +66,29 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      solution-names: ${{ steps.solution-matrix.outputs.solution-names }}
+      release-date: ${{ steps.solution-matrix.outputs.release-date }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Set Solution Names Matrix
+        id: solution-matrix
         run: | 
-          $solutionNames = @()
+          if ('${{inputs.solution-names}}' -match ','){
+            $solutionList = @()
+            '${{inputs.solution-names}}' -split ',' | foreach { 
+              $solutionList += $_.Trim()
+              write-host $_.Trim()
+            }
+            $solutionNames = ($solutionList | Convertto-Json -compress).toString()
+          }
+          else {
+            $solutionNames = ('${{inputs.solution-names}}' | Convertto-Json -compress).toString()
+          }
+          write-host $solutionNames
           $releaseDate = (Get-Date).toString('yyyyMMdd');
-          echo "release-date=$releaseDate" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
-          echo "solution-names=$solutionNames" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
+          write-output "solution-names=$solutionNames" >> $Env:GITHUB_OUTPUT
+          write-output "release-date=$releaseDate"  >> $Env:GITHUB_OUTPUT
         #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
         shell: pwsh
       - name: Variables 
@@ -114,6 +129,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    strategy:
+      matrix:
+        solutions-name: ${{ fromJSON( needs.setup.outputs.solution-names) }}      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -177,8 +195,8 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-name: ${{ inputs.solution-names }}
-          solution-output-file: '${{ inputs.folder-path }}/solutions/${{ inputs.solution-names }}.zip'
+          solution-name: ${{ matrix.solution-name }}
+          solution-output-file: '${{ inputs.folder-path }}/solutions/${{ matrix.solution-name }}.zip'
           overwrite: true
           export-general-settings: true
       - name: Export Managed Solution
@@ -188,8 +206,8 @@ jobs:
           app-id: ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }}
           client-secret: ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }}
           tenant-id: ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-          solution-name: ${{ inputs.solution-names }}
-          solution-output-file: '${{ inputs.folder-path }}/solutions/${{ inputs.solution-names }}_managed.zip'
+          solution-name: ${{ matrix.solution-name }}
+          solution-output-file: '${{ inputs.folder-path }}/solutions/${{ matrix.solution-name }}_managed.zip'
           managed: true
           overwrite: true
           export-general-settings: true
@@ -197,14 +215,14 @@ jobs:
         if: ${{ inputs.delete-existing-source == true }}
         run: |
           . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
-          $results = Delete-ExistingSolutionSource -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -deleteFiles $true 
+          $results = Delete-ExistingSolutionSource -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteFiles $true 
           write-host $results
         shell: pwsh
       - name: Unpack Solution
         uses: microsoft/powerplatform-actions/unpack-solution@v1
         with:
-          solution-file: '${{ inputs.folder-path }}/solutions/${{ inputs.solution-names }}.zip'
-          solution-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}/'
+          solution-file: '${{ inputs.folder-path }}/solutions/${{ matrix.solution-name }}.zip'
+          solution-folder: '${{ inputs.folder-path }}/src/${{ matrix.solution-name }}/'
           process-canvas-apps: true
           solution-type: 'Both'
           overwrite-files: true
@@ -217,7 +235,7 @@ jobs:
         if:  ${{ inputs.ClearEnvironmentVariableValues == true }}
         run: |
           . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
-          $version = Clear-CurentEnvironmentVariables -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
+          $version = Clear-CurentEnvironmentVariables -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
         shell: pwsh
       - name: update solution version
         id: update-solution-version
@@ -225,25 +243,25 @@ jobs:
           . "ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           switch ("${{ inputs.branch-type }}"){
             "main" {
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -MajorVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -MajorVersionIncrement 1 -updateVersion $true
             }
             "feature" {
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
             }
             "release" {
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
             }
             "development"{
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
             }
             "hotfix" {
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -PatchVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -PatchVersionIncrement 1 -updateVersion $true
             }
             "bugfix" {
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -PatchVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -PatchVersionIncrement 1 -updateVersion $true
             }
             default {
-              $version = Update-SolutionVersion -solutionName '${{ inputs.solution-names }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
+              $version = Update-SolutionVersion -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -ReleaseVersionIncrement 1 -updateVersion $true
             }
           }
           write-host $version
@@ -251,8 +269,8 @@ jobs:
       #- name: branch Solution
       #  uses: microsoft/powerplatform-actions/branch-solution@v1
       #  with:
-      #    solution-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}'
-      #    solution-target-folder: '${{ inputs.folder-path }}/src/${{ inputs.solution-names }}'
+      #    solution-folder: '${{ inputs.folder-path }}/src/${{ matrix.solution-name }}'
+      #    solution-target-folder: '${{ inputs.folder-path }}/src/${{ matrix.solution-name }}'
       #    branch-name: ${{ env.branch-name }}
       #    repo-url: 'https://github.com/Contoso-Enterprise/PowerPlatformALM'
       #    repo-token: ${{ secrets.GITHUB_TOKEN }}
