@@ -48,6 +48,13 @@ on:
         type: boolean
         default: false
 jobs:
+  read-me:
+    runs-on: ubuntu-latest
+    steps:
+    - name: readme
+      run: |
+        echo "Deploying ${{ inputs.solution-name }} to Staging"
+      shell: pwsh
   deploy-staging-setup:
     environment: 'Contoso Staging'
     runs-on: ubuntu-latest
