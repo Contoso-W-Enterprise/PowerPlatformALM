@@ -56,7 +56,7 @@ jobs:
         echo "Deploying ${{ inputs.solution-name }} to Staging"
       shell: pwsh
   deploy-staging-setup:
-    environment: 'Contoso Staging'
+    environment: 'MeganBs Developer Environment'
     runs-on: ubuntu-latest
     outputs:
       setting-file: ${{ steps.staging-setting-file-variables.outputs.setting-file }}
