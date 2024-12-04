@@ -86,7 +86,6 @@ jobs:
       branch-type: ${{ inputs.branch-type }}
       commitMessage: 'Export Solution ${{ inputs.solution-names }}'
       folder-path: '.'
-      VersionReleaseIncrement: 1
       delete-existing-source: ${{ inputs.delete-existing-source }}
     secrets: inherit
        
