@@ -66,9 +66,9 @@ jobs:
       - name: Set Solution Names Matrix
         id: solution-matrix
         run: | 
-          if ('${{inputs.solution-names}}' -match ','){
+          if ("${{inputs.solution-names}}" -match ','){
             $solutionList = @()
-            '${{inputs.solution-names}}' -split ',' | foreach { 
+            "${{inputs.solution-names}}" -split ',' | foreach { 
               $solutionList += $_.Trim()
               write-host $_.Trim()
             }
