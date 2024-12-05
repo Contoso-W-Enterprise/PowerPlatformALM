@@ -110,9 +110,9 @@ jobs:
           write-host "release name ${{inputs.release-name}}"
           write-host "folder path ${{inputs.folder-path}}"
           
-          if ((${{inputs.release-name}}).length -gt 1)
+          if (("${{inputs.release-name}}").length -gt 1)
           {
-            $releaseName = ${{inputs.release-name}}
+            $releaseName = "${{inputs.release-name}}"
             write-host "release name: $releaseName"     
             if (($inputs.'folder-path').length -gt 1 )
             {
