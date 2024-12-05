@@ -148,8 +148,8 @@ jobs:
         uses: actions/checkout@v4
       - name: checkout exist or create new branch
         run: | 
-          git config --global user.email "$(github.triggering_actor)"
-          git config --global user.name "$(github.triggering_actor)"
+          git config --global user.email "${GITHUB_ACTOR}"
+          git config --global user.name "${GITHUB_ACTOR}@contoso.willinc.ca"
           $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
           $branchExists = ($null -ne (git branch --all | where {$_ -like "*$branchName"}))
           if ($branchExists) {
