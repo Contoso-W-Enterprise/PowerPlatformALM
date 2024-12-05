@@ -137,7 +137,7 @@ jobs:
               }
             }
           }
-          write-Host $releasePath;
+          write-Host "release path $releasePath";
           write-Host ${{ inputs.solution-name}} ;
           echo "release-name=$releaseName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "release-path=$releasePath" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
