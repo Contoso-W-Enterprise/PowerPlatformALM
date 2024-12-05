@@ -79,7 +79,7 @@ jobs:
   variable-matrix:
     strategy:
       matrix:
-        solution-name: ${{ fromJSON( needs.setup.outputs.solution-names ) }} 
+        solution-name: ${{ fromJSON( needs.display-variables.outputs.solution-names ) }} 
     name: Variable-matrix 
     runs-on: ubuntu-latest    
     steps:    
