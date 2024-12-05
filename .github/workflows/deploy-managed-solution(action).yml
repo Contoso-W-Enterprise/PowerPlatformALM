@@ -26,7 +26,7 @@ on:
       solution-name:
         description: 'name of the solution to worked on from Power Platform'
         required: true
-        default:  'contoso_university_core'
+        default:  'ContosoAPI'
       branch-type:
         required: false
         type: choice
