@@ -42,6 +42,10 @@ on:
         type: string
         required: false
         default:  ''
+      target-environment:
+        description: 'Target Environment'
+        type: environment
+        required: true
       use-setting-file:
         description: 'setting file'
         required: true
@@ -56,7 +60,7 @@ jobs:
         echo "Deploying ${{ inputs.solution-name }} to Staging"
       shell: pwsh
   deploy-staging-setup:
-    environment: 'MeganBs Developer Environment'
+    environment: ${{ inputs.target-environment }}
     runs-on: ubuntu-latest
     outputs:
       setting-file: ${{ steps.staging-setting-file-variables.outputs.setting-file }}
@@ -65,7 +69,7 @@ jobs:
         EVENT_CONTEXT: ${{ toJSON(github.event) }}
       run: |
         echo $EVENT_CONTEXT
-    - name: Staging Variables      
+    - name: Staging variables      
       run: |        
         write-Host "ref ${{ github.ref }}"        
         write-Host "GITHUB_REF ${{ github.GITHUB_REF }}"
@@ -89,7 +93,7 @@ jobs:
     needs: [deploy-staging-setup]
     uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
     with: 
-      environment: 'Contoso Staging'
+      environment: ${{ inputs.target-environment }}
       solution-name: ${{ inputs.solution-name }}
       branch-name: '${{ inputs.branch-name }}'
       branch-type: '${{ inputs.branch-type }}'
@@ -97,43 +101,43 @@ jobs:
       settings-file: ${{ needs.deploy-staging-setup.outputs.setting-file }}
       managed: true
     secrets: inherit
-  deploy-production-setup:
-    needs: [deploy-staging]
-    environment: 'Contoso Production'
-    runs-on: ubuntu-latest
-    outputs:
-      setting-file: ${{ steps.production-setting-file-variables.outputs.setting-file }}
-    steps: 
-    - name: Production Variables      
-      run: |        
-        write-Host "ref ${{ github.ref }}"        
-        write-Host "GITHUB_REF ${{ github.GITHUB_REF }}"
-        if (${{ inputs.use-setting-file }} -eq $true)
-        {
+  # deploy-production-setup:
+  #   needs: [deploy-staging]
+  #   environment: 'Contoso Production'
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     setting-file: ${{ steps.production-setting-file-variables.outputs.setting-file }}
+  #   steps: 
+  #   - name: Production Variables      
+  #     run: |        
+  #       write-Host "ref ${{ github.ref }}"        
+  #       write-Host "GITHUB_REF ${{ github.GITHUB_REF }}"
+  #       if (${{ inputs.use-setting-file }} -eq $true)
+  #       {
 
-          if (Test-Path -LiteralPath "settings/${{ inputs.solution-name }}-Contoso Staging.json") {
-            $settingFile = 'settings/${{ inputs.solution-name }}-Contoso Production.json'
-          } else {
-            $settingFile = ''
-          }
-        } else {
-          $settingFile = ''
-        }
-        echo "setting-file=$settingFile" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append; 
-      shell: pwsh
-    - name: Set environment variables to output
-      id: production-setting-file-variables
-      run: |
-        echo "setting-file=${{ env.setting-file }}" >> "$GITHUB_OUTPUT"
-  deploy-production:
-    needs: [deploy-production-setup]
-    uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
-    with: 
-      environment: 'Contoso Production'
-      solution-name: ${{ inputs.solution-name }}
-      branch-name: '${{ inputs.branch-name }}'
-      branch-type: '${{ inputs.branch-type }}'
-      folder-path: '.'
-      settings-file: ${{ needs.deploy-production-setup.outputs.setting-file }}
-      managed: true
-    secrets: inherit
+  #         if (Test-Path -LiteralPath "settings/${{ inputs.solution-name }}-Contoso Staging.json") {
+  #           $settingFile = 'settings/${{ inputs.solution-name }}-Contoso Production.json'
+  #         } else {
+  #           $settingFile = ''
+  #         }
+  #       } else {
+  #         $settingFile = ''
+  #       }
+  #       echo "setting-file=$settingFile" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append; 
+  #     shell: pwsh
+  #   - name: Set environment variables to output
+  #     id: production-setting-file-variables
+  #     run: |
+  #       echo "setting-file=${{ env.setting-file }}" >> "$GITHUB_OUTPUT"
+  # deploy-production:
+  #   needs: [deploy-production-setup]
+  #   uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-import-solution.yml@main
+  #   with: 
+  #     environment: 'Contoso Production'
+  #     solution-name: ${{ inputs.solution-name }}
+  #     branch-name: '${{ inputs.branch-name }}'
+  #     branch-type: '${{ inputs.branch-type }}'
+  #     folder-path: '.'
+  #     settings-file: ${{ needs.deploy-production-setup.outputs.setting-file }}
+  #     managed: true
+  #   secrets: inherit
