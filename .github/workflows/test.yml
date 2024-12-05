@@ -21,6 +21,10 @@ jobs:
       solution-names: ${{ steps.solution-matrix.outputs.solution-names }}
       release-date: ${{ steps.solution-matrix.outputs.release-date }}
     steps:
+    - name: show Context
+      run: | 
+        echo "${{ toJSON(github.context) }}"
+      shell: pwsh
     - name: Set Solution Names Matrix
       id: solution-matrix
       run: | 
