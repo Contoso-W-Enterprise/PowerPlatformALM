@@ -42,8 +42,11 @@ jobs:
       with:
         lfs: true
         sparse-checkout: |
-          .github
           .
+          .github
+          PowerShell
+          src
+          release
     - name: Debug list of files
       run: |
         Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
