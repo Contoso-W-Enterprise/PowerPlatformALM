@@ -53,6 +53,7 @@ jobs:
       run: |
         git config --global user.email '${{ github.actor }}'
         git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
+        git fetch
         echo "git show-ref"
         git show-ref
         echo "git branch --all"
@@ -64,7 +65,6 @@ jobs:
 
         if git ls-remote --heads origin ${{ inputs.branch-name}} ; then
           echo "Branch exists. Checking out..."
-          git fetch
           git --work-tree=${{ inputs.folder-path }} checkout origin/${{ inputs.branch-name }}
           git pull origin ${{ inputs.branch-name}} 
         else
