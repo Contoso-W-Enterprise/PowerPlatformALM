@@ -124,7 +124,7 @@ jobs:
                 write-host "latest release: $($latestRelease)"
                 $releasePath = $inputs.'folder-path' + '/release/' + $latestRelease + '/' 
               } else {
-                write-Error "Release folder not found"
+                write-host "Release folder not found"
               }
             } else {
               if (Test-Path -LiteralPath "release") {
@@ -133,7 +133,7 @@ jobs:
                 write-host "latest release: $($latestRelease)"
                 $releasePath = 'release/'+ $latestRelease + '/'
               } else {
-                write-Error "Release folder not found"
+                write-host "Release folder not found"
               }
             }
           }
