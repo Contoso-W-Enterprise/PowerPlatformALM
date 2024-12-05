@@ -103,10 +103,16 @@ jobs:
           persist-credentials: true
       - name: Set release variables
         run: |
-          $solutionName = '${{ Inputs.solution-name }}';
-          if (($inputs.'release-name').length -gt 1)
+          $solutionName = '${{ inputs.solution-name }}';
+          write-Host "solution name $solutionName"
+          write-Host "release name $inputs.'release-name'"
+          write-Host "folder Path $inputs.'folder-path'"
+          write-host "release name ${{inputs.'release-name'}}"
+          write-host "folder path ${{inputs.'folder-path'}}"
+          
+          if ((${{inputs.'release-name'}}).length -gt 1)
           {
-            $releaseName = $inputs.'release-name'
+            $releaseName = ${{inputs.'release-name'}}
             write-host "release name: $releaseName"     
             if (($inputs.'folder-path').length -gt 1 )
             {
@@ -138,7 +144,6 @@ jobs:
             }
           }
           write-Host "release path $releasePath";
-          write-Host ${{ inputs.solution-name}} ;
           echo "release-name=$releaseName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "release-path=$releasePath" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
