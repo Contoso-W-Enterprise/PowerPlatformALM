@@ -146,6 +146,10 @@ jobs:
           echo "release-name=$releaseName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "release-path=$releasePath" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
+      - name: Debug list of files
+        run: |
+          Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
+        shell: pwsh
       - name: Install Power Platform Tools
         uses: microsoft/powerplatform-actions/actions-install@v1
       - name: who-am-i action
