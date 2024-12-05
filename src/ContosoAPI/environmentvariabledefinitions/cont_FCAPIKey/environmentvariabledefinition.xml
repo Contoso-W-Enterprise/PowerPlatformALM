@@ -1,5 +1,4 @@
 <environmentvariabledefinition schemaname="cont_FCAPIKey">
-  <defaultvalue>fca_live_Arz3dC57Pw666fwniSMaT5SB9xLrES9KuDFRsthf</defaultvalue>
   <displayname default="FC API Key">
     <label description="FC API Key" languagecode="1033" />
   </displayname>
