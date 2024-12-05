@@ -159,7 +159,7 @@ jobs:
           git config --global user.name "${GITHUB_ACTOR}@contoso.willinc.ca"
           git fetch
           $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
-          $branchExists = ($null -ne (git ls-remote --heads origin feature/002))
+          $branchExists = ($null -ne (git ls-remote --heads origin "$branchName"))
           if ($branchExists) {
             write-host "Branch $branchName exists"
             git checkout origin/${{ inputs.branch-name }}
