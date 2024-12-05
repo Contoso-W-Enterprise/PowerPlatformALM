@@ -49,13 +49,13 @@ jobs:
           git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
           $branchName = "${{ inputs.branch-name }}"
           $branchExists = ($null -ne (git branch --all | where {$_ -like "*$branchName"}))
+          git branch --all
           if ($branchExists) {
             write-host "Branch $branchName exists"
             git checkout  "$branchName"
             git pull origin "$branchName"
           } else {
             write-host "Branch $branchName does not exists"
-            git branch --all
             exit;
           }
         shell: pwsh
