@@ -47,26 +47,25 @@ jobs:
         run: |
           git config --global user.email '${{ github.actor }}'
           git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
+          git show-ref
           $branchName = "${{ inputs.branch-name }}"
           $branchExists = ($null -ne (git branch --all | where {$_ -like "*$branchName"}))
           git branch --all
-          if ($branchExists) {
-            write-host "Branch $branchName exists"
-            git checkout  "$branchName"
-            git pull origin "$branchName"
-          } else {
-            write-host "Branch $branchName does not exists"
-            exit;
-          }
-          echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
-          echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
+          echo "refs/remotes/origin/$(branch)"
+          if git show-ref --verify --quiet refs/remotes/origin/$(branch) ; then
+            echo "Branch exists. Checking out..."
+            git --work-tree=${{ inputs.folder-path }} checkout $(branch) 
+            git pull origin $(branch) 
+          else
+            echo "Branch does not exist."
+          fi
         shell: pwsh
-      - name: Checkout new Branch 
-        if: ${{ env.branch-exists == 'False' }}
-        uses: actions/checkout@v4
-        with:
-           ref: ${{ env.branch-name }}
-           path: ${{ inputs.folder-path }}
+      # - name: Checkout new Branch 
+      #   if: ${{ env.branch-exists == 'False' }}
+      #   uses: actions/checkout@v4
+      #   with:
+      #      ref: ${{ env.branch-name }}
+      #      path: ${{ inputs.folder-path }}
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
