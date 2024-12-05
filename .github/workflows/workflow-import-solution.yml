@@ -129,18 +129,16 @@ jobs:
             } else {
               if (Test-Path -LiteralPath "release") {
                 write-host "tested release successful"
-                $latestRelease = Get-ChildItem -path "release" -Directory | Sort-Object -Property 'CreationTime' -Descending -top 1
-                $latestRelease | select *
-                write-host "latest release: $($latestRelease.Name)"
-                $releaseName = $latestRelease.name
-                $releasePath = 'release/'+ $releaseName + '/'
+                $latestRelease = (Get-ChildItem -path "$($inputs.'folder-path')/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
+                write-host "latest release: $($latestRelease)"
+                $releasePath = 'release/'+ $latestRelease + '/'
               } else {
                 write-Error "Release folder not found"
               }
             }
           }
           write-Host $releasePath;
-          write-Host ${{ Inputs.solution-name}} ;
+          write-Host ${{ inputs.solution-name}} ;
           echo "release-name=$releaseName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "release-path=$releasePath" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
