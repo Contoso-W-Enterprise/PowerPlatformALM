@@ -43,17 +43,21 @@ jobs:
           echo $EVENT_CONTEXT
       - name: Checkout branch
         uses: actions/checkout@v4
+        with:
+          lfs: true
+          
       - name: check out branch if exists
         run: |
           git config --global user.email '${{ github.actor }}'
           git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
           git show-ref
           git branch --all
-          echo "refs/remotes/origin/$(branch)"
-          if git show-ref --verify --quiet refs/remotes/origin/$(branch) ; then
+          echo "refs/remotes/origin/${{ inputs.branch-name}}"
+          if git show-ref --verify --quiet refs/remotes/origin/${{ inputs.branch-name}} ; then
             echo "Branch exists. Checking out..."
-            git --work-tree=${{ inputs.folder-path }} checkout $(branch) 
-            git pull origin $(branch) 
+            git --work-tree=${{ inputs.folder-path }} checkout ${{ inputs.branch-name}}
+            git pull origin ${{ inputs.branch-name}} 
+    
           else
             echo "Branch does not exist."
           fi
