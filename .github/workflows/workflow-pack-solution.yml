@@ -53,6 +53,7 @@ jobs:
             git pull origin "$branchName"
           } else {
             write-host "Branch $branchName does not exists"
+            git branch --all
             exit;
           }
         shell: pwsh
