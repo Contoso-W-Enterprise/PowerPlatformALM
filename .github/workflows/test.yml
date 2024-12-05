@@ -73,6 +73,17 @@ jobs:
         else
           echo "Branch does not exist."
         fi        
+    - name: Checkout Template Branch 
+      uses: actions/checkout@v4
+      with:
+        repository: Contoso-W-Enterprise/PowerPlatformALM
+        ref: main
+        path: ALMTemplate
+        github-server-url: 'https://github.com'
+        lfs: true
+        sparse-checkout: |
+          .github
+          PowerShell
     - name: Set Solution Names Matrix
       id: solution-matrix
       run: | 
