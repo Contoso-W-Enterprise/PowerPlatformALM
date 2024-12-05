@@ -1,4 +1,4 @@
-name: Test variables
+name: Test scripts
 
 # Controls when the workflow will run
 on:
@@ -45,9 +45,11 @@ jobs:
       run: |
         git config --global user.email '${{ github.actor }}'
         git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
+        echo "git show-ref"
         git show-ref
+        echo "git branch --all"
         git branch --all
-        echo "refs/remotes/origin/${{ inputs.branch-name}}"
+        echo "refrence: refs/remotes/origin/${{ inputs.branch-name}}"
         if git show-ref --verify --quiet refs/remotes/origin/${{ inputs.branch-name}} ; then
           echo "Branch exists. Checking out..."
           git --work-tree=${{ inputs.folder-path }} checkout ${{ inputs.branch-name}}
