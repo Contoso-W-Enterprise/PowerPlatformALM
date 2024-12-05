@@ -27,6 +27,9 @@ on:
       branch-name:
         type: string
         required: false
+      branch-type:
+        type: string
+        required: false
       folder-path:
         type: string
         required: false
@@ -72,8 +75,9 @@ jobs:
           git config --global user.email '${{ github.actor }}'
           git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
           git fetch
-          git show-ref          
-          $branchExists = ($null -ne (git ls-remote --heads origin ${{ inputs.branch-name }}))
+          git show-ref
+          $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
+          $branchExists = ($null -ne (git ls-remote --heads origin "$branchName"))
           if ($branchExists) {          
             echo "Branch exists. Checking out..."
             git checkout origin/${{ inputs.branch-name }}
