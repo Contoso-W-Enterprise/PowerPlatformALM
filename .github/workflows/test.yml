@@ -64,7 +64,7 @@ jobs:
 
         if git ls-remote --heads origin ${{ inputs.branch-name}} ; then
           echo "Branch exists. Checking out..."
-          git checkout ${{ inputs.branch-name }}
+          git checkout origin ${{ inputs.branch-name }}
           git pull origin ${{ inputs.branch-name}} 
         else
           echo "Branch does not exist."
