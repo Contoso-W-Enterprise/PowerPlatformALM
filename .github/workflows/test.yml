@@ -75,5 +75,14 @@ jobs:
         echo "variable : env URI $envURI"      
         echo "variable : PPenv URI ${{ env.POWERPLATFORMTARGETENVIRONMENT.POWERPLATFORMURI }}"              
         echo "variable : var URI ${{ vars.POWERPLATFORMURI }}"        
-        echo "variable Target ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}"        
-        echo "variable Source ${{ vars.POWERPLATFORMSOURCEENVIRONMENT }}"    
+        echo "variable Target ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}"       
+  variable-matrix:
+    strategy:
+      matrix:
+        solution-name: ${{ fromJSON( needs.setup.outputs.solution-names ) }} 
+    name: Variable-matrix 
+    runs-on: ubuntu-latest    
+    steps:    
+    - name: Use matrix
+      run: |        
+        echo ${{ matrix.solution-name }}
