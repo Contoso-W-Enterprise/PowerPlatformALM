@@ -17,6 +17,9 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     environment: ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}
+    outputs:
+      solution-names: ${{ steps.solution-matrix.outputs.solution-names }}
+      release-date: ${{ steps.solution-matrix.outputs.release-date }}
     steps:
     - name: Set Solution Names Matrix
       id: solution-matrix
