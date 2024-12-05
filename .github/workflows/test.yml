@@ -33,7 +33,7 @@ jobs:
           $solutionNames = ($solutionList | Convertto-Json -compress).toString()
         }
         else {
-          $solutionNames = ("${{inputs.solution-names}}" | Convertto-Json -compress).toString()
+          $solutionNames = "[" + ("${{inputs.solution-names}}" | Convertto-Json -compress).toString() + "]"
         }
         write-host $solutionNames
         $releaseDate = (Get-Date).toString('yyyyMMdd');
