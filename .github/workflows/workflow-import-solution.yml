@@ -162,7 +162,7 @@ jobs:
       - name: Check solution exists
         id: check-solution-exists
         run: |
-          . "/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
+          . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           import-DataverseWebAPI "${{ github.workspace }}/ALMTemplate"
           $solutionName = '${{ Inputs.solution-name }}';
           $token = Connect-Dataverse -dataverseHost '${{ vars.POWERPLATFORMORGURI }}' -tenantId ${{ secrets.POWERPLATFORMCONTOSOTENANTID }} -clientId ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }} -clientSecret ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }} 
