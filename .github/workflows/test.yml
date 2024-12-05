@@ -43,6 +43,7 @@ jobs:
         lfs: true
         sparse-checkout: |
           .github
+          .
     - name: check out branch if exists
       run: |
         git config --global user.email '${{ github.actor }}'
