@@ -45,7 +45,8 @@ jobs:
       run: |
         echo ${{ vars.POWERPLATFORMORGURI }}
         echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
-        echo ${{ steps.solution-matrix.outputs.solution-names }}    
+        echo ${{ steps.solution-matrix.outputs.solution-names }}
+        echo ${{ fromJSON(steps.solution-matrix.outputs.solution-names) }}
     - name: Use variables 1
       run: |
         echo "repository variable : ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}"
