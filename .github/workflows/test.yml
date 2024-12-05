@@ -8,7 +8,7 @@ on:
       solution-names:
         description: 'names of solutions'
         required: true
-        default:  "['OrgDemo','OrgData']"
+        default:  "OrgDemo,OrgData"
 env:
   all-solution-names: "['OrgDemo','OrgData']"
 
@@ -18,9 +18,34 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}
     steps:
-    - name: Use variables 1
+    - name: Set Solution Names Matrix
+      id: solution-matrix
+      run: | 
+        if ("${{inputs.solution-names}}" -match ','){
+          $solutionList = @()
+          "${{inputs.solution-names}}" -split ',' | foreach { 
+            $solutionList += $_.Trim()
+            write-host $_.Trim()
+          }
+          $solutionNames = ($solutionList | Convertto-Json -compress).toString()
+        }
+        else {
+          $solutionNames = ("${{inputs.solution-names}}" | Convertto-Json -compress).toString()
+        }
+        write-host $solutionNames
+        $releaseDate = (Get-Date).toString('yyyyMMdd');
+        write-output "solution-names=$solutionNames" >> $Env:GITHUB_OUTPUT
+        write-output "release-date=$releaseDate"  >> $Env:GITHUB_OUTPUT
+      #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
+      shell: pwsh
+    - name: Variables 
       run: |
-        echo "${{ fromJSON( "ContosoAPI" ) }}"
+        echo ${{ vars.POWERPLATFORMORGURI }}
+        echo ${{ secrets.POWERPLATFORMCONTOSOTENANTID }}
+        echo ${{ steps.solution-matrix.outputs.value }}    
+  - name: Use variables 1
+      run: |
+        echo "${{ fromJSON( $inputs.solution-names ) }}"
         echo "repository variable : ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}"
         echo "variable : env URI ${{ env.POWERPLATFORMURI }}"
         echo "variable : var URI ${{ vars.POWERPLATFORMORGURI }}"
