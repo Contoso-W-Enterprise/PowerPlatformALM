@@ -141,6 +141,6 @@ jobs:
           author_email: "${{ github.actor }}@contoso.willinc.ca"
           message: ${{ inputs.commitMessage }}
           #new_branch: ${{ inputs.branch-name }}
-          add: '${{ inputs.folder-path }}/release/. --force'
+          add: 'release/. --force'
           default_author: github_actor
           github_token: ${{ secrets.GITHUB_TOKEN }}
