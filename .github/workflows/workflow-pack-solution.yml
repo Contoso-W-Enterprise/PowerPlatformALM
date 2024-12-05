@@ -45,22 +45,26 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
-          
+          sparse-checkout: |
+            .
+            .github
+            src
+            release          
       - name: check out branch if exists
         run: |
           git config --global user.email '${{ github.actor }}'
           git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
+          git fetch
           git show-ref
           git branch --all
-          echo "refs/remotes/origin/${{ inputs.branch-name}}"
-          if git show-ref --verify --quiet refs/remotes/origin/${{ inputs.branch-name}} ; then
+          if git ls-remote --heads origin ${{ inputs.branch-name}} ; then
             echo "Branch exists. Checking out..."
-            git --work-tree=${{ inputs.folder-path }} checkout ${{ inputs.branch-name}}
+            git checkout origin/${{ inputs.branch-name }}
             git pull origin ${{ inputs.branch-name}} 
-    
           else
             echo "Branch does not exist."
-          fi
+          fi     
+        
       # - name: Checkout new Branch 
       #   if: ${{ env.branch-exists == 'False' }}
       #   uses: actions/checkout@v4
@@ -75,7 +79,10 @@ jobs:
           path: ALMTemplate
           github-server-url: 'https://github.com'
           lfs: true
-          persist-credentials: true      
+          sparse-checkout: |
+            .github
+            PowerShell
+          persist-credentials: true
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set environment variables
         run: |
