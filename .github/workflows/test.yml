@@ -44,6 +44,11 @@ jobs:
         sparse-checkout: |
           .github
           .
+    - name: Debug list of files
+      run: |
+        Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
+      shell: pwsh        
+
     - name: check out branch if exists
       run: |
         git config --global user.email '${{ github.actor }}'
