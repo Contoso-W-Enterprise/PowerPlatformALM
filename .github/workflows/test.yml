@@ -45,7 +45,6 @@ jobs:
         echo ${{ steps.solution-matrix.outputs.value }}    
     - name: Use variables 1
       run: |
-        echo "${{ fromJSON( $inputs.solution-names ) }}"
         echo "repository variable : ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}"
         echo "variable : env URI ${{ env.POWERPLATFORMURI }}"
         echo "variable : var URI ${{ vars.POWERPLATFORMORGURI }}"
