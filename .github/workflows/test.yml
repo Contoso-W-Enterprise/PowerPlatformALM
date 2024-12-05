@@ -8,7 +8,13 @@ on:
       solution-names:
         description: 'names of solutions'
         required: true
+        type: string
         default:  "OrgDemo,OrgData"
+      branch-name:
+        description: 'branch to check out'
+        type: string
+        required: true
+        default: "feature/001"
 env:
   all-solution-names: "['OrgDemo','OrgData']"
 
@@ -27,6 +33,20 @@ jobs:
       run: | 
         echo "$GITHUB_CONTEXT"
       shell: pwsh
+    - name: check out branch if exists
+      run: |
+        git config --global user.email '${{ github.actor }}'
+        git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
+        git show-ref
+        git branch --all
+        echo "refs/remotes/origin/${{ inputs.branch-name}}"
+        if git show-ref --verify --quiet refs/remotes/origin/${{ inputs.branch-name}} ; then
+          echo "Branch exists. Checking out..."
+          git --work-tree=${{ inputs.folder-path }} checkout ${{ inputs.branch-name}}
+          git pull origin ${{ inputs.branch-name}} 
+        else
+          echo "Branch does not exist."
+        fi
     - name: Set Solution Names Matrix
       id: solution-matrix
       run: | 
@@ -71,6 +91,10 @@ jobs:
     - name : check variable
       run: |
           echo "uri : ${{ vars.POWERPLATFORMORGURI }}"
+    - name: Debug list of files
+      run: |
+        Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
+      shell: pwsh        
   display-variables-again:    
     name: Test2    
     runs-on: ubuntu-latest
