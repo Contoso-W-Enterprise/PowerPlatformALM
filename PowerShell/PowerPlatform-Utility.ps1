@@ -35,7 +35,7 @@ function import-DataverseWebAPI {
 	param(
         [Parameter()] [String]$Path
 	)
-	Import-Module "$Path/ALMTemplate/PowerShell/dataverse-webapi-functions.psm1" -force
+	Import-Module "$Path/PowerShell/dataverse-webapi-functions.psm1" -force
 }
 
 
