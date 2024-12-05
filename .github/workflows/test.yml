@@ -67,7 +67,8 @@ jobs:
           echo "uri : ${{ vars.POWERPLATFORMORGURI }}"
   display-variables-again:    
     name: Test2    
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
+    needs: display-variables
     steps:    
     - name: Use variables 2      
       run: |
@@ -78,6 +79,7 @@ jobs:
         echo "variable : var URI ${{ vars.POWERPLATFORMURI }}"        
         echo "variable Target ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}"       
   variable-matrix:
+    needs: [display-variables, display-variables-again]
     strategy:
       matrix:
         solution-name: ${{ fromJSON( needs.display-variables.outputs.solution-names ) }} 
