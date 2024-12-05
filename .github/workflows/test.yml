@@ -51,6 +51,8 @@ jobs:
         git show-ref
         echo "git branch --all"
         git branch --all
+        echo "git ls-remote"
+        git ls-remote
         echo "refrence: refs/remotes/origin/${{ inputs.branch-name}}"
         if git show-ref --verify --quiet refs/remotes/origin/${{ inputs.branch-name}} ; then
           echo "Branch exists. Checking out..."
