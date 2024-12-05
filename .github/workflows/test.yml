@@ -17,13 +17,15 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     environment: ${{ vars.POWERPLATFORMTARGETENVIRONMENT }}
+    env:
+      GITHUB_CONTEXT: ${{ toJSON(github) }}
     outputs:
       solution-names: ${{ steps.solution-matrix.outputs.solution-names }}
       release-date: ${{ steps.solution-matrix.outputs.release-date }}
     steps:
     - name: show Context
       run: | 
-        echo "${{ toJSON(github.context) }}"
+        echo "$GITHUB_CONTEXT"
       shell: pwsh
     - name: Set Solution Names Matrix
       id: solution-matrix
