@@ -105,8 +105,6 @@ jobs:
         run: |
           $solutionName = '${{ inputs.solution-name }}';
           write-Host "solution name $solutionName"
-          write-Host "release name $inputs.'release-name'"
-          write-Host "folder Path $inputs.'folder-path'"
           write-host "release name ${{inputs.release-name}}"
           write-host "folder path ${{inputs.folder-path}}"
           
@@ -114,21 +112,21 @@ jobs:
           {
             $releaseName = "${{inputs.release-name}}"
             write-host "release name: $releaseName"     
-            if (($inputs.'folder-path').length -gt 1 )
+            if (("${{inputs.folder-path}}").length -gt 1 )
             {
-              $releasePath = $inputs.'folder-path' + '/release/'+ $releaseName + '/'
+              $releasePath = "${{inputs.folder-path}}" + '/release/'+ $releaseName + '/'
             } else {
               $releasePath = 'release/' + $releaseName +'/'
             }
           } else {
             write-host "release name: null"     
-            if (($inputs.'folder-path').length -gt 1 )
+            if (("${{inputs.folder-path}}").length -gt 1 )
             {
-              if (Test-Path -LiteralPath "$($inputs.'folder-path')/release") {
-                write-host "tested $($inputs.'folder-path')/release successful"
-                $latestRelease = (Get-ChildItem -path "$($inputs.'folder-path')/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
+              if (Test-Path -LiteralPath "${{inputs.folder-path}}/release") {
+                write-host "tested ${{inputs.folder-path}}/release successful"
+                $latestRelease = (Get-ChildItem -path "${{inputs.folder-path}}/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
                 write-host "latest release: $($latestRelease)"
-                $releasePath = $inputs.'folder-path' + '/release/' + $latestRelease + '/' 
+                $releasePath = "${{inputs.folder-path}}/release/' + $latestRelease + '/' 
               } else {
                 write-host "Release folder not found"
               }
