@@ -43,8 +43,8 @@ jobs:
           echo $EVENT_CONTEXT
       - name: check out branch if exists
         run: |
-          git config --global user.email "${GITHUB_ACTOR}"
-          git config --global user.name "${GITHUB_ACTOR}@contoso.willinc.ca"
+          git config --global user.email '${{ github.actor }}'
+          git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
           $branchName = "${{ inputs.branch-name }}"
           $branchExists = ($null -ne (git branch --all | where {$_ -like "*$branchName"}))
           if ($branchExists) {
@@ -55,6 +55,7 @@ jobs:
             write-host "Branch $branchName does not exists"
             exit;
           }
+        shell: pwsh
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set environment variables
         run: |
