@@ -62,7 +62,13 @@ jobs:
       solution-names: ${{ steps.solution-matrix.outputs.solution-names }}
       release-date: ${{ steps.solution-matrix.outputs.release-date }}
     # Steps represent a sequence of tasks that will be executed as part of the job
+    env:
+      GITHUB_CONTEXT: ${{ toJSON(github) }}
     steps:
+      - name: Show GITHUB Context
+        run: | 
+          echo "$GITHUB_CONTEXT"
+        shell: pwsh
       - name: Set Solution Names Matrix
         id: solution-matrix
         run: | 
