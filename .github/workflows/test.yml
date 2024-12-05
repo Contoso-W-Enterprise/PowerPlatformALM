@@ -44,7 +44,6 @@ jobs:
         sparse-checkout: |
           .
           .github
-          PowerShell
           src
           release
     - name: Debug list of files
