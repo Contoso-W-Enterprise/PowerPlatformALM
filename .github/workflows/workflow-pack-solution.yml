@@ -91,6 +91,10 @@ jobs:
       # - name: Checkout branch main
       #   if: ${{ steps.check-branch-exists.outputs.exists != 'true' }}
       #   uses: actions/checkout@v4
+      - name: Debug list of files
+        run: |
+          Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
+        shell: pwsh
       - name: Install Power Platform Tools
         uses: microsoft/powerplatform-actions/actions-install@v1
       - uses: microsoft/powerplatform-actions/pack-solution@v1
