@@ -70,14 +70,6 @@ jobs:
         else
           echo "Branch does not exist."
         fi        
-
-        if git show-ref --verify --quiet refs/remotes/origin/${{ inputs.branch-name}} ; then
-          echo "2Branch exists. Checking out..."
-          git --work-tree=${{ inputs.folder-path }} checkout ${{ inputs.branch-name}}
-          git pull origin ${{ inputs.branch-name}} 
-        else
-          echo "2Branch does not exist."
-        fi
     - name: Set Solution Names Matrix
       id: solution-matrix
       run: | 
