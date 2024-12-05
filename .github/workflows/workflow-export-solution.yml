@@ -146,14 +146,24 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout branch
         uses: actions/checkout@v4
+        with:
+          lfs: true
+          sparse-checkout: |
+            .
+            .github
+            src
+            release
       - name: checkout exist or create new branch
         run: | 
           git config --global user.email "${GITHUB_ACTOR}"
           git config --global user.name "${GITHUB_ACTOR}@contoso.willinc.ca"
+          git fetch
           $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
-          $branchExists = ($null -ne (git branch --all | where {$_ -like "*$branchName"}))
+          $branchExists = ($null -ne (git ls-remote --heads origin feature/002))
           if ($branchExists) {
             write-host "Branch $branchName exists"
+            git checkout origin/${{ inputs.branch-name }}
+            git pull origin ${{ inputs.branch-name}} 
           } else {
             write-host "Branch $branchName does not exists, creating new branch and checking it out"
             git branch "$branchName"
@@ -169,12 +179,12 @@ jobs:
         ##uses: GuillaumeFalourd/branch-exists@v1
         ##with:
           ##branch: ${{ inputs.branchType }}-${{ inputs.branchName }}
-      - name: Checkout new Branch 
-        if: ${{ env.branch-exists == 'False' }}
-        uses: actions/checkout@v4
-        with:
-           ref: ${{ env.branch-name }}
-           path: ${{ inputs.folder-path }}
+      # - name: Checkout new Branch 
+      #   if: ${{ env.branch-exists == 'False' }}
+      #   uses: actions/checkout@v4
+      #   with:
+      #      ref: ${{ env.branch-name }}
+      #      path: ${{ inputs.folder-path }}
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
@@ -184,6 +194,9 @@ jobs:
           github-server-url: 'https://github.com'
           lfs: true
           persist-credentials: true      
+          sparse-checkout: |
+            .github
+            PowerShell
       # - name: Branch not found
       #   if:  ${{ env.branch-exists == 'False' }}
       #   uses: actions/checkout@v4
