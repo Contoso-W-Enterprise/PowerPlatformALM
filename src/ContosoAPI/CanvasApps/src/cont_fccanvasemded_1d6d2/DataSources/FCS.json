@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "cont_fcs",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "cont_fc",
+    "Name": "FCS",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cont_destination": "Destination",
+      "cont_fc_AsyncOperations": "System Jobs",
+      "cont_fc_BulkDeleteFailures": "Bulk Delete Failures",
+      "cont_fc_DuplicateBaseRecord": "Duplicate Records (cont_fc_DuplicateBaseRecord)",
+      "cont_fc_DuplicateMatchingRecord": "Duplicate Records (cont_fc_DuplicateMatchingRecord)",
+      "cont_fc_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "cont_fc_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "cont_fc_ProcessSession": "Process Sessions",
+      "cont_fc_SyncErrors": "Sync Errors",
+      "cont_fcid": "FC",
+      "cont_name": "Name",
+      "cont_source": "Source",
+      "cont_value": "Value",
+      "cont_valuedatetime": "Value Datetime",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "FCS",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "FCS (Views)",
+    "Name": "_cont_fc_views",
+    "RelatedEntityName": "FCS",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2505bb4e-3b92-412f-8ba4-81d5b7156da5": "Inactive FCS",
+      "304df015-6d23-4f42-89f5-c93af516e2ec": "Active FCS",
+      "69b5657f-93e5-4715-8a66-acb11d208519": "FC Advanced Find View",
+      "851bb074-d6cd-432b-9a9c-4c12ea785f9e": "FC Lookup View",
+      "c901f0c1-8d37-4bf4-9da6-311b7ccf6816": "FC Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (FCS)",
+    "Name": "cont_fc_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "FCS"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "FCS",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (FCS)",
+    "Name": "cont_fc_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "FCS"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "FCS",
+    "Type": "OptionSetInfo"
+  }
+]
