@@ -31,13 +31,20 @@ FunctionName -Parameter1 "Value1" -Parameter2 "Value2"
 # Function definitions and other code
 
 # Import the dataverse-webapi-functions module
-Import-Module 'ALMTemplate/PowerShell/dataverse-webapi-functions.psm1' -force
+function import-DataverseWebAPI {
+	param(
+        [Parameter()] [String]$Path
+	)
+	Import-Module "$Path/ALMTemplate/PowerShell/dataverse-webapi-functions.psm1" -force
+}
+
+
 ###########################
 # PAC CLI functions
 # Function to install pac cli
 function Install-Pac-Cli{
 	param(
-        [Parameter()] [String]$nugetPackageVersion		
+	[Parameter()] [String]$nugetPackageVersion		
 	)
     $nugetPackage = "Microsoft.PowerApps.CLI"
     $outFolder = "pac"
