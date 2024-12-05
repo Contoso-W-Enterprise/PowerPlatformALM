@@ -58,7 +58,24 @@ jobs:
             write-host "Branch $branchName does not exists"
             exit;
           }
+          echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
+          echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
+      - name: Checkout new Branch 
+        if: ${{ env.branch-exists == 'False' }}
+        uses: actions/checkout@v4
+        with:
+           ref: ${{ env.branch-name }}
+           path: ${{ inputs.folder-path }}
+      - name: Checkout Template Branch 
+        uses: actions/checkout@v4
+        with:
+          repository: Contoso-W-Enterprise/PowerPlatformALM
+          ref: main
+          path: ALMTemplate
+          github-server-url: 'https://github.com'
+          lfs: true
+          persist-credentials: true      
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set environment variables
         run: |
