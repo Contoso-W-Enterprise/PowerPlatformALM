@@ -81,7 +81,7 @@ jobs:
       - uses: microsoft/powerplatform-actions/pack-solution@v1
         with:
           solution-file: ${{ inputs.folder-path }}/${{ env.release-path }}${{ inputs.solution-name }}.zip
-          solution-folder: ${{ env.folder-path }}${{ inputs.solution-name }}
+          solution-folder: ${{ env.folder-path }}/src/${{ inputs.solution-name }}
           solution-type: Both
           #process-canvas-apps: true
       - name: Debug output
