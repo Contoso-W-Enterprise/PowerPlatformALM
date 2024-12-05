@@ -47,7 +47,7 @@ on:
 
 jobs:
   deploy-setup:
-    environment: ${{ inputs.target-environment }}
+    # environment: ${{ inputs.target-environment }}
     runs-on: ubuntu-latest
     steps: 
     - env:
