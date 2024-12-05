@@ -27,9 +27,6 @@ on:
       branch-name:
         type: string
         required: false
-      branch-type:
-        type: string
-        required: true
       folder-path:
         type: string
         required: false
@@ -57,42 +54,49 @@ jobs:
       contents: read
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Set branch variables
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
         run: |
-          if ( $inputs.'branch-type' -eq 'main')
-          {
-            $branchName = 'main'
+          echo $EVENT_CONTEXT
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          sparse-checkout: |
+            .
+            .github
+            src
+            release          
+      - name: check out branch if exists
+        run: |
+          git config --global user.email '${{ github.actor }}'
+          git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
+          git fetch
+          git show-ref          
+          $branchExists = ($null -ne (git ls-remote --heads origin ${{ inputs.branch-name }}))
+          if ($branchExists) {          
+            echo "Branch exists. Checking out..."
+            git checkout origin/${{ inputs.branch-name }}
+            git switch ${{ inputs.branch-name }}
+            git pull origin ${{ inputs.branch-name}} 
           } else {
-            $branchName = $inputs.'branch-type' + '/' +$inputs.'branch-name'
+            echo "Branch does not exist."
           }
-          echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
+          git status
+          echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
-      - name: check-branch-exists
-        id: check-branch-exists
-        uses: GuillaumeFalourd/branch-exists@v1
-        with:
-          branch: ${{ inputs.branch-name }}
-      - name: debug check exists
-        run: echo "${{ steps.check-branch-exists.outputs }}"
-      - name: Checkout branch if exists
-        if: ${{ steps.check-branch-exists.outputs.exists == 'true' }}
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.branch-name }}
-      - name: Checkout branch main
-        if: ${{ steps.check-branch-exists.outputs.exists != 'true' }}
-        uses: actions/checkout@v4
-        with: 
-          persistCredentials: true
-          ref: ${{ inputs.branch-name }}
-          path: ${{ inputs.folder-path }}
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
-          persistCredentials: true
-          repository: Contoso-W-Enterprise/PowerPlatformALM/
-          ref: V1
+          repository: Contoso-W-Enterprise/PowerPlatformALM
+          ref: main
           path: ALMTemplate
+          github-server-url: 'https://github.com'
+          lfs: true
+          sparse-checkout: |
+            .github
+            PowerShell
+          persist-credentials: true
       - name: Set release variables
         run: |
           $solutionName = '${{ Inputs.solution-name }}';
@@ -150,7 +154,8 @@ jobs:
       - name: Check solution exists
         id: check-solution-exists
         run: |
-          . "PowerShell/PowerPlatform-Utility.ps1"
+          . "/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
+          import-DataverseWebAPI "ALMTemplate"
           $solutionName = '${{ Inputs.solution-name }}';
           $token = Connect-Dataverse -dataverseHost '${{ vars.POWERPLATFORMORGURI }}' -tenantId ${{ secrets.POWERPLATFORMCONTOSOTENANTID }} -clientId ${{ secrets.POWERPLATFORMCONTOSOCLIENTID }} -clientSecret ${{ secrets.POWERPLATFORMCONTOSOCLIENTSECRET }} 
           $results = Get-DataverseSolution -token $token -dataverseHost '${{ vars.POWERPLATFORMORGURI }}' -solutionUniqueName $solutionName
