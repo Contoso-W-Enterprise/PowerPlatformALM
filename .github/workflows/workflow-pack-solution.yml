@@ -65,6 +65,7 @@ jobs:
             git pull origin ${{ inputs.branch-name}} 
           } else {
             echo "Branch does not exist."
+            exit
           }
           git status
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
@@ -91,11 +92,11 @@ jobs:
           $releaseDate = (Get-Date).toString('yyyyMMdd');
           if (('${{ inputs.folder-path }}').length -gt 1 ){
             $folderPath = "${{ inputs.folder-path }}/src/"
-            $releasePath = "${{ inputs.folder-path }}/release/$version-$releaseDate/" 
+            $releasePath = "${{ inputs.folder-path }}/release/$solutionName-$version-$releaseDate/" 
           } else
           {
             $folderPath = "src/" 
-            $releasePath = "release/$version-$releaseDate/"
+            $releasePath = "release/$solutionName-$version-$releaseDate/"
           }
           write-Host $releaseDate;
           write-Host $folderPath;
