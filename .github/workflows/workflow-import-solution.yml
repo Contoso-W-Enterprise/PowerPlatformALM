@@ -128,7 +128,7 @@ jobs:
                 write-host "latest release: $latestRelease"
                 $releasePath = $latestRelease
               } else {
-                write-host "Release folder not found"
+                write-host "${{inputs.folder-path}}/release folder not found"
               }
             } else {
               if (Test-Path -LiteralPath "${{ github.workspace }}/release") {
