@@ -120,7 +120,9 @@ jobs:
             }
           } else {
             write-host "release name: null"     
-            if (("${{inputs.folder-path}}").length -gt 1 )
+            write-host ('${{inputs.folder-path}}').length
+            write-host '${{inputs.folder-path}}'
+            if (('${{inputs.folder-path}}').length -gt 1 )
             {
               if (Test-Path -LiteralPath "${{inputs.folder-path}}/release") {
                 write-host "tested ${{inputs.folder-path}}/release successful"
