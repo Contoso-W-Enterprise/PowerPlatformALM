@@ -90,15 +90,18 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set environment variables
         run: |
-          $releaseDate = (Get-Date).toString('yyyyMMdd');
+          . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
           $solutionName = '${{ Inputs.solution-name }}';
-          if (($inputs.'folder-path').length -gt 1 ){
-            $folderPath = $inputs.'folder-path' + '/src/' 
-            $releasePath = $inputs.'folder-path' + '/release/'+ $releaseDate + '/' 
+          $version = Get-SolutionVersion $solutionName
+          
+          $releaseDate = (Get-Date).toString('yyyyMMdd');
+          if ((${{ inputs.folder-path }}).length -gt 1 ){
+            $folderPath = "${{ inputs.folder-path }}/src/"
+            $releasePath = "${{ inputs.'folder-path }}/release/$version-$releaseDate/" 
           } else
           {
-            $folderPath = 'src/' 
-            $releasePath = 'release/'+ $releaseDate + '/'
+            $folderPath = "src/" 
+            $releasePath = "release/$version-$releaseDate/"
           }
           write-Host $releaseDate;
           write-Host $folderPath;
