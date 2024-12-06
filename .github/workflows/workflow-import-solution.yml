@@ -126,7 +126,7 @@ jobs:
             {
               write-host "greater $(Test-Path '${{inputs.folder-path}}/release')"
               write-host "greater again $(Test-Path '${{ github.workspace }}/release')"
-              write-host "great once again ($pwd.Path)/${{inputs.folder-path}}/release"
+              write-host "great once again $pwd/${{inputs.folder-path}}/release"
               if (Test-Path -Path '${{inputs.folder-path}}/release') 
               {
                 write-host "tested ${{inputs.folder-path}}/release successful"
@@ -135,7 +135,15 @@ jobs:
                 $releasePath = $latestRelease.DirectoryName
               } else {
                 write-host "Greater ${{inputs.folder-path}}/release folder not found"
-                exit
+                if (Test-Path -Path '${{ github.workspace }}/release') {
+                  write-host "tested release successful"
+                  $latestRelease = Get-ChildItem -path "${{ github.workspace }}/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1
+                  write-host "latest release: $latestRelease.DirectoryName"
+                  $releasePath = $latestRelease.DirectoryName
+                } else {
+                  write-host "${{ github.workspace }}/release folder not found"
+                  exit
+                }
               }
             } else {
               write-host "less than"
