@@ -18,6 +18,9 @@ on:
         type: string
         required: true
         default: 'OrgDemo'
+      branch-type:
+        type: string
+        required: true
       branch-name:
         type: string
         required: true
@@ -58,11 +61,11 @@ jobs:
           git show-ref
           $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
           $branchExists = ($null -ne (git ls-remote --heads origin $branchName))
-          if ($branchExists) {          
+          if ($branchExists) { 
             echo "Branch exists. Checking out..."
-            git checkout origin/${{ inputs.branch-name }}
-            git switch ${{ inputs.branch-name }}
-            git pull origin ${{ inputs.branch-name}} 
+            git checkout origin/$branchName
+            git switch $branchName
+            git pull origin $branchName
           } else {
             echo "Branch does not exist."
             exit
