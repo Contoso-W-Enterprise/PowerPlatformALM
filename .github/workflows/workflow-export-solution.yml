@@ -259,7 +259,7 @@ jobs:
         if:  ${{ inputs.ClearEnvironmentVariableValues == true }}
         run: |
           . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
-          $version = Clear-CurentEnvironmentVariables -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
+          Clear-CurentEnvironmentVariables -solutionName '${{ matrix.solution-name }}' -folderPath '${{ inputs.folder-path }}' -deleteCurrentValues $true
         shell: pwsh
 
       - name: update solution version
