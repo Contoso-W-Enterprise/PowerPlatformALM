@@ -126,7 +126,7 @@ jobs:
             {
               write-host "greater $(Test-Path '${{inputs.folder-path}}/release')"
               write-host "greater again $(Test-Path '${{ github.workspace }}/release')"
-              
+              write-host "great once again ($pwd.Path)/${{inputs.folder-path}}/release"
               if (Test-Path -Path '${{inputs.folder-path}}/release') 
               {
                 write-host "tested ${{inputs.folder-path}}/release successful"
