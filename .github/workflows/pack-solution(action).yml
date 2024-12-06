@@ -61,4 +61,5 @@ jobs:
     uses: Contoso-W-Enterprise/PowerPlatformALM/.github/workflows/workflow-pack-solution.yml@main
     with: 
       solution-name: '${{ inputs.solution-name }}'
-      branch-name: '${{ inputs.branch-type }}/${{ inputs.branch-name}}'
+      branch-type: '${{ inputs.branch-type }}'
+      branch-name: '${{ inputs.branch-name}}'
