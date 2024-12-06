@@ -125,8 +125,8 @@ jobs:
               if (Test-Path -LiteralPath "${{inputs.folder-path}}/release") {
                 write-host "tested ${{inputs.folder-path}}/release successful"
                 $latestRelease = (Get-ChildItem -path "${{inputs.folder-path}}/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
-                write-host "latest release: $($latestRelease)"
-                $releasePath = "${{ inputs.folder-path }}" + "/release/$latestRelease/" 
+                write-host "latest release: $latestRelease"
+                $releasePath = $latestRelease
               } else {
                 write-host "Release folder not found"
               }
@@ -135,7 +135,7 @@ jobs:
                 write-host "tested release successful"
                 $latestRelease = (Get-ChildItem -path "release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
                 write-host "latest release: $($latestRelease)"
-                $releasePath = "release/$latestRelease/"
+                $releasePath = $latestRelease
               } else {
                 write-host "Release folder not found"
               }
