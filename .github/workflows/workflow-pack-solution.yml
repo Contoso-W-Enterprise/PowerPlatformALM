@@ -138,7 +138,7 @@ jobs:
       - name: Commit to relase branch
         run: |
           git status
-          git add ${{ env.release-path }}/. --force
+          git add ${{ env.release-path }}. --force
           git commit -m "Creating patch for ${{ inputs.solution-name }} in ${{ env.release-path }}. ${{ inputs.commitMessage }}"
           git push --set-upstream origin ${{ inputs.branch-type }}/${{ inputs.brach-name}}          
         shell: pwsh
