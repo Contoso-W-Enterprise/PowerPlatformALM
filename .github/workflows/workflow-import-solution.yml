@@ -131,7 +131,8 @@ jobs:
                 write-host "latest release: $latestRelease"
                 $releasePath = $latestRelease
               } else {
-                write-host "${{inputs.folder-path}}/release folder not found"
+                write-host "Greater ${{inputs.folder-path}}/release folder not found"
+                exit
               }
             } else {
               write-host "less than"
@@ -142,6 +143,7 @@ jobs:
                 $releasePath = $latestRelease
               } else {
                 write-host "${{ github.workspace }}/release folder not found"
+                exit
               }
             }
           }
