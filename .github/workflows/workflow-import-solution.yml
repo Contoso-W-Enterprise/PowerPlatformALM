@@ -107,7 +107,6 @@ jobs:
           write-Host "solution name $solutionName"
           write-host "release name ${{inputs.release-name}}"
           write-host "folder path ${{inputs.folder-path}}"
-          write-host "current folder: $pwd"
           if (("${{inputs.release-name}}").length -gt 1)
           {
             $releaseName = "${{inputs.release-name}}"
@@ -120,13 +119,8 @@ jobs:
             }
           } else {
             write-host "release name: null"     
-            write-host ('${{inputs.folder-path}}').length
-            write-host '${{inputs.folder-path}}'
             if (('${{inputs.folder-path}}').length -gt 1 )
             {
-              write-host "greater $(Test-Path '${{inputs.folder-path}}/release')"
-              write-host "greater again $(Test-Path '${{ github.workspace }}/release')"
-              write-host "great once again $pwd/${{inputs.folder-path}}/release"
               if (Test-Path -Path '${{inputs.folder-path}}/release') 
               {
                 write-host "tested ${{inputs.folder-path}}/release successful"
@@ -134,9 +128,8 @@ jobs:
                 write-host "latest release: $latestRelease.DirectoryName"
                 $releasePath = $latestRelease.DirectoryName
               } else {
-                write-host "Greater ${{inputs.folder-path}}/release folder not found"
                 if (Test-Path -Path '${{ github.workspace }}/release') {
-                  write-host "tested release successful"
+                  write-host "Tested {{inputs.folder-path}}/release successful"
                   $latestRelease = Get-ChildItem -path "${{ github.workspace }}/release"  -File "$solutionName.zip" -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1
                   write-host "latest release: $latestRelease.DirectoryName"
                   $releasePath = $latestRelease.DirectoryName
@@ -146,9 +139,8 @@ jobs:
                 }
               }
             } else {
-              write-host "less than"
               if (Test-Path -Path '${{ github.workspace }}/release') {
-                write-host "tested release successful"
+                write-host "tested ${{ github.workspace }}/release successful"
                 $latestRelease = Get-ChildItem -path "${{ github.workspace }}/release"  -File "$solutionName.zip" -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1
                 write-host "latest release: $latestRelease.DirectoryName"
                 $releasePath = $latestRelease.DirectoryName
