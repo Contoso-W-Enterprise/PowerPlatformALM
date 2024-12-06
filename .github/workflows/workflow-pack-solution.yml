@@ -89,7 +89,7 @@ jobs:
           $version = Get-SolutionVersion $solutionName
           
           $releaseDate = (Get-Date).toString('yyyyMMdd');
-          if ((${{ inputs.folder-path }}).length -gt 1 ){
+          if (('${{ inputs.folder-path }}').length -gt 1 ){
             $folderPath = "${{ inputs.folder-path }}/src/"
             $releasePath = "${{ inputs.folder-path }}/release/$version-$releaseDate/" 
           } else
