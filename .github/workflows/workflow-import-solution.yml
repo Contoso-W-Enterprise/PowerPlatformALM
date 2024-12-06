@@ -124,7 +124,9 @@ jobs:
             write-host '${{inputs.folder-path}}'
             if (('${{inputs.folder-path}}').length -gt 1 )
             {
-              write-host "greater $(Test-Path -Path '${{inputs.folder-path}}/release')"
+              write-host "greater $(Test-Path '${{inputs.folder-path}}/release')"
+              write-host "greater again $(Test-Path '${{ github.workspace }}/release')"
+              
               if (Test-Path -Path '${{inputs.folder-path}}/release') 
               {
                 write-host "tested ${{inputs.folder-path}}/release successful"
