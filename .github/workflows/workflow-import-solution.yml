@@ -124,6 +124,7 @@ jobs:
             write-host '${{inputs.folder-path}}'
             if (('${{inputs.folder-path}}').length -gt 1 )
             {
+              write-host "greater"
               if (Test-Path -LiteralPath "${{inputs.folder-path}}/release") {
                 write-host "tested ${{inputs.folder-path}}/release successful"
                 $latestRelease = (Get-ChildItem -path "${{inputs.folder-path}}/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
@@ -133,6 +134,7 @@ jobs:
                 write-host "${{inputs.folder-path}}/release folder not found"
               }
             } else {
+              write-host "less than"
               if (Test-Path -LiteralPath "${{ github.workspace }}/release") {
                 write-host "tested release successful"
                 $latestRelease = (Get-ChildItem -path "${{ github.workspace }}/release"  -File "$solutionName.zip -Recurse | Sort-Object -Property LastWriteTime -Descending -top 1).DirectoryName            
