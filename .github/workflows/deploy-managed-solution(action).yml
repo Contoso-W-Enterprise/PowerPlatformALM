@@ -51,6 +51,9 @@ on:
         required: true
         type: boolean
         default: false
+      release-name:
+        description: 'name of release'
+        required: false
 jobs:
   read-me:
     runs-on: ubuntu-latest
@@ -98,6 +101,7 @@ jobs:
       branch-name: '${{ inputs.branch-name }}'
       branch-type: '${{ inputs.branch-type }}'
       settings-file: ${{ needs.deploy-staging-setup.outputs.setting-file }}
+      release-name: '${{ inputs.release-name }}'
       managed: true
     secrets: inherit
   # deploy-production-setup:
