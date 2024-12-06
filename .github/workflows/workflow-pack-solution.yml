@@ -57,7 +57,7 @@ jobs:
           git fetch
           git show-ref
           $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
-          $branchExists = ($null -ne (git ls-remote --heads origin "$branchName"))
+          $branchExists = ($null -ne (git ls-remote --heads origin $branchName))
           if ($branchExists) {          
             echo "Branch exists. Checking out..."
             git checkout origin/${{ inputs.branch-name }}
