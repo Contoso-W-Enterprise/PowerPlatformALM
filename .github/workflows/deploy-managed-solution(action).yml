@@ -97,7 +97,6 @@ jobs:
       solution-name: ${{ inputs.solution-name }}
       branch-name: '${{ inputs.branch-name }}'
       branch-type: '${{ inputs.branch-type }}'
-      folder-path: '.'
       settings-file: ${{ needs.deploy-staging-setup.outputs.setting-file }}
       managed: true
     secrets: inherit
