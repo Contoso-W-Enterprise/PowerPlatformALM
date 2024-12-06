@@ -136,12 +136,9 @@ jobs:
         run: |
           Get-ChildItem  -Recurse | foreach { write-host $_.FullName }
       - name: Commit to relase branch
-        uses: EndBug/add-and-commit@v9
-        with: 
-          author_name: ${{ github.actor }}
-          author_email: "${{ github.actor }}@contoso.willinc.ca"
-          message: ${{ inputs.commitMessage }}
-          #new_branch: ${{ inputs.branch-name }}
-          add: '${{ env.release-path }}/. --force'
-          default_author: github_actor
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git status
+          git add ${{ env.release-path }}/. --force
+          git commit -m "Creating patch for ${{ inputs.solution-name }} in ${{ env.release-path }}. ${{ inputs.commitMessage }}"
+          git push --set-upstream origin ${{ inputs.branch-type }}/${{ inputs.brach-name}}          
+        shell: pwsh
