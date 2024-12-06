@@ -169,7 +169,7 @@ jobs:
             git branch "$branchName"
             git checkout -b "$branchName"
             git push -u origin "$branchName"
-            git fetch
+            git pull
             git status
           }
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
