@@ -67,6 +67,5 @@ jobs:
       solution-name: ${{ inputs.solution-name }}
       branch-name: '${{ inputs.branch-name }}'
       branch-type: '${{ inputs.branch-type }}'
-      folder-path: '.'
       managed: false
     secrets: inherit
