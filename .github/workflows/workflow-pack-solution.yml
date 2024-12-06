@@ -85,13 +85,13 @@ jobs:
       - name: Set environment variables
         run: |
           . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
-          $solutionName = '${{ Inputs.solution-name }}';
+          $solutionName = '${{ inputs.solution-name }}';
           $version = Get-SolutionVersion $solutionName
           
           $releaseDate = (Get-Date).toString('yyyyMMdd');
           if ((${{ inputs.folder-path }}).length -gt 1 ){
             $folderPath = "${{ inputs.folder-path }}/src/"
-            $releasePath = "${{ inputs.'folder-path }}/release/$version-$releaseDate/" 
+            $releasePath = "${{ inputs.folder-path }}/release/$version-$releaseDate/" 
           } else
           {
             $folderPath = "src/" 
@@ -100,7 +100,7 @@ jobs:
           write-Host $releaseDate;
           write-Host $folderPath;
           write-Host $releasePath;
-          write-Host ${{ Inputs.solution-name}} ;
+          write-Host "${{ inputs.solution-name }}";
           echo "release-date=$releaseDate"  | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "source-path=$folderPath" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "release-path=$releasePath" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
