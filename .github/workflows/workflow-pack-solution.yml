@@ -93,8 +93,8 @@ jobs:
           
           $releaseDate = (Get-Date).toString('yyyyMMdd');
           if (('${{ inputs.folder-path }}').length -gt 1 ){
-            $folderPath = "${{ inputs.folder-path }}/src/"
-            $releasePath = "${{ inputs.folder-path }}/release/$solutionName-$version-$releaseDate/" 
+            $folderPath = "src/"
+            $releasePath = "release/$solutionName-$version-$releaseDate/" 
           } else
           {
             $folderPath = "src/" 
@@ -142,7 +142,7 @@ jobs:
       - name: Commit to relase branch
         run: |
           git status
-          git add ${{ env.release-path }}. --sparse
+          git add release/. --sparse
           git commit -m "Creating patch for ${{ inputs.solution-name }} in ${{ env.release-path }}. ${{ inputs.commitMessage }}"
           git push --set-upstream origin ${{ inputs.branch-type }}/${{ inputs.brach-name}}          
         shell: pwsh
