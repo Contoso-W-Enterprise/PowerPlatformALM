@@ -50,7 +50,7 @@ jobs:
           lfs: true
           sparse-checkout: |
             .github
-            src
+            src/${{ inputs.solution-name }}
             release
       - name: check out branch if exists
         run: |
