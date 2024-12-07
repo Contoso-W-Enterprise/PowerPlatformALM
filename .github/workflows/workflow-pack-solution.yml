@@ -156,7 +156,8 @@ jobs:
       - name: Commit to relase branch
         run: |
           git status
-          git add release
+          git add ${{ env.release-path }}${{ inputs.solution-name }}.zip
+          git add ${{ env.release-path }}${{ inputs.solution-name }}_managed.zip
           git commit -m "Packing solution ${{ inputs.solution-name }} to ${{ env.release-path }}. ${{ inputs.commitMessage }}"
           git push origin ${{ env.branch-name}}          
         shell: pwsh
