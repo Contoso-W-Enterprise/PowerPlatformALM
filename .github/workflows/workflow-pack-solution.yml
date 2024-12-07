@@ -148,7 +148,7 @@ jobs:
       - name: Commit to relase branch
         run: |
           git status
-          git add release/. --sparse
+          git add release/. 
           git commit -m "Packing solution ${{ inputs.solution-name }} to ${{ env.release-path }}. ${{ inputs.commitMessage }}"
-          git push --set-upstream origin ${{ env.branch-name}}          
+          git push origin ${{ env.branch-name}}          
         shell: pwsh
