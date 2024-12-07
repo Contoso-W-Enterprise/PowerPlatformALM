@@ -63,7 +63,7 @@ jobs:
           } else {
             $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
           }
-          $branchExists =  ($null -ne (git ls-remote --heads origin $branchName))
+          $branchExists =  ($null -ne (git branch -r --list "origin/$branchName"))
           #$branchExists = ($null -ne (git ls-remote --heads origin $branchName))
           if ($branchExists) { 
             echo "Branch exists. Checking out..."
