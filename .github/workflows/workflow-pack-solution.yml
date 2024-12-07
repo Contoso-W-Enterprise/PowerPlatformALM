@@ -44,14 +44,6 @@ jobs:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
         run: |
           echo $EVENT_CONTEXT
-      - name: Checkout branch
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-          sparse-checkout: |
-            .github
-            src
-            release
       - name: check out branch if exists
         run: |
           git config --global user.email '${{ github.actor }}'
@@ -65,18 +57,27 @@ jobs:
           }
           $branchExists =  ($null -ne (git branch -r --list "origin/$branchName"))
           #$branchExists = ($null -ne (git ls-remote --heads origin $branchName))
-          if ($branchExists) { 
-            echo "Branch exists. Checking out..."
-            #git checkout origin/$branchName
-            git switch $branchName
-            git pull origin $branchName
-          } else {
-            echo "Branch does not exist."
-            exit
-          }
+          # if ($branchExists) { 
+          #   echo "Branch exists. Checking out..."
+          #   #git checkout origin/$branchName
+          #   git switch $branchName
+          #   git pull origin $branchName
+          # } else {
+          #   echo "Branch does not exist."
+          #   exit
+          # }
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.branch-name }}
+          lfs: true
+          sparse-checkout: |
+            .github
+            src
+            release
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
