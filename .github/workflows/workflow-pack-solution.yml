@@ -51,7 +51,7 @@ jobs:
           sparse-checkout: |
             .github
             src
-            release          
+            release
       - name: check out branch if exists
         run: |
           git config --global user.email '${{ github.actor }}'
@@ -144,5 +144,5 @@ jobs:
           git status
           git add release/. --sparse
           git commit -m "Creating patch for ${{ inputs.solution-name }} in ${{ env.release-path }}. ${{ inputs.commitMessage }}"
-          git push --set-upstream origin ${{ inputs.branch-type }}/${{ inputs.brach-name}}          
+          git push --set-upstream origin ${{ inputs.branch-type }}/${{ inputs.branch-name}}          
         shell: pwsh
