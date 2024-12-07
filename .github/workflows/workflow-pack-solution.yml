@@ -44,6 +44,14 @@ jobs:
           EVENT_CONTEXT: ${{ toJSON(github.event) }}
         run: |
           echo $EVENT_CONTEXT
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          sparse-checkout: |
+            .github
+            src
+            release
       - name: check out branch if exists
         run: |
           git config --global user.email '${{ github.actor }}'
