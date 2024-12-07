@@ -67,14 +67,13 @@ jobs:
           #$branchExists = ($null -ne (git ls-remote --heads origin $branchName))
           if ($branchExists) { 
             echo "Branch exists. Checking out..."
-            git checkout origin/$branchName
+            #git checkout origin/$branchName
             git switch $branchName
             git pull origin $branchName
           } else {
             echo "Branch does not exist."
             exit
           }
-          git status
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
