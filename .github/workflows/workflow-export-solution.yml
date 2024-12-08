@@ -170,8 +170,8 @@ jobs:
           } else {
             write-host "Branch $branchName does not exists, creating new branch and checking it out"
             git branch "$branchName"
-            # git checkout -b "$branchName"
-            # git push -u origin "$branchName"
+            git checkout -b "$branchName"
+            git push -u origin "$branchName"
             # git pull
             # git status
           }
