@@ -252,7 +252,7 @@ jobs:
         id: update-solution-version
         run: |
           . "${{ github.workspace }}/ALMTemplate/PowerShell/PowerPlatform-Utility.ps1"
-          $solutionName = '${{ inputs.solution-name }}';
+          $solutionName = '${{ matrix.solution-name }}';
           $origVersion = Get-SolutionVersion $solutionName
           switch ("${{ inputs.branch-type }}"){
             "main" {
