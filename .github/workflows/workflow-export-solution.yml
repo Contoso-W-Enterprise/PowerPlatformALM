@@ -175,6 +175,7 @@ jobs:
             git pull
             git status
           }
+          git config advice.updateSparsePath false
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
@@ -284,7 +285,10 @@ jobs:
           write-host $newVersion
           echo "orig-version=$origVersion" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "new-version=$newVersion" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
-
+        shell: pwsh
+      - name: Debug list of files ater export
+        run: |
+          Get-ChildItem -path '.' -Recurse | foreach { write-host $_.FullName }
         shell: pwsh
       - name: Commit to relase branch
         run: |
