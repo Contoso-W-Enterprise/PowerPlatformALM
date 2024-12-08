@@ -66,41 +66,34 @@ jobs:
         with:
           lfs: true
           sparse-checkout: |
-            .
             .github
-            src
-            release          
+            src/${{ inputs.solution-name }}
+            release
       - name: check out branch if exists
         run: |
           git config --global user.email '${{ github.actor }}'
           git config --global user.name "${{ github.actor }}@contoso.willinc.ca"
           git fetch
           git show-ref
-          $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
-          $branchExists = ($null -ne (git ls-remote --heads origin "$branchName"))
-          if ($branchExists) {          
-            echo "Branch exists. Checking out..."
-            git checkout origin/${{ inputs.branch-name }}
-            git switch ${{ inputs.branch-name }}
-            git pull origin ${{ inputs.branch-name}} 
+          if ("${{ inputs.branch-type }}" -in ("develop","main")){
+            $branchName = "${{ inputs.branch-type }}"
           } else {
-            echo "Branch does not exist."
+            $branchName = "${{ inputs.branch-type }}/${{ inputs.branch-name }}"
           }
-          git status
+          $branchExists =  ($null -ne (git branch -r --list "origin/$branchName"))
+
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
+          echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         shell: pwsh
-      - name: Checkout Template Branch 
+      - name: Checkout branch
         uses: actions/checkout@v4
         with:
-          repository: Contoso-W-Enterprise/PowerPlatformALM
-          ref: main
-          path: ALMTemplate
-          github-server-url: 'https://github.com'
+          ref: ${{ env.branch-name }}
           lfs: true
           sparse-checkout: |
             .github
-            PowerShell
-          persist-credentials: true
+            src/${{ inputs.solution-name }}
+            release
       - name: Set release variables
         run: |
           $solutionName = '${{ inputs.solution-name }}';
