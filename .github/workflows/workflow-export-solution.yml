@@ -165,8 +165,8 @@ jobs:
           $branchExists = ($null -ne (git ls-remote --heads origin "$branchName"))
           if ($branchExists) {
             write-host "Branch $branchName exists"
-            git checkout "origin/$branchExists"
-            git pull origin "$branchExists"
+            git checkout "origin/$branchName"
+            git pull origin "$branchName"
           } else {
             write-host "Branch $branchName does not exists, creating new branch and checking it out"
             git branch "$branchName"
