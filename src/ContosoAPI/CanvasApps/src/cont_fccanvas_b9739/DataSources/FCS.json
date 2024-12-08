@@ -6,6 +6,7 @@
     "IsSampleData": false,
     "IsWritable": true,
     "LogicalName": "cont_fc",
+    "MaxGetRowsCount": 500,
     "Name": "FCS",
     "NativeCDSDataSourceInfoNameMapping": {
       "_ownerid_value": "Owner",

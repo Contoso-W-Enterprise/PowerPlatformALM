@@ -625,7 +625,7 @@
       "DisplayNameResourceString": "Fill",
       "EnumValues": [],
       "HelperUI": null,
-      "Hidden": true,
+      "Hidden": false,
       "IsDataSourceProperty": false,
       "IsLinkableToParentTheme": true,
       "IsPrimaryBehavioral": false,
@@ -1211,7 +1211,7 @@
       "IsControlSpecific": false,
       "LoadingOrder": 10,
       "ModifiedPath": "",
-      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"0.0.42\",\"IsFirstParty\":true}}",
+      "Path": "{\"Id\":\"PowerAppsControlInfo\",\"Data\":{\"TemplateVersion\":1,\"Version\":\"0.0.44\",\"IsFirstParty\":true}}",
       "Type": 3
     },
     {
@@ -1570,5 +1570,5 @@
     "supportResettableProperties": "true",
     "supportSetFocus": "true"
   },
-  "Version": "0.0.42"
+  "Version": "0.0.44"
 }

@@ -71,7 +71,7 @@
                 "Gallery1 As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver5.0'":
                     DelayItemLoading: =true
                     Height: =768
-                    Items: =Filter(FCS, 'FCS (Views)'.'Active FCS')
+                    Items: =Sort(Filter(FCS, 'FCS (Views)'.'Active FCS'),ThisRecord.'Value Datetime',SortOrder.Descending)
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
@@ -89,7 +89,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Text: =ThisItem.Source
+                        Text: =ThisItem.'Value Datetime'
                         VerticalAlign: =VerticalAlign.Top
                         Width: =Parent.TemplateWidth - 86
                         X: =1
@@ -104,7 +104,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Text: =ThisItem.Destination
+                        Text: =ThisItem.Source  & "-" & ThisItem.Destination
                         VerticalAlign: =VerticalAlign.Top
                         Width: =Title2.Width
                         X: =1
