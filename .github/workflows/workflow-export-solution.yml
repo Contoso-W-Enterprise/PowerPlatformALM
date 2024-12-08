@@ -165,21 +165,31 @@ jobs:
           $branchExists = ($null -ne (git ls-remote --heads origin "$branchName"))
           if ($branchExists) {
             write-host "Branch $branchName exists"
-            git checkout "origin/$branchName"
-            git pull origin "$branchName"
+            # git checkout "origin/$branchName"
+            # git pull origin "$branchName"
           } else {
             write-host "Branch $branchName does not exists, creating new branch and checking it out"
             git branch "$branchName"
-            git checkout -b "$branchName"
-            git push -u origin "$branchName"
-            git pull
-            git status
+            # git checkout -b "$branchName"
+            # git push -u origin "$branchName"
+            # git pull
+            # git status
           }
           git config advice.updateSparsePath false
           echo "branch-exists=$branchExists" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
           echo "branch-name=$branchName" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append;
         #echo "release-date=$(date +'%Y%m%d')" >> "$GITHUB_ENV"
         shell: pwsh 
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.branch-name }}
+          lfs: true
+          sparse-checkout: |
+            .github
+            src\${{ matrix.solution-name }}
+            release
+
       - name: Checkout Template Branch 
         uses: actions/checkout@v4
         with:
