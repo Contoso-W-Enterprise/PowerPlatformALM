@@ -307,6 +307,6 @@ jobs:
           echo 'git commit -m "Exporting ${{ matrix.solution-name }} version ${{ env.orig-version }} update to ${{ env.new-version }} from ${{ inputs.environment }}. ${{ inputs.commitMessage }}"'
           git commit -m "Exporting ${{ matrix.solution-name }} version ${{ env.orig-version }} update to ${{ env.new-version }} from ${{ inputs.environment }}. ${{ inputs.commitMessage }}"
           #git push origin ${{ env.branch-name}}
-          echo "git push ${{ env.branch-name}}" 
-          git push ${{ env.branch-name}}
+          echo "git push origin/${{ env.branch-name}}" 
+          git push origin/${{ env.branch-name}}
         shell: pwsh
