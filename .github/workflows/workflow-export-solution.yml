@@ -302,8 +302,11 @@ jobs:
         shell: pwsh
       - name: Commit to relase branch
         run: |
+          echo "git add '${{ inputs.folder-path }}/src/${{ matrix.solution-name }}' --force"
           git add '${{ inputs.folder-path }}/src/${{ matrix.solution-name }}' --force
+          echo 'git commit -m "Exporting ${{ matrix.solution-name }} version ${{ env.orig-version }} update to ${{ env.new-version }} from ${{ inputs.environment }}. ${{ inputs.commitMessage }}"'
           git commit -m "Exporting ${{ matrix.solution-name }} version ${{ env.orig-version }} update to ${{ env.new-version }} from ${{ inputs.environment }}. ${{ inputs.commitMessage }}"
           #git push origin ${{ env.branch-name}}
+          echo "git push -u orgin ${{ env.branch-name}}" 
           git push -u orgin ${{ env.branch-name}}
         shell: pwsh
