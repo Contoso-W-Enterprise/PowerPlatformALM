@@ -16,7 +16,7 @@
 # use-setting-file: setting file
 # Required reuseable workflows: workflow-import-solution.yml
 # Author: William Tsoi (Microsoft)
-# Date: 2024-07-16
+# Date: 2025-01-09
 
 name: Deploy Managed Solution with Actions
 
