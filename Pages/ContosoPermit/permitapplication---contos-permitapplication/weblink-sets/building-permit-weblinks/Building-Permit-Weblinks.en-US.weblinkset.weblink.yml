@@ -1,0 +1,22 @@
+- adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 1
+  adx_displaypagechildlinks: false
+  adx_name: Our Permits
+  adx_openinnewwindow: false
+  adx_pageid: 9c8f0596-ae9d-ed11-aad1-000d3a31fdff
+  adx_publishingstateid: 2556ab90-ae9d-ed11-aad1-00224805caa9
+  adx_robotsfollowlink: true
+  adx_weblinkid: 1dfe5396-ae9d-ed11-aad1-00224805c0d1
+  adx_weblinksetid: 13299195-ae9d-ed11-aad1-000d3a320a78
+- adx_disablepagevalidation: false
+  adx_displayimageonly: false
+  adx_displayorder: 2
+  adx_displaypagechildlinks: false
+  adx_name: My Permits
+  adx_openinnewwindow: false
+  adx_pageid: ac851c99-ae9d-ed11-aad1-00224805ca8f
+  adx_publishingstateid: 2556ab90-ae9d-ed11-aad1-00224805caa9
+  adx_robotsfollowlink: true
+  adx_weblinkid: 77013996-ae9d-ed11-aad1-000d3a320118
+  adx_weblinksetid: 13299195-ae9d-ed11-aad1-000d3a320a78

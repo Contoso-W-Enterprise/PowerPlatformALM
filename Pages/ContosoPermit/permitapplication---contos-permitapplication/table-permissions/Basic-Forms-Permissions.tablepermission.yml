@@ -1,0 +1,13 @@
+adx_append: false
+adx_appendto: false
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: adx_entityform
+adx_entityname: Basic Forms Permissions
+adx_entitypermission_webrole:
+- 9f8f0596-ae9d-ed11-aad1-000d3a31fdff
+- a18f0596-ae9d-ed11-aad1-000d3a31fdff
+adx_entitypermissionid: 01ac4b91-ae9d-ed11-aad1-00224805cd41
+adx_read: true
+adx_scope: 756150000
+adx_write: false

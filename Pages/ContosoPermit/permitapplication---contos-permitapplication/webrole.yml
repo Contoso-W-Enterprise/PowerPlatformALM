@@ -1,0 +1,18 @@
+- adx_anonymoususersrole: false
+  adx_authenticatedusersrole: false
+  adx_name: Legacy Administrators Web Role
+  adx_webroleid: 15299195-ae9d-ed11-aad1-000d3a320a78
+- adx_anonymoususersrole: true
+  adx_authenticatedusersrole: false
+  adx_name: Anonymous Users
+  adx_webroleid: 16299195-ae9d-ed11-aad1-000d3a320a78
+- adx_anonymoususersrole: false
+  adx_authenticatedusersrole: true
+  adx_description: End users for this site will automatically get this web role to be used to submit permits
+  adx_name: '[Building Permit] C2 - User (Default)'
+  adx_webroleid: 9f8f0596-ae9d-ed11-aad1-000d3a31fdff
+- adx_anonymoususersrole: false
+  adx_authenticatedusersrole: false
+  adx_description: Admin Role
+  adx_name: '[Building Permit] C1 - Admin'
+  adx_webroleid: a18f0596-ae9d-ed11-aad1-000d3a31fdff

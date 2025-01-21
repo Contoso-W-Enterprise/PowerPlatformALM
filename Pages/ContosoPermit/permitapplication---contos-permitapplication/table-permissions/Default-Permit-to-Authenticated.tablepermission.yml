@@ -1,0 +1,12 @@
+adx_append: true
+adx_appendto: true
+adx_create: true
+adx_delete: false
+adx_entitylogicalname: bp_defaultapplication
+adx_entityname: Default Permit to Authenticated
+adx_entitypermission_webrole:
+- 9f8f0596-ae9d-ed11-aad1-000d3a31fdff
+adx_entitypermissionid: 02ac4b91-ae9d-ed11-aad1-00224805cd41
+adx_read: true
+adx_scope: 756150000
+adx_write: true

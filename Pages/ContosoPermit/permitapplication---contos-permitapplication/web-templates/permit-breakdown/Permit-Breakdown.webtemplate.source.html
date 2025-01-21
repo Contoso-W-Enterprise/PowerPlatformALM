@@ -1,0 +1,61 @@
+{% fetchxml submittedpermits %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical">
+    <entity name="bp_defaultapplication">
+        <attribute name="bp_defaultapplicationid"/>
+        <attribute name="bp_permitstatus"/>
+        <filter type="and">
+            <condition attribute="bp_permitstatus" operator="eq" value="121260000"/>
+            <condition attribute="statecode" operator="eq" value="0"/>
+        </filter>
+    </entity>
+</fetch>
+{% endfetchxml %}
+{% if submittedpermits %}
+{% assign submittedCount = submittedpermits.results.entities.size %}
+{% else assign submittedCount = "0" %}
+{% endif %}
+
+{% fetchxml underreviewpermits %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical">
+    <entity name="bp_defaultapplication">
+        <attribute name="bp_defaultapplicationid"/>
+        <attribute name="bp_permitstatus"/>
+        <filter type="and">
+            <condition attribute="bp_permitstatus" operator="eq" value="121260003"/>
+            <condition attribute="statecode" operator="eq" value="0"/>
+        </filter>
+    </entity>
+</fetch>
+{% endfetchxml %}
+{% if underreviewpermits %}
+{% assign underReviewCount = underreviewpermits.results.entities.size %}
+{% else assign underReviewCount = "0" %}
+{% endif %}
+
+{% fetchxml finalizedpermits %}
+<fetch version="1.0" output-format="xml-platform" mapping="logical">
+    <entity name="bp_defaultapplication">
+        <attribute name="bp_defaultapplicationid"/>
+        <attribute name="bp_permitstatus"/>
+        <filter type="or">
+            <condition attribute="bp_permitstatus" operator="eq" value="121260001"/>
+            <condition attribute="bp_permitstatus" operator="eq" value="121260002"/>
+        </filter>
+        <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0"/>
+        </filter>
+    </entity>
+</fetch>
+{% endfetchxml %}
+{% if finalizedpermits %}
+{% assign finalizedCount = finalizedpermits.results.entities.size %}
+{% else assign finalizedCount = "0" %}
+{% endif %}
+<div class="snapshot-header-container">
+    <h1 style="align-self: flex-start;" >Snapshot</h1>
+</div>
+<div class="snapshot-container">
+    <div class="snapshot-item"><div class="snapshot-number">{{submittedCount}}</div><h2>Permits submitted</h2></div>
+    <div class="snapshot-item"><div class="snapshot-number">{{underReviewCount}}</div><h2>Action Required</h2></div>
+    <div class="snapshot-item"><div class="snapshot-number">{{finalizedCount}}</div><h2>Finalized Decision</h2></div>
+</div>

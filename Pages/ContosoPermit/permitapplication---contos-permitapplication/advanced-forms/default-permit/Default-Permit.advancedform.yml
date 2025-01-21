@@ -1,0 +1,13 @@
+adx_authenticationrequired: false
+adx_editexistingrecordpermitted: true
+adx_multiplerecordsperuserpermitted: true
+adx_name: Default Permit
+adx_progressindicatorenabled: true
+adx_progressindicatorignorelaststep: false
+adx_progressindicatorposition: 756150002
+adx_progressindicatorprependstepnum: false
+adx_progressindicatortype: 756150000
+adx_savechangeswarningonclose: false
+adx_startnewsessiononload: false
+adx_startstep: 869c8c95-ae9d-ed11-aad1-000d3a5c052a
+adx_webformid: 12299195-ae9d-ed11-aad1-000d3a320a78

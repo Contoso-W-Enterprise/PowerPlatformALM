@@ -1,0 +1,38 @@
+  {% assign page_size = 10 %}
+  {% assign current_page = request.params.page | default: 1 %}
+    {% fetchxml applicationtype %}
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="bp_permit">
+          <attribute name="bp_name"/>
+          <attribute name="bp_description"/>
+          <attribute name="bp_permittimeline"/>
+          <attribute name="bp_shortname"/>
+          <filter type="and">
+            <condition attribute="bp_name" operator="like" value="%{{ request.params.q }}%"/>
+          </filter>
+        </entity>
+      </fetch>
+      {% endfetchxml %}
+      <script>
+        function updateApplication(appName) {
+          var queryUrl = '/summary/?q=';
+          queryUrl = queryUrl + appName.replaceAll(' ', '-')
+          window.location.href = queryUrl
+        }
+      </script>
+    {% if applicationtype.results and applicationtype.results.entities and applicationtype.results.entities.size > 0 %}
+    {% assign entityCode = applicationtype.results.entities[0].objecttypecode %}
+    {% endif %}
+    {% assign applicationTypeResult = applicationtype.results.entities %}
+    <div class="search-bar">
+    {% include 'Search' search_id:'search_control' %}
+    </div>
+<div class="search-container">
+{% for application in applicationTypeResult %}
+  <button onclick="updateApplication('{{application.bp_shortname}}')" class=" applicationTypeItem" style=" display: flex; flex-direction: column; margin-right: 7px; margin-left: 7px; margin-bottom: 14px;" value="{{application.attributevalue}}">
+    <h1 class="card-h1">{{application.bp_name}}</h1>
+    <p class="card-p">Average Processing Time: {{application.bp_permittimeline}}</p> 
+    <p class="card-p" style="color: #8F8F8F;">{{application.bp_description}}</p>
+  </button>
+{% endfor %}
+</div>

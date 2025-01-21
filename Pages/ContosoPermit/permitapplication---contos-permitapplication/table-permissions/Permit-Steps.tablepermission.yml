@@ -1,0 +1,15 @@
+adx_append: false
+adx_appendto: false
+adx_create: false
+adx_delete: false
+adx_entitylogicalname: bp_permitsteps
+adx_entityname: Permit Steps
+adx_entitypermission_webrole:
+- 15299195-ae9d-ed11-aad1-000d3a320a78
+- 16299195-ae9d-ed11-aad1-000d3a320a78
+- 9f8f0596-ae9d-ed11-aad1-000d3a31fdff
+- a18f0596-ae9d-ed11-aad1-000d3a31fdff
+adx_entitypermissionid: eab05f8b-ae9d-ed11-aad1-00224808121e
+adx_read: true
+adx_scope: 756150000
+adx_write: false

@@ -1,0 +1,9 @@
+<entities >
+  <entity name="account" displayname="Account" etc="1" primaryidfield="accountid" primarynamefield="name" disableplugins="false">
+    <fields>
+      <field displayname="Account Name" name="name" type="string" />
+      <field displayname="Account" name="accountid" type="guid" primaryKey="true" />
+      <field displayname="Address 1" name="address1_composite" type="string" />
+    </fields>
+  </entity>
+</entities>
