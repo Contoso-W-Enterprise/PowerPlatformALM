@@ -67,6 +67,24 @@ function Set-DefaultHeaders {
     $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
     $headers.Add("Authorization", "Bearer $token")
     $headers.Add("Content-Type", "application/json")
+
+    return $headers
+}
+function Set-CustomHeaders {
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        $items
+    )
+    $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+    $headers.Add("Authorization", "Bearer $token")
+    $headers.Add("Content-Type", "application/json")
+    if ($items -ne $null)
+    {
+        foreach($item in $items)
+        {
+            $headers.Add($item.Name, $item.Value)
+        }
+    }
     return $headers
 }
 
@@ -114,6 +132,22 @@ function Invoke-DataverseHttpPost {
     $headers = Set-DefaultHeaders $token
     $requestUrl = Set-RequestUrl $dataverseHost $requestUrlRemainder
     $response = Invoke-RestMethod $requestUrl -Method 'POST' -Headers $headers -Body $body
+    return $response
+}
+
+function Invoke-DataverseHttpPatch {
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$requestUrlRemainder,
+        [Parameter(Mandatory)] [String]$body
+    )
+    $headers = Set-CustomHeaders $token -items ([pscustomobject]@{"Name"="If-Match"; "Value"="*"})
+    write-host ($headers  | convertto-json)
+    write-host ($body)
+    $requestUrl = Set-RequestUrl $dataverseHost $requestUrlRemainder
+    write-host $requestUrl
+    $response = Invoke-RestMethod $requestUrl -Method 'PATCH' -Headers $headers -Body $body
     return $response
 }
 
