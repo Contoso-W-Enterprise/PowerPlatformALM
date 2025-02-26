@@ -19,12 +19,13 @@ function Get-SpnToken {
         [Parameter(Mandatory)] [String]$clientId,
         [Parameter(Mandatory)] [String]$clientSecret,
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [Parameter(Mandatory)] [String]$aadHost = "https://login.microsoftonline.com/"
+        [Parameter(Mandatory)] [String]$aadHost = "https://login.microsoftonline.com"
     )
+    $dataverseHost = $dataverseHost.TrimEnd('/')
+    $aadHost = $aadHost.TrimEnd('/')
     $validDataverseHost = Get-HostFromUrl -url $dataverseHost
     $body = @{client_id = $clientId; client_secret = $clientSecret; grant_type = "client_credentials"; scope = "https://$validDataverseHost/.default"; }
-    $OAuthReq = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token" -Body $body
-
+    $OAuthReq = Invoke-RestMethod -Method Post -Uri "$aadHost/$tenantId/oauth2/v2.0/token" -Body $body
     return $OAuthReq.access_token
 }
 
@@ -94,7 +95,7 @@ This function sets the url by joining the host url and requestUrlRemainder.
 function Set-RequestUrl {
     param (
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [Parameter(Mandatory)] [String]$requestUrlRemainder
+        [String]$requestUrlRemainder
     )
     if ($dataverseHost -notlike 'https://*')
     {
@@ -111,7 +112,7 @@ function Invoke-DataverseHttpGet {
     param (
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [Parameter(Mandatory)] [String]$requestUrlRemainder
+        [String]$requestUrlRemainder
     )
     $headers = Set-DefaultHeaders $token
     $requestUrl = Set-RequestUrl $dataverseHost $requestUrlRemainder
@@ -134,7 +135,9 @@ function Invoke-DataverseHttpPost {
     $response = Invoke-RestMethod $requestUrl -Method 'POST' -Headers $headers -Body $body
     return $response
 }
-
+<#
+This function invokes Dataverse web api PATCH.
+#>
 function Invoke-DataverseHttpPatch {
     param (
         [Parameter(Mandatory)] [String]$token,
@@ -150,7 +153,21 @@ function Invoke-DataverseHttpPatch {
     $response = Invoke-RestMethod $requestUrl -Method 'PATCH' -Headers $headers -Body $body
     return $response
 }
-
+function Invoke-DataverseHttpUpsert {
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$requestUrlRemainder,
+        [Parameter(Mandatory)] [String]$body
+    )
+    $headers = Set-CustomHeaders $token -items ([pscustomobject]@{"Name"="If-None-Match"; "Value"="*"})
+    write-host ($headers  | convertto-json)
+    write-host ($body)
+    $requestUrl = Set-RequestUrl $dataverseHost $requestUrlRemainder
+    write-host $requestUrl
+    $response = Invoke-RestMethod $requestUrl -Method 'PUT' -Headers $headers -Body $body
+    return $response
+}
 <#
 This function triggers to download the unmanaged and managed solution pipeline artifacts.
 #>
