@@ -100,6 +100,167 @@ function Connect-Dataverse
     $token = Get-SpnToken -tenantID $tenantID -clientId $clientId -clientSecret $clientSecret -dataverseHost $dataverseHost -aadHost $aadHost
     return $token
 }
+<# 
+description: This function retrieves the solutions from the Dataverse environment.
+#>
+function get-DataverseEntities
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost
+    )
+    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder ''
+    return $response.value
+}
+<#
+description: This function retrieves the solutions from the Dataverse environment.
+#>
+function get-DataverseEntityItems {
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$entityName,
+        [String]$select,
+        [String]$filter,
+        [String]$expand,
+        [String]$orderby,
+        [String]$top,
+        [String]$skip
+    )
+    $querystring = $entityName + '?'
+    if ($select -ne '') {
+        $querystring += '$select=' + [uri]::EscapeDataString($select) + '&'
+    }
+    if ($filter -ne '') {
+        $querystring += '$filter=' + [uri]::EscapeDataString($filter) + '&'
+    }
+    if ($expand -ne '') {
+        $querystring += '$expand=' + [uri]::EscapeDataString($expand) + '&'
+    }
+    if ($orderby -ne '') {
+        $querystring += '$orderby=' + [uri]::EscapeDataString($orderby) + '&'
+    }
+    if ($top -ne '') {
+        $querystring += '$top=' + [uri]::EscapeDataString($top) + '&'
+    }
+    if ($skip -ne '') {
+        $querystring += '$skip=' + [uri]::EscapeDataString($skip) + '&'
+    }
+    $querystring = $querystring.TrimEnd('&')
+    $querystring = $querystring.TrimEnd('?')
+    write-Verbose $querystring
+    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder $querystring
+    return $response.value
+}
+<#
+description: This function retrieves a specific item from the Dataverse environment.
+#>
+function get-DataverseEntityItem
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$entityName,
+        [Parameter(Mandatory)] [String]$itemId,
+        [String]$select,
+        [String]$expand
+    )
+    $querystring = $entityName + "($itemId)?"
+    if ('' -ne $select) {
+        $querystring += '$select=' + [uri]::EscapeDataString($select) + '&'
+    }
+    if ('' -ne $expand) {
+        $querystring += '$expand=' + [uri]::EscapeDataString($expand) + '&'
+    }
+    $querystring = $querystring.TrimEnd('&')
+    write-verbose $querystring
+    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder $querystring
+    return $response
+}
+<#
+description: This function retrieves the metadata for a specific entity from the Dataverse environment.
+#>
+function get-DataverseEntityMetadata
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$entityName
+    )
+    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder "`$metadata#$entityName"
+    return $response.value
+}
+function get-DataverseEntityDefinitions
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [String]$entityName,
+        [String]$metadataId,
+        [String]$select
+
+    )
+
+    if ('' -ne $entityName) {
+        $filterString = "LogicalCollectionName eq '$entityName'"
+        $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'EntityDefinitions' -filter $filterString -select $select
+    }
+    if ('' -ne $metadataId) {        
+        $querystring = "EntityDefinitions($metadataId)" + '?'
+        $response = Get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'EntityDefinitions' -itemId $metadataId -select $select
+    }
+    if ($null -ne $response.value) {
+        return $response.value
+    }
+    return $response
+}
+<#
+description: This function retrieves the attributes definitions for a specific entity from the Dataverse environment.
+#>
+function get-DataverseEntityAttributesDefinitions
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$entityName
+    )
+    $querystring = "EntityDefinitions(LogicalName='$entityName')/Attributes"
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName $querystring
+    return $response
+}
+<#
+description: This function retrieves the attributes definitions for a specific entity from the Dataverse environment.
+#>
+function get-DataverseEntityAttributeDefinition
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$entityName,
+        [Parameter(Mandatory)] [String]$attributeName
+    )
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName "EntityDefinitions(LogicalName='$entityName')/Attributes" -filter "LogicalName='$attributeName" -select $select
+    return $response
+}
+
+# description: This function retrieves the settings for a specific entity from the Dataverse environment.
+# Usage: get-DataverseEntitySettings -token $token -dataverseHost $dataverseHost -entityName $entityName
+# parameters:
+# - token: The token for the Dataverse environment.
+# - dataverseHost: The Dataverse environment host URL.
+# - entityName: The name of the entity to retrieve settings for.
+# returns: The settings for the specific entity from the Dataverse environment.
+function get-DataverseEntitySettings
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$entityName
+    )
+    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder "EntityDefinitions(LogicalName='$entityName')"
+    return $response
+
+}
 # description: This function retrieves the solutions from the Dataverse environment.
 # Usage: Get-DataverseSolutions -token $token -dataverseHost $dataverseHost
 # parameters:
@@ -111,11 +272,15 @@ function Get-DataverseSolutions
 {
     param (
         [Parameter(Mandatory)] [String]$token,
-        [Parameter(Mandatory)] [String]$dataverseHost
-
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [String]$select,
+        [String]$filter,
+        [String]$orderby,
+        [String]$top,
+        [String]$skip
     )
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder 'solutions'
-    return $response.value
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutions' -select $select -filter $filter -orderby $orderby -top $top -skip $skip
+    return $response
 }
 # description: This function retrieves a specific solution from the Dataverse environment.
 # Usage: Get-DataverseSolution -token $token -dataverseHost $dataverseHost -solutionUniqueName $solutionUniqueName
@@ -130,10 +295,11 @@ function Get-DataverseSolution
     param (
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [Parameter(Mandatory)] [String]$solutionUniqueName
+        [Parameter(Mandatory)] [String]$solutionUniqueName,
+        [String]$select
     )
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder ('solutions?$filter=uniquename%20eq%20%27' + $solutionUniqueName + '%27')
-    return $response.value
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutions' -filter ("uniquename eq '$solutionUniqueName'") -select $select
+    return $response
 }
 # description: This function retrieves the solution components from the Dataverse environment.
 # Usage: Get-DataverseSolutionComponents -token $token -dataverseHost $dataverseHost -solutionId $solutionId -componentType $componentType
@@ -151,25 +317,47 @@ function Get-DataverseSolutionComponents
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost,
         [Parameter(Mandatory)] [String]$solutionId,
-        [String]$componentType
+        [String]$componentTypeId
     )
-    if($componentType)
+    $results = @()
+    if($componentTypeId)
     {
-        $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder ('solutioncomponents?$filter=_solutionid_value%20eq%20%27' + $solutionId + '%27&componenttype%20eq%20' + $componentType)
+        $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutioncomponents' -filter ("_solutionid_value eq '$solutionId' & componenttype eq $componentType")
+        #$response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder ('solutioncomponents?$filter=_solutionid_value%20eq%20%27' + $solutionId + '%27&componenttype%20eq%20' + $componentType)
     }
     else
     {
-        $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder ('solutioncomponents?$filter=_solutionid_value%20eq%20%27' + $solutionId + '%27')
+        $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutioncomponents' -filter ("_solutionid_value eq '$solutionId'")
+        #$response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder ('solutioncomponents?$filter=_solutionid_value%20eq%20%27' + $solutionId + '%27')
     }
-    $results = @()
-    foreach ($component in $response.value)
+
+    foreach ($component in $response)
     {
-        $componentType = Get-SolutionComponentTypes -componenttype $component.componenttype
+        $componentType = (Get-SolutionComponentType -componenttype $component.componenttype)
+
+        if ($null -ne $componentType.Entity ) {
+            if ($componentType.Entity -eq '/')
+            {
+                $item = get-DataverseEntityDefinitions -token $token -dataverseHost $dataverseHost -metadataId $component.objectid -select 'LogicalName,SchemaName,EntitySetName,PrimaryIdAttribute,PrimaryImageAttribute'
+            }
+            else {
+                $entityColumns = get-DataverseEntityDefinitions -token $token -dataverseHost $dataverseHost -entityName $componentType.Entity -select 'PrimaryIdAttribute,PrimaryNameAttribute'
+                $item = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName ($componentType.Entity) -itemId ($component.objectid) -select ($entityColumns.PrimaryIdAttribute + ',' + $entityColumns.PrimaryNameAttribute)
+            }  
+        }
+        else {
+            $item = $null
+        }
+        $createdBy = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId ($component._createdby_value) -select 'systemuserid,fullname,organizationid,domainname'
+        $modifiedBy = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId ($component._modifiedby_value) -select 'systemuserid,fullname,organizationid,domainname'
         $results += [PSCustomObject]@{
             componentTypeName = $componentType.Label
             componentType = $component.componenttype
             id = $component.objectid
             componentId = $component.solutioncomponentid
+            component = $item
+            createdBy = $createdBy
+            modifiedBy = $modifiedBy
         }
     }
     return $results
@@ -205,8 +393,7 @@ function get-DataverseAuditLogsSettings
         [Parameter(Mandatory)] [String]$dataverseHost
     )
     $organizationId = get-DataverseOrganizationId -token $token -dataverseHost $dataverseHost
-    $querystring = "organizations($organizationId)?`$select=" + [uri]::EscapeDataString("allowentityonlyaudit,isauditenabled,isuseraccessauditenabled,auditretentionperiod,enableipbasedfirewallruleinauditmode,useraccessauditinginterval,auditretentionperiodv2,isreadauditenabled")
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder $querystring
+    $response = Get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'organizations' -itemId $organizationId -select 'allowentityonlyaudit,isauditenabled,isuseraccessauditenabled,auditretentionperiod,enableipbasedfirewallruleinauditmode,useraccessauditinginterval,auditretentionperiodv2,isreadauditenabled'
     return $response
 }
 # description: This function sets the audit logs settings for the Dataverse environment.
@@ -232,7 +419,6 @@ function set-DataverseAuditLogsSettings
         "auditretentionperiodv2" = $AuditRetentionPeriodV2;
         "isuseraccessauditenabled" = $isuserAccessAuditEnabled;
     }) | convertto-json -depth 3
-    write-host $auditParams
     $organizationId = get-DataverseOrganizationId -token $token -dataverseHost $dataverseHost
     $response = Invoke-DataverseHttpPatch -token $token -dataverseHost $dataverseHost -requestUrlRemainder "organizations($organizationId)"  -body $auditParams
     return $response
@@ -250,8 +436,7 @@ function get-DataverseRPASettings{
         [Parameter(Mandatory)] [String]$dataverseHost
     )
     $organizationId = get-DataverseOrganizationId -token $token -dataverseHost $dataverseHost
-    $querystring = "organizations($organizationId)?`$select=" + [uri]::EscapeDataString("isrpaautoscaleaadjoinenabled,isrpaautoscaleenabled,isrpaunattendedenabled,isrpaboxcrossgeoenabled,isrpaboxenabled")
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder $querystring
+    $response = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'organizations' -itemId $organizationId -select 'isrpaautoscaleaadjoinenabled,isrpaautoscaleenabled,isrpaunattendedenabled,isrpaboxcrossgeoenabled,isrpaboxenabled'
     return $response
 }
 # description: This function sets the RPA settings for the Dataverse environment.
@@ -287,24 +472,7 @@ function set-DataverseRPASettings {
     $response = Invoke-DataverseHttpPatch -token $token -dataverseHost $dataverseHost -requestUrlRemainder "organizations($organizationId)" -body $rpaParams 
     return $response
 }
-# description: This function retrieves the settings for a specific entity from the Dataverse environment.
-# Usage: get-DataverseEntitySettings -token $token -dataverseHost $dataverseHost -entityName $entityName
-# parameters:
-# - token: The token for the Dataverse environment.
-# - dataverseHost: The Dataverse environment host URL.
-# - entityName: The name of the entity to retrieve settings for.
-# returns: The settings for the specific entity from the Dataverse environment.
-function get-DataverseEntitySettings
-{
-    param (
-        [Parameter(Mandatory)] [String]$token,
-        [Parameter(Mandatory)] [String]$dataverseHost,
-        [Parameter(Mandatory)] [String]$entityName
-    )
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder "EntityDefinitions(LogicalName='$entityName')"
-    return $response
 
-}
 # description: This function retrieves the audit logs for a specific entity from the Dataverse environment.
 # Usage: get-DataverseAuditLogs -token $token -dataverseHost $dataverseHost -entityName $entityName -operation $operation
 # parameters:
@@ -348,31 +516,33 @@ function get-DataverseAuditLogs
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost,
         [Parameter(Mandatory)] [String]$entityName,
-        [String]$operation
+        [String]$operation,
+        [String]$select,
+        [String]$top
     )
     # operation types
     # 1 = Create
     # 2 = Update
     # 3 = Delete
     # 4 = Access
-    if ($operation -ne ''){
-        $querystring = 'objecttypecode eq ''' + $entityName + ''' and operation eq ' + $operation
-    } else {
-        $querystring = 'objecttypecode eq ''' + $entityName + ''''
-    }
-    $querystring = 'audits?$filter=' + [uri]::EscapeDataString($querystring)
-    write-host $querystring
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder $querystring
-    return $response.value 
-}
 
+    if ($operation -ne ''){
+        $filterstring = 'objecttypecode eq ''' + $entityName + ''' and operation eq ' + $operation
+    } else {
+        $filterstring = 'objecttypecode eq ''' + $entityName + ''''
+    }
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'audits' -filter $filterstring -select $select -top $top
+    return $response 
+}<#
+description: This function retrieves the organization ID from the Dataverse environment.
+#>
 function get-DataverseOrganizationId {
     param (
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost
     )
-    $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder 'organizations'
-    return $response.value[0].organizationid
+    $response = get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'organizations' -select 'organizationid' -top 1
+    return $response.organizationid
 }
 <# Following scripts are from PowerCAT team (ALM Accelerator)
 #>
@@ -433,6 +603,19 @@ function Grant-DataverseAccessToWorkflow {
         `n        `"AccessMask`": `"ReadAccess`"
         `n    }
         `n}"
+        $body = @{
+            Target = @{
+                workflowid = $validatedId
+                "@odata.type" = "Microsoft.Dynamics.CRM.workflow"
+            }
+            PrincipalAccess = @{
+                Principal = @{
+                    teamid = $teamId
+                    "@odata.type" = "Microsoft.Dynamics.CRM.team"
+                }
+                AccessMask = "ReadAccess"
+            }
+        } | ConvertTo-Json -Depth 3
     
         $requestUrlRemainder = "GrantAccess"
         Invoke-DataverseHttpPost $token $dataverseHost $requestUrlRemainder $body
@@ -476,6 +659,19 @@ function Grant-DataverseAccessToConnector {
         `n        `"AccessMask`": `"ReadAccess`"
         `n    }
         `n}"
+        $body = @{ 
+            Target = @{
+                connectorid = $validatedId
+                "@odata.type" = "Microsoft.Dynamics.CRM.connector"
+            }
+            PrincipalAccess = @{
+                Principal = @{
+                    teamid = $teamId
+                    "@odata.type" = "Microsoft.Dynamics.CRM.team"
+                }
+                AccessMask = "ReadAccess"
+            }
+        } | ConvertTo-Json -Depth 3
 
         $requestUrlRemainder = "GrantAccess"        
         Invoke-DataverseHttpPost $token $dataverseHost $requestUrlRemainder $body
@@ -493,7 +689,8 @@ function Get-DataverseTeamId {
     )
     $teamId = ''
     $odataQuery = 'teams?$filter=name eq ' + "'$teamName'" + '&$select=teamid'
-    $response = Invoke-DataverseHttpGet $token $dataverseHost $odataQuery
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'teams' -itemId $teamName -select 'teamid'
+    #$response = Invoke-DataverseHttpGet $token $dataverseHost $odataQuery
     if($response.value.length -gt 0) {
         $teamId = $response.value[0].teamid
     }
@@ -735,106 +932,106 @@ function Delete-ExistingSolutionSource
     }    
     return $false
 }
-function Get-SolutionComponentTypes 
+function Get-SolutionComponentType
 {
     param ( 
         [Parameter(Mandatory)] [String]$componenttype
     )   
     $componentTypes = @(
-    [PSCustomObject]@{ Values = 1; Label = "Entity" }
-    [PSCustomObject]@{ Values = 2; Label = "Attribute" }
-    [PSCustomObject]@{ Values = 3; Label = "Relationship" }
-    [PSCustomObject]@{ Values = 4; Label = "Attribute Picklist Value" }
-    [PSCustomObject]@{ Values = 5; Label = "Attribute Lookup Value" }
-    [PSCustomObject]@{ Values = 6; Label = "View Attribute" }
-    [PSCustomObject]@{ Values = 7; Label = "Localized Label" }
-    [PSCustomObject]@{ Values = 8; Label = "Relationship Extra Condition" }
-    [PSCustomObject]@{ Values = 9; Label = "Option Set" }
-    [PSCustomObject]@{ Values = 10; Label = "Entity Relationship" }
-    [PSCustomObject]@{ Values = 11; Label = "Entity Relationship Role" }
-    [PSCustomObject]@{ Values = 12; Label = "Entity Relationship Relationships" }
-    [PSCustomObject]@{ Values = 13; Label = "Managed Property" }
-    [PSCustomObject]@{ Values = 14; Label = "Entity Key" }
-    [PSCustomObject]@{ Values = 16; Label = "Privilege" }
-    [PSCustomObject]@{ Values = 17; Label = "PrivilegeObjectTypeCode" }
-    [PSCustomObject]@{ Values = 20; Label = "Role" }
-    [PSCustomObject]@{ Values = 21; Label = "Role Privilege" }
-    [PSCustomObject]@{ Values = 22; Label = "Display String" }
-    [PSCustomObject]@{ Values = 23; Label = "Display String Map" }
-    [PSCustomObject]@{ Values = 24; Label = "Form" }
-    [PSCustomObject]@{ Values = 25; Label = "Organization" }
-    [PSCustomObject]@{ Values = 26; Label = "Saved Query" }
-    [PSCustomObject]@{ Values = 29; Label = "Workflow" }
-    [PSCustomObject]@{ Values = 31; Label = "Report" }
-    [PSCustomObject]@{ Values = 32; Label = "Report Entity" }
-    [PSCustomObject]@{ Values = 33; Label = "Report Category" }
-    [PSCustomObject]@{ Values = 34; Label = "Report Visibility" }
-    [PSCustomObject]@{ Values = 35; Label = "Attachment" }
-    [PSCustomObject]@{ Values = 36; Label = "Email Template" }
-    [PSCustomObject]@{ Values = 37; Label = "Contract Template" }
-    [PSCustomObject]@{ Values = 38; Label = "KB Article Template" }
-    [PSCustomObject]@{ Values = 39; Label = "Mail Merge Template" }
-    [PSCustomObject]@{ Values = 44; Label = "Duplicate Rule" }
-    [PSCustomObject]@{ Values = 45; Label = "Duplicate Rule Condition" }
-    [PSCustomObject]@{ Values = 46; Label = "Entity Map" }
-    [PSCustomObject]@{ Values = 47; Label = "Attribute Map" }
-    [PSCustomObject]@{ Values = 48; Label = "Ribbon Command" }
-    [PSCustomObject]@{ Values = 49; Label = "Ribbon Context Group" }
-    [PSCustomObject]@{ Values = 50; Label = "Ribbon Customization" }
-    [PSCustomObject]@{ Values = 52; Label = "Ribbon Rule" }
-    [PSCustomObject]@{ Values = 53; Label = "Ribbon Tab To Command Map" }
-    [PSCustomObject]@{ Values = 55; Label = "Ribbon Diff" }
-    [PSCustomObject]@{ Values = 59; Label = "Saved Query Visualization" }
-    [PSCustomObject]@{ Values = 60; Label = "System Form" }
-    [PSCustomObject]@{ Values = 61; Label = "Web Resource" }
-    [PSCustomObject]@{ Values = 62; Label = "Site Map" }
-    [PSCustomObject]@{ Values = 63; Label = "Connection Role" }
-    [PSCustomObject]@{ Values = 64; Label = "Complex Control" }
-    [PSCustomObject]@{ Values = 70; Label = "Field Security Profile" }
-    [PSCustomObject]@{ Values = 71; Label = "Field Permission" }
-    [PSCustomObject]@{ Values = 90; Label = "Plugin Type" }
-    [PSCustomObject]@{ Values = 91; Label = "Plugin Assembly" }
-    [PSCustomObject]@{ Values = 92; Label = "SDK Message Processing Step" }
-    [PSCustomObject]@{ Values = 93; Label = "SDK Message Processing Step Image" }
-    [PSCustomObject]@{ Values = 95; Label = "Service Endpoint" }
-    [PSCustomObject]@{ Values = 150; Label = "Routing Rule" }
-    [PSCustomObject]@{ Values = 151; Label = "Routing Rule Item" }
-    [PSCustomObject]@{ Values = 152; Label = "SLA" }
-    [PSCustomObject]@{ Values = 153; Label = "SLA Item" }
-    [PSCustomObject]@{ Values = 154; Label = "Convert Rule" }
-    [PSCustomObject]@{ Values = 155; Label = "Convert Rule Item" }
-    [PSCustomObject]@{ Values = 65; Label = "Hierarchy Rule" }
-    [PSCustomObject]@{ Values = 161; Label = "Mobile Offline Profile" }
-    [PSCustomObject]@{ Values = 162; Label = "Mobile Offline Profile Item" }
-    [PSCustomObject]@{ Values = 165; Label = "Similarity Rule" }
-    [PSCustomObject]@{ Values = 66; Label = "Custom Control" }
-    [PSCustomObject]@{ Values = 68; Label = "Custom Control Default Config" }
-    [PSCustomObject]@{ Values = 166; Label = "Data Source Mapping" }
-    [PSCustomObject]@{ Values = 201; Label = "SDKMessage" }
-    [PSCustomObject]@{ Values = 202; Label = "SDKMessageFilter" }
-    [PSCustomObject]@{ Values = 203; Label = "SdkMessagePair" }
-    [PSCustomObject]@{ Values = 204; Label = "SdkMessageRequest" }
-    [PSCustomObject]@{ Values = 205; Label = "SdkMessageRequestField" }
-    [PSCustomObject]@{ Values = 206; Label = "SdkMessageResponse" }
-    [PSCustomObject]@{ Values = 207; Label = "SdkMessageResponseField" }
-    [PSCustomObject]@{ Values = 210; Label = "WebWizard" }
-    [PSCustomObject]@{ Values = 18; Label = "Index" }
-    [PSCustomObject]@{ Values = 208; Label = "Import Map" }
-    [PSCustomObject]@{ Values = 300; Label = "Canvas App" }
-    [PSCustomObject]@{ Values = 371; Label = "Connector" }
-    [PSCustomObject]@{ Values = 372; Label = "Connector" }
-    [PSCustomObject]@{ Values = 380; Label = "Environment Variable Definition" }
-    [PSCustomObject]@{ Values = 381; Label = "Environment Variable Value" }
-    [PSCustomObject]@{ Values = 400; Label = "AI Project Type" }
-    [PSCustomObject]@{ Values = 401; Label = "AI Project" }
-    [PSCustomObject]@{ Values = 402; Label = "AI Configuration" }
-    [PSCustomObject]@{ Values = 430; Label = "Entity Analytics Configuration" }
-    [PSCustomObject]@{ Values = 431; Label = "Attribute Image Configuration" }
-    [PSCustomObject]@{ Values = 432; Label = "Entity Image Configuration" }
+    [PSCustomObject]@{ Values = 1; Label = "Entity"; Entity = "/" }
+    [PSCustomObject]@{ Values = 2; Label = "Attribute"; Entity = "attributes" }
+    [PSCustomObject]@{ Values = 3; Label = "Relationship"; Entity = "relationships" }
+    [PSCustomObject]@{ Values = 4; Label = "Attribute Picklist Value"; Entity = $null }
+    [PSCustomObject]@{ Values = 5; Label = "Attribute Lookup Value"; Entity = $null }
+    [PSCustomObject]@{ Values = 6; Label = "View Attribute"; Entity = $null }
+    [PSCustomObject]@{ Values = 7; Label = "Localized Label"; Entity = $null }
+    [PSCustomObject]@{ Values = 8; Label = "Relationship Extra Condition"; Entity = $null }
+    [PSCustomObject]@{ Values = 9; Label = "Option Set"; Entity = $null }
+    [PSCustomObject]@{ Values = 10; Label = "Entity Relationship"; Entity = $null }
+    [PSCustomObject]@{ Values = 11; Label = "Entity Relationship Role"; Entity = $null }
+    [PSCustomObject]@{ Values = 12; Label = "Entity Relationship Relationships"; Entity = $null }
+    [PSCustomObject]@{ Values = 13; Label = "Managed Property"; Entity = $null }
+    [PSCustomObject]@{ Values = 14; Label = "Entity Key"; Entity = $null }
+    [PSCustomObject]@{ Values = 16; Label = "Privilege"; Entity = "privileges" }
+    [PSCustomObject]@{ Values = 17; Label = "PrivilegeObjectTypeCode"; Entity = $null }
+    [PSCustomObject]@{ Values = 20; Label = "Role"; Entity = "roles" }
+    [PSCustomObject]@{ Values = 21; Label = "Role Privilege"; Entity = $null }
+    [PSCustomObject]@{ Values = 22; Label = "Display String"; Entity = $null }
+    [PSCustomObject]@{ Values = 23; Label = "Display String Map"; Entity = $null }
+    [PSCustomObject]@{ Values = 24; Label = "Form"; Entity = $null }
+    [PSCustomObject]@{ Values = 25; Label = "Organization"; Entity = "organizations" }
+    [PSCustomObject]@{ Values = 26; Label = "Saved Query"; Entity = $null }
+    [PSCustomObject]@{ Values = 29; Label = "Workflow"; Entity = "workflows" }
+    [PSCustomObject]@{ Values = 31; Label = "Report"; Entity = "reports" }
+    [PSCustomObject]@{ Values = 32; Label = "Report Entity"; Entity = $null }
+    [PSCustomObject]@{ Values = 33; Label = "Report Category"; Entity = $null }
+    [PSCustomObject]@{ Values = 34; Label = "Report Visibility"; Entity = $null }
+    [PSCustomObject]@{ Values = 35; Label = "Attachment"; Entity = "attachments" }
+    [PSCustomObject]@{ Values = 36; Label = "Email Template"; Entity = $null }
+    [PSCustomObject]@{ Values = 37; Label = "Contract Template"; Entity = $null }
+    [PSCustomObject]@{ Values = 38; Label = "KB Article Template"; Entity = $null }
+    [PSCustomObject]@{ Values = 39; Label = "Mail Merge Template"; Entity = $null }
+    [PSCustomObject]@{ Values = 44; Label = "Duplicate Rule"; Entity = $null }
+    [PSCustomObject]@{ Values = 45; Label = "Duplicate Rule Condition"; Entity = $null }
+    [PSCustomObject]@{ Values = 46; Label = "Entity Map"; Entity = $null }
+    [PSCustomObject]@{ Values = 47; Label = "Attribute Map"; Entity = $null }
+    [PSCustomObject]@{ Values = 48; Label = "Ribbon Command"; Entity = $null }
+    [PSCustomObject]@{ Values = 49; Label = "Ribbon Context Group"; Entity = $null }
+    [PSCustomObject]@{ Values = 50; Label = "Ribbon Customization"; Entity = $null }
+    [PSCustomObject]@{ Values = 52; Label = "Ribbon Rule"; Entity = $null }
+    [PSCustomObject]@{ Values = 53; Label = "Ribbon Tab To Command Map"; Entity = $null }
+    [PSCustomObject]@{ Values = 55; Label = "Ribbon Diff"; Entity = $null }
+    [PSCustomObject]@{ Values = 59; Label = "Saved Query Visualization"; Entity = $null }
+    [PSCustomObject]@{ Values = 60; Label = "System Form"; Entity = $null }
+    [PSCustomObject]@{ Values = 61; Label = "Web Resource"; Entity = $null }
+    [PSCustomObject]@{ Values = 62; Label = "Site Map"; Entity = "sitemaps" }
+    [PSCustomObject]@{ Values = 63; Label = "Connection Role"; Entity = $null }
+    [PSCustomObject]@{ Values = 64; Label = "Complex Control"; Entity = $null }
+    [PSCustomObject]@{ Values = 70; Label = "Field Security Profile"; Entity = $null }
+    [PSCustomObject]@{ Values = 71; Label = "Field Permission"; Entity = $null }
+    [PSCustomObject]@{ Values = 90; Label = "Plugin Type"; Entity = $null }
+    [PSCustomObject]@{ Values = 91; Label = "Plugin Assembly"; Entity = $null }
+    [PSCustomObject]@{ Values = 92; Label = "SDK Message Processing Step"; Entity = $null }
+    [PSCustomObject]@{ Values = 93; Label = "SDK Message Processing Step Image"; Entity = $null }
+    [PSCustomObject]@{ Values = 95; Label = "Service Endpoint"; Entity = $null }
+    [PSCustomObject]@{ Values = 150; Label = "Routing Rule"; Entity = $null }
+    [PSCustomObject]@{ Values = 151; Label = "Routing Rule Item"; Entity = $null }
+    [PSCustomObject]@{ Values = 152; Label = "SLA"; Entity = $null }
+    [PSCustomObject]@{ Values = 153; Label = "SLA Item"; Entity = $null }
+    [PSCustomObject]@{ Values = 154; Label = "Convert Rule"; Entity = $null }
+    [PSCustomObject]@{ Values = 155; Label = "Convert Rule Item"; Entity = $null }
+    [PSCustomObject]@{ Values = 65; Label = "Hierarchy Rule"; Entity = $null }
+    [PSCustomObject]@{ Values = 161; Label = "Mobile Offline Profile"; Entity = $null }
+    [PSCustomObject]@{ Values = 162; Label = "Mobile Offline Profile Item"; Entity = $null }
+    [PSCustomObject]@{ Values = 165; Label = "Similarity Rule"; Entity = $null }
+    [PSCustomObject]@{ Values = 66; Label = "Custom Control"; Entity = $null }
+    [PSCustomObject]@{ Values = 68; Label = "Custom Control Default Config"; Entity = $null }
+    [PSCustomObject]@{ Values = 166; Label = "Data Source Mapping"; Entity = $null }
+    [PSCustomObject]@{ Values = 201; Label = "SDKMessage"; Entity = $null }
+    [PSCustomObject]@{ Values = 202; Label = "SDKMessageFilter"; Entity = $null }
+    [PSCustomObject]@{ Values = 203; Label = "SdkMessagePair"; Entity = $null }
+    [PSCustomObject]@{ Values = 204; Label = "SdkMessageRequest"; Entity = $null }
+    [PSCustomObject]@{ Values = 205; Label = "SdkMessageRequestField"; Entity = $null }
+    [PSCustomObject]@{ Values = 206; Label = "SdkMessageResponse"; Entity = $null }
+    [PSCustomObject]@{ Values = 207; Label = "SdkMessageResponseField"; Entity = $null }
+    [PSCustomObject]@{ Values = 210; Label = "WebWizard"; Entity = $null }
+    [PSCustomObject]@{ Values = 18; Label = "Index"; Entity = $null }
+    [PSCustomObject]@{ Values = 208; Label = "Import Map"; Entity = $null }
+    [PSCustomObject]@{ Values = 300; Label = "Canvas App"; Entity = $null }
+    [PSCustomObject]@{ Values = 371; Label = "Connector"; Entity = $null }
+    [PSCustomObject]@{ Values = 372; Label = "Connector"; Entity = $null }
+    [PSCustomObject]@{ Values = 380; Label = "Environment Variable Definition"; Entity = "environmentvariabledefinitions" }
+    [PSCustomObject]@{ Values = 381; Label = "Environment Variable Value"; Entity = "environmentvariablevalues" }
+    [PSCustomObject]@{ Values = 400; Label = "AI Project Type"; Entity = $null}
+    [PSCustomObject]@{ Values = 401; Label = "AI Project"; Entity = $null }
+    [PSCustomObject]@{ Values = 402; Label = "AI Configuration"; Entity = $null }
+    [PSCustomObject]@{ Values = 430; Label = "Entity Analytics Configuration"; Entity = $null }
+    [PSCustomObject]@{ Values = 431; Label = "Attribute Image Configuration"; Entity = $null }
+    [PSCustomObject]@{ Values = 432; Label = "Entity Image Configuration"; Entity = $null }
 )
     if($componenttype)
     {
         return $componentTypes | where { $_.Values -eq $componenttype }
     }
-    return $componentTypes
+    return $componentTypes.Label
 }
