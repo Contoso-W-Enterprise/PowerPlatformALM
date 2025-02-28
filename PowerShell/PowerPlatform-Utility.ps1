@@ -95,9 +95,12 @@ function Connect-Dataverse
         [Parameter(Mandatory)] [String]$clientId,
         [Parameter(Mandatory)] [String]$clientSecret,
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [String]$aadHost = 'login.microsoftonline.com'
+        [String]$aadHost = "https://login.microsoft.com"
     )
-    $token = Get-SpnToken -tenantID $tenantID -clientId $clientId -clientSecret $clientSecret -dataverseHost $dataverseHost -aadHost $aadHost
+    Write-Verbose "Connecting to Dataverse..."
+    Write-verbose "dataverseHost: $dataverseHost"
+    Write-verbose "aadHost: $aadHost"
+    $token = Get-SpnToken $tenantID $clientId $clientSecret $dataverseHost $aadHost
     return $token
 }
 <# 
@@ -147,6 +150,7 @@ function get-DataverseEntityItems {
         $querystring += '$skip=' + [uri]::EscapeDataString($skip) + '&'
     }
     $querystring = $querystring.TrimEnd('&')
+    $querystring = $querystring.TrimEnd('%26')
     $querystring = $querystring.TrimEnd('?')
     write-Verbose $querystring
     $response = Invoke-DataverseHttpGet -token $token -dataverseHost $dataverseHost -requestUrlRemainder $querystring
@@ -273,13 +277,24 @@ function Get-DataverseSolutions
     param (
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost,
-        [String]$select,
+        [String]$isManaged,
+        [String]$select = 'solutionid,uniquename,friendlyname,description,version,ismanaged,modifiedon,createdon',
+        [String]$expand = 'publisherid($select=publisherid,customizationprefix,description,friendlyname),modifiedby($select=systemuserid,fullname,domainname),createdby($select=systemuserid,fullname,domainname)',
         [String]$filter,
         [String]$orderby,
         [String]$top,
         [String]$skip
     )
-    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutions' -select $select -filter $filter -orderby $orderby -top $top -skip $skip
+    if ($isManaged -ne '') {
+        if ($filter -ne '') {
+            $filter = $filter + " & ismanaged eq $($isManaged.toLower())"
+        }
+        else {
+            $filter = "ismanaged eq $($isManaged.toLower()) "
+        }
+    }
+
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutions' -select $select -filter $filter -orderby $orderby -top $top -skip $skip -expand $expand
     return $response
 }
 # description: This function retrieves a specific solution from the Dataverse environment.
@@ -296,9 +311,10 @@ function Get-DataverseSolution
         [Parameter(Mandatory)] [String]$token,
         [Parameter(Mandatory)] [String]$dataverseHost,
         [Parameter(Mandatory)] [String]$solutionUniqueName,
-        [String]$select
+        [String]$select ='solutionid,uniquename,friendlyname,description,version,ismanaged,modifiedon,createdon',
+        [String]$expand = 'publisherid($select=publisherid,customizationprefix,description,friendlyname),modifiedby($select=systemuserid,fullname,domainname),createdby($select=systemuserid,fullname,domainname)'
     )
-    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutions' -filter ("uniquename eq '$solutionUniqueName'") -select $select
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'solutions' -filter ("uniquename eq '$solutionUniqueName'") -select $select -expand $expand
     return $response
 }
 # description: This function retrieves the solution components from the Dataverse environment.
@@ -348,8 +364,11 @@ function Get-DataverseSolutionComponents
         else {
             $item = $null
         }
-        $createdBy = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId ($component._createdby_value) -select 'systemuserid,fullname,organizationid,domainname'
-        $modifiedBy = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId ($component._modifiedby_value) -select 'systemuserid,fullname,organizationid,domainname'
+        $createdBy = get-DataverseUser -token $token -dataverseHost $dataverseHost -userid $component._createdby_value
+        $modifiedBy = get-DataverseUser -token $token -dataverseHost $dataverseHost -userid $component._modifiedby_value
+
+         #get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId ($component._createdby_value) -select 'systemuserid,fullname,organizationid,domainname'
+        #$modifiedBy = get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId ($component._modifiedby_value) -select 'systemuserid,fullname,organizationid,domainname'
         $results += [PSCustomObject]@{
             componentTypeName = $componentType.Label
             componentType = $component.componenttype
@@ -362,7 +381,21 @@ function Get-DataverseSolutionComponents
     }
     return $results
 }
-
+function get-DataverseSolutionJSON
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [Parameter(Mandatory)] [String]$solutionName
+    )
+    $solution = Get-DataverseSolution -token $token -dataverseHost $dataverseHost -solutionUniqueName $solutionName
+    $solutionComponents = Get-DataverseSolutionComponents -token $token -dataverseHost $dataverseHost -solutionId $solution.solutionid
+    $solutionJSON = [PSCustomObject]@{
+        solution = $solution
+        components = $solutionComponents
+    } | Convertto-json -depth 10
+    return $solutionJSON
+}
 # description: This function retrieves the Dataverse environment profile.
 # Usage: get-DataverseWhoAmI -token $token -dataverseHost $dataverseHost
 # parameters:
@@ -590,19 +623,19 @@ function Grant-DataverseAccessToWorkflow {
     $teamId = Get-DataverseTeamId $token $dataverseHost $teamName
     Write-Host "teamId - $teamId"
     if($teamId -ne '') {
-        $body = "{
-        `n    `"Target`":{
-        `n        `"workflowid`":`"$validatedId`",
-        `n        `"@odata.type`": `"Microsoft.Dynamics.CRM.workflow`"
-        `n    },
-        `n    `"PrincipalAccess`":{
-        `n        `"Principal`":{
-        `n            `"teamid`": `"$teamId`",
-        `n            `"@odata.type`": `"Microsoft.Dynamics.CRM.team`"
-        `n        },
-        `n        `"AccessMask`": `"ReadAccess`"
-        `n    }
-        `n}"
+        # $body = "{
+        # `n    `"Target`":{
+        # `n        `"workflowid`":`"$validatedId`",
+        # `n        `"@odata.type`": `"Microsoft.Dynamics.CRM.workflow`"
+        # `n    },
+        # `n    `"PrincipalAccess`":{
+        # `n        `"Principal`":{
+        # `n            `"teamid`": `"$teamId`",
+        # `n            `"@odata.type`": `"Microsoft.Dynamics.CRM.team`"
+        # `n        },
+        # `n        `"AccessMask`": `"ReadAccess`"
+        # `n    }
+        # `n}"
         $body = @{
             Target = @{
                 workflowid = $validatedId
@@ -646,19 +679,19 @@ function Grant-DataverseAccessToConnector {
 
     $teamId = Get-DataverseTeamId $token $dataverseHost $teamName
     if($teamId -ne '') {
-        $body = "{
-        `n    `"Target`":{
-        `n        `"connectorid`":`"$validatedId`",
-        `n        `"@odata.type`": `"Microsoft.Dynamics.CRM.connector`"
-        `n    },
-        `n    `"PrincipalAccess`":{
-        `n        `"Principal`":{
-        `n            `"teamid`": `"$teamId`",
-        `n            `"@odata.type`": `"Microsoft.Dynamics.CRM.team`"
-        `n        },
-        `n        `"AccessMask`": `"ReadAccess`"
-        `n    }
-        `n}"
+        # $body = "{
+        # `n    `"Target`":{
+        # `n        `"connectorid`":`"$validatedId`",
+        # `n        `"@odata.type`": `"Microsoft.Dynamics.CRM.connector`"
+        # `n    },
+        # `n    `"PrincipalAccess`":{
+        # `n        `"Principal`":{
+        # `n            `"teamid`": `"$teamId`",
+        # `n            `"@odata.type`": `"Microsoft.Dynamics.CRM.team`"
+        # `n        },
+        # `n        `"AccessMask`": `"ReadAccess`"
+        # `n    }
+        # `n}"
         $body = @{ 
             Target = @{
                 connectorid = $validatedId
@@ -696,7 +729,77 @@ function Get-DataverseTeamId {
     }
     return $teamId
 }
+function Get-DataverseUsers
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [String]$select = 'domainname,systemuserid',
+        [String]$filter,
+        [String]$expand,
+        [String]$orderby,
+        [String]$top,
+        [String]$skip
+    )
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -select $select -filter $filter -expand $expand -orderby $orderby -top $top -skip $skip
+    return $response
+} 
+function Get-DataverseUser
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [string]$userId,
+        [String]$select = 'domainname,systemuserid',
+        [String]$filter
+    )
+    if ($userId -ne '') {
+        $response = Get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -itemId $userId -select $select
+    } else {
+        $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -filter $filter -select $select
+    }
+    #$response = Get-DataverseEntityItem -token $token -dataverseHost $dataverseHost -entityName 'systemusers' -select $select -filter $filter
+    return $response
+}
+function get-DataverseWorkflows
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [String]$select = 'name,workflowid,modifiedon,solutionid,createdon,ismanaged,versionnumber,description',
+        [String]$filter,
+        [String]$expand='createdby($select=fullname,systemuserid),modifiedby($select=fullname,systemuserid)',
+        [String]$orderby,
+        [String]$top,
+        [String]$skip
+    )
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'workflows' -select $select -filter $filter -expand $expand -orderby $orderby -top $top -skip $skip
+    return $response.value
+}
+function get-DataverseWorkflowRuns 
+{
+    param (
+        [Parameter(Mandatory)] [String]$token,
+        [Parameter(Mandatory)] [String]$dataverseHost,
+        [String]$workflowId,
+        [String]$select = 'name,flowrunid,versionnumber,starttime,duration,workflowid,ttlinseconds,isprimary,triggertype,status,endtime,resourceid,errorcode,errormessage,utcconversiontimezonecode',
+        [String]$filter,
+        [String]$expand,
+        [String]$orderby,
+        [String]$top,
+        [String]$skip
+    )
+    if ($workflowId -ne '') {
+        if($filter -ne '') {
+            $filter = $filter + " and workflowid eq $workflowId"
+        } else {
+            $filter = "workflowid eq $workflowId"
+        }
+    }
 
+    $response = Get-DataverseEntityItems -token $token -dataverseHost $dataverseHost -entityName 'flowruns' -select $select -filter $filter -expand $expand -orderby $orderby -top $top -skip $skip
+    return $response.value
+}
 ##################################
 # Git Repository functions 
 # description: This function retrieves the version of a solution from the provided folder path.
@@ -989,6 +1092,7 @@ function Get-SolutionComponentType
     [PSCustomObject]@{ Values = 64; Label = "Complex Control"; Entity = $null }
     [PSCustomObject]@{ Values = 70; Label = "Field Security Profile"; Entity = $null }
     [PSCustomObject]@{ Values = 71; Label = "Field Permission"; Entity = $null }
+    [PSCustomObject]@{ Values = 80; Label = "Model Driven App"; Entity = 'appmodules' }
     [PSCustomObject]@{ Values = 90; Label = "Plugin Type"; Entity = $null }
     [PSCustomObject]@{ Values = 91; Label = "Plugin Assembly"; Entity = $null }
     [PSCustomObject]@{ Values = 92; Label = "SDK Message Processing Step"; Entity = $null }
@@ -1029,9 +1133,5 @@ function Get-SolutionComponentType
     [PSCustomObject]@{ Values = 431; Label = "Attribute Image Configuration"; Entity = $null }
     [PSCustomObject]@{ Values = 432; Label = "Entity Image Configuration"; Entity = $null }
 )
-    if($componenttype)
-    {
-        return $componentTypes | where { $_.Values -eq $componenttype }
-    }
-    return $componentTypes.Label
+    return $componentTypes | where { $_.Values -eq $componenttype }
 }
