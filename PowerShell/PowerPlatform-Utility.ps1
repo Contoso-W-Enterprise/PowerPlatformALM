@@ -652,7 +652,6 @@ function Grant-DataverseAccessToWorkflow {
     
         $requestUrlRemainder = "GrantAccess"
         Invoke-DataverseHttpPost $token $dataverseHost $requestUrlRemainder $body
-        Invoke-
     }
 }
 
